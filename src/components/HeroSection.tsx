@@ -39,17 +39,14 @@ const HeroSection = () => {
           </div>
 
           {/* Right - Image */}
-          <div className="order-1 md:order-2 flex justify-center animate-fade-up">
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-3xl bg-champagne opacity-50 blur-xl" />
-              <img
-                src={heroImg}
-                alt="Dra. Talita Melo - Ginecologista especialista em fertilidade"
-                className="relative rounded-3xl w-full max-w-md object-cover shadow-xl"
-                width={800}
-                height={1024}
-              />
-            </div>
+          <div className="order-1 md:order-2 flex items-end justify-center animate-fade-up">
+            <img
+              src={heroImg}
+              alt="Dra. Talita Melo - Ginecologista especialista em fertilidade"
+              className="w-full max-w-sm md:max-w-md object-contain object-bottom drop-shadow-2xl"
+              width={800}
+              height={1024}
+            />
           </div>
         </div>
 
