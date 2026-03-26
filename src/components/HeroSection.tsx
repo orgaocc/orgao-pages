@@ -15,7 +15,7 @@ const HeroSection = () => {
           <img src={logoImg} alt="Jejum para Engravidar" className="h-10 md:h-12 w-auto" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-end">
           {/* Left - Copy */}
           <div className="order-2 md:order-1">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold leading-tight text-foreground animate-fade-up">
@@ -39,11 +39,11 @@ const HeroSection = () => {
           </div>
 
           {/* Right - Image */}
-          <div className="order-1 md:order-2 flex items-end justify-center animate-fade-up">
+          <div className="order-1 md:order-2 flex items-end justify-end self-end animate-fade-up">
             <img
               src={heroImg}
               alt="Dra. Talita Melo - Ginecologista especialista em fertilidade"
-              className="w-full max-w-sm md:max-w-md object-contain object-bottom drop-shadow-2xl"
+              className="w-full max-w-[28rem] md:max-w-[32rem] object-contain object-bottom drop-shadow-2xl"
               width={800}
               height={1024}
             />
