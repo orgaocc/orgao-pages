@@ -1,4 +1,4 @@
-import heroImg from "@/assets/hero-doctor.jpg";
+import heroImg from "@/assets/hero-doctor.webp";
 import logoImg from "@/assets/logo-jejum.webp";
 
 const HeroSection = () => {
