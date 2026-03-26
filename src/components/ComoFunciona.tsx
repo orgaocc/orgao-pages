@@ -1,4 +1,4 @@
-import doctorImg from "@/assets/doctor-portrait.jpg";
+
 
 const ComoFunciona = () => {
   return (
