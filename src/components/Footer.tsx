@@ -1,4 +1,5 @@
 import { MessageCircle } from "lucide-react";
+import logoImg from "@/assets/logo-jejum.webp";
 
 const Footer = () => {
   return (
@@ -27,9 +28,7 @@ const Footer = () => {
 
         {/* Footer info */}
         <div className="border-t border-border pt-8 text-center">
-          <p className="font-serif text-xl font-semibold text-foreground mb-2">
-            Jejum<span className="text-sage italic"> para </span>Engravidar
-          </p>
+          <img src={logoImg} alt="Jejum para Engravidar" className="h-8 md:h-10 w-auto mx-auto mb-2" />
           <p className="text-sm font-body text-muted-foreground">
             © {new Date().getFullYear()} Grupo Conceber. Todos os direitos reservados.
           </p>
