@@ -39,11 +39,11 @@ const HeroSection = () => {
           </div>
 
           {/* Right - Image */}
-          <div className="order-1 md:order-2 flex items-end justify-center animate-fade-up">
+          <div className="order-1 md:order-2 flex items-end justify-end self-end animate-fade-up">
             <img
               src={heroImg}
               alt="Dra. Talita Melo - Ginecologista especialista em fertilidade"
-              className="w-full max-w-sm md:max-w-md object-contain object-bottom drop-shadow-2xl"
+              className="w-full max-w-[28rem] md:max-w-[32rem] object-contain object-bottom drop-shadow-2xl"
               width={800}
               height={1024}
             />
