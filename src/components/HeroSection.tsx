@@ -15,7 +15,7 @@ const HeroSection = () => {
           <img src={logoImg} alt="Jejum para Engravidar" className="h-10 md:h-12 w-auto" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-end">
           {/* Left - Copy */}
           <div className="order-2 md:order-1">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold leading-tight text-foreground animate-fade-up">
