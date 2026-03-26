@@ -1,5 +1,3 @@
-import doctorImg from "@/assets/doctor-portrait.jpg";
-
 const Autoridade = () => {
   return (
     <section className="py-16 md:py-24">
@@ -7,7 +5,7 @@ const Autoridade = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center">
             <img
-              src={doctorImg}
+              src="https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-17.webp"
               alt="Dra. Talita Melo"
               className="rounded-3xl w-full max-w-sm object-cover shadow-lg"
               loading="lazy"

@@ -1,4 +1,3 @@
-import coupleImg from "@/assets/couple-embrace.jpg";
 import { Check } from "lucide-react";
 
 const points = [
@@ -33,7 +32,7 @@ const ParaQuemE = () => {
           </div>
           <div className="flex justify-center">
             <img
-              src={coupleImg}
+              src="https://grupoconceber.com/wp-content/uploads/2026/01/Mask-group-28-1.webp"
               alt="Casal abraçado esperando um bebê"
               className="rounded-3xl w-full max-w-md object-cover shadow-lg"
               loading="lazy"
