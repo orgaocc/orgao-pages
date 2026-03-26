@@ -1,13 +1,7 @@
-import coupleImg from "@/assets/couple-embrace.jpg";
 import { Check } from "lucide-react";
 
 const points = [
-  "Tentou quase de tudo, mas ainda não jejuou com acompanhamento alimentar adequado.",
-  "Sabe que precisa alinhar corpo e espírito para engravidar, mas ainda não recebeu ajuda médica pra isso.",
-  "Quer se fortalecer durante o tratamento para engravidar, mas não quer fazer isso sozinha.",
-  "Busca acolhimento emocional, cuidado com o corpo e fortalecimento para a alma.",
-];
-
+...
 const ParaQuemE = () => {
   return (
     <section className="py-16 md:py-24 section-sage">
@@ -33,7 +27,7 @@ const ParaQuemE = () => {
           </div>
           <div className="flex justify-center">
             <img
-              src={coupleImg}
+              src="https://grupoconceber.com/wp-content/uploads/2026/01/Mask-group-28-1.webp"
               alt="Casal abraçado esperando um bebê"
               className="rounded-3xl w-full max-w-md object-cover shadow-lg"
               loading="lazy"
