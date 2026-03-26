@@ -19,7 +19,7 @@ const ComoFunciona = () => {
           </div>
           <div className="flex justify-center">
             <img
-              src={doctorImg}
+              src="https://grupoconceber.com/wp-content/uploads/2026/01/Talita-Terco-1.webp"
               alt="Dra. Talita Melo"
               className="rounded-3xl w-full max-w-sm object-cover shadow-lg"
               loading="lazy"
