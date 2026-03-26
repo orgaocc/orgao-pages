@@ -1,4 +1,5 @@
 import heroImg from "@/assets/hero-doctor.jpg";
+import logoImg from "@/assets/logo-jejum.webp";
 
 const HeroSection = () => {
   return (
@@ -11,9 +12,7 @@ const HeroSection = () => {
       <div className="section-container relative z-10">
         {/* Logo area */}
         <div className="mb-8 md:mb-12">
-          <span className="font-serif text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
-            Jejum<span className="text-sage italic"> para </span>Engravidar
-          </span>
+          <img src={logoImg} alt="Jejum para Engravidar" className="h-10 md:h-12 w-auto" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">

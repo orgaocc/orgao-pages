@@ -1,4 +1,5 @@
 import { MessageCircle } from "lucide-react";
+import logoImg from "@/assets/logo-jejum.webp";
 
 const Footer = () => {
   return (
