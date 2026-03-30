@@ -219,7 +219,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                   placeholder="Email"
                   required
                   value={formData.email}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                  onChange={handleChange}
                   className={inputClasses}
                 />
               </div>
