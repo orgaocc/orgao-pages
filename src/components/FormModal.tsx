@@ -90,7 +90,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
         formBody.append(key, value);
       });
 
-      await fetch("https://hooks.grupoconceber.com/webhook/med-captacaoleads", {
+      await fetch("https://hooks.grupoconceber.com/webhook/leads_captacao", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: formBody.toString(),
