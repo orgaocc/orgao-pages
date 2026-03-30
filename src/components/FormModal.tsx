@@ -152,7 +152,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form id="formLovable" onSubmit={handleSubmit} className="formLovable space-y-4">
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
