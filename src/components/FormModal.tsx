@@ -140,7 +140,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
             </button>
 
             <div className="text-center mb-6">
-              <img src={logoImg} alt="Jejum para Engravidar" className="h-14 md:h-16 w-auto mx-auto mb-4" />
+              <img src={logoImg} alt="Jejum para Engravidar" className="max-h-[150px] w-auto mx-auto mb-4" />
               <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-2">
                 Garanta seu ingresso
               </h3>
