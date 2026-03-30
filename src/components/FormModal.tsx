@@ -63,36 +63,64 @@ function formatSubmissionDate(): string {
 const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
   const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_DATA);
   const [submitting, setSubmitting] = useState(false);
-  const hydratedRef = useRef(false);
+  const synced = useRef(false);
 
-  // Hydrate from PixelX autofill only once
+  // Sync PixelX autofill: poll DOM input values when modal opens
+  // PixelX sets .value on the DOM directly, bypassing React onChange
   useEffect(() => {
-    const px = (window as any)?.pixel_x_app;
-    if (!hydratedRef.current && px?.getLead) {
-      const lead = px.getLead();
-      if (lead) {
-        hydratedRef.current = true;
-        setFormData((prev) => ({
-          ...prev,
-          nome: lead.nome ?? lead.lead_name ?? prev.nome,
-          email: lead.email ?? lead.lead_email ?? prev.email,
-          telefone: lead.whatsapp ?? lead.lead_phone
-            ? applyPhoneMask(lead.whatsapp ?? lead.lead_phone ?? "")
-            : prev.telefone,
-        }));
+    if (!open || synced.current) return;
+
+    const readDomValues = () => {
+      const nome = (document.getElementById("nome") as HTMLInputElement)?.value || "";
+      const email = (document.getElementById("email") as HTMLInputElement)?.value || "";
+      const telefone = (document.getElementById("telefone") as HTMLInputElement)?.value || "";
+
+      if (nome || email || telefone) {
+        synced.current = true;
+        setFormData({
+          nome,
+          email,
+          telefone: telefone ? applyPhoneMask(telefone) : "",
+        });
       }
-    }
-  }, []);
+    };
+
+    // Poll a few times to catch async PixelX autofill
+    const timers = [
+      setTimeout(readDomValues, 100),
+      setTimeout(readDomValues, 300),
+      setTimeout(readDomValues, 600),
+      setTimeout(readDomValues, 1200),
+    ];
+
+    return () => timers.forEach(clearTimeout);
+  }, [open]);
+
+  // Reset sync flag when modal closes so it re-checks next open
+  useEffect(() => {
+    if (!open) synced.current = false;
+  }, [open]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    hydratedRef.current = true; // prevent re-hydration after user edits
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    hydratedRef.current = true;
-    setFormData((prev) => ({ ...prev, telefone: applyPhoneMask(e.target.value) }));
+    // On first user interaction, sync ALL fields from DOM to prevent clearing
+    if (!synced.current) {
+      synced.current = true;
+      const nome = (document.getElementById("nome") as HTMLInputElement)?.value || "";
+      const email = (document.getElementById("email") as HTMLInputElement)?.value || "";
+      const telefone = (document.getElementById("telefone") as HTMLInputElement)?.value || "";
+      setFormData({
+        nome: name === "nome" ? value : nome,
+        email: name === "email" ? value : email,
+        telefone: name === "telefone" ? applyPhoneMask(value) : (telefone ? applyPhoneMask(telefone) : ""),
+      });
+      return;
+    }
+    if (name === "telefone") {
+      setFormData((prev) => ({ ...prev, telefone: applyPhoneMask(value) }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -233,7 +261,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                   placeholder="(00) 00000-0000"
                   required
                   value={formData.telefone}
-                  onChange={handlePhoneChange}
+                  onChange={handleChange}
                   className={inputClasses}
                 />
               </div>
