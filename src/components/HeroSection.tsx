@@ -38,8 +38,8 @@ const HeroSection = () => {
             </p>
           </div>
 
-          {/* Right - Image */}
-          <div className="order-1 md:order-2 flex items-end justify-end self-end animate-fade-up">
+          {/* Right - Image + Authority badge */}
+          <div className="order-1 md:order-2 flex flex-col items-end self-end animate-fade-up">
             <img
               src={heroImg}
               alt="Dra. Talita Melo - Ginecologista especialista em fertilidade"
@@ -47,20 +47,19 @@ const HeroSection = () => {
               width={800}
               height={1024}
             />
-          </div>
-        </div>
-
-        {/* Authority badge */}
-        <div className="mt-12 md:mt-16 animate-fade-up-delay-3">
-          <div className="inline-flex items-center gap-4 rounded-2xl bg-cream px-6 py-4 shadow-sm border border-border">
-            <div className="w-1 h-10 rounded-full bg-sage" />
-            <div>
-              <p className="font-serif text-lg font-semibold text-foreground">
-                Dra. Talita Melo
-              </p>
-              <p className="text-sm font-body text-muted-foreground">
-                Ginecologista referência em Fertilidade · Co-fundadora do Programa Conceber
-              </p>
+            {/* Authority badge */}
+            <div className="w-full max-w-[28rem] md:max-w-[32rem] animate-fade-up-delay-3">
+              <div className="flex items-center gap-4 rounded-2xl bg-cream px-6 py-4 shadow-sm border border-border">
+                <div className="w-1 h-10 rounded-full bg-sage" />
+                <div>
+                  <p className="font-serif text-lg font-semibold text-foreground">
+                    Dra. Talita Melo
+                  </p>
+                  <p className="text-sm font-body text-muted-foreground">
+                    Ginecologista referência em Fertilidade · Co-fundadora do Programa Conceber
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
