@@ -10,14 +10,14 @@ const HeroSection = () => {
       <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-sage-light opacity-30 blur-3xl" />
 
       <div className="section-container relative z-10">
-        {/* Logo area */}
-        <div className="mb-8 md:mb-12">
-          <img src={logoImg} alt="Jejum para Engravidar" className="h-10 md:h-12 w-auto" />
-        </div>
-
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-end">
           {/* Left - Copy */}
           <div className="order-2 md:order-1">
+            {/* Logo */}
+            <div className="mb-8 md:mb-12">
+              <img src={logoImg} alt="Jejum para Engravidar" className="h-10 md:h-12 w-auto" />
+            </div>
+
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold leading-tight text-foreground animate-fade-up">
               Para estar com seu filho no colo este ano, você precisa{" "}
               <em className="text-sage not-italic">preparar seu corpo e o seu espírito</em> agora.
