@@ -208,6 +208,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                 <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
                   type="tel"
+                  id="telefone"
                   name="telefone"
                   placeholder="(00) 00000-0000"
                   required
