@@ -21,7 +21,7 @@ const ComoFunciona = () => {
             <img
               src="https://grupoconceber.com/wp-content/uploads/2026/01/Talita-Terco-1.webp"
               alt="Dra. Talita Melo"
-              className="rounded-3xl w-full max-w-sm object-cover shadow-lg"
+              className="w-full max-w-sm object-cover shadow-none rounded-none"
               loading="lazy"
               width={640}
               height={800}
