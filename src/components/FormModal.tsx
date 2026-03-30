@@ -261,7 +261,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                   placeholder="(00) 00000-0000"
                   required
                   value={formData.telefone}
-                  onChange={handlePhoneChange}
+                  onChange={handleChange}
                   className={inputClasses}
                 />
               </div>
