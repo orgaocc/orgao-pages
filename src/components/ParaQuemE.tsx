@@ -34,7 +34,7 @@ const ParaQuemE = () => {
             <img
               src="https://grupoconceber.com/wp-content/uploads/2026/01/Mask-group-28-1.webp"
               alt="Casal abraçado esperando um bebê"
-              className="rounded-3xl w-full max-w-md object-cover shadow-lg"
+              className="w-full max-w-md object-cover rounded-none shadow-none"
               loading="lazy"
               width={800}
               height={600}
