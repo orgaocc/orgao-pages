@@ -77,10 +77,11 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
       utm_content: utms.utm_content,
       utm_term: utms.utm_term,
       utm_page: window.location.pathname,
-      lancamento: "JEJUM_ORACAO",
+      lancamento: "PCT33",
       utm_id: utms.utm_id,
       form: "lovable_jejum",
-      source: "jejum_captacao",
+      source: "jep",
+      precheckout: "true",
       submission_date: formatSubmissionDate(),
     };
 
