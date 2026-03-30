@@ -101,6 +101,21 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
       console.error("Webhook error:", err);
     }
 
+    // Pixel X App lead event — must fire before redirect
+    try {
+      if (window.pixel_x_app?.send_event) {
+        const phoneForPixel = formData.telefone.replace(/\D/g, "");
+        await window.pixel_x_app.send_event({
+          event_name: 'Lead',
+          lead_name: formData.nome,
+          lead_email: formData.email,
+          lead_phone: phoneForPixel,
+        });
+      }
+    } catch (err) {
+      console.error("Pixel X App error:", err);
+    }
+
     const utmSource = getUtmParams().utm_source;
     const phoneDigits = formData.telefone.replace(/\D/g, "");
     const redirectUrl = `https://pay.hotmart.com/E104660930C?checkoutMode=10&name=${encodeURIComponent(formData.nome)}&email=${encodeURIComponent(formData.email)}&phonenumber=${encodeURIComponent(phoneDigits)}&src=${encodeURIComponent(utmSource)}&sck=lovable_page`;
