@@ -1,4 +1,12 @@
 import React, { useState } from "react";
+
+declare global {
+  interface Window {
+    pixel_x_app?: {
+      send_event: (data: Record<string, string>) => Promise<void>;
+    };
+  }
+}
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { User, Mail, Phone, X } from "lucide-react";
