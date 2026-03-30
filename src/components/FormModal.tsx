@@ -63,8 +63,35 @@ function formatSubmissionDate(): string {
 const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
   const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_DATA);
   const [submitting, setSubmitting] = useState(false);
+  const hydratedRef = useRef(false);
+
+  // Hydrate from PixelX autofill only once
+  useEffect(() => {
+    const px = (window as any)?.pixel_x_app;
+    if (!hydratedRef.current && px?.getLead) {
+      const lead = px.getLead();
+      if (lead) {
+        hydratedRef.current = true;
+        setFormData((prev) => ({
+          ...prev,
+          nome: lead.nome ?? lead.lead_name ?? prev.nome,
+          email: lead.email ?? lead.lead_email ?? prev.email,
+          telefone: lead.whatsapp ?? lead.lead_phone
+            ? applyPhoneMask(lead.whatsapp ?? lead.lead_phone ?? "")
+            : prev.telefone,
+        }));
+      }
+    }
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    hydratedRef.current = true; // prevent re-hydration after user edits
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    hydratedRef.current = true;
     setFormData((prev) => ({ ...prev, telefone: applyPhoneMask(e.target.value) }));
   };
 
