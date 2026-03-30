@@ -10,7 +10,7 @@ const deliverables = [
     title: "Plano Alimentar",
     description:
       "Para seguir durante os 7 dias de Jejum, com horários, ingredientes, opções de cardápio e de substituições.",
-    image: nutritionImg,
+    image: "https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-12.webp",
   },
   {
     icon: Sparkles,
