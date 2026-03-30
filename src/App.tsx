@@ -15,6 +15,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/jpe/lo1/" element={<Index />} />
+          <Route path="/lo" element={<Index />} />
           <Route path="/" element={<Navigate to="/jpe/lo1/" replace />} />
           <Route path="*" element={<Navigate to="/jpe/lo1/" replace />} />
         </Routes>
