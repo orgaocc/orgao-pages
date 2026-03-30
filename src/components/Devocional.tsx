@@ -1,3 +1,5 @@
+import devocionalImg from "@/assets/devocional-mockup.webp";
+
 const Devocional = () => {
   return (
     <section className="py-16 md:py-24 section-champagne relative overflow-hidden">
@@ -6,7 +8,7 @@ const Devocional = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center">
             <img
-              src="https://grupoconceber.com/wp-content/uploads/2026/01/3-mockup-devocional-1.webp"
+              src={devocionalImg}
               alt="Devocional Exclusivo FÉrtilidade"
               className="rounded-2xl w-full max-w-sm shadow-xl"
               loading="lazy"

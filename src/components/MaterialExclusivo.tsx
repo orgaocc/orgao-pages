@@ -1,3 +1,5 @@
+import materiaisImg from "@/assets/materiais-exclusivos.webp";
+
 const MaterialExclusivo = () => {
   return (
     <section className="py-16 md:py-24 section-champagne">
@@ -5,7 +7,7 @@ const MaterialExclusivo = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center">
             <img
-              src="https://grupoconceber.com/wp-content/uploads/2026/01/Mockup-Materiais-Exclusivos-2.webp"
+              src={materiaisImg}
               alt="Material exclusivo do programa"
               className="rounded-2xl w-full max-w-md shadow-lg"
               loading="lazy"

@@ -1,4 +1,8 @@
 import { UtensilsCrossed, Sparkles, GraduationCap, PlayCircle } from "lucide-react";
+import receber1 from "@/assets/receber-1.webp";
+import receber2 from "@/assets/receber-2.webp";
+import receber3 from "@/assets/receber-3.webp";
+import receber4 from "@/assets/receber-4.webp";
 
 const deliverables = [
   {
@@ -6,27 +10,27 @@ const deliverables = [
     title: "Plano Alimentar",
     description:
       "Para seguir durante os 7 dias de Jejum, com horários, ingredientes, opções de cardápio e de substituições.",
-    image: "https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-12.webp",
+    image: receber1,
   },
   {
     icon: Sparkles,
     title: "Meditações Guiadas",
     description: "Orações matinais para manter inabalável a fé na sua gravidez.",
-    image: "https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-13.webp",
+    image: receber2,
   },
   {
     icon: GraduationCap,
     title: "7 aulas sobre conteúdos de fertilidade",
     description:
       "Conteúdos com tudo que a medicina já comprovou ajudar na busca por uma gravidez rápida e saudável.",
-    image: "https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-14.webp",
+    image: receber3,
   },
   {
     icon: PlayCircle,
     title: "Gravações liberadas",
     description:
       "Todas as aulas estarão disponíveis para consulta enquanto durar o jejum.",
-    image: "https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-15.webp",
+    image: receber4,
   },
 ];
 

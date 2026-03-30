@@ -1,4 +1,6 @@
 import { Check, ShieldCheck } from "lucide-react";
+import { useState } from "react";
+import FormModal from "./FormModal";
 
 const items = [
   "Plano alimentar para a fertilidade",
@@ -8,6 +10,8 @@ const items = [
 ];
 
 const Oferta = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <section id="oferta" className="py-16 md:py-24 section-blush">
       <div className="section-container">
@@ -46,9 +50,12 @@ const Oferta = () => {
               </p>
 
               <div className="mt-8">
-                <a href="#oferta" className="btn-cta w-full text-lg block text-center">
+                <button
+                  onClick={() => setModalOpen(true)}
+                  className="btn-cta w-full text-lg block text-center"
+                >
                   Quero garantir o meu ingresso
-                </a>
+                </button>
               </div>
 
               <div className="mt-6 flex items-center justify-center gap-2 text-sm font-body text-taupe">
@@ -59,6 +66,8 @@ const Oferta = () => {
           </div>
         </div>
       </div>
+
+      <FormModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 };
