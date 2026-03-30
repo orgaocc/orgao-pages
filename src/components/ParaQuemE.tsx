@@ -1,3 +1,4 @@
+import paraQuemImg from "@/assets/para-quem-e.webp";
 import { Check } from "lucide-react";
 
 const points = [
@@ -32,7 +33,7 @@ const ParaQuemE = () => {
           </div>
           <div className="flex justify-center">
             <img
-              src="https://grupoconceber.com/wp-content/uploads/2026/01/Mask-group-28-1.webp"
+              src={paraQuemImg}
               alt="Casal abraçado esperando um bebê"
               className="w-full max-w-md object-cover rounded-none shadow-none"
               loading="lazy"

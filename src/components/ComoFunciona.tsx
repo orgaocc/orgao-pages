@@ -1,4 +1,4 @@
-
+import talitaTercoImg from "@/assets/talita-terco.webp";
 
 const ComoFunciona = () => {
   return (
@@ -19,7 +19,7 @@ const ComoFunciona = () => {
           </div>
           <div className="flex justify-center">
             <img
-              src="https://grupoconceber.com/wp-content/uploads/2026/01/Talita-Terco-1.webp"
+              src={talitaTercoImg}
               alt="Dra. Talita Melo"
               className="w-full max-w-sm object-cover shadow-none rounded-none"
               loading="lazy"
