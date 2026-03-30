@@ -58,6 +58,28 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  /* LO2 — Feminine fertility palette: pinks, rose, warm neutrals */
+  .theme-lo2 {
+    --primary: 340 45% 52%;
+    --primary-foreground: 30 25% 97%;
+    --ring: 340 45% 52%;
+
+    --accent: 350 35% 82%;
+    --accent-foreground: 25 20% 18%;
+
+    /* Remap sage → rose/pink tones */
+    --sage: 340 45% 52%;
+    --sage-light: 345 40% 94%;
+    --olive: 350 30% 58%;
+    --rose-burned: 338 50% 48%;
+
+    /* Warmer blush & champagne */
+    --blush: 340 35% 92%;
+    --champagne: 20 30% 92%;
+    --terracotta: 350 40% 58%;
+    --terracotta-light: 345 30% 90%;
+  }
 }
 
 @layer base {
