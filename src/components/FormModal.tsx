@@ -1,4 +1,12 @@
 import React, { useState } from "react";
+
+declare global {
+  interface Window {
+    pixel_x_app?: {
+      send_event: (data: Record<string, string>) => Promise<void>;
+    };
+  }
+}
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { User, Mail, Phone, X } from "lucide-react";
@@ -101,6 +109,21 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
       console.error("Webhook error:", err);
     }
 
+    // Pixel X App lead event — must fire before redirect
+    try {
+      if (window.pixel_x_app?.send_event) {
+        const phoneForPixel = formData.telefone.replace(/\D/g, "");
+        await window.pixel_x_app.send_event({
+          event_name: 'Lead',
+          lead_name: formData.nome,
+          lead_email: formData.email,
+          lead_phone: phoneForPixel,
+        });
+      }
+    } catch (err) {
+      console.error("Pixel X App error:", err);
+    }
+
     const utmSource = getUtmParams().utm_source;
     const phoneDigits = formData.telefone.replace(/\D/g, "");
     const redirectUrl = `https://pay.hotmart.com/E104660930C?checkoutMode=10&name=${encodeURIComponent(formData.nome)}&email=${encodeURIComponent(formData.email)}&phonenumber=${encodeURIComponent(phoneDigits)}&src=${encodeURIComponent(utmSource)}&sck=lovable_page`;
@@ -157,6 +180,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
                   type="text"
+                  id="nome"
                   name="nome"
                   placeholder="Nome"
                   required
@@ -170,6 +194,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
                   type="email"
+                  id="email"
                   name="email"
                   placeholder="Email"
                   required
@@ -183,6 +208,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                 <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
                   type="tel"
+                  id="telefone"
                   name="telefone"
                   placeholder="(00) 00000-0000"
                   required
