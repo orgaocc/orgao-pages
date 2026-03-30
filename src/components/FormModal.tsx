@@ -94,19 +94,12 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
     };
 
     try {
-      const formBody = new URLSearchParams();
-      Object.entries(body).forEach(([key, value]) => {
-        formBody.append(key, value);
-      });
-
-      await fetch("https://hooks.grupoconceber.com/webhook/leads_captacao", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formBody.toString(),
-        mode: "no-cors",
+      const { supabase } = await import("@/integrations/supabase/client");
+      await supabase.functions.invoke("process-lead", {
+        body,
       });
     } catch (err) {
-      console.error("Webhook error:", err);
+      console.error("Process lead error:", err);
     }
 
     // Pixel X App lead event — must fire before redirect
