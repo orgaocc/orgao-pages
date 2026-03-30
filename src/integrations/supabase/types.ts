@@ -14,7 +14,116 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      failed_webhooks: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          id: string
+          lead_id: string
+          payload: Json
+          resolved: boolean | null
+          resolved_at: string | null
+          retry_count: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          lead_id: string
+          payload: Json
+          resolved?: boolean | null
+          resolved_at?: string | null
+          retry_count?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          lead_id?: string
+          payload?: Json
+          resolved?: boolean | null
+          resolved_at?: string | null
+          retry_count?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "failed_webhooks_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          created_at: string
+          email: string
+          form: string | null
+          id: string
+          lancamento: string | null
+          nome: string
+          precheckout: string | null
+          source: string | null
+          submission_date: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_id: string | null
+          utm_medium: string | null
+          utm_page: string | null
+          utm_source: string | null
+          utm_term: string | null
+          webhook_sent: boolean | null
+          webhook_sent_at: string | null
+          whatsapp: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          form?: string | null
+          id?: string
+          lancamento?: string | null
+          nome: string
+          precheckout?: string | null
+          source?: string | null
+          submission_date: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_id?: string | null
+          utm_medium?: string | null
+          utm_page?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          webhook_sent?: boolean | null
+          webhook_sent_at?: string | null
+          whatsapp: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          form?: string | null
+          id?: string
+          lancamento?: string | null
+          nome?: string
+          precheckout?: string | null
+          source?: string | null
+          submission_date?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_id?: string | null
+          utm_medium?: string | null
+          utm_page?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          webhook_sent?: boolean | null
+          webhook_sent_at?: string | null
+          whatsapp?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
