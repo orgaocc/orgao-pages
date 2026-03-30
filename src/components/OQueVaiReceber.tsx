@@ -1,5 +1,5 @@
 import { UtensilsCrossed, Sparkles, GraduationCap, PlayCircle } from "lucide-react";
-import nutritionImg from "@/assets/nutrition-flat.jpg";
+// nutritionImg import removed as it is replaced with a URL below
 import meditationImg from "@/assets/meditation.jpg";
 import onlineClassImg from "@/assets/online-class.jpg";
 import materialsImg from "@/assets/materials-mockup.jpg";
