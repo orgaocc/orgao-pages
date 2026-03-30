@@ -46,7 +46,7 @@ const Oferta = () => {
               </p>
 
               <div className="mt-8">
-                <a href="#" className="btn-cta w-full text-lg block text-center">
+                <a href="#oferta" className="btn-cta w-full text-lg block text-center">
                   Quero garantir o meu ingresso
                 </a>
               </div>
