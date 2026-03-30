@@ -199,7 +199,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                 {submitting ? "ENVIANDO..." : "QUERO GARANTIR MEU INGRESSO"}
               </button>
 
-              <p className="text-[13px] text-foreground text-center mt-3 leading-snug">
+              <p className="text-[12px] text-foreground text-center mt-3 leading-snug">
                 Os dados coletados são tratados nos termos da Lei Geral de Proteção de Dados e você pode se descadastrar da nossa lista de contatos a qualquer momento.
               </p>
             </form>
