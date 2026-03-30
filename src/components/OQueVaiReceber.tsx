@@ -1,8 +1,4 @@
 import { UtensilsCrossed, Sparkles, GraduationCap, PlayCircle } from "lucide-react";
-// nutritionImg import removed as it is replaced with a URL below
-import meditationImg from "@/assets/meditation.jpg";
-import onlineClassImg from "@/assets/online-class.jpg";
-import materialsImg from "@/assets/materials-mockup.jpg";
 
 const deliverables = [
   {
@@ -16,21 +12,21 @@ const deliverables = [
     icon: Sparkles,
     title: "Meditações Guiadas",
     description: "Orações matinais para manter inabalável a fé na sua gravidez.",
-    image: meditationImg,
+    image: "https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-13.webp",
   },
   {
     icon: GraduationCap,
     title: "7 aulas sobre conteúdos de fertilidade",
     description:
       "Conteúdos com tudo que a medicina já comprovou ajudar na busca por uma gravidez rápida e saudável.",
-    image: onlineClassImg,
+    image: "https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-14.webp",
   },
   {
     icon: PlayCircle,
     title: "Gravações liberadas",
     description:
       "Todas as aulas estarão disponíveis para consulta enquanto durar o jejum.",
-    image: materialsImg,
+    image: "https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-15.webp",
   },
 ];
 
