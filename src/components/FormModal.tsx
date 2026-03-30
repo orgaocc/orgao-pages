@@ -1,0 +1,207 @@
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { User, Mail, Phone, X } from "lucide-react";
+import logoImg from "@/assets/logo-jejum.webp";
+
+interface FormModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+type FormDataState = {
+  nome: string;
+  email: string;
+  telefone: string;
+};
+
+const INITIAL_FORM_DATA: FormDataState = {
+  nome: "",
+  email: "",
+  telefone: "",
+};
+
+function getUtmParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    utm_campaign: params.get("utm_campaign") || "",
+    utm_source: params.get("utm_source") || "direto_site",
+    utm_medium: params.get("utm_medium") || "direto_site",
+    utm_content: params.get("utm_content") || "direto_site",
+    utm_term: params.get("utm_term") || "direto_site",
+    utm_id: params.get("utm_id") || "",
+  };
+}
+
+function formatPhoneForWebhook(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.startsWith("55")) return `+${digits}`;
+  return `+55${digits}`;
+}
+
+function applyPhoneMask(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (digits.length <= 2) return digits.length ? `(${digits}` : "";
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+function formatSubmissionDate(): string {
+  const now = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+}
+
+const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
+  const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_DATA);
+  const [submitting, setSubmitting] = useState(false);
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, telefone: applyPhoneMask(e.target.value) }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+
+    const utms = getUtmParams();
+
+    const body = {
+      nome: formData.nome,
+      email: formData.email,
+      whatsapp: formatPhoneForWebhook(formData.telefone),
+      utm_campaign: utms.utm_campaign,
+      utm_source: utms.utm_source,
+      utm_medium: utms.utm_medium,
+      utm_content: utms.utm_content,
+      utm_term: utms.utm_term,
+      utm_page: window.location.pathname,
+      lancamento: "JEJUM_ORACAO",
+      utm_id: utms.utm_id,
+      form: "lovable_jejum",
+      source: "jejum_captacao",
+      submission_date: formatSubmissionDate(),
+    };
+
+    try {
+      const formBody = new URLSearchParams();
+      Object.entries(body).forEach(([key, value]) => {
+        formBody.append(key, value);
+      });
+
+      await fetch("https://hooks.grupoconceber.com/webhook/med-captacaoleads", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formBody.toString(),
+        mode: "no-cors",
+      });
+    } catch (err) {
+      console.error("Webhook error:", err);
+    }
+
+    setSubmitting(false);
+    onClose();
+  };
+
+  const inputClasses = cn(
+    "w-full pl-11 pr-4 py-3.5 rounded-xl text-sm font-body",
+    "bg-secondary border border-border text-foreground placeholder:text-muted-foreground",
+    "focus:outline-none focus:ring-2 focus:ring-sage/40 focus:border-sage/40",
+    "transition-all duration-200"
+  );
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={onClose}
+        >
+          <div className="absolute inset-0 bg-foreground/40 backdrop-blur-sm" />
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 16 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="relative w-full max-w-md bg-card rounded-3xl p-8 md:p-10 shadow-2xl border border-border"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="text-center mb-6">
+              <img src={logoImg} alt="Jejum para Engravidar" className="h-14 md:h-16 w-auto mx-auto mb-4" />
+              <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-2">
+                Garanta seu ingresso
+              </h3>
+              <p className="text-muted-foreground text-sm font-body">
+                06 a 12 de Abril · Encontros online e ao vivo
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="relative">
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  name="nome"
+                  placeholder="Nome"
+                  required
+                  value={formData.nome}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, nome: e.target.value }))}
+                  className={inputClasses}
+                />
+              </div>
+
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                  className={inputClasses}
+                />
+              </div>
+
+              <div className="relative">
+                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="tel"
+                  name="telefone"
+                  placeholder="(00) 00000-0000"
+                  required
+                  value={formData.telefone}
+                  onChange={handlePhoneChange}
+                  className={inputClasses}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="btn-cta w-full text-lg mt-2"
+              >
+                {submitting ? "ENVIANDO..." : "QUERO GARANTIR MEU INGRESSO"}
+              </button>
+            </form>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default FormModal;
