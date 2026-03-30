@@ -1,5 +1,5 @@
 import { UtensilsCrossed, Sparkles, GraduationCap, PlayCircle } from "lucide-react";
-import nutritionImg from "@/assets/nutrition-flat.jpg";
+// nutritionImg import removed as it is replaced with a URL below
 import meditationImg from "@/assets/meditation.jpg";
 import onlineClassImg from "@/assets/online-class.jpg";
 import materialsImg from "@/assets/materials-mockup.jpg";
@@ -10,7 +10,7 @@ const deliverables = [
     title: "Plano Alimentar",
     description:
       "Para seguir durante os 7 dias de Jejum, com horários, ingredientes, opções de cardápio e de substituições.",
-    image: nutritionImg,
+    image: "https://grupoconceber.com/wp-content/uploads/2025/12/Mask-group-12.webp",
   },
   {
     icon: Sparkles,
