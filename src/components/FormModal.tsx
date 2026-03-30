@@ -102,8 +102,8 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
     }
 
     const utmSource = getUtmParams().utm_source;
-    const phone = formatPhoneForWebhook(formData.telefone);
-    const redirectUrl = `https://pay.hotmart.com/E104660930C?checkoutMode=10&name=${encodeURIComponent(formData.nome)}&email=${encodeURIComponent(formData.email)}&phonenumber=${encodeURIComponent(phone)}&src=${encodeURIComponent(utmSource)}&sck=lovable_page`;
+    const phoneDigits = formData.telefone.replace(/\D/g, "");
+    const redirectUrl = `https://pay.hotmart.com/E104660930C?checkoutMode=10&name=${encodeURIComponent(formData.nome)}&email=${encodeURIComponent(formData.email)}&phonenumber=${encodeURIComponent(phoneDigits)}&src=${encodeURIComponent(utmSource)}&sck=lovable_page`;
     window.location.href = redirectUrl;
   };
 
