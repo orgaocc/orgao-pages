@@ -194,6 +194,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
                   type="email"
+                  id="email"
                   name="email"
                   placeholder="Email"
                   required
