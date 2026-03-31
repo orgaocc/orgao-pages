@@ -46,7 +46,7 @@ const Oferta = () => {
                 R$ 57<span className="text-2xl">,00</span>
               </p>
               <p className="text-sm font-body text-muted-foreground mt-2">
-                ou 4x de R$ 7,88
+                ou 8x de R$ 7,88
               </p>
 
               <div className="mt-8">
