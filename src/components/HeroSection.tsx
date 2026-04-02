@@ -83,8 +83,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Junte-se a <strong>mais de 1.700 mulheres</strong> que uniram fé e medicina para{" "}
-        <strong>engravidar</strong>.
+        Junte-se a <strong className="text-sage font-semibold">mais de 1.700 mulheres</strong> que uniram fé e medicina para{" "}
+        <strong className="text-sage font-semibold">engravidar</strong>.
       </>
     ),
     subheadline: (
