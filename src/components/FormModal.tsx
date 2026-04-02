@@ -126,6 +126,12 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
+
+    const phoneDigitsCheck = formData.telefone.replace(/\D/g, "");
+    if (!formData.nome.trim() || !formData.email.trim() || phoneDigitsCheck.length < 10) {
+      return;
+    }
+
     setSubmitting(true);
 
     const utms = getUtmParams();
