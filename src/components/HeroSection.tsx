@@ -68,8 +68,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Transforme a <strong>ansiedade da espera</strong> em um caminho claro de como{" "}
-        <strong>engravidar</strong>.
+        Transforme a <strong className="text-sage font-semibold">ansiedade da espera</strong> em um caminho claro de como{" "}
+        <strong className="text-sage font-semibold">engravidar</strong>.
       </>
     ),
     subheadline: (
