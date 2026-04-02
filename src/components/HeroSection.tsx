@@ -23,8 +23,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Chega de tentativas aleatórias de <strong>engravidar</strong>: prepare o berço que o{" "}
-        <strong>seu futuro filho</strong> vai ocupar.
+        Chega de tentativas aleatórias de <strong className="text-sage font-semibold">engravidar</strong>: prepare o berço que o{" "}
+        <strong className="text-sage font-semibold">seu futuro filho</strong> vai ocupar.
       </>
     ),
     subheadline: (
