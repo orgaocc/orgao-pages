@@ -38,8 +38,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        O caminho para <strong>engravidar</strong> começa no alinhamento entre a sua{" "}
-        <strong>fé</strong> e a sua <strong>biologia</strong>.
+        O caminho para <strong className="text-sage font-semibold">engravidar</strong> começa no alinhamento entre a sua{" "}
+        <strong className="text-sage font-semibold">fé</strong> e a sua <strong className="text-sage font-semibold">biologia</strong>.
       </>
     ),
     subheadline: (
