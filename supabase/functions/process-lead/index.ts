@@ -61,6 +61,7 @@ Deno.serve(async (req) => {
       source: body.source || "jep",
       precheckout: body.precheckout || "true",
       submission_date: body.submission_date || "",
+      headline_test: body.headline_test || "Head0",
     };
 
     // 1. Store lead in database
