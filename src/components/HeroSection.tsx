@@ -23,8 +23,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Chega de tentativas aleatórias de <strong>engravidar</strong>: prepare o berço que o{" "}
-        <strong>seu futuro filho</strong> vai ocupar.
+        Chega de tentativas aleatórias de <strong className="text-sage font-semibold">engravidar</strong>: prepare o berço que o{" "}
+        <strong className="text-sage font-semibold">seu futuro filho</strong> vai ocupar.
       </>
     ),
     subheadline: (
@@ -38,8 +38,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        O caminho para <strong>engravidar</strong> começa no alinhamento entre a sua{" "}
-        <strong>fé</strong> e a sua <strong>biologia</strong>.
+        O caminho para <strong className="text-sage font-semibold">engravidar</strong> começa no alinhamento entre a sua{" "}
+        <strong className="text-sage font-semibold">fé</strong> e a sua <strong className="text-sage font-semibold">biologia</strong>.
       </>
     ),
     subheadline: (
@@ -53,8 +53,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Você não precisa carregar o <strong>peso da espera</strong> sozinha; prepare o seu corpo para{" "}
-        <strong>engravidar</strong>.
+        Você não precisa carregar o <strong className="text-sage font-semibold">peso da espera</strong> sozinha; prepare o seu corpo para{" "}
+        <strong className="text-sage font-semibold">engravidar</strong>.
       </>
     ),
     subheadline: (
@@ -68,8 +68,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Transforme a <strong>ansiedade da espera</strong> em um caminho claro de como{" "}
-        <strong>engravidar</strong>.
+        Transforme a <strong className="text-sage font-semibold">ansiedade da espera</strong> em um caminho claro de como{" "}
+        <strong className="text-sage font-semibold">engravidar</strong>.
       </>
     ),
     subheadline: (
@@ -83,8 +83,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Junte-se a <strong>mais de 1.700 mulheres</strong> que uniram fé e medicina para{" "}
-        <strong>engravidar</strong>.
+        Junte-se a <strong className="text-sage font-semibold">mais de 1.700 mulheres</strong> que uniram fé e medicina para{" "}
+        <strong className="text-sage font-semibold">engravidar</strong>.
       </>
     ),
     subheadline: (
@@ -98,8 +98,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Não passe <strong>mais um mês</strong> sem dar ao seu corpo o que ele realmente precisa para{" "}
-        <strong>engravidar</strong>.
+        Não passe <strong className="text-sage font-semibold">mais um mês</strong> sem dar ao seu corpo o que ele realmente precisa para{" "}
+        <strong className="text-sage font-semibold">engravidar</strong>.
       </>
     ),
     subheadline: (
@@ -113,8 +113,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Fortaleça sua mente e espírito e prepare o seu corpo para <strong>engravidar</strong> ainda{" "}
-        <strong>este ano</strong>.
+        Fortaleça sua mente e espírito e prepare o seu corpo para <strong className="text-sage font-semibold">engravidar</strong> ainda{" "}
+        <strong className="text-sage font-semibold">este ano</strong>.
       </>
     ),
     subheadline: (
@@ -128,7 +128,7 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Recupere o seu corpo e o seu espírito das várias tentativas de <strong>engravidar</strong> e
+        Recupere o seu corpo e o seu espírito das várias tentativas de <strong className="text-sage font-semibold">engravidar</strong> e
         comece a tentar do jeito certo.
       </>
     ),
