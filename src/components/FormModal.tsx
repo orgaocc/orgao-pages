@@ -130,6 +130,8 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
 
     const utms = getUtmParams();
 
+    const headlineVariant = sessionStorage.getItem("headline_variant") || "0";
+
     const body = {
       nome: formData.nome,
       email: formData.email,
@@ -146,6 +148,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
       source: "jep",
       precheckout: "true",
       submission_date: formatSubmissionDate(),
+      headline_test: `Head${headlineVariant}`,
     };
 
     try {

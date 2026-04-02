@@ -61,6 +61,7 @@ Deno.serve(async (req) => {
       source: body.source || "jep",
       precheckout: body.precheckout || "true",
       submission_date: body.submission_date || "",
+      headline_test: body.headline_test || "Head0",
     };
 
     // 1. Store lead in database
@@ -82,6 +83,7 @@ Deno.serve(async (req) => {
         source: webhookPayload.source,
         precheckout: webhookPayload.precheckout,
         submission_date: webhookPayload.submission_date,
+        headline_test: webhookPayload.headline_test,
       })
       .select("id")
       .single();

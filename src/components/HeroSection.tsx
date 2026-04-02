@@ -1,7 +1,161 @@
+import { useMemo } from "react";
 import heroImg from "@/assets/hero-doctor.webp";
 import logoImg from "@/assets/logo-jejum.webp";
 
+type Variation = {
+  headline: React.ReactNode;
+  subheadline: React.ReactNode;
+};
+
+const VARIATIONS: Variation[] = [
+  // 0 — Original (control)
+  {
+    headline: (
+      <>
+        Para estar com seu filho no colo este ano, você precisa{" "}
+        <em className="text-sage not-italic">preparar seu corpo e o seu espírito</em> agora.
+      </>
+    ),
+    subheadline:
+      "7 dias de jejum, orientação alimentar e atualizações da medicina para quem quer engravidar de forma natural.",
+  },
+  // 1
+  {
+    headline: (
+      <>
+        Chega de tentativas aleatórias de <strong>engravidar</strong>: prepare o berço que o{" "}
+        <strong>seu futuro filho</strong> vai ocupar.
+      </>
+    ),
+    subheadline: (
+      <>
+        Uma jornada de 7 dias unindo <u>jejum estratégico</u>, <u>plano alimentar</u> funcional e{" "}
+        <u>medicina</u> para destravar sua fertilidade natural.
+      </>
+    ),
+  },
+  // 2
+  {
+    headline: (
+      <>
+        O caminho para <strong>engravidar</strong> começa no alinhamento entre a sua{" "}
+        <strong>fé</strong> e a sua <strong>biologia</strong>.
+      </>
+    ),
+    subheadline: (
+      <>
+        Receba <u>7 dias de direcionamento</u> clínico, <u>cardápio para fertilidade</u> e um{" "}
+        <u>devocional exclusivo</u> para preparar seu corpo e mente.
+      </>
+    ),
+  },
+  // 3
+  {
+    headline: (
+      <>
+        Você não precisa carregar o <strong>peso da espera</strong> sozinha; prepare o seu corpo para{" "}
+        <strong>engravidar</strong>.
+      </>
+    ),
+    subheadline: (
+      <>
+        Participe de <u>7 dias de imersão</u> com <u>aulas</u> sobre fertilidade,{" "}
+        <u>meditações</u> guiadas e <u>orientações médicas</u> de quem entende sua jornada.
+      </>
+    ),
+  },
+  // 4
+  {
+    headline: (
+      <>
+        Transforme a <strong>ansiedade da espera</strong> em um caminho claro de como{" "}
+        <strong>engravidar</strong>.
+      </>
+    ),
+    subheadline: (
+      <>
+        Protocolo de <u>7 dias com jejum</u>, <u>nutrição</u> avançada e{" "}
+        <u>atualizações da medicina</u> para mulheres que buscam engravidar naturalmente.
+      </>
+    ),
+  },
+  // 5
+  {
+    headline: (
+      <>
+        Junte-se a <strong>mais de 1.700 mulheres</strong> que uniram fé e medicina para{" "}
+        <strong>engravidar</strong>.
+      </>
+    ),
+    subheadline: (
+      <>
+        Tenha acesso a <u>7 aulas exclusivas</u>, <u>plano alimentar</u> detalhado e{" "}
+        <u>apoio espiritual</u> para preparar seu organismo para o próximo ciclo.
+      </>
+    ),
+  },
+  // 6
+  {
+    headline: (
+      <>
+        Não passe <strong>mais um mês</strong> sem dar ao seu corpo o que ele realmente precisa para{" "}
+        <strong>engravidar</strong>.
+      </>
+    ),
+    subheadline: (
+      <>
+        <u>7 dias de acompanhamento</u> com foco em <u>nutrição</u> fértil, <u>jejum</u> guiado e
+        os <u>fundamentos médicos</u> para potencializar suas chances.
+      </>
+    ),
+  },
+  // 7
+  {
+    headline: (
+      <>
+        Fortaleça sua mente e espírito e prepare o seu corpo para <strong>engravidar</strong> ainda{" "}
+        <strong>este ano</strong>.
+      </>
+    ),
+    subheadline: (
+      <>
+        Uma semana com <u>devocional</u> exclusivo, <u>meditações</u>, <u>plano alimentar</u> e
+        conteúdo para assistir e revisar.
+      </>
+    ),
+  },
+  // 8
+  {
+    headline: (
+      <>
+        Recupere o seu corpo e o seu espírito das várias tentativas de <strong>engravidar</strong> e
+        comece a tentar do jeito certo.
+      </>
+    ),
+    subheadline: (
+      <>
+        Conheça o <u>método de 7 dias</u> que combina jejum assistido, <u>medicina</u> integrativa e{" "}
+        <u>suporte emocional</u> para futuras mães.
+      </>
+    ),
+  },
+];
+
+function getVariantIndex(): number {
+  const stored = sessionStorage.getItem("headline_variant");
+  if (stored !== null) {
+    const n = parseInt(stored, 10);
+    if (!isNaN(n) && n >= 0 && n < VARIATIONS.length) return n;
+  }
+  const idx = Math.floor(Math.random() * VARIATIONS.length);
+  sessionStorage.setItem("headline_variant", String(idx));
+  return idx;
+}
+
 const HeroSection = () => {
+  const variantIdx = useMemo(() => getVariantIndex(), []);
+  const { headline, subheadline } = VARIATIONS[variantIdx];
+
   return (
     <section className="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-24">
       {/* Subtle background decoration */}
@@ -17,8 +171,7 @@ const HeroSection = () => {
           </div>
 
           <h1 className="text-3xl font-serif font-semibold leading-tight text-foreground animate-fade-up">
-            Para estar com seu filho no colo este ano, você precisa{" "}
-            <em className="text-sage not-italic">preparar seu corpo e o seu espírito</em> agora.
+            {headline}
           </h1>
 
           <div className="mt-6 animate-fade-up-delay-1">
@@ -64,12 +217,11 @@ const HeroSection = () => {
             </div>
 
             <h1 className="text-4xl lg:text-5xl font-serif font-semibold leading-tight text-foreground animate-fade-up">
-              Para estar com seu filho no colo este ano, você precisa{" "}
-              <em className="text-sage not-italic">preparar seu corpo e o seu espírito</em> agora.
+              {headline}
             </h1>
 
             <p className="mt-6 text-xl font-body text-muted-foreground leading-relaxed animate-fade-up-delay-1">
-              7 dias de jejum, orientação alimentar e atualizações da medicina para quem quer engravidar de forma natural.
+              {subheadline}
             </p>
 
             <div className="mt-8 animate-fade-up-delay-2">
