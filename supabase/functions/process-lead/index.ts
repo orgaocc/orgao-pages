@@ -83,6 +83,7 @@ Deno.serve(async (req) => {
         source: webhookPayload.source,
         precheckout: webhookPayload.precheckout,
         submission_date: webhookPayload.submission_date,
+        headline_test: webhookPayload.headline_test,
       })
       .select("id")
       .single();
