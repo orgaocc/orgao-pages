@@ -1,0 +1,1 @@
+ALTER TABLE public.leads ADD COLUMN headline_test text DEFAULT 'Head0';
