@@ -53,8 +53,8 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Você não precisa carregar o <strong>peso da espera</strong> sozinha; prepare o seu corpo para{" "}
-        <strong>engravidar</strong>.
+        Você não precisa carregar o <strong className="text-sage font-semibold">peso da espera</strong> sozinha; prepare o seu corpo para{" "}
+        <strong className="text-sage font-semibold">engravidar</strong>.
       </>
     ),
     subheadline: (
