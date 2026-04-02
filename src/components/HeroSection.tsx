@@ -128,7 +128,7 @@ const VARIATIONS: Variation[] = [
   {
     headline: (
       <>
-        Recupere o seu corpo e o seu espírito das várias tentativas de <strong>engravidar</strong> e
+        Recupere o seu corpo e o seu espírito das várias tentativas de <strong className="text-sage font-semibold">engravidar</strong> e
         comece a tentar do jeito certo.
       </>
     ),
