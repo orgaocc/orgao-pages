@@ -7,9 +7,11 @@ type Variation = {
   subheadline: React.ReactNode;
 };
 
-const VARIATIONS: Variation[] = [
-  // 0 — Original (control)
-  {
+const VARIANT_KEYS = ["Head0", "Head3", "Head7", "Head8"] as const;
+
+const VARIATIONS: Record<string, Variation> = {
+  // Head0 — Original (control)
+  Head0: {
     headline: (
       <>
         Para estar com seu filho no colo este ano, você precisa{" "}
@@ -19,38 +21,8 @@ const VARIATIONS: Variation[] = [
     subheadline:
       "7 dias de jejum, orientação alimentar e atualizações da medicina para quem quer engravidar de forma natural.",
   },
-  // 1
-  {
-    headline: (
-      <>
-        Chega de tentativas aleatórias de <strong className="text-sage font-semibold">engravidar</strong>: prepare o berço que o{" "}
-        <strong className="text-sage font-semibold">seu futuro filho</strong> vai ocupar.
-      </>
-    ),
-    subheadline: (
-      <>
-        Uma jornada de 7 dias unindo <u>jejum estratégico</u>, <u>plano alimentar</u> funcional e{" "}
-        <u>medicina</u> para destravar sua fertilidade natural.
-      </>
-    ),
-  },
-  // 2
-  {
-    headline: (
-      <>
-        O caminho para <strong className="text-sage font-semibold">engravidar</strong> começa no alinhamento entre a sua{" "}
-        <strong className="text-sage font-semibold">fé</strong> e a sua <strong className="text-sage font-semibold">biologia</strong>.
-      </>
-    ),
-    subheadline: (
-      <>
-        Receba <u>7 dias de direcionamento</u> clínico, <u>cardápio para fertilidade</u> e um{" "}
-        <u>devocional exclusivo</u> para preparar seu corpo e mente.
-      </>
-    ),
-  },
-  // 3
-  {
+  // Head3
+  Head3: {
     headline: (
       <>
         Você não precisa carregar o <strong className="text-sage font-semibold">peso da espera</strong> sozinha; prepare o seu corpo para{" "}
@@ -64,53 +36,8 @@ const VARIATIONS: Variation[] = [
       </>
     ),
   },
-  // 4
-  {
-    headline: (
-      <>
-        Transforme a <strong className="text-sage font-semibold">ansiedade da espera</strong> em um caminho claro de como{" "}
-        <strong className="text-sage font-semibold">engravidar</strong>.
-      </>
-    ),
-    subheadline: (
-      <>
-        Protocolo de <u>7 dias com jejum</u>, <u>nutrição</u> avançada e{" "}
-        <u>atualizações da medicina</u> para mulheres que buscam engravidar naturalmente.
-      </>
-    ),
-  },
-  // 5
-  {
-    headline: (
-      <>
-        Junte-se a <strong className="text-sage font-semibold">mais de 1.700 mulheres</strong> que uniram fé e medicina para{" "}
-        <strong className="text-sage font-semibold">engravidar</strong>.
-      </>
-    ),
-    subheadline: (
-      <>
-        Tenha acesso a <u>7 aulas exclusivas</u>, <u>plano alimentar</u> detalhado e{" "}
-        <u>apoio espiritual</u> para preparar seu organismo para o próximo ciclo.
-      </>
-    ),
-  },
-  // 6
-  {
-    headline: (
-      <>
-        Não passe <strong className="text-sage font-semibold">mais um mês</strong> sem dar ao seu corpo o que ele realmente precisa para{" "}
-        <strong className="text-sage font-semibold">engravidar</strong>.
-      </>
-    ),
-    subheadline: (
-      <>
-        <u>7 dias de acompanhamento</u> com foco em <u>nutrição</u> fértil, <u>jejum</u> guiado e
-        os <u>fundamentos médicos</u> para potencializar suas chances.
-      </>
-    ),
-  },
-  // 7
-  {
+  // Head7
+  Head7: {
     headline: (
       <>
         Fortaleça sua mente e espírito e prepare o seu corpo para <strong className="text-sage font-semibold">engravidar</strong> ainda{" "}
@@ -124,8 +51,8 @@ const VARIATIONS: Variation[] = [
       </>
     ),
   },
-  // 8
-  {
+  // Head8
+  Head8: {
     headline: (
       <>
         Recupere o seu corpo e o seu espírito das várias tentativas de <strong className="text-sage font-semibold">engravidar</strong> e
@@ -139,22 +66,19 @@ const VARIATIONS: Variation[] = [
       </>
     ),
   },
-];
+};
 
-function getVariantIndex(): number {
+function getVariantKey(): string {
   const stored = sessionStorage.getItem("headline_variant");
-  if (stored !== null) {
-    const n = parseInt(stored, 10);
-    if (!isNaN(n) && n >= 0 && n < VARIATIONS.length) return n;
-  }
-  const idx = Math.floor(Math.random() * VARIATIONS.length);
-  sessionStorage.setItem("headline_variant", String(idx));
-  return idx;
+  if (stored !== null && VARIANT_KEYS.includes(stored as any)) return stored;
+  const key = VARIANT_KEYS[Math.floor(Math.random() * VARIANT_KEYS.length)];
+  sessionStorage.setItem("headline_variant", key);
+  return key;
 }
 
 const HeroSection = () => {
-  const variantIdx = useMemo(() => getVariantIndex(), []);
-  const { headline, subheadline } = VARIATIONS[variantIdx];
+  const variantKey = useMemo(() => getVariantKey(), []);
+  const { headline, subheadline } = VARIATIONS[variantKey];
 
   return (
     <section className="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-24">
@@ -181,7 +105,7 @@ const HeroSection = () => {
           </div>
 
           <p className="mt-4 text-sm font-body text-taupe animate-fade-up-delay-2">
-            Encontros online e ao vivo, de <strong>06 a 12 de Abril</strong>, por apenas <strong>R$57</strong>
+            Encontros online e ao vivo, de <strong>13 a 19 de Abril</strong>, por apenas <strong>R$57</strong>
           </p>
 
           <div className="mt-8 animate-fade-up-delay-2">
@@ -231,7 +155,7 @@ const HeroSection = () => {
             </div>
 
             <p className="mt-5 text-sm font-body text-taupe animate-fade-up-delay-3">
-              Encontros online e ao vivo, de <strong>06 a 12 de Abril</strong>, por apenas <strong>R$57</strong>
+              Encontros online e ao vivo, de <strong>13 a 19 de Abril</strong>, por apenas <strong>R$57</strong>
             </p>
           </div>
 

@@ -154,7 +154,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
       source: "jep",
       precheckout: "true",
       submission_date: formatSubmissionDate(),
-      headline_test: `Head${headlineVariant}`,
+      headline_test: headlineVariant || "Head0",
     };
 
     try {
@@ -232,7 +232,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
                 Garanta seu ingresso
               </h3>
               <p className="text-muted-foreground text-sm font-body">
-                06 a 12 de Abril · Encontros online e ao vivo
+                13 a 19 de Abril · Encontros online e ao vivo
               </p>
             </div>
 
