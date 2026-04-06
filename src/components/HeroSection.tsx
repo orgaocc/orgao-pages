@@ -77,8 +77,8 @@ function getVariantKey(): string {
 }
 
 const HeroSection = () => {
-  const variantIdx = useMemo(() => getVariantIndex(), []);
-  const { headline, subheadline } = VARIATIONS[variantIdx];
+  const variantKey = useMemo(() => getVariantKey(), []);
+  const { headline, subheadline } = VARIATIONS[variantKey];
 
   return (
     <section className="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-24">
