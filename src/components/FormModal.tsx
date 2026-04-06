@@ -154,7 +154,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
       source: "jep",
       precheckout: "true",
       submission_date: formatSubmissionDate(),
-      headline_test: `Head${headlineVariant}`,
+      headline_test: headlineVariant || "Head0",
     };
 
     try {
