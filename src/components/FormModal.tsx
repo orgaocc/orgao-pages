@@ -7,7 +7,7 @@ declare global {
     };
   }
 }
-import { motion, AnimatePresence } from "framer-motion";
+import { useState as useStateAnim } from "react";
 import { cn } from "@/lib/utils";
 import { User, Mail, Phone, X } from "lucide-react";
 import logoImg from "@/assets/logo-jejum.webp";
