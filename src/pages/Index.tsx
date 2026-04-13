@@ -1,31 +1,35 @@
+import { lazy, Suspense } from "react";
 import HeroSection from "@/components/HeroSection";
-import ComoFunciona from "@/components/ComoFunciona";
-import Pilares from "@/components/Pilares";
-import MaterialExclusivo from "@/components/MaterialExclusivo";
-import ProvaSocial from "@/components/ProvaSocial";
-import OQueVaiReceber from "@/components/OQueVaiReceber";
-import ParaQuemE from "@/components/ParaQuemE";
-import Devocional from "@/components/Devocional";
-import Oferta from "@/components/Oferta";
-import Autoridade from "@/components/Autoridade";
-import FAQ from "@/components/FAQ";
-import Footer from "@/components/Footer";
+
+const ComoFunciona = lazy(() => import("@/components/ComoFunciona"));
+const Pilares = lazy(() => import("@/components/Pilares"));
+const MaterialExclusivo = lazy(() => import("@/components/MaterialExclusivo"));
+const ProvaSocial = lazy(() => import("@/components/ProvaSocial"));
+const OQueVaiReceber = lazy(() => import("@/components/OQueVaiReceber"));
+const ParaQuemE = lazy(() => import("@/components/ParaQuemE"));
+const Devocional = lazy(() => import("@/components/Devocional"));
+const Oferta = lazy(() => import("@/components/Oferta"));
+const Autoridade = lazy(() => import("@/components/Autoridade"));
+const FAQ = lazy(() => import("@/components/FAQ"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <HeroSection />
-      <ComoFunciona />
-      <Pilares />
-      <MaterialExclusivo />
-      <ProvaSocial />
-      <OQueVaiReceber />
-      <ParaQuemE />
-      <Devocional />
-      <Oferta />
-      <Autoridade />
-      <FAQ />
-      <Footer />
+      <Suspense fallback={null}>
+        <ComoFunciona />
+        <Pilares />
+        <MaterialExclusivo />
+        <ProvaSocial />
+        <OQueVaiReceber />
+        <ParaQuemE />
+        <Devocional />
+        <Oferta />
+        <Autoridade />
+        <FAQ />
+        <Footer />
+      </Suspense>
     </div>
   );
 };

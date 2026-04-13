@@ -7,7 +7,7 @@ declare global {
     };
   }
 }
-import { motion, AnimatePresence } from "framer-motion";
+
 import { cn } from "@/lib/utils";
 import { User, Mail, Phone, X } from "lucide-react";
 import logoImg from "@/assets/logo-jejum.webp";
@@ -198,103 +198,93 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
     "transition-all duration-200"
   );
 
+  if (!open) return null;
+
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          onClick={onClose}
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-modal-overlay"
+        onClick={onClose}
+      >
+        <div className="absolute inset-0 bg-foreground/40 backdrop-blur-sm" />
+
+        <div
+          className="relative w-full max-w-md bg-card rounded-3xl p-8 md:p-10 shadow-2xl border border-border animate-modal-content"
+          onClick={(e) => e.stopPropagation()}
         >
-          <div className="absolute inset-0 bg-foreground/40 backdrop-blur-sm" />
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 16 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative w-full max-w-md bg-card rounded-3xl p-8 md:p-10 shadow-2xl border border-border"
-            onClick={(e) => e.stopPropagation()}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
           >
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <X className="w-4 h-4" />
+          </button>
 
-            <div className="text-center mb-6">
-              <img src={logoImg} alt="Jejum para Engravidar" className="max-w-[150px] h-auto mx-auto mb-4" />
-              <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-2">
-                Garanta seu ingresso
-              </h3>
-              <p className="text-muted-foreground text-sm font-body">
-                13 a 19 de Abril · Encontros online e ao vivo
-              </p>
+          <div className="text-center mb-6">
+            <img src={logoImg} alt="Jejum para Engravidar" className="max-w-[150px] h-auto mx-auto mb-4" />
+            <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-2">
+              Garanta seu ingresso
+            </h3>
+            <p className="text-muted-foreground text-sm font-body">
+              13 a 19 de Abril · Encontros online e ao vivo
+            </p>
+          </div>
+
+          <form id="formLovable" onSubmit={handleSubmit} className="formLovable elementor-form space-y-4">
+            <div className="relative">
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Nome"
+                required
+                value={formData.nome}
+                onChange={handleChange}
+                className={inputClasses}
+              />
             </div>
 
-            <form id="formLovable" onSubmit={handleSubmit} className="formLovable elementor-form space-y-4">
-              <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  type="text"
-                  id="nome"
-                  name="nome"
-                  placeholder="Nome"
-                  required
-                  value={formData.nome}
-                  onChange={handleChange}
-                  className={inputClasses}
-                />
-              </div>
+            <div className="relative">
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className={inputClasses}
+              />
+            </div>
 
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={inputClasses}
-                />
-              </div>
+            <div className="relative">
+              <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                placeholder="(00) 00000-0000"
+                required
+                value={formData.telefone}
+                onChange={handleChange}
+                className={inputClasses}
+              />
+            </div>
 
-              <div className="relative">
-                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  type="tel"
-                  id="telefone"
-                  name="telefone"
-                  placeholder="(00) 00000-0000"
-                  required
-                  value={formData.telefone}
-                  onChange={handleChange}
-                  className={inputClasses}
-                />
-              </div>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="btn-cta w-full text-lg mt-2"
+            >
+              {submitting ? "ENVIANDO..." : "QUERO GARANTIR MEU INGRESSO"}
+            </button>
 
-              <button
-                type="submit"
-                disabled={submitting}
-                className="btn-cta w-full text-lg mt-2"
-              >
-                {submitting ? "ENVIANDO..." : "QUERO GARANTIR MEU INGRESSO"}
-              </button>
-
-              <p className="text-[12px] text-foreground text-center mt-3 leading-snug">
-                Os dados coletados são tratados nos termos da Lei Geral de Proteção de Dados e você pode se descadastrar da nossa lista de contatos a qualquer momento.
-              </p>
-            </form>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+            <p className="text-[12px] text-foreground text-center mt-3 leading-snug">
+              Os dados coletados são tratados nos termos da Lei Geral de Proteção de Dados e você pode se descadastrar da nossa lista de contatos a qualquer momento.
+            </p>
+          </form>
+        </div>
+      </div>
   );
 };
 
