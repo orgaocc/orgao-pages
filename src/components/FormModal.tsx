@@ -198,10 +198,9 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
     "transition-all duration-200"
   );
 
-  return (
-    if (!open) return null;
+  if (!open) return null;
 
-    return (
+  return (
       <div
         className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-modal-overlay"
         onClick={onClose}
