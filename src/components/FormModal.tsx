@@ -224,7 +224,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
               Garanta seu ingresso
             </h3>
             <p className="text-muted-foreground text-sm font-body">
-              20 a 24 de Abril · Encontros online e ao vivo
+              20 a 24 de Abril · Encontros online
             </p>
           </div>
 

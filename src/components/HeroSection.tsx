@@ -105,7 +105,7 @@ const HeroSection = () => {
           </div>
 
           <p className="mt-4 text-sm font-body text-taupe animate-fade-up-delay-2">
-            Encontros online e ao vivo, de <strong>20 a 24 de Abril</strong>, por apenas <strong>R$57</strong>
+Encontros online, de <strong>20 a 24 de Abril</strong>, por apenas <strong>R$57</strong>
           </p>
 
           <div className="mt-8 animate-fade-up-delay-2">
@@ -155,7 +155,7 @@ const HeroSection = () => {
             </div>
 
             <p className="mt-5 text-sm font-body text-taupe animate-fade-up-delay-3">
-              Encontros online e ao vivo, de <strong>20 a 24 de Abril</strong>, por apenas <strong>R$57</strong>
+              Encontros online, de <strong>20 a 24 de Abril</strong>, por apenas <strong>R$57</strong>
             </p>
           </div>
 
