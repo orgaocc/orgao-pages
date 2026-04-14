@@ -17,11 +17,6 @@ const faqs = [
       "Sim. Justamente por unir conhecimento clínico e espiritual, o evento ajuda a identificar padrões e travas que muitas vezes passam despercebidos. As aulas e os materiais complementares foram pensados para te ajudar a dar um passo concreto na sua preparação física, emocional e espiritual para a gravidez.",
   },
   {
-    question: "E se eu não conseguir acompanhar tudo durante os 7 dias?",
-    answer:
-      "O ideal é participar durante a semana do jejum, mas todo o conteúdo ficará disponível para você assistir até o dia 14/04.",
-  },
-  {
     question: "E se eu não gostar ou achar que não é pra mim?",
     answer:
       "Acreditamos tanto no que preparamos que temos certeza de que esse evento será um divisor de águas na sua vida. Mas, se ainda assim você sentir que não é o momento, basta seguir as orientações de reembolso dentro do prazo legal e devolveremos seu investimento sem complicações.",
