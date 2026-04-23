@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -79,6 +79,46 @@
     --champagne: 20 30% 92%;
     --terracotta: 350 40% 58%;
     --terracotta-light: 345 30% 90%;
+  }
+
+  /* LO3 — Mounjaro angle: deep pink (#C2185B), bege rosado (#F8F0F3), gold accents */
+  .theme-lo3 {
+    --background: 340 33% 96%;        /* #F8F0F3 bege rosado */
+    --foreground: 0 0% 17%;           /* #2C2C2C */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 17%;
+    --muted: 340 25% 94%;
+    --muted-foreground: 0 0% 42%;     /* #6B6B6B */
+    --border: 340 15% 88%;
+    --input: 340 15% 88%;
+
+    --primary: 336 78% 39%;           /* #C2185B */
+    --primary-foreground: 0 0% 100%;
+    --ring: 336 78% 39%;
+
+    --accent: 340 50% 88%;
+    --accent-foreground: 0 0% 17%;
+
+    --sage: 336 78% 39%;
+    --sage-light: 340 50% 95%;
+    --olive: 336 50% 50%;
+    --rose-burned: 336 78% 39%;
+    --blush: 340 33% 96%;
+    --champagne: 0 0% 100%;
+    --terracotta: 336 78% 39%;
+    --terracotta-light: 340 50% 92%;
+    --cream: 0 0% 100%;
+    --gold: 43 53% 54%;               /* #C9A84C */
+    --taupe: 0 0% 42%;
+  }
+
+  .theme-lo3 h1,
+  .theme-lo3 h2,
+  .theme-lo3 h3,
+  .theme-lo3 h4,
+  .theme-lo3 h5,
+  .theme-lo3 h6 {
+    font-family: 'Playfair Display', 'Cormorant Garamond', serif;
   }
 }
 
