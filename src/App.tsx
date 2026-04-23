@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import IndexLo2 from "./pages/IndexLo2.tsx";
+import IndexLo3 from "./pages/IndexLo3.tsx";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
           <Route path="/jpe/lo1/" element={<Index />} />
           <Route path="/lo" element={<Index />} />
           <Route path="/jpe/lo2/" element={<IndexLo2 />} />
+          <Route path="/jpe/lo3/" element={<IndexLo3 />} />
           <Route path="/" element={<Navigate to="/jpe/lo1/" replace />} />
           <Route path="*" element={<Navigate to="/jpe/lo1/" replace />} />
         </Routes>
