@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Serif+Display:ital@0;1&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -119,6 +119,26 @@
   .theme-lo3 h5,
   .theme-lo3 h6 {
     font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+  }
+
+  /* Teste 1 — variação da LO1 apenas com a fonte de destaque trocada */
+  .theme-teste1 h1,
+  .theme-teste1 h2,
+  .theme-teste1 h3,
+  .theme-teste1 h4,
+  .theme-teste1 h5,
+  .theme-teste1 h6 {
+    font-family: 'DM Serif Display', 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .theme-teste1 h1 {
+    font-size: clamp(1.85rem, 4.2vw, 3rem);
+    line-height: 1.12;
+  }
+  .theme-teste1 h2 {
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    line-height: 1.18;
   }
 }
 
