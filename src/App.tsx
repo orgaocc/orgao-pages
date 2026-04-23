@@ -6,8 +6,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import IndexLo2 from "./pages/IndexLo2.tsx";
 import IndexLo3 from "./pages/IndexLo3.tsx";
-import Fonts from "./pages/Fonts.tsx";
-import IndexTeste1 from "./pages/IndexTeste1.tsx";
 
 const queryClient = new QueryClient();
 
@@ -22,8 +20,6 @@ const App = () => (
           <Route path="/lo" element={<Index />} />
           <Route path="/jpe/lo2/" element={<IndexLo2 />} />
           <Route path="/jpe/lo3/" element={<IndexLo3 />} />
-          <Route path="/fonts" element={<Fonts />} />
-          <Route path="/jpe/teste1/" element={<IndexTeste1 />} />
           <Route path="/" element={<Navigate to="/jpe/lo1/" replace />} />
           <Route path="*" element={<Navigate to="/jpe/lo1/" replace />} />
         </Routes>
