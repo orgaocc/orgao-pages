@@ -11,7 +11,6 @@ const Devocional = lazy(() => import("@/components/lo3/DevocionalLo3"));
 const Oferta = lazy(() => import("@/components/lo3/OfertaLo3"));
 const Autoridade = lazy(() => import("@/components/lo3/AutoridadeLo3"));
 const FAQ = lazy(() => import("@/components/lo3/FAQLo3"));
-const Suporte = lazy(() => import("@/components/lo3/SuporteLo3"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 const IndexLo3 = () => {
@@ -29,7 +28,6 @@ const IndexLo3 = () => {
         <Oferta />
         <Autoridade />
         <FAQ />
-        <Suporte />
         <Footer />
       </Suspense>
     </div>
