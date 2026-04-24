@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import heroImg from "@/assets/hero-doctor.webp";
+import heroImg from "@/assets/hero-doctor-lo2b.webp";
 import { Calendar } from "lucide-react";
 
 const HighlightCard = () => (
@@ -107,7 +107,7 @@ function getVariantKey(): string {
   return key;
 }
 
-const HeroSection = () => {
+const HeroSectionLo2b = () => {
   const variantKey = useMemo(() => getVariantKey(), []);
   const { headline, subheadline } = VARIATIONS[variantKey];
 
@@ -210,4 +210,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default HeroSectionLo2b;
