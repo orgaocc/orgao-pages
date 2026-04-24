@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSectionLo2b";
 import UrgencyBar from "@/components/UrgencyBar";
 
 const ComoFunciona = lazy(() => import("@/components/ComoFunciona"));
