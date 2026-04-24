@@ -75,6 +75,20 @@ const HeroLo3 = () => {
               height={1024}
             />
           </div>
+
+          <div className="w-full max-w-[20rem] animate-fade-up-delay-3">
+            <div className="flex items-center gap-4 rounded-2xl bg-card px-6 py-4 shadow-sm border border-border text-left">
+              <div className="w-1 h-10 rounded-full bg-primary" />
+              <div>
+                <p className="font-serif text-lg font-semibold text-foreground">
+                  Dra. Talita Melo
+                </p>
+                <p className="text-sm font-body text-muted-foreground">
+                  Ginecologista referência em Fertilidade · Co-fundadora do Programa Conceber
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Desktop */}
@@ -109,7 +123,7 @@ const HeroLo3 = () => {
             </div>
           </div>
 
-          <div className="flex justify-center animate-fade-up">
+          <div className="flex flex-col items-center animate-fade-up">
             <img
               src={heroImg}
               alt="Dra. Talita Melo - Ginecologista especialista em fertilidade"
@@ -117,6 +131,19 @@ const HeroLo3 = () => {
               width={800}
               height={1024}
             />
+            <div className="w-full max-w-[32rem] animate-fade-up-delay-3">
+              <div className="flex items-center gap-4 rounded-2xl bg-card px-6 py-4 shadow-sm border border-border">
+                <div className="w-1 h-10 rounded-full bg-primary" />
+                <div>
+                  <p className="font-serif text-lg font-semibold text-foreground">
+                    Dra. Talita Melo
+                  </p>
+                  <p className="text-sm font-body text-muted-foreground">
+                    Ginecologista referência em Fertilidade · Co-fundadora do Programa Conceber
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
