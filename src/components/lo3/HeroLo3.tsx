@@ -10,7 +10,7 @@ const HighlightCard = () => (
           <p className="text-[10px] font-body font-bold uppercase tracking-[0.15em] text-muted-foreground">
             Datas
           </p>
-          <p className="font-serif text-base md:text-lg font-semibold text-foreground leading-tight">
+          <p className="font-body text-base md:text-lg font-semibold text-foreground leading-tight">
             27 de Abril a 3 de Maio
           </p>
         </div>
@@ -20,9 +20,9 @@ const HighlightCard = () => (
           <p className="text-[10px] font-body font-bold uppercase tracking-[0.15em] text-muted-foreground">
             Investimento
           </p>
-          <p className="font-serif text-foreground leading-tight">
-            <span className="text-2xl md:text-3xl font-bold text-primary">R$ 57</span>
-            <span className="ml-2 text-xs md:text-sm font-body text-muted-foreground">
+          <p className="font-body text-foreground leading-tight">
+            <span className="text-2xl md:text-3xl font-bold text-primary tracking-tight">R$ 57</span>
+            <span className="ml-2 text-xs md:text-sm text-muted-foreground">
               ou 8x R$ 7,88
             </span>
           </p>
