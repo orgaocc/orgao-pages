@@ -1,6 +1,37 @@
 import { useMemo } from "react";
 import heroImg from "@/assets/hero-doctor.webp";
-import logoImg from "@/assets/logo-jejum.webp";
+import { Calendar } from "lucide-react";
+
+const HighlightCard = () => (
+  <div className="rounded-2xl bg-cream border border-border shadow-sm overflow-hidden">
+    <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-border">
+      <div className="flex items-center gap-3 px-5 py-4 flex-1 justify-center sm:justify-start">
+        <Calendar className="w-5 h-5 text-sage shrink-0" aria-hidden />
+        <div className="text-left">
+          <p className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-taupe">
+            Datas
+          </p>
+          <p className="font-serif text-base md:text-lg font-semibold text-foreground leading-tight">
+            27 de Abril a 3 de Maio
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center gap-3 px-5 py-4 flex-1 justify-center sm:justify-start">
+        <div className="text-left">
+          <p className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-taupe">
+            Investimento
+          </p>
+          <p className="font-serif text-foreground leading-tight">
+            <span className="text-2xl md:text-3xl font-bold text-sage">R$ 57</span>
+            <span className="ml-2 text-xs md:text-sm font-body text-muted-foreground">
+              ou 8x R$ 7,88
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 type Variation = {
   headline: React.ReactNode;
@@ -90,10 +121,6 @@ const HeroSection = () => {
       <div className="section-container relative z-10">
         {/* Mobile / Tablet: stacked layout */}
         <div className="flex flex-col items-center text-center md:hidden">
-          <div className="mb-6">
-            <img src={logoImg} alt="Jejum para Engravidar" className="h-10 w-auto mx-auto" />
-          </div>
-
           <h1 className="text-3xl font-serif font-semibold leading-tight text-foreground animate-fade-up">
             {headline}
           </h1>
@@ -104,9 +131,9 @@ const HeroSection = () => {
             </a>
           </div>
 
-          <p className="mt-4 text-sm font-body text-taupe animate-fade-up-delay-2">
-Encontros online, de <strong>27 de Abril a 3 de Maio</strong>, por apenas <strong>R$57</strong>
-          </p>
+          <div className="mt-5 w-full max-w-[22rem] animate-fade-up-delay-2">
+            <HighlightCard />
+          </div>
 
           <div className="mt-8 animate-fade-up-delay-2">
             <img
@@ -136,10 +163,6 @@ Encontros online, de <strong>27 de Abril a 3 de Maio</strong>, por apenas <stron
         {/* Desktop: 2-column layout */}
         <div className="hidden md:grid md:grid-cols-2 gap-12 items-end">
           <div>
-            <div className="mb-12">
-              <img src={logoImg} alt="Jejum para Engravidar" className="h-12 w-auto" />
-            </div>
-
             <h1 className="text-4xl lg:text-5xl font-serif font-semibold leading-tight text-foreground animate-fade-up">
               {headline}
             </h1>
@@ -154,9 +177,9 @@ Encontros online, de <strong>27 de Abril a 3 de Maio</strong>, por apenas <stron
               </a>
             </div>
 
-            <p className="mt-5 text-sm font-body text-taupe animate-fade-up-delay-3">
-              Encontros online, de <strong>27 de Abril a 3 de Maio</strong>, por apenas <strong>R$57</strong>
-            </p>
+            <div className="mt-6 max-w-md animate-fade-up-delay-3">
+              <HighlightCard />
+            </div>
           </div>
 
           <div className="flex flex-col items-end self-end animate-fade-up">
