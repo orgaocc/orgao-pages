@@ -7,19 +7,39 @@ import {
 
 const faqs = [
   {
+    question: "O evento fica gravado?",
+    answer:
+      "Sim, o conteúdo ficará disponível apenas durante a semana do evento. Após esse período, não será mais possível acessar as aulas.",
+  },
+  {
+    question: "Para quem é o jejum?",
+    answer:
+      "O Jejum e Oração para Engravidar é indicado para mulheres e casais que desejam se preparar para a gestação, cuidando do corpo, do emocional e da espiritualidade ✨",
+  },
+  {
+    question: "Não tenho ciclo, posso participar?",
+    answer:
+      "Sim! Mesmo sem ciclo, você pode participar. O jejum atua na redução da inflamação, no equilíbrio hormonal e na organização do organismo como um todo.",
+  },
+  {
     question: "É seguro fazer jejum enquanto tento engravidar?",
     answer:
-      "Durante o período de jejum, você terá acesso a uma área com todas as meditações, aulas e materiais. Se você não conseguir participar de alguma atividade no horário marcado, pode ver a gravação em outro momento.",
+      "Sim, é seguro, desde que você siga exatamente as orientações do programa e não estenda o período do cardápio. O processo foi estruturado para ser feito com segurança e equilíbrio.",
   },
   {
-    question: "Funciona para quem tem ciclo irregular ou problemas hormonais?",
+    question: "Tenho diagnóstico, posso participar?",
     answer:
-      "Sim. Justamente por unir conhecimento clínico e espiritual, o evento ajuda a identificar padrões e travas que muitas vezes passam despercebidos. As aulas e os materiais complementares foram pensados para te ajudar a dar um passo concreto na sua preparação física, emocional e espiritual para a gravidez.",
+      "Sim! Ter um diagnóstico não impede sua participação. Pelo contrário, o jejum pode ajudar na preparação do corpo, reduzindo inflamação e melhorando o ambiente hormonal. Muitas mulheres com SOP, endometriose e outros quadros participam e se beneficiam.",
   },
   {
-    question: "E se eu não gostar ou achar que não é pra mim?",
+    question: "Por onde o evento acontece?",
     answer:
-      "Acreditamos tanto no que preparamos que temos certeza de que esse evento será um divisor de águas na sua vida. Mas, se ainda assim você sentir que não é o momento, basta seguir as orientações de reembolso dentro do prazo legal e devolveremos seu investimento sem complicações.",
+      "O evento ocorre online, através do YouTube. Após a compra, você receberá no seu e-mail todas as orientações, incluindo o link do grupo exclusivo de WhatsApp, que é por onde serão enviados os links das aulas e materiais de apoio.",
+  },
+  {
+    question: "Em quais horários acontecem as aulas?",
+    answer:
+      "As aulas acontecem às 7h30 de segunda a sexta-feira e às 9h no sábado e domingo ✨",
   },
 ];
 
