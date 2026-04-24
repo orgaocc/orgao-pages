@@ -35,11 +35,11 @@ const Pilares = () => {
               className="card-premium group overflow-hidden"
               style={{ animationDelay: `${i * 0.15}s` }}
             >
-              <div className="aspect-[4/3] -mx-6 -mt-6 md:-mx-8 md:-mt-8 mb-6 overflow-hidden rounded-t-2xl">
+               <div className="aspect-[4/3] -mx-6 -mt-6 md:-mx-8 md:-mt-8 mb-6 overflow-hidden rounded-t-2xl bg-muted/30">
                 <img
                   src={pillar.image}
                   alt={pillar.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                   className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                   width={800}
                   height={600}
