@@ -1,7 +1,7 @@
 import { Heart, Leaf, Stethoscope } from "lucide-react";
-import meditationImg from "@/assets/meditation.jpg";
-import nutritionImg from "@/assets/nutrition-flat.jpg";
-import onlineClassImg from "@/assets/online-class.jpg";
+import meditationImg from "@/assets/pilar-fe.webp";
+import nutritionImg from "@/assets/pilar-nutricao.webp";
+import onlineClassImg from "@/assets/pilar-medicina.webp";
 
 const pillars = [
   {
