@@ -7,19 +7,39 @@ import {
 
 const faqs = [
   {
+    question: "O evento fica gravado?",
+    answer:
+      "Sim, o conteúdo ficará disponível apenas durante a semana do evento. Após esse período, não será mais possível acessar as aulas.",
+  },
+  {
+    question: "Para quem é o jejum?",
+    answer:
+      "O Jejum e Oração para Engravidar é indicado para mulheres e casais que desejam se preparar para a gestação, cuidando do corpo, do emocional e da espiritualidade ✨",
+  },
+  {
+    question: "Não tenho ciclo, posso participar?",
+    answer:
+      "Sim! Mesmo sem ciclo, você pode participar. O jejum atua na redução da inflamação, no equilíbrio hormonal e na organização do organismo como um todo.",
+  },
+  {
     question: "É seguro fazer jejum enquanto tento engravidar?",
     answer:
-      "Sim. O jejum do evento é específico e orientado pela Dra. Talita — bem diferente de restrições severas. Você vai aprender exatamente como e quando fazer, com segurança clínica.",
+      "Sim, é seguro, desde que você siga exatamente as orientações do programa e não estenda o período do cardápio. O processo foi estruturado para ser feito com segurança e equilíbrio.",
   },
   {
-    question: "Funciona para quem tem SOP ou resistência insulínica?",
+    question: "Tenho diagnóstico, posso participar?",
     answer:
-      "Especialmente para essas mulheres. O protocolo foi desenvolvido justamente para equilibrar os desequilíbrios metabólicos que a resistência insulínica provoca — o mesmo que o Mounjaro faz, mas de forma natural.",
+      "Sim! Ter um diagnóstico não impede sua participação. Pelo contrário, o jejum pode ajudar na preparação do corpo, reduzindo inflamação e melhorando o ambiente hormonal. Muitas mulheres com SOP, endometriose e outros quadros participam e se beneficiam.",
   },
   {
-    question: "E se eu não gostar ou achar que não é pra mim?",
+    question: "Por onde o evento acontece?",
     answer:
-      "Você tem garantia de 7 dias. Mas o que mais ouvimos das alunas é: \"por que não fiz isso antes?\"",
+      "O evento ocorre online, através do YouTube. Após a compra, você receberá no seu e-mail todas as orientações, incluindo o link do grupo exclusivo de WhatsApp, que é por onde serão enviados os links das aulas e materiais de apoio.",
+  },
+  {
+    question: "Em quais horários acontecem as aulas?",
+    answer:
+      "As aulas acontecem às 7h30 de segunda a sexta-feira e às 9h no sábado e domingo ✨",
   },
 ];
 
