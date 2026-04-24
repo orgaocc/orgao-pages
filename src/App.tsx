@@ -20,8 +20,8 @@ const App = () => (
           <Route path="/jpe/lo1/" element={<Index />} />
           <Route path="/lo" element={<Index />} />
           <Route path="/jpe/lo2/" element={<IndexLo2 />} />
-          <Route path="/lo2-b" element={<IndexLo2B />} />
-          <Route path="/lo2-b/" element={<IndexLo2B />} />
+          <Route path="/jpe/lo2b" element={<IndexLo2B />} />
+          <Route path="/jpe/lo2b/" element={<IndexLo2B />} />
           <Route path="/jpe/lo3/" element={<IndexLo3 />} />
           <Route path="/" element={<Navigate to="/jpe/lo1/" replace />} />
           <Route path="*" element={<Navigate to="/jpe/lo1/" replace />} />
