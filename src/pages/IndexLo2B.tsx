@@ -14,7 +14,7 @@ const Autoridade = lazy(() => import("@/components/Autoridade"));
 const FAQ = lazy(() => import("@/components/FAQ"));
 const Footer = lazy(() => import("@/components/Footer"));
 
-const IndexLo2 = () => {
+const IndexLo2B = () => {
   return (
     <div className="min-h-screen bg-background theme-lo2">
       <UrgencyBar />
@@ -36,4 +36,4 @@ const IndexLo2 = () => {
   );
 };
 
-export default IndexLo2;
+export default IndexLo2B;
