@@ -4,8 +4,8 @@ import { Calendar } from "lucide-react";
 
 const HighlightCard = () => (
   <div className="rounded-2xl bg-cream border border-border shadow-sm overflow-hidden">
-    <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-border">
-      <div className="flex items-center gap-3 px-5 py-4 flex-1 justify-center sm:justify-start">
+    <div className="flex flex-row divide-x divide-border">
+      <div className="flex items-center gap-3 px-4 sm:px-5 py-4 flex-1 justify-center sm:justify-start">
         <Calendar className="w-5 h-5 text-sage shrink-0" aria-hidden />
         <div className="text-left">
           <p className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-taupe">
@@ -16,7 +16,7 @@ const HighlightCard = () => (
           </p>
         </div>
       </div>
-      <div className="flex items-center gap-3 px-5 py-4 flex-1 justify-center sm:justify-start">
+      <div className="flex items-center gap-3 px-4 sm:px-5 py-4 flex-1 justify-center sm:justify-start">
         <div className="text-left">
           <p className="text-[10px] font-body font-semibold uppercase tracking-[0.15em] text-taupe">
             Investimento
@@ -125,14 +125,14 @@ const HeroSection = () => {
             {headline}
           </h1>
 
-          <div className="mt-6 animate-fade-up-delay-1">
+          <div className="mt-6 w-full max-w-[22rem] animate-fade-up-delay-1">
+            <HighlightCard />
+          </div>
+
+          <div className="mt-5 animate-fade-up-delay-2">
             <a href="#oferta" className="btn-cta text-lg">
               Garantir meu ingresso
             </a>
-          </div>
-
-          <div className="mt-5 w-full max-w-[22rem] animate-fade-up-delay-2">
-            <HighlightCard />
           </div>
 
           <div className="mt-8 animate-fade-up-delay-2">
@@ -171,14 +171,14 @@ const HeroSection = () => {
               {subheadline}
             </p>
 
-            <div className="mt-8 animate-fade-up-delay-2">
+            <div className="mt-8 max-w-md animate-fade-up-delay-2">
+              <HighlightCard />
+            </div>
+
+            <div className="mt-6 animate-fade-up-delay-3">
               <a href="#oferta" className="btn-cta text-lg">
                 Garantir meu ingresso
               </a>
-            </div>
-
-            <div className="mt-6 max-w-md animate-fade-up-delay-3">
-              <HighlightCard />
             </div>
           </div>
 
