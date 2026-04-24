@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import HeroLo3 from "@/components/lo3/HeroLo3";
+import UrgencyBar from "@/components/UrgencyBar";
 
 const Mecanismo = lazy(() => import("@/components/lo3/MecanismoLo3"));
 const ComoFunciona = lazy(() => import("@/components/lo3/ComoFuncionaLo3"));
@@ -16,6 +17,7 @@ const Footer = lazy(() => import("@/components/Footer"));
 const IndexLo3 = () => {
   return (
     <div className="min-h-screen bg-background theme-lo3">
+      <UrgencyBar />
       <HeroLo3 />
       <Suspense fallback={null}>
         <Mecanismo />

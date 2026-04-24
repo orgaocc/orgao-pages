@@ -1,5 +1,36 @@
 import heroImg from "@/assets/hero-doctor.webp";
-import logoImg from "@/assets/logo-jejum.webp";
+import { Calendar } from "lucide-react";
+
+const HighlightCard = () => (
+  <div className="rounded-2xl bg-card border border-border shadow-sm overflow-hidden">
+    <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-border">
+      <div className="flex items-center gap-3 px-5 py-4 flex-1 justify-center sm:justify-start">
+        <Calendar className="w-5 h-5 text-primary shrink-0" aria-hidden />
+        <div className="text-left">
+          <p className="text-[10px] font-body font-bold uppercase tracking-[0.15em] text-muted-foreground">
+            Datas
+          </p>
+          <p className="font-serif text-base md:text-lg font-semibold text-foreground leading-tight">
+            27 de Abril a 3 de Maio
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center gap-3 px-5 py-4 flex-1 justify-center sm:justify-start">
+        <div className="text-left">
+          <p className="text-[10px] font-body font-bold uppercase tracking-[0.15em] text-muted-foreground">
+            Investimento
+          </p>
+          <p className="font-serif text-foreground leading-tight">
+            <span className="text-2xl md:text-3xl font-bold text-primary">R$ 57</span>
+            <span className="ml-2 text-xs md:text-sm font-body text-muted-foreground">
+              ou 8x R$ 7,88
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 const HeroLo3 = () => {
   return (
@@ -7,10 +38,6 @@ const HeroLo3 = () => {
       <div className="section-container relative z-10">
         {/* Mobile */}
         <div className="flex flex-col items-center text-center md:hidden">
-          <div className="mb-6">
-            <img src={logoImg} alt="Jejum para Engravidar" className="h-10 w-auto mx-auto" />
-          </div>
-
           <p className="text-xs font-body font-bold uppercase tracking-[0.18em] text-primary mb-4">
             Medicina · Nutrição · Fé
           </p>
@@ -35,9 +62,9 @@ const HeroLo3 = () => {
             </a>
           </div>
 
-          <p className="mt-4 text-xs font-body text-muted-foreground animate-fade-up-delay-2">
-            Encontros online · <strong>27 de Abril a 3 de Maio</strong> · Por apenas <strong>R$57</strong>
-          </p>
+          <div className="mt-5 w-full animate-fade-up-delay-2">
+            <HighlightCard />
+          </div>
 
           <div className="mt-8 animate-fade-up-delay-2">
             <img
@@ -53,10 +80,6 @@ const HeroLo3 = () => {
         {/* Desktop */}
         <div className="hidden md:grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="mb-10">
-              <img src={logoImg} alt="Jejum para Engravidar" className="h-12 w-auto" />
-            </div>
-
             <p className="text-sm font-body font-bold uppercase tracking-[0.18em] text-primary mb-5">
               Medicina · Nutrição · Fé
             </p>
@@ -81,9 +104,9 @@ const HeroLo3 = () => {
               </a>
             </div>
 
-            <p className="mt-5 text-sm font-body text-muted-foreground animate-fade-up-delay-3">
-              Encontros online · <strong>27 de Abril a 3 de Maio</strong> · Por apenas <strong>R$57</strong>
-            </p>
+            <div className="mt-6 max-w-md animate-fade-up-delay-3">
+              <HighlightCard />
+            </div>
           </div>
 
           <div className="flex justify-center animate-fade-up">
