@@ -58,6 +58,57 @@ export type Database = {
           },
         ]
       }
+      launch_config: {
+        Row: {
+          created_at: string
+          id: number
+          is_fallback: boolean
+          lancamento_id: string
+          lancamento_nome: string
+          link_ingresso: string
+          link_produto_principal: string | null
+          received_at: string
+          sales_end: string | null
+          sales_start: string | null
+          updated_at: string
+          week_end: string | null
+          week_number: number | null
+          week_start: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          is_fallback?: boolean
+          lancamento_id: string
+          lancamento_nome: string
+          link_ingresso: string
+          link_produto_principal?: string | null
+          received_at?: string
+          sales_end?: string | null
+          sales_start?: string | null
+          updated_at?: string
+          week_end?: string | null
+          week_number?: number | null
+          week_start?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          is_fallback?: boolean
+          lancamento_id?: string
+          lancamento_nome?: string
+          link_ingresso?: string
+          link_produto_principal?: string | null
+          received_at?: string
+          sales_end?: string | null
+          sales_start?: string | null
+          updated_at?: string
+          week_end?: string | null
+          week_number?: number | null
+          week_start?: string | null
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string
