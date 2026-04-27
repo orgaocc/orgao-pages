@@ -17,7 +17,7 @@ const HighlightCard = () => {
             Datas
           </p>
           <p className="font-body text-base md:text-lg font-semibold text-foreground leading-tight">
-            {line1}<br />{line2}
+            {line1}{line2 && (<><br />{line2}</>)}
           </p>
         </div>
       </div>
