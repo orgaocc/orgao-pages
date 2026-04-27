@@ -16,6 +16,8 @@ export default {
       fontFamily: {
         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        lora: ['Lora', 'Georgia', 'serif'],
+        raleway: ['Raleway', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

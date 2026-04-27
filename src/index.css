@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -81,35 +81,42 @@
     --terracotta-light: 345 30% 90%;
   }
 
-  /* LO3 — Mounjaro angle: deep pink (#C2185B), bege rosado (#F8F0F3), gold accents */
+  /* LO3 — Mounjaro angle: deep pink (#C2185B), rose-blush (#FDF2F8), gold accents */
   .theme-lo3 {
-    --background: 340 33% 96%;        /* #F8F0F3 bege rosado */
-    --foreground: 0 0% 17%;           /* #2C2C2C */
+    --background: 320 67% 97%;        /* #FDF2F8 rose-blush */
+    --foreground: 0 0% 15%;           /* #262626 */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 17%;
-    --muted: 340 25% 94%;
-    --muted-foreground: 0 0% 42%;     /* #6B6B6B */
-    --border: 340 15% 88%;
-    --input: 340 15% 88%;
+    --card-foreground: 0 0% 15%;
+    --muted: 325 35% 95%;
+    --muted-foreground: 0 0% 44%;     /* #707070 */
+    --border: 325 25% 91%;
+    --input: 325 25% 91%;
 
     --primary: 336 78% 39%;           /* #C2185B */
     --primary-foreground: 0 0% 100%;
     --ring: 336 78% 39%;
 
-    --accent: 340 50% 88%;
-    --accent-foreground: 0 0% 17%;
+    --accent: 336 55% 93%;
+    --accent-foreground: 0 0% 15%;
+
+    --radius: 0.875rem;
 
     --sage: 336 78% 39%;
-    --sage-light: 340 50% 95%;
+    --sage-light: 336 55% 95%;
     --olive: 336 50% 50%;
     --rose-burned: 336 78% 39%;
-    --blush: 340 33% 96%;
+    --blush: 320 67% 97%;
     --champagne: 0 0% 100%;
     --terracotta: 336 78% 39%;
-    --terracotta-light: 340 50% 92%;
+    --terracotta-light: 336 40% 93%;
     --cream: 0 0% 100%;
-    --gold: 43 53% 54%;               /* #C9A84C */
-    --taupe: 0 0% 42%;
+    --gold: 43 62% 50%;               /* #C9A84C richer */
+    --taupe: 0 0% 44%;
+  }
+
+  /* Lo3: Lora headings + Raleway body */
+  .theme-lo3 {
+    font-family: 'Raleway', system-ui, sans-serif;
   }
 
   .theme-lo3 h1,
@@ -117,8 +124,9 @@
   .theme-lo3 h3,
   .theme-lo3 h4,
   .theme-lo3 h5,
-  .theme-lo3 h6 {
-    font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+  .theme-lo3 h6,
+  .theme-lo3 .font-serif {
+    font-family: 'Lora', Georgia, serif;
   }
 }
 
@@ -145,9 +153,19 @@
     @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold font-body
       bg-primary text-primary-foreground rounded-full
       transition-all duration-300 ease-out
-      hover:shadow-lg hover:scale-[1.02] hover:-translate-y-0.5
-      active:scale-[0.98];
-    box-shadow: 0 4px 14px 0 hsl(var(--primary) / 0.3);
+      hover:shadow-xl hover:scale-[1.02] hover:-translate-y-0.5
+      active:scale-[0.98] cursor-pointer;
+    box-shadow: 0 4px 18px 0 hsl(var(--primary) / 0.35);
+    letter-spacing: 0.01em;
+  }
+
+  .theme-lo3 .btn-cta {
+    background: linear-gradient(135deg, hsl(336 78% 39%), hsl(336 68% 46%));
+    box-shadow: 0 6px 22px 0 hsl(336 78% 39% / 0.38);
+  }
+
+  .theme-lo3 .btn-cta:hover {
+    box-shadow: 0 10px 30px 0 hsl(336 78% 39% / 0.45);
   }
 
   .btn-cta-accent {

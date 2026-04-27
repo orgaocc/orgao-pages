@@ -2,34 +2,40 @@ import autoridadeImg from "@/assets/autoridade.webp";
 
 const AutoridadeLo3 = () => {
   return (
-    <section className="py-16 md:py-24 bg-card">
+    <section className="py-20 md:py-28 bg-background">
       <div className="section-container">
-        <div className="grid md:grid-cols-2 gap-10 items-start">
+        <div className="grid md:grid-cols-2 gap-12 items-start">
           <div className="flex justify-center md:sticky md:top-8">
-            <img
-              src={autoridadeImg}
-              alt="Dra. Talita Melo"
-              className="rounded-2xl w-full max-w-sm object-cover shadow-[0_2px_12px_rgba(0,0,0,0.08)]"
-              loading="lazy"
-              width={640}
-              height={800}
-            />
+            <div className="relative">
+              <div
+                className="absolute -inset-4 rounded-3xl opacity-[0.07] blur-2xl"
+                style={{ background: "hsl(var(--primary))" }}
+              />
+              <img
+                src={autoridadeImg}
+                alt="Dra. Talita Melo"
+                className="relative rounded-2xl w-full max-w-sm object-cover shadow-[0_8px_32px_rgba(194,24,91,0.1)]"
+                loading="lazy"
+                width={640}
+                height={800}
+              />
+            </div>
           </div>
           <div>
-            <p className="text-xs font-body font-bold uppercase tracking-[0.18em] text-primary mb-3">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">
               Sua especialista
             </p>
-            <h2 className="text-[22px] md:text-4xl font-serif font-semibold text-foreground leading-tight">
+            <h2 className="text-[22px] md:text-4xl font-semibold text-foreground leading-tight" style={{ fontFamily: 'Lora, Georgia, serif' }}>
               Quem sou eu para te ajudar a engravidar?
             </h2>
-            <div className="mt-6 space-y-4 text-[15px] font-body text-muted-foreground leading-relaxed">
+            <div className="mt-7 space-y-4 text-[15px] text-muted-foreground leading-relaxed">
               <p>
-                Meu nome é <strong className="text-foreground">Talita Melo</strong>.
+                Meu nome é <strong className="text-foreground font-semibold">Talita Melo</strong>.
               </p>
               <p>
                 Sou Médica Ginecologista, referência em fertilidade no Brasil, autora do livro{" "}
-                <strong className="text-foreground">FÉrtilidade</strong> e co-fundadora do{" "}
-                <strong className="text-foreground">Conceber</strong>, um dos maiores programas de
+                <strong className="text-foreground font-semibold">FÉrtilidade</strong> e co-fundadora do{" "}
+                <strong className="text-foreground font-semibold">Conceber</strong>, um dos maiores programas de
                 acompanhamento para quem quer engravidar no Brasil.
               </p>
               <p>
@@ -45,7 +51,7 @@ const AutoridadeLo3 = () => {
               </p>
               <p>
                 Mas por ter unido a medicina com a fé, hoje sou mãe de{" "}
-                <strong className="text-foreground">dois filhos</strong>. Aos 42 e 43 anos.
+                <strong className="text-foreground font-semibold">dois filhos</strong>. Aos 42 e 43 anos.
               </p>
               <p>
                 Isso só foi possível porque entendi que não adianta cuidar do corpo sem fortalecer
@@ -53,8 +59,14 @@ const AutoridadeLo3 = () => {
                 o que ele precisa para receber essa graça.
               </p>
 
-              <div className="rounded-xl bg-sage-light border-l-4 border-primary p-5 my-6">
-                <p className="font-serif text-lg italic text-foreground">
+              <div
+                className="rounded-xl border-l-4 p-5 my-6"
+                style={{
+                  background: "hsl(var(--gold) / 0.08)",
+                  borderColor: "hsl(var(--gold))",
+                }}
+              >
+                <p className="text-lg italic text-foreground leading-relaxed" style={{ fontFamily: 'Lora, Georgia, serif' }}>
                   "A ciência cura, mas é a fé que sustenta."
                 </p>
               </div>

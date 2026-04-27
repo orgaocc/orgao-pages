@@ -42,13 +42,13 @@ const items = [
 
 const OQueVaiReceberLo3 = () => {
   return (
-    <section className="py-16 md:py-24 bg-card">
+    <section className="py-20 md:py-28 bg-background">
       <div className="section-container">
-        <div className="text-center mb-12">
-          <p className="text-xs font-body font-bold uppercase tracking-[0.18em] text-primary mb-3">
+        <div className="text-center mb-14">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">
             Seu programa completo
           </p>
-          <h2 className="text-[22px] md:text-4xl font-serif font-semibold text-foreground">
+          <h2 className="text-[22px] md:text-4xl font-semibold text-foreground" style={{ fontFamily: 'Lora, Georgia, serif' }}>
             É isso que você vai receber
           </h2>
         </div>
@@ -57,14 +57,14 @@ const OQueVaiReceberLo3 = () => {
           {items.map((item, i) => (
             <div
               key={item.title}
-              className="rounded-xl bg-background p-6 md:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.08)] grid md:grid-cols-2 gap-6 items-center"
+              className="rounded-2xl bg-white p-6 md:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-border grid md:grid-cols-2 gap-6 items-center transition-all duration-300 hover:shadow-[0_8px_32px_rgba(194,24,91,0.1)]"
             >
               {item.image ? (
-                <div className={i % 2 === 1 ? "md:order-2" : ""}>
+                <div className={`overflow-hidden rounded-xl ${i % 2 === 1 ? "md:order-2" : ""}`}>
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="rounded-xl w-full aspect-[4/3] object-cover"
+                    className="w-full aspect-[4/3] object-cover transition-transform duration-500 hover:scale-105"
                     loading="lazy"
                     width={800}
                     height={600}
@@ -73,14 +73,17 @@ const OQueVaiReceberLo3 = () => {
               ) : null}
               <div className={`${item.image && i % 2 === 1 ? "md:order-1" : ""} ${!item.image ? "md:col-span-2" : ""}`}>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-sage-light flex items-center justify-center shrink-0">
+                  <div
+                    className="w-11 h-11 rounded-full flex items-center justify-center shrink-0"
+                    style={{ background: "hsl(var(--sage-light))" }}
+                  >
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>
-                  <h3 className="text-lg md:text-2xl font-serif font-semibold text-foreground">
+                  <h3 className="text-lg md:text-2xl font-semibold text-foreground" style={{ fontFamily: 'Lora, Georgia, serif' }}>
                     {item.title}
                   </h3>
                 </div>
-                <p className="text-[15px] font-body text-muted-foreground leading-relaxed">
+                <p className="text-[15px] text-muted-foreground leading-relaxed">
                   {item.description}
                 </p>
               </div>

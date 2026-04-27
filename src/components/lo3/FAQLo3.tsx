@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "Para quem é o jejum?",
     answer:
-      "O Jejum e Oração para Engravidar é indicado para mulheres e casais que desejam se preparar para a gestação, cuidando do corpo, do emocional e da espiritualidade ✨",
+      "O Jejum e Oração para Engravidar é indicado para mulheres e casais que desejam se preparar para a gestação, cuidando do corpo, do emocional e da espiritualidade.",
   },
   {
     question: "Não tenho ciclo, posso participar?",
@@ -39,17 +39,17 @@ const faqs = [
   {
     question: "Em quais horários acontecem as aulas?",
     answer:
-      "As aulas acontecem às 7h30 de segunda a sexta-feira e às 9h no sábado e domingo ✨",
+      "As aulas acontecem às 7h30 de segunda a sexta-feira e às 9h no sábado e domingo.",
   },
 ];
 
 const FAQLo3 = () => {
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-20 md:py-28 bg-white">
       <div className="section-container">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-[22px] md:text-4xl font-serif font-semibold text-foreground">
+          <div className="text-center mb-12">
+            <h2 className="text-[22px] md:text-4xl font-semibold text-foreground" style={{ fontFamily: 'Lora, Georgia, serif' }}>
               Perguntas Frequentes
             </h2>
           </div>
@@ -59,12 +59,12 @@ const FAQLo3 = () => {
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
-                className="rounded-xl bg-card border border-border px-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
+                className="rounded-2xl bg-background border border-border px-6 shadow-sm transition-all duration-200 hover:border-primary/20 hover:shadow-[0_4px_16px_rgba(194,24,91,0.08)]"
               >
-                <AccordionTrigger className="text-left font-body text-base font-medium text-foreground py-5 hover:no-underline">
+                <AccordionTrigger className="text-left text-base font-medium text-foreground py-5 hover:no-underline hover:text-primary transition-colors duration-200">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-[15px] font-body text-muted-foreground leading-relaxed pb-5">
+                <AccordionContent className="text-[15px] text-muted-foreground leading-relaxed pb-5">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
