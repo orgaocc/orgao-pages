@@ -11,6 +11,7 @@ declare global {
 import { cn } from "@/lib/utils";
 import { User, Mail, Phone, X } from "lucide-react";
 import logoImg from "@/assets/logo-jejum.webp";
+import { getLaunchConfigOnce } from "@/hooks/useLaunchConfig";
 
 interface FormModalProps {
   open: boolean;
@@ -184,7 +185,18 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
     const utmSource = getUtmParams().utm_source;
     const phoneDigits = formData.telefone.replace(/\D/g, "");
     const xcod = new URLSearchParams(window.location.search).get("xcod");
-    let redirectUrl = `https://pay.hotmart.com/E104660930C?checkoutMode=10&name=${encodeURIComponent(formData.nome)}&email=${encodeURIComponent(formData.email)}&phonenumber=${encodeURIComponent(phoneDigits)}&src=${encodeURIComponent(utmSource)}&sck=lovable_page`;
+
+    // Resolve dynamic Hotmart link from launch_config (falls back to E104660930C)
+    let baseLink = "https://pay.hotmart.com/E104660930C";
+    try {
+      const cfg = await getLaunchConfigOnce();
+      if (cfg?.link_ingresso) baseLink = cfg.link_ingresso;
+    } catch (e) {
+      console.warn("launch config unavailable, using fallback link", e);
+    }
+
+    const sep = baseLink.includes("?") ? "&" : "?";
+    let redirectUrl = `${baseLink}${sep}checkoutMode=10&name=${encodeURIComponent(formData.nome)}&email=${encodeURIComponent(formData.email)}&phonenumber=${encodeURIComponent(phoneDigits)}&src=${encodeURIComponent(utmSource)}&sck=lovable_page`;
     if (xcod) {
       redirectUrl += `&xcod=${encodeURIComponent(xcod)}`;
     }
