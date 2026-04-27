@@ -26,8 +26,8 @@ const HighlightCard = () => {
             Investimento
           </p>
           <p className="font-body text-foreground leading-tight">
-            <span className="block text-2xl md:text-3xl font-bold text-primary tracking-tight">R$ 57</span>
-            <span className="block text-xs md:text-sm text-muted-foreground mt-0.5">
+            <span className={`${line2 ? "block" : "inline"} text-2xl md:text-3xl font-bold text-primary tracking-tight`}>R$ 57</span>
+            <span className={`${line2 ? "block mt-0.5" : "inline ml-2"} text-xs md:text-sm text-muted-foreground`}>
               ou 8x R$ 7,88
             </span>
           </p>
