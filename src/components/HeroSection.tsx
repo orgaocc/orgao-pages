@@ -1,8 +1,13 @@
 import { useMemo } from "react";
 import heroImg from "@/assets/hero-doctor.webp";
 import { Calendar } from "lucide-react";
+import { useLaunchConfig } from "@/hooks/useLaunchConfig";
+import { formatDateRangeTwoLines } from "@/lib/dateRange";
 
-const HighlightCard = () => (
+const HighlightCard = () => {
+  const { config } = useLaunchConfig();
+  const [line1, line2] = formatDateRangeTwoLines(config.week_start, config.week_end);
+  return (
   <div className="rounded-2xl bg-cream border border-border shadow-sm overflow-hidden">
     <div className="flex flex-row divide-x divide-border">
       <div className="flex items-center gap-3 px-4 sm:px-5 py-4 flex-1 justify-center sm:justify-start">
@@ -12,7 +17,7 @@ const HighlightCard = () => (
             Datas
           </p>
           <p className="font-body text-base md:text-lg font-semibold text-foreground leading-tight">
-            27 de Abril a<br />3 de Maio
+            {line1}<br />{line2}
           </p>
         </div>
       </div>
@@ -31,7 +36,8 @@ const HighlightCard = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 type Variation = {
   headline: React.ReactNode;

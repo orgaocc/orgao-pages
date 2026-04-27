@@ -11,7 +11,8 @@ declare global {
 import { cn } from "@/lib/utils";
 import { User, Mail, Phone, X } from "lucide-react";
 import logoImg from "@/assets/logo-jejum.webp";
-import { getLaunchConfigOnce } from "@/hooks/useLaunchConfig";
+import { getLaunchConfigOnce, useLaunchConfig } from "@/hooks/useLaunchConfig";
+import { formatDateRange } from "@/lib/dateRange";
 
 interface FormModalProps {
   open: boolean;
@@ -65,6 +66,8 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
   const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_DATA);
   const [submitting, setSubmitting] = useState(false);
   const synced = useRef(false);
+  const { config } = useLaunchConfig();
+  const dateLabel = formatDateRange(config.week_start, config.week_end);
 
   // Sync PixelX autofill: poll DOM input values when modal opens
   // PixelX sets .value on the DOM directly, bypassing React onChange
@@ -236,7 +239,7 @@ const FormModal: React.FC<FormModalProps> = ({ open, onClose }) => {
               Garanta seu ingresso
             </h3>
             <p className="text-muted-foreground text-sm font-body">
-              27 de Abril a 3 de Maio · Encontros online
+              {dateLabel} · Encontros online
             </p>
           </div>
 
