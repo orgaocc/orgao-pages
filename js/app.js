@@ -189,6 +189,56 @@ function initForm() {
 }
 
 /* =============================================
+   SCROLL REVEAL
+   ============================================= */
+function initReveal() {
+  const els = document.querySelectorAll('.reveal:not(.visible)');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(el => io.observe(el));
+}
+
+/* =============================================
+   FLOATING CTA — appears after hero, hides near offer/modal
+   ============================================= */
+function initFloatCta() {
+  const float = document.getElementById('float-cta');
+  const hero = document.getElementById('hero');
+  const offer = document.getElementById('oferta');
+  if (!float || !hero) return;
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      const offerRect = offer ? offer.getBoundingClientRect() : null;
+      const inOfferZone = offerRect && offerRect.top < window.innerHeight && offerRect.bottom > 0;
+      const modalOpen = document.getElementById('modal').classList.contains('open');
+      if (heroBottom < 0 && !inOfferZone && !modalOpen) {
+        float.classList.add('show');
+      } else {
+        float.classList.remove('show');
+      }
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* =============================================
    INIT
    ============================================= */
 document.addEventListener('DOMContentLoaded', () => {
@@ -196,4 +246,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaq();
   initModal();
   initForm();
+  initReveal();
+  initFloatCta();
 });
