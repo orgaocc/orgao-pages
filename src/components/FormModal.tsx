@@ -11,7 +11,8 @@ declare global {
 import { cn } from "@/lib/utils";
 import { User, Mail, Phone, X } from "lucide-react";
 import logoImg from "@/assets/logo-jejum.webp";
-import { getLaunchConfigOnce } from "@/hooks/useLaunchConfig";
+import { getLaunchConfigOnce, useLaunchConfig } from "@/hooks/useLaunchConfig";
+import { formatDateRange } from "@/lib/dateRange";
 
 interface FormModalProps {
   open: boolean;
