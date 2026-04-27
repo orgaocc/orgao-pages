@@ -1,7 +1,10 @@
 import { Clock } from "lucide-react";
+import { useLaunchConfig } from "@/hooks/useLaunchConfig";
+import { formatStartLine } from "@/lib/dateRange";
 
 const UrgencyBar = () => {
-  const text = "Começa na próxima segunda — 27 de Abril";
+  const { config } = useLaunchConfig();
+  const text = formatStartLine(config.week_start);
   const items = Array.from({ length: 8 });
   return (
     <div className="sticky top-0 z-50 bg-red-600 text-white font-bold overflow-hidden">
