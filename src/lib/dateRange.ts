@@ -46,7 +46,13 @@ export function formatDateRange(
   return `${s.getDate()} de ${MONTHS_PT[s.getMonth()]} a ${e.getDate()} de ${MONTHS_PT[e.getMonth()]}`;
 }
 
-/** Same as formatDateRange but returns ["27 de Abril a", "3 de Maio"] for two-line layouts. */
+/**
+ * Returns the date range split for two-line layouts ONLY when the range
+ * crosses months (e.g. ["27 de Abril a", "3 de Maio"]). When start and end
+ * are in the same month, returns a single-line string ("4 a 10 de Maio")
+ * as the first element and an empty string as the second — callers should
+ * skip the line break when line2 is empty.
+ */
 export function formatDateRangeTwoLines(
   start: string | null | undefined,
   end: string | null | undefined,
@@ -56,7 +62,7 @@ export function formatDateRangeTwoLines(
   const e = parseLocalDate(end);
   if (!s || !e) return fallback;
   if (s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear()) {
-    return [`${s.getDate()} a`, `${e.getDate()} de ${MONTHS_PT[s.getMonth()]}`];
+    return [`${s.getDate()} a ${e.getDate()} de ${MONTHS_PT[s.getMonth()]}`, ""];
   }
   return [
     `${s.getDate()} de ${MONTHS_PT[s.getMonth()]} a`,
