@@ -156,6 +156,7 @@ async function handleSubmit(e) {
     utm_id:          utms.utm_id,
     form:            CONFIG.form,
     source:          CONFIG.source,
+    headline_variant: sessionStorage.getItem('headline_variant') || 'HeadOriginal',
     precheckout:     'true',
     submission_date: submissionDate(),
   };
