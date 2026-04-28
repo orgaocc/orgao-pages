@@ -59,6 +59,9 @@
 /jpe/cc-v7-b/js/*
   Cache-Control: public, max-age=604800
 
+/jpe/cc-v7-b/assets/*
+  Cache-Control: public, max-age=2592000
+
 # Fontes — 1 ano + immutable (não mudam pra mesma URL)
 /jpe/cc-v3/assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
