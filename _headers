@@ -35,16 +35,16 @@
 /jpe/cc-v9/assets/*
   Cache-Control: public, max-age=2592000
 
-/jpe/cc-lo1/css/*
+/jpe/cc-v1/css/*
   Cache-Control: public, max-age=604800
 
-/jpe/cc-lo1/js/*
+/jpe/cc-v1/js/*
   Cache-Control: public, max-age=604800
 
-/jpe/cc-lo2b/css/*
+/jpe/cc-v2/css/*
   Cache-Control: public, max-age=604800
 
-/jpe/cc-lo2b/js/*
+/jpe/cc-v2/js/*
   Cache-Control: public, max-age=604800
 
 # Fontes — 1 ano + immutable (não mudam pra mesma URL)
