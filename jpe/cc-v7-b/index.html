@@ -46,7 +46,7 @@
   <link rel="dns-prefetch" href="https://mjzboolbdynbavxpounr.supabase.co" />
 
   <!-- Hero LCP image preload -->
-  <link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/hero.webp" imagesrcset="assets/hero-640.webp 640w, assets/hero.webp 675w" imagesizes="(max-width: 960px) 100vw, 50vw" fetchpriority="high" />
 
   <!-- Font preloads -->
   <link rel="preload" as="font" type="font/woff2" href="../cc-v3/assets/fonts/lora-normal-latin.woff2" crossorigin />
@@ -1458,7 +1458,7 @@ section:not(#hero) {
         <div class="hero-photo-frame-bg"></div>
         <div class="hero-photo-frame-dots"></div>
         <div class="hero-photo-frame">
-          <img src="assets/hero.webp" alt="Dra. Talita Melo — Ginecologista especialista em fertilidade" width="675" height="892" fetchpriority="high" decoding="async" />
+          <img src="assets/hero.webp" srcset="assets/hero-640.webp 640w, assets/hero.webp 675w" sizes="(max-width: 960px) 100vw, 50vw" alt="Dra. Talita Melo — Ginecologista especialista em fertilidade" width="675" height="892" fetchpriority="high" decoding="async" />
         </div>
         <div class="doctor-pill">
           <div class="doctor-pill-dot">TM</div>
