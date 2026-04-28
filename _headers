@@ -35,6 +35,9 @@
 /jpe/cc-v9/assets/*
   Cache-Control: public, max-age=2592000
 
+/jpe/cc-v2b/assets/*
+  Cache-Control: public, max-age=2592000
+
 /jpe/cc-v1/css/*
   Cache-Control: public, max-age=604800
 
