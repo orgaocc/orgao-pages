@@ -1,4 +1,63 @@
 /* =============================================
+   FONTS — self-hosted Google Fonts (WOFF2)
+   ============================================= */
+
+/* Lora italic latin-ext */
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../assets/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Lora italic latin */
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../assets/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Lora normal latin-ext */
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../assets/fonts/lora-normal-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Lora normal latin */
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../assets/fonts/lora-normal-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Raleway normal latin-ext */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/raleway-normal-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Raleway normal latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/raleway-normal-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* =============================================
    DESIGN SYSTEM — Hebe (Jejum para Engravidar)
    Based on UI/UX Pro Max recommendations:
    - Pattern: Scroll-Triggered Storytelling
@@ -105,6 +164,12 @@ section {
   overflow: hidden;
 }
 @media (max-width: 768px) { section { padding: 64px 0; } }
+
+/* Render offscreen sections lazily — boost LCP/TBT */
+section:not(#hero) {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
+}
 
 .bg-blush  { background: var(--bg); }
 .bg-white  { background: var(--bg-white); }
@@ -704,12 +769,18 @@ section {
 
 .photo-block {
   position: relative;
+  aspect-ratio: 4/5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo-block img { width: 100%; height: 100%; object-fit: contain; }
+.photo-block.framed {
   border-radius: var(--r-2xl);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  aspect-ratio: 4/5;
 }
-.photo-block img { width: 100%; height: 100%; object-fit: cover; }
+.photo-block.framed img { object-fit: cover; }
 
 .pillars-grid {
   display: grid;
@@ -791,13 +862,19 @@ section {
 
 .split-img {
   position: relative;
-  border-radius: var(--r-2xl);
-  overflow: hidden;
   aspect-ratio: 4/3;
-  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .split-img.tall { aspect-ratio: 4/5; }
-.split-img img { width:100%; height:100%; object-fit: cover; }
+.split-img img { width:100%; height:100%; object-fit: contain; }
+.split-img.framed {
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.split-img.framed img { object-fit: cover; }
 
 /* =============================================
    PROVA SOCIAL
@@ -951,10 +1028,12 @@ section {
 .rc-img {
   width: 100%;
   aspect-ratio: 16/10;
-  overflow: hidden;
-  background: var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 18px 0;
 }
-.rc-img img { width:100%; height: 100%; object-fit: cover; transition: transform var(--t-slow) var(--ease); }
+.rc-img img { width:100%; height: 100%; object-fit: contain; transition: transform var(--t-slow) var(--ease); }
 .receive-card:hover .rc-img img { transform: scale(1.04); }
 
 .rc-body {
@@ -1043,21 +1122,13 @@ section {
 }
 .dev-photo {
   position: relative;
-  border-radius: var(--r-2xl);
-  overflow: hidden;
   aspect-ratio: 4/3;
-  box-shadow:
-    0 0 0 1px rgba(197,152,67,.18),
-    0 4px 12px rgba(197,152,67,.18),
-    0 24px 60px rgba(197,152,67,.20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 12px 28px rgba(197,152,67,.20)) drop-shadow(0 4px 8px rgba(197,152,67,.15));
 }
-.dev-photo img { width:100%; height: 100%; object-fit: cover; }
-.dev-photo::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(197,152,67,.06), transparent 50%);
-  pointer-events: none;
-}
+.dev-photo img { width:100%; height: 100%; object-fit: contain; }
 .dev-cta { margin-top: 28px; }
 .dev-cta .btn-cta {
   background: linear-gradient(135deg, #D5A75B 0%, var(--gold) 50%, var(--gold-deep) 100%);

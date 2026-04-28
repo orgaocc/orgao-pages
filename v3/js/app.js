@@ -34,27 +34,40 @@ function formatUrgency(s) {
   return `Começa ${WEEKDAYS[s.getDay()]} — ${s.getDate()} de ${MONTHS[s.getMonth()]}`;
 }
 
-async function loadDates() {
-  try {
-    const res = await fetch(
-      `${CONFIG.supabase_url}/rest/v1/launch_config?id=eq.1&select=week_start,week_end,link_ingresso`,
-      { headers: { apikey: CONFIG.supabase_key, Authorization: `Bearer ${CONFIG.supabase_key}` } }
-    );
-    const [data] = await res.json();
-    if (data) {
-      if (data.week_start) CONFIG.week_start = data.week_start;
-      if (data.week_end)   CONFIG.week_end   = data.week_end;
-      if (data.link_ingresso) CONFIG.link_ingresso = data.link_ingresso;
-    }
-  } catch (_) { /* usa fallback */ }
-
+function applyDates() {
   const s = parseDate(CONFIG.week_start);
   const e = parseDate(CONFIG.week_end);
   const dateRange = formatRange(s, e);
   const urgencyText = formatUrgency(s);
-
   document.querySelectorAll('[data-date-range]').forEach(el => el.textContent = dateRange);
   document.querySelectorAll('[data-urgency]').forEach(el => el.textContent = urgencyText);
+}
+
+async function loadDates() {
+  // Render fallback imediato — Supabase é refinement
+  applyDates();
+
+  const fetchRemote = async () => {
+    try {
+      const res = await fetch(
+        `${CONFIG.supabase_url}/rest/v1/launch_config?id=eq.1&select=week_start,week_end,link_ingresso`,
+        { headers: { apikey: CONFIG.supabase_key, Authorization: `Bearer ${CONFIG.supabase_key}` } }
+      );
+      const [data] = await res.json();
+      if (data) {
+        if (data.week_start) CONFIG.week_start = data.week_start;
+        if (data.week_end)   CONFIG.week_end   = data.week_end;
+        if (data.link_ingresso) CONFIG.link_ingresso = data.link_ingresso;
+        applyDates();
+      }
+    } catch (_) { /* mantém fallback */ }
+  };
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(fetchRemote, { timeout: 3000 });
+  } else {
+    setTimeout(fetchRemote, 1500);
+  }
 }
 
 /* =============================================

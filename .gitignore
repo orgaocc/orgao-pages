@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local dev config (Claude Code preview launch.json, etc)
+.claude/
