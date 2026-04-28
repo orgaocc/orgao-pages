@@ -1511,10 +1511,10 @@ footer {
   gap: 18px;
 }
 .footer-logo { width: 100px; height: auto; opacity: .85; }
-.footer-cr { font-size: 13px; color: rgba(255,255,255,.55); text-align: center; }
+.footer-cr { font-size: 13px; color: rgba(255,255,255,.82); text-align: center; }
 .footer-links {
   display: flex; gap: 14px; align-items: center;
-  font-size: 13px; color: rgba(255,255,255,.6);
+  font-size: 13px; color: rgba(255,255,255,.85);
 }
 .footer-links a:hover { color: #fff; }
 .footer-links span { color: rgba(255,255,255,.3); }
