@@ -42,7 +42,7 @@
   </script>
 
   <!-- Resource hints -->
-  <link rel="preconnect" href="https://grupoconceber.com" crossorigin />
+  <link rel="preconnect" href="https://grupoconceber.com" />
   <link rel="preconnect" href="https://mjzboolbdynbavxpounr.supabase.co" crossorigin />
   <link rel="dns-prefetch" href="https://mjzboolbdynbavxpounr.supabase.co" />
 
@@ -51,6 +51,7 @@
 
   <!-- Font preloads -->
   <link rel="preload" as="font" type="font/woff2" href="../cc-v3/assets/fonts/lora-normal-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../cc-v3/assets/fonts/lora-italic-latin.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="../cc-v3/assets/fonts/raleway-normal-latin.woff2" crossorigin />
 
   <style>
@@ -1328,7 +1329,7 @@ section:not(#hero) {
 <body>
 
 <!-- ==================== URGENCY BAR ==================== -->
-<div id="urgency-bar" aria-label="Aviso de início">
+<div id="urgency-bar" aria-hidden="true">
   <div class="marquee-track" aria-hidden="true">
     <span class="marquee-item">
       <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>
@@ -1381,6 +1382,8 @@ section:not(#hero) {
     </span>
   </div>
 </div>
+
+<main>
 
 <!-- ==================== HERO ==================== -->
 <section id="hero">
@@ -1817,6 +1820,8 @@ section:not(#hero) {
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ==================== FOOTER ==================== -->
 <footer id="footer">
