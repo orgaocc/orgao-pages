@@ -182,12 +182,6 @@ async function handleSubmit(e) {
     });
   } catch (_) {}
 
-  try {
-    if (window.pixel_x_app?.send_event) {
-      await window.pixel_x_app.send_event({ event_name:'Lead', lead_name:nome, lead_email:email, lead_phone:digits });
-    }
-  } catch (_) {}
-
   const sep = CONFIG.link_ingresso.includes('?') ? '&' : '?';
   let url = `${CONFIG.link_ingresso}${sep}checkoutMode=10&name=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&phonenumber=${encodeURIComponent(digits)}&src=${encodeURIComponent(utms.utm_source)}&sck=hebe_html`;
   if (utms.xcod) url += `&xcod=${encodeURIComponent(utms.xcod)}`;
@@ -198,7 +192,7 @@ function initForm() {
   document.getElementById('f-tel').addEventListener('input', function() {
     this.value = applyMask(this.value);
   });
-  document.getElementById('lead-form').addEventListener('submit', handleSubmit);
+  document.getElementById('formClaude').addEventListener('submit', handleSubmit);
 }
 
 /* =============================================

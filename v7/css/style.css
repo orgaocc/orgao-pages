@@ -348,9 +348,30 @@ section:not(#hero) {
   max-width: calc(100vw - 24px);
 }
 .float-cta.show { transform: translateX(-50%) translateY(0); }
-.float-cta-text { font-size: 13px; font-weight: 600; color: var(--fg); white-space: nowrap; }
+.float-cta-text { font-size: 13px; font-weight: 600; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .float-cta-text strong { color: var(--primary); }
 .float-cta .btn-cta { padding: 11px 20px; min-height: 42px; font-size: 13px; }
+@media (max-width: 520px) {
+  .float-cta {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    bottom: 12px;
+    padding: 7px 7px 7px 14px;
+    gap: 10px;
+  }
+  .float-cta-text {
+    font-size: 12px;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .float-cta .btn-cta {
+    flex: 1 1 auto;
+    padding: 14px 18px;
+    min-height: 50px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}
 
 /* =============================================
    HERO
