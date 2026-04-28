@@ -293,22 +293,34 @@ section:not(#hero) {
    URGENCY BAR
    ============================================= */
 #urgency-bar {
-  background: linear-gradient(90deg, var(--primary-hover), var(--primary), #14B8A6, var(--primary), var(--primary-hover));
-  background-size: 300% 100%;
+  position: relative;
+  background: var(--primary);
   color: #fff;
   overflow: hidden;
+}
+#urgency-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 300%;
+  background: linear-gradient(90deg, var(--primary-hover), var(--primary), #14B8A6, var(--primary), var(--primary-hover));
+  will-change: transform;
   animation: gradientShift 12s linear infinite;
+  pointer-events: none;
 }
 @keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  100% { background-position: 300% 50%; }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-66.667%); }
 }
 .marquee-track {
+  position: relative;
+  z-index: 1;
   display: flex;
   gap: 56px;
   padding: 11px 0;
   white-space: nowrap;
   width: max-content;
+  will-change: transform;
   animation: marquee 38s linear infinite;
 }
 .marquee-item {
