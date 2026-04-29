@@ -25,3 +25,4 @@ dist-ssr
 
 # Local dev config (Claude Code preview launch.json, etc)
 .claude/
+CLAUDE.md
