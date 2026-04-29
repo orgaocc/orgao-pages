@@ -174,7 +174,8 @@ async function handleSubmit(e) {
   } catch (_) {}
 
   const sep = CONFIG.link_ingresso.includes('?') ? '&' : '?';
-  let url = `${CONFIG.link_ingresso}${sep}checkoutMode=10&name=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&phonenumber=${encodeURIComponent(digits)}&src=${encodeURIComponent(utms.utm_source)}&sck=${CONFIG.sck}`;
+  const checkoutMode = /[?&]checkoutMode=/.test(CONFIG.link_ingresso) ? '' : 'checkoutMode=10&';
+  let url = `${CONFIG.link_ingresso}${sep}${checkoutMode}name=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&phonenumber=${encodeURIComponent(digits)}&src=${encodeURIComponent(utms.utm_source)}&sck=${CONFIG.sck}`;
   if (utms.xcod) url += `&xcod=${encodeURIComponent(utms.xcod)}`;
   window.location.href = url;
 }
