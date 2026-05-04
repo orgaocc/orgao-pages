@@ -353,25 +353,52 @@ p{margin:0}
 }
 
 /* ============== SECTION 8 — Frase de impacto ============== */
-.impact{padding:60px 0;position:relative;overflow:hidden}
-@media(min-width:768px){.impact{padding:110px 0}}
-.impact-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;max-width:1080px;margin:0 auto}
-.impact-photo{
-  border-radius:var(--radius-lg);overflow:hidden;
-  background:var(--cream-deep);aspect-ratio:4/5;
-  max-width:360px;margin:0 auto;
-  box-shadow:var(--shadow-md)
+.impact{padding:80px 0;position:relative;overflow:hidden}
+@media(min-width:768px){.impact{padding:130px 0}}
+.impact::before,.impact::after{
+  content:"";position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%);
+  pointer-events:none
 }
-.impact-photo img{width:100%;height:100%;object-fit:cover}
-.impact-text h2{
-  font-size:clamp(28px,4vw,42px);font-style:italic;
-  color:#fff;line-height:1.2;font-weight:500;text-align:center
+.impact::before{width:480px;height:480px;top:-180px;left:-160px}
+.impact::after{width:560px;height:560px;bottom:-220px;right:-180px}
+.impact-wrap{
+  position:relative;max-width:880px;margin:0 auto;
+  text-align:center;padding:0 8px
 }
-.impact-text h2 em{color:#F5EFE6;font-style:normal;font-weight:700}
-@media(min-width:820px){
-  .impact-grid{grid-template-columns:.9fr 1.1fr;gap:50px}
-  .impact-text h2{text-align:left}
+.impact-ornament{
+  display:inline-flex;align-items:center;gap:14px;
+  margin-bottom:30px;color:rgba(255,255,255,.55)
 }
+.impact-ornament .line{width:48px;height:1px;background:currentColor;display:inline-block}
+.impact-ornament svg{width:18px;height:18px}
+.impact-quote{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(28px,5vw,52px);line-height:1.18;
+  color:#fff;letter-spacing:-.01em;
+  text-wrap:balance
+}
+.impact-quote em{
+  font-style:normal;font-weight:700;
+  display:block;margin-top:10px;
+  background:linear-gradient(120deg,#F5EFE6 0%,#fff 50%,#F5EFE6 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent
+}
+.impact-pillars{
+  display:flex;justify-content:center;align-items:center;flex-wrap:wrap;
+  gap:12px 22px;margin-top:42px
+}
+.impact-pillars .pill{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:10px 18px;border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  font-size:12.5px;font-weight:600;letter-spacing:.1em;
+  color:#F5EFE6;text-transform:uppercase;
+  backdrop-filter:blur(4px);background:rgba(255,255,255,.05)
+}
+.impact-pillars .pill svg{width:14px;height:14px;color:#9bcfae}
+.impact-pillars .sep{width:5px;height:5px;background:rgba(255,255,255,.4);border-radius:50%}
+@media(max-width:520px){.impact-pillars .sep{display:none}}
 
 /* ============== SECTION 9 — Box de oferta ============== */
 .offer{padding:60px 0}
@@ -760,12 +787,31 @@ footer{background:var(--ink);color:#cdc6bb;padding:48px 0 110px;font-size:13px}
 <!-- ==================== FRASE DE IMPACTO ==================== -->
 <section class="impact bg-sage">
   <div class="container">
-    <div class="impact-grid">
-      <div class="impact-photo reveal">
-        <img src="assets/talita-impacto.webp" alt="Dra. Talita Melo" loading="lazy" width="600" height="600">
+    <div class="impact-wrap reveal">
+      <div class="impact-ornament" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2C8 6 6 9 6 13a6 6 0 0012 0c0-4-2-7-6-11z"/><path d="M12 22V13"/></svg>
+        <span class="line"></span>
       </div>
-      <div class="impact-text reveal">
-        <h2>O EVENTO MAIS COMPLETO PARA QUEM QUER ENGRAVIDAR <em>UNINDO MEDICINA, NUTRIÇÃO E FÉ!</em></h2>
+      <p class="impact-quote">
+        O evento mais completo para quem quer engravidar
+        <em>unindo medicina, nutrição e fé.</em>
+      </p>
+      <div class="impact-pillars" role="list">
+        <span class="pill" role="listitem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M2 12h20"/></svg>
+          Medicina
+        </span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="pill" role="listitem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C9 6 5 9 5 14a7 7 0 0014 0c0-5-4-8-7-12z"/></svg>
+          Nutrição
+        </span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="pill" role="listitem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M5 9h14"/></svg>
+          Fé
+        </span>
       </div>
     </div>
   </div>
@@ -813,7 +859,7 @@ footer{background:var(--ink);color:#cdc6bb;padding:48px 0 110px;font-size:13px}
     <h2>Aprenda com quem realmente entende</h2>
     <div class="about-card reveal">
       <div class="about-photo">
-        <img src="assets/talita-sobre.webp" alt="Retrato da Dra. Talita Melo" loading="lazy" width="500" height="498">
+        <img src="../cc-v3/assets/talita.webp" alt="Retrato da Dra. Talita Melo" loading="lazy" width="500" height="500">
       </div>
       <div class="about-info">
         <h3>Dra. Talita Melo</h3>
