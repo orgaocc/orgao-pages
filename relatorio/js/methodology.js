@@ -90,8 +90,8 @@ export function aggregateRows(rows) {
     }
   }
 
-  // se ainda não temos nome, usar a parte do email antes do @
-  if (!nome && email) nome = email.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  // se não temos nome real, deixa em branco — o render mostra o email no header
+  // e o CTA usa fallback "Você"
 
   const hoje = new Date();
   const meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
@@ -481,7 +481,7 @@ function buildGaps(input) {
 // CTA
 // -----------------------------------------------------------------------------
 function buildCTA(input, pilares, diagnosticos) {
-  const nome = (input.contexto.nome || "").split(" ")[0] || "Você";
+  const primeiroNome = (input.contexto.nome || "").split(" ")[0];
   const n = diagnosticos.length;
   const simultaneo = n >= 2 ? "simultâneos" : "simultâneo";
   const entries = Object.entries(pilares).sort((a, b) => a[1] - b[1]);
@@ -499,8 +499,23 @@ function buildCTA(input, pilares, diagnosticos) {
   const perdas = scoreA4Q1(input.respostas["A4_Q1"]);
   const temPerda = perdas.perdas.length > 0 && !perdas.perdas.includes("A");
   const situacao = temPerda ? "uma perda que merece investigação — não conformidade" : "uma jornada que merece direção clara";
-  const diagText = n === 0 ? "" : `você tem ${n} diagnóstico${n > 1 ? "s" : ""} ${simultaneo}, `;
-  return `${nome}, ${diagText}${achado} e ${situacao}. Você não precisa de mais informação genérica. Você precisa de um protocolo feito para o seu corpo, com uma equipe que já guiou milhares de mulheres nessa jornada.`;
+
+  // monta o vocativo + abertura sem repetir "Você"
+  const vocativo = primeiroNome ? `${primeiroNome}, ` : "";
+  const sujeito = primeiroNome ? "você tem" : "Você tem";
+  const diagText = n === 0 ? "" : `${sujeito} ${n} diagnóstico${n > 1 ? "s" : ""} ${simultaneo}, `;
+
+  // se não tem diagnósticos e não tem nome, capitaliza o achado
+  let abertura;
+  if (n === 0 && !primeiroNome) {
+    abertura = `Identificamos ${achado}`;
+  } else if (n === 0) {
+    abertura = `${vocativo}identificamos ${achado}`;
+  } else {
+    abertura = `${vocativo}${diagText}${achado}`;
+  }
+
+  return `${abertura} e ${situacao}. Você não precisa de mais informação genérica. Você precisa de um protocolo feito para o seu corpo, com uma equipe que já guiou milhares de mulheres nessa jornada.`;
 }
 
 // -----------------------------------------------------------------------------

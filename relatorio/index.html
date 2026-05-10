@@ -116,6 +116,17 @@
     line-height:1;
     margin-top:18px;
   }
+  /* quando o header mostra o email (sem nome real), fica menor e quebra se preciso */
+  .name.is-email{
+    font-family:'Inter', sans-serif;
+    font-size:22px;
+    font-weight:500;
+    letter-spacing:0;
+    line-height:1.25;
+    word-break:break-all;
+    color:var(--ink-soft);
+    margin-top:24px;
+  }
   .age-line{
     font-size:14px; color:var(--ink-soft);
     margin-top:12px;
@@ -352,8 +363,30 @@
   }
   .check-label b{ color:var(--ink); font-weight:600; display:block; font-size:14px; margin-bottom:1px; }
 
+  .disclaimer{
+    margin:24px auto 0;
+    padding:14px 20px;
+    background:transparent;
+    border:1px dashed var(--line);
+    border-radius:8px;
+    text-align:center;
+    font-size:12px; line-height:1.6;
+    color:var(--muted);
+    font-style:italic;
+    font-family:'Cormorant Garamond', serif;
+    max-width:640px;
+  }
+  .disclaimer b{
+    font-style:normal; font-weight:600;
+    color:var(--ink-soft);
+    font-family:'Inter',sans-serif;
+    font-size:10.5px; letter-spacing:.18em;
+    text-transform:uppercase;
+    display:block; margin-bottom:6px;
+  }
+
   .brand-foot{
-    margin-top:28px;
+    margin-top:24px;
     display:flex; flex-direction:column; align-items:center; gap:8px;
   }
   .brand-logo{
@@ -1023,6 +1056,11 @@
             <span class="check-label"><b>Estrutura completa</b>materiais, exames e suporte</span>
           </div>
         </div>
+      </div>
+
+      <div class="disclaimer">
+        <b>Aviso importante</b>
+        Este relatório é gerado automaticamente a partir das suas respostas nos formulários do programa e tem caráter educativo. Não substitui consulta, diagnóstico ou acompanhamento médico, nutricional ou psicológico. Para decisões clínicas, procure sempre profissionais qualificados.
       </div>
 
       <div class="brand-foot">

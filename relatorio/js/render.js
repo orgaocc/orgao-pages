@@ -125,7 +125,13 @@ function updateCTA(cta) {
 // -----------------------------------------------------------------------------
 export function renderReport(report) {
   const ctx = report.contexto || {};
-  setText("[data-nome]", ctx.nome || "—");
+  // Header: prioriza nome real; se não tiver, mostra o email (com fonte menor)
+  const nomeEl = document.querySelector("[data-nome]");
+  if (nomeEl) {
+    const isEmail = !ctx.nome && !!ctx.email;
+    nomeEl.textContent = ctx.nome || ctx.email || "—";
+    nomeEl.classList.toggle("is-email", isEmail);
+  }
   const idadeStr = ctx.idade != null ? `${ctx.idade} anos` : "";
   setText("[data-age-line]", `${idadeStr}${idadeStr ? " · " : ""}${ctx.data_relatorio || ""}`);
 
