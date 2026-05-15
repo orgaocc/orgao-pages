@@ -19,10 +19,12 @@ export function aggregateRows(rows) {
   const aulasVistas = new Set();
 
   // 1. agrupa por aula, mantém a row com mais opcoes_ preenchidas
+  //    detectAula prioriza row.aula (coluna do banco, vinda da edge function
+  //    isolada da aula); cai pra fingerprint do payload se aula vier null.
   const bestByAula = {};   // aula → row
   for (const row of rows) {
     const payload = row.payload || {};
-    const aula = detectAula(payload);
+    const aula = detectAula(row);
     if (!aula) continue;
     const opcoesCount = Object.keys(payload).filter((k) => k.startsWith("opcoes_")).length;
     const cur = bestByAula[aula];
@@ -36,13 +38,16 @@ export function aggregateRows(rows) {
     .sort((a, b) => new Date(a.row.created_at || 0) - new Date(b.row.created_at || 0));
 
   // Para a Aula 1, o campo `ciclo` é SOBRESCRITO (frequência e borra de café
-  // têm o mesmo ID interno). Varre TODAS as rows que tenham `ciclo` capturando
-  // os 2 valores distintos. Não usa detectAula porque rows iniciais podem ter
-  // só esse 1 campo (não passa o threshold do detectAula).
+  // têm o mesmo ID interno na InLead). Varre TODAS as rows da Aula 1 (ou
+  // sem aula detectada — registros antigos) capturando os 2 valores distintos.
   const cicloValues = new Set();
   for (const row of rows) {
     const payload = row.payload || {};
-    if (payload.ciclo) cicloValues.add(String(payload.ciclo).trim());
+    if (!payload.ciclo) continue;
+    // só inclui se a row for da Aula 1 (ou sem identificação — fallback antigo)
+    const aula = detectAula(row);
+    if (aula && aula !== "aula1") continue;
+    cicloValues.add(String(payload.ciclo).trim());
   }
   for (const v of cicloValues) {
     const s = v.toLowerCase();

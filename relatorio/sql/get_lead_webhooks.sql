@@ -5,17 +5,24 @@
 -- agregadas em uma única lista. Roda como SECURITY DEFINER para conseguir ler
 -- a cpl_inlead_hooks (que está bloqueada por RLS para anon).
 --
--- Como o ID do campo de email muda por form, fazemos a busca varrendo TODOS
--- os pares chave/valor do payload procurando um valor com formato de email.
+-- v2 (2026-05-15): inclui a coluna `aula` no retorno. As 5 edge functions
+-- isoladas (cpl-inlead-hooks-aulaN) gravam o valor 'AulaN' direto. Caso a
+-- coluna esteja NULL (registros antigos), o front faz fallback pelo fingerprint
+-- de chaves opcoes_*.
 --
--- Para colar inteiro no SQL Editor do Supabase Cloud.
+-- Para colar inteiro no SQL Editor do Supabase Cloud (substitui a v1).
 -- =============================================================================
 
-CREATE OR REPLACE FUNCTION public.get_lead_webhooks(lead_email text)
+-- Postgres não permite mudar o tipo de retorno via CREATE OR REPLACE
+-- (erro 42P13). Por isso fazemos DROP + CREATE.
+DROP FUNCTION IF EXISTS public.get_lead_webhooks(text);
+
+CREATE FUNCTION public.get_lead_webhooks(lead_email text)
 RETURNS TABLE (
   id          uuid,
   payload     jsonb,
   headers     jsonb,
+  aula        text,
   created_at  timestamptz
 )
 LANGUAGE sql
@@ -26,6 +33,7 @@ AS $$
     h.id,
     h.payload,
     h.headers,
+    h.aula,
     h.created_at
   FROM public.cpl_inlead_hooks h
   WHERE
@@ -38,12 +46,13 @@ AS $$
   ORDER BY h.created_at ASC;
 $$;
 
--- Permite que a anon role (a chave usada no front) chame essa função
 GRANT EXECUTE ON FUNCTION public.get_lead_webhooks(text) TO anon;
 
 -- =============================================================================
--- TESTE
+-- Teste rápido após alterar:
 -- =============================================================================
--- SELECT count(*) AS total, min(created_at) AS primeira, max(created_at) AS ultima
--- FROM public.get_lead_webhooks('clauzinhasantos5@gmail.com');
+-- SELECT aula, count(*) AS rows
+-- FROM public.get_lead_webhooks('marcelapassini@yahoo.com.br')
+-- GROUP BY aula
+-- ORDER BY aula;
 -- =============================================================================

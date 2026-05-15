@@ -22,7 +22,26 @@ export const FINGERPRINTS = {
   aula5: ["opcoes_Ed9Hul", "opcoes_rAmtmW", "opcoes_rB0ue6", "opcoes_CrwTbQ", "opcoes_uHKZxz", "opcoes_Zze6Ex", "opcoes_j36FM9", "opcoes_cyyDWr", "opcoes_Jz47hn", "opcoes_OLoCHh", "opcoes_UZqM4U", "opcoes_TyPZAZ", "opcoes_45a94e", "opcoes_k8vFWm"],
 };
 
-export function detectAula(payload) {
+// Converte o valor da coluna `aula` ("Aula1", "Aula2", …) pro slug interno
+// que usamos no código ("aula1", "aula2", …). Aceita variações de caso.
+export function normalizeAulaColumn(v) {
+  if (!v) return null;
+  const m = String(v).trim().toLowerCase().match(/aula\s*([1-5])/);
+  return m ? `aula${m[1]}` : null;
+}
+
+// Detecta a aula de uma row.
+// Prioridade:
+//   1) Coluna `aula` vinda do banco (canônica, vem da edge function isolada)
+//   2) Fallback: fingerprint do payload (registros antigos sem `aula`)
+export function detectAula(row) {
+  // Caso o caller passe diretamente um payload (compat com chamadas antigas)
+  const payload = row && typeof row === "object" && row.payload ? row.payload : row;
+  const aulaCol = row && typeof row === "object" ? row.aula : null;
+
+  const fromColumn = normalizeAulaColumn(aulaCol);
+  if (fromColumn) return fromColumn;
+
   if (!payload || typeof payload !== "object") return null;
   const keys = new Set(Object.keys(payload));
   let bestAula = null, bestScore = 0;
