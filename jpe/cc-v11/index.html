@@ -241,11 +241,8 @@ section{padding:60px 0}
 
 /* ============== MATERIAL EXCLUSIVO ============== */
 .material-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center;max-width:1100px;margin:0 auto}
-.material-photo{
-  background:var(--mint);border-radius:var(--radius);overflow:hidden;
-  aspect-ratio:4/3;max-width:520px;margin:0 auto;box-shadow:var(--shadow-md)
-}
-.material-photo img{width:100%;height:100%;object-fit:cover}
+.material-photo{max-width:520px;margin:0 auto}
+.material-photo img{width:100%;height:auto;display:block}
 .material-text h2{font-size:clamp(26px,3.4vw,38px);margin-bottom:18px}
 .material-text p{color:var(--ink-soft);margin-bottom:14px;font-size:16px}
 .material-text .cta-row{margin-top:24px}
@@ -292,11 +289,8 @@ section{padding:60px 0}
 .receive-row .text h3{font-size:clamp(24px,3vw,32px);margin-bottom:16px;color:var(--ink);font-weight:600}
 .receive-row .text h3 .ic{margin-right:12px;font-size:1.1em;vertical-align:-2px}
 .receive-row .text p{color:var(--ink-soft);font-size:17px;line-height:1.65}
-.receive-row .img-wrap{
-  background:var(--mint);border-radius:var(--radius);overflow:hidden;
-  aspect-ratio:4/3;box-shadow:var(--shadow-md);max-width:520px;margin:0 auto;width:100%
-}
-.receive-row .img-wrap img{width:100%;height:100%;object-fit:cover}
+.receive-row .img-wrap{max-width:520px;margin:0 auto;width:100%}
+.receive-row .img-wrap img{width:100%;height:auto;display:block}
 @media(min-width:820px){
   .receive-row{grid-template-columns:1fr 1fr;gap:60px}
   .receive-row.reverse .text{order:2}
@@ -355,10 +349,7 @@ section{padding:60px 0}
 
 /* ============== SOBRE ============== */
 .about-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center;max-width:1080px;margin:0 auto}
-.about-photo{
-  border-radius:var(--radius);overflow:hidden;background:var(--mint);
-  max-width:320px;margin:0 auto;box-shadow:var(--shadow-md)
-}
+.about-photo{max-width:360px;margin:0 auto}
 .about-photo img{width:100%;height:auto;display:block}
 .about-text .eyebrow{margin-bottom:12px;display:inline-block}
 .about-text h2{font-size:clamp(26px,3.4vw,40px);margin-bottom:20px}
@@ -543,10 +534,6 @@ footer{background:var(--ink);color:#cdc6bb;padding:48px 0 110px;font-size:13px}
       <p>O <strong>Jejum para Engravidar</strong> é uma pausa consciente em tudo o que inflama, sobrecarrega e desequilibra o seu organismo — para que sua fertilidade volte a florescer da maneira certa.</p>
     </div>
 
-    <div class="how-mockup reveal">
-      <img src="assets/notebooks-trio.webp" alt="Três telas de notebook mostrando aulas, plano alimentar e devocional do programa" loading="lazy" width="1200" height="600">
-    </div>
-
     <div class="how-summary reveal">
       <p class="how-summary-lead">Uma semana inteira com</p>
       <ul class="how-bullets">
@@ -628,7 +615,7 @@ footer{background:var(--ink);color:#cdc6bb;padding:48px 0 110px;font-size:13px}
           <p>Orações matinais para manter inabalável a fé na sua gravidez.</p>
         </div>
         <div class="img-wrap">
-          <img src="assets/meditacao.jpg" alt="Mulher em momento de oração e meditação" loading="lazy">
+          <img src="assets/receber-meditacoes.webp" alt="Mockup do devocional de meditações guiadas" loading="lazy">
         </div>
       </div>
 
@@ -639,7 +626,7 @@ footer{background:var(--ink);color:#cdc6bb;padding:48px 0 110px;font-size:13px}
           <p>Conteúdos com tudo que a medicina já comprovou ajudar na busca por uma gravidez rápida e saudável.</p>
         </div>
         <div class="img-wrap">
-          <img src="assets/aulas-online.jpg" alt="Dra. Talita Melo gravando aulas sobre fertilidade" loading="lazy">
+          <img src="assets/receber-aulas.webp" alt="Mockup das 7 aulas sobre fertilidade com a Dra. Talita Melo" loading="lazy">
         </div>
       </div>
 
@@ -650,7 +637,7 @@ footer{background:var(--ink);color:#cdc6bb;padding:48px 0 110px;font-size:13px}
           <p>Todas as aulas estarão disponíveis para consulta enquanto durar o jejum.</p>
         </div>
         <div class="img-wrap">
-          <img src="assets/receber-gravacoes.webp" alt="Mockup da área de membros com todas as aulas gravadas" loading="lazy">
+          <img src="assets/receber-gravacoes.webp" alt="Mockup da área de membros com as aulas gravadas liberadas" loading="lazy">
         </div>
       </div>
     </div>
@@ -699,7 +686,7 @@ footer{background:var(--ink);color:#cdc6bb;padding:48px 0 110px;font-size:13px}
   <div class="container">
     <div class="about-grid">
       <div class="about-photo reveal">
-        <img src="assets/talita-casal.jpg" alt="Dra. Talita Melo grávida com seu marido" loading="lazy">
+        <img src="assets/talita-especialista.webp" alt="Dra. Talita Melo, médica ginecologista" loading="lazy">
       </div>
       <div class="about-text reveal">
         <span class="eyebrow">Sua especialista</span>
