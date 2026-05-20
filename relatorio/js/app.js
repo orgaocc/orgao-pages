@@ -22,6 +22,9 @@ import {
   showLogin, showReport, showIncomplete,
   setGateMessage, setGateLoading,
 } from "./render.js";
+import { trackAccess } from "./tracking.js";
+
+const TODAS_AULAS = ["aula1", "aula2", "aula3", "aula4", "aula5"];
 
 const FALLBACK_REPORT = {
   contexto: { nome: "Carla Mendes", email: "", idade: 37, anos_tentando: 2, data_relatorio: "08 de Maio de 2026", formularios_respondidos: 5 },
@@ -83,16 +86,26 @@ async function processarEmail(email, debug) {
   if (!rows || rows.length === 0) {
     setGateLoading(false);
     setGateMessage("E-mail não encontrado nos formulários. Confira se digitou o mesmo e-mail usado no preenchimento.");
+    trackAccess("email_nao_encontrado", { email });
     return;
   }
 
   const input = aggregateRows(rows);
   if (debug === "input") { console.log("INPUT", input); setGateLoading(false); return; }
 
+  const aulasVistas = input.contexto.aulas_vistas || [];
+  const aulasFaltantes = TODAS_AULAS.filter((a) => !aulasVistas.includes(a));
+
   // ---- regra de acesso: tem que ter as 5 aulas ----
   if (input.contexto.formularios_respondidos < 5) {
     setGateLoading(false);
-    showIncomplete(input.contexto.aulas_vistas);
+    showIncomplete(aulasVistas);
+    trackAccess("relatorio_bloqueado", {
+      email,
+      aulas_respondidas: input.contexto.formularios_respondidos,
+      aulas_vistas: aulasVistas,
+      aulas_faltantes: aulasFaltantes,
+    });
     return;
   }
 
@@ -102,6 +115,15 @@ async function processarEmail(email, debug) {
   setGateLoading(false);
   renderReport(report);
   showReport();
+  trackAccess("relatorio_visualizado", {
+    email,
+    aulas_respondidas: 5,
+    indice: report.indice,
+    pilares: report.pilares,
+    sinais_alerta: report.contadores.sinais_alerta,
+    pilares_criticos: report.contadores.pilares_criticos,
+    diagnosticos: report.diagnosticos.map((d) => d.titulo),
+  });
 }
 
 // -----------------------------------------------------------------------------
