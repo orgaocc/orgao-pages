@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mapa Mental — Gestão Tech & Operações</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --bg-grid: rgba(20, 30, 50, 0.04);
+    --paper: #fbf9f3;
+    --ink: #0f1724;
+    --ink-soft: #3a4757;
+    --ink-faint: #6b7888;
+    --accent: #d9442a;
+    --accent-soft: #e87a64;
+    --accent-2: #1d4e89;
+    --accent-3: #c9a227;
+    --line: #c9c2b0;
+    --line-strong: #5a6373;
+    --node-bg: #ffffff;
+    --node-border: #d9d3c2;
+    --node-hover: #fff8e8;
+    --pill-bg: rgba(217, 68, 42, 0.08);
+    --pill-text: #a8341e;
+    --shadow: 0 1px 0 rgba(15, 23, 36, 0.04), 0 8px 24px -8px rgba(15, 23, 36, 0.12);
+    --shadow-strong: 0 2px 0 rgba(15, 23, 36, 0.08), 0 14px 40px -10px rgba(15, 23, 36, 0.22);
+  }
+
+  [data-theme="dark"] {
+    --bg: #0d1117;
+    --bg-grid: rgba(220, 220, 240, 0.04);
+    --paper: #12181f;
+    --ink: #e8eaed;
+    --ink-soft: #b8bdc6;
+    --ink-faint: #7c8693;
+    --accent: #ff6b4a;
+    --accent-soft: #ff9078;
+    --accent-2: #5ba8ff;
+    --accent-3: #f0c862;
+    --line: #2a3340;
+    --line-strong: #4a5567;
+    --node-bg: #1a212b;
+    --node-border: #2a3340;
+    --node-hover: #232b38;
+    --pill-bg: rgba(255, 107, 74, 0.12);
+    --pill-text: #ff9078;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 8px 24px -8px rgba(0, 0, 0, 0.5);
+    --shadow-strong: 0 2px 0 rgba(0, 0, 0, 0.4), 0 14px 40px -10px rgba(0, 0, 0, 0.7);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Manrope', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    min-height: 100vh;
+    transition: background 0.4s ease, color 0.4s ease;
+    background-image:
+      linear-gradient(var(--bg-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 2px dashed var(--line);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .title-block .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-faint);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .title-block .tag::before {
+    content: "◆";
+    color: var(--accent);
+    margin-right: 8px;
+  }
+
+  .title-block h1 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .title-block h1 span {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .title-block .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    max-width: 540px;
+  }
+
+  .controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 10px 14px;
+    background: var(--node-bg);
+    color: var(--ink);
+    border: 1px solid var(--node-border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn:hover {
+    background: var(--node-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+  }
+  .btn.primary {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .btn.primary:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ===== CENTRAL NODE ===== */
+  .central {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .central-node {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 28px 48px;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: var(--shadow-strong);
+    position: relative;
+    max-width: 600px;
+  }
+  .central-node::before, .central-node::after {
+    content: "";
+    position: absolute;
+    width: 12px; height: 12px;
+    border: 2px solid var(--accent);
+    background: var(--bg);
+    border-radius: 50%;
+  }
+  .central-node::before { top: -7px; left: -7px; }
+  .central-node::after { bottom: -7px; right: -7px; }
+
+  .central-node .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .central-node h2 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 2.5vw, 28px);
+    letter-spacing: -0.02em;
+  }
+
+  /* ===== EIXOS LAYOUT ===== */
+  .eixos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 1100px) {
+    .eixos { grid-template-columns: 1fr; }
+  }
+
+  .eixo {
+    background: var(--paper);
+    border: 1px solid var(--node-border);
+    border-radius: 8px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+
+  .eixo-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .eixo-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    padding: 4px 10px;
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border-radius: 3px;
+    margin-bottom: 12px;
+  }
+  .eixo-a .eixo-tag { background: var(--pill-bg); color: var(--pill-text); }
+  .eixo-b .eixo-tag {
+    background: rgba(29, 78, 137, 0.1);
+    color: var(--accent-2);
+  }
+  [data-theme="dark"] .eixo-b .eixo-tag {
+    background: rgba(91, 168, 255, 0.15);
+    color: var(--accent-2);
+  }
+
+  .eixo h3 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .eixo h3 .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--ink-faint);
+    margin-right: 8px;
+    font-weight: 500;
+  }
+  .eixo .eixo-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 8px;
+  }
+
+  /* ===== GRUPOS / CATEGORIAS ===== */
+  .grupo {
+    margin-bottom: 16px;
+    border: 1px solid var(--node-border);
+    border-radius: 6px;
+    background: var(--node-bg);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .grupo:hover { box-shadow: var(--shadow); border-color: var(--line-strong); }
+
+  .grupo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    gap: 12px;
+  }
+  .grupo-header:hover { background: var(--node-hover); }
+
+  .grupo-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .grupo-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .grupo-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .grupo-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    background: var(--bg);
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid var(--node-border);
+  }
+  .chevron {
+    width: 14px; height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    color: var(--ink-faint);
+  }
+  .grupo.open .chevron { transform: rotate(90deg); }
+
+  .grupo-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    border-top: 1px dashed var(--line);
+  }
+  .grupo.open .grupo-body { max-height: 5000px; }
+  .grupo-body-inner { padding: 12px 16px 16px; }
+
+  /* ===== FERRAMENTAS ===== */
+  .ferramenta {
+    margin: 8px 0;
+    padding: 10px 12px 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg);
+    border-radius: 0 4px 4px 0;
+    transition: all 0.2s ease;
+  }
+  .ferramenta.legado { border-left-color: var(--ink-faint); opacity: 0.92; }
+  .ferramenta.universal { border-left-color: var(--accent-3); }
+
+  .ferramenta-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    gap: 10px;
+  }
+  .ferramenta-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .ferramenta-name .badge {
+    font-size: 9px;
+    font-weight: 500;
+    margin-left: 6px;
+    padding: 2px 6px;
+    background: var(--node-bg);
+    color: var(--ink-faint);
+    border-radius: 2px;
+    border: 1px solid var(--node-border);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .ferramenta-name .badge.principal { color: var(--accent); border-color: var(--accent); }
+  .ferramenta-name .badge.universal { color: var(--accent-3); border-color: var(--accent-3); }
+
+  .ferramenta-toggle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--ink-faint);
+    transition: transform 0.2s ease;
+  }
+  .ferramenta.open .ferramenta-toggle { transform: rotate(45deg); color: var(--accent); }
+
+  .tarefas {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .ferramenta.open .tarefas { max-height: 1000px; }
+
+  .tarefas ul {
+    list-style: none;
+    margin-top: 10px;
+    padding-left: 4px;
+  }
+  .tarefas li {
+    position: relative;
+    padding: 4px 0 4px 18px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .tarefas li::before {
+    content: "─";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+  }
+  .tarefas li small {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* ===== FLUXOS (EIXO B) ===== */
+  .fluxo {
+    margin-bottom: 14px;
+    padding: 14px 16px;
+    background: var(--node-bg);
+    border: 1px solid var(--node-border);
+    border-radius: 6px;
+    transition: box-shadow 0.2s ease;
+  }
+  .fluxo:hover { box-shadow: var(--shadow); }
+
+  .fluxo-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent-2);
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+  }
+
+  .fluxo-titulo {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .fluxo-chain {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .fluxo-step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 9px;
+    background: var(--bg);
+    border: 1px solid var(--node-border);
+    border-radius: 3px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .fluxo-step.bifurcacao {
+    border-style: dashed;
+    border-color: var(--accent-2);
+  }
+  .fluxo-arrow {
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  /* ===== ESCOPO (GIANNAVITA) ===== */
+  .fluxo.escopo {
+    border-left: 4px solid var(--accent-3);
+    background: linear-gradient(135deg, var(--node-bg) 0%, var(--bg) 100%);
+  }
+  .fluxo.escopo .fluxo-num {
+    color: var(--accent-3);
+  }
+  .escopo-frentes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .frente {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid var(--node-border);
+    border-radius: 4px;
+  }
+  .frente-status {
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 4px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .frente-status.ativo {
+    background: rgba(40, 140, 70, 0.12);
+    color: #2a8a4a;
+    border: 1px solid rgba(40, 140, 70, 0.3);
+  }
+  [data-theme="dark"] .frente-status.ativo {
+    background: rgba(80, 200, 120, 0.15);
+    color: #6dd49a;
+    border-color: rgba(80, 200, 120, 0.3);
+  }
+  .frente-status.construcao {
+    background: rgba(217, 162, 39, 0.15);
+    color: #9a7115;
+    border: 1px solid rgba(217, 162, 39, 0.35);
+  }
+  [data-theme="dark"] .frente-status.construcao {
+    background: rgba(240, 200, 98, 0.15);
+    color: var(--accent-3);
+    border-color: rgba(240, 200, 98, 0.3);
+  }
+  .frente-content {
+    flex: 1;
+  }
+  .frente-titulo {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .frente-desc {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .frente-desc .pipeline {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    padding: 3px 6px;
+    background: var(--node-bg);
+    border-radius: 2px;
+    border: 1px dashed var(--line);
+  }
+
+  /* ===== TIME TECH ===== */
+  .time-tech {
+    margin-top: 24px;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--node-bg) 0%, var(--bg) 100%);
+    border: 1px solid var(--node-border);
+    border-left: 4px solid var(--accent-3);
+    border-radius: 6px;
+  }
+  .time-tech .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--accent-3);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .time-tech h4 {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .time-tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 600px) {
+    .time-tech-grid { grid-template-columns: 1fr; }
+  }
+  .time-tech-block {
+    background: var(--node-bg);
+    border: 1px solid var(--node-border);
+    border-radius: 4px;
+    padding: 10px 12px;
+  }
+  .time-tech-block .who {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .time-tech-block ul {
+    list-style: none;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .time-tech-block li {
+    padding: 2px 0 2px 14px;
+    position: relative;
+  }
+  .time-tech-block li::before {
+    content: "·";
+    position: absolute;
+    left: 4px;
+    color: var(--accent-3);
+    font-weight: 700;
+  }
+
+  /* ===== ROTINAS ===== */
+  .rotinas {
+    margin-top: 20px;
+  }
+  .rotinas-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .rotinas-header::before, .rotinas-header::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .rotina-tipo {
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    background: var(--node-bg);
+    border: 1px solid var(--node-border);
+    border-radius: 4px;
+  }
+  .rotina-tipo .freq {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+  .rotina-tipo .freq.diaria { background: var(--accent); color: white; }
+  .rotina-tipo .freq.semanal { background: var(--accent-2); color: white; }
+  .rotina-tipo .freq.demanda { background: var(--accent-3); color: var(--ink); }
+
+  .rotina-tipo ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .rotina-tipo li {
+    padding: 3px 0 3px 16px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .rotina-tipo li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+    top: 6px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--line);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+  }
+  footer .signature {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ===== ANIMAÇÃO INICIAL ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .central, .eixo, footer {
+    animation: fadeUp 0.6s ease backwards;
+  }
+  .central { animation-delay: 0.05s; }
+  .eixo-a { animation-delay: 0.15s; }
+  .eixo-b { animation-delay: 0.25s; }
+  footer { animation-delay: 0.4s; }
+</style>
+</head>
+<body data-theme="light">
+
+<div class="container">
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="title-block">
+      <div class="tag">Blueprint Operacional · v1.0 · Hericlis</div>
+      <h1>Mapa Mental — <span>Gestão Tech &amp; Operações</span></h1>
+      <p class="subtitle">// Stack de ferramentas + Jornadas de trabalho integradas</p>
+    </div>
+    <div class="controls">
+      <button class="btn" id="expandAll">⊕ Expandir tudo</button>
+      <button class="btn" id="collapseAll">⊖ Recolher tudo</button>
+      <button class="btn primary" id="themeToggle">◐ Tema</button>
+    </div>
+  </header>
+
+  <!-- ===== CENTRAL ===== -->
+  <div class="central">
+    <div class="central-node">
+      <div class="label">Nó Central</div>
+      <h2>Gestão Tech &amp; Operações</h2>
+    </div>
+  </div>
+
+  <!-- ===== EIXOS ===== -->
+  <div class="eixos">
+
+    <!-- =================================================== -->
+    <!-- EIXO A — STACK DE FERRAMENTAS -->
+    <!-- =================================================== -->
+    <section class="eixo eixo-a">
+      <div class="eixo-header">
+        <span class="eixo-tag">Eixo A</span>
+        <h3><span class="num">01</span>Stack de Ferramentas</h3>
+        <p class="eixo-desc">// agrupadas por área funcional — clique pra expandir</p>
+      </div>
+
+      <!-- COMUNICAÇÃO -->
+      <div class="grupo" data-group>
+        <div class="grupo-header">
+          <div class="grupo-title"><span class="grupo-icon">🗨️</span> Comunicação</div>
+          <div class="grupo-meta">
+            <span class="grupo-count">3 ferramentas</span>
+            <span class="chevron">▶</span>
+          </div>
+        </div>
+        <div class="grupo-body"><div class="grupo-body-inner">
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">Unnichat <span class="badge principal">Principal</span></div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Automações de Onboarding (todos os produtos)</li>
+              <li>CRM / Pipelines Comercial e Suporte</li>
+              <li>Conexão com Gateways de Pagamento</li>
+              <li>Gestão das Automações de Instagram e WhatsApp</li>
+              <li>Gestão de Contatos e Negócios</li>
+              <li>Disparos em Massa</li>
+              <li>Gestão de Contas e Atendentes <small>Contas da Meta/Instagram + usuários da própria Unni</small></li>
+            </ul></div>
+          </div>
+
+          <div class="ferramenta legado" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">Manychat <span class="badge">Legado / Backup</span></div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Automações de Onboarding (todos os produtos)</li>
+              <li>CRM / Pipelines Comercial e Suporte</li>
+              <li>Gestão das Automações de Instagram e WhatsApp</li>
+              <li>Gestão de Contatos e Negócios</li>
+              <li>Disparos em Massa</li>
+              <li>Gestão de Contas</li>
+              <li><small>Tudo migrado para o Unnichat — poucos ativos, maioria backup</small></li>
+            </ul></div>
+          </div>
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">Sendflow <span class="badge">WhatsApp em massa</span></div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Gestão de Campanhas (grupos e comunidades)</li>
+              <li>Gestão de Instâncias Conectadas <small>números ativos e desconectados</small></li>
+              <li>Gerenciamento dos Sendhooks para Dash e n8n</li>
+              <li>Automações dos Grupos <small>boas-vindas, descrição, foto, criação automática</small></li>
+              <li>Ações dos Grupos <small>enviar mensagem, gerir admins, abrir/fechar grupos</small></li>
+              <li>Auxiliar o time no uso regular do Send</li>
+            </ul></div>
+          </div>
+
+        </div></div>
+      </div>
+
+      <!-- PLATAFORMAS DE VENDA -->
+      <div class="grupo" data-group>
+        <div class="grupo-header">
+          <div class="grupo-title"><span class="grupo-icon">💰</span> Plataformas de Venda</div>
+          <div class="grupo-meta">
+            <span class="grupo-count">2 ferramentas</span>
+            <span class="chevron">▶</span>
+          </div>
+        </div>
+        <div class="grupo-body"><div class="grupo-body-inner">
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">Hotmart</div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Gestão de Produto</li>
+              <li>Gestão de Cupons e Ofertas</li>
+              <li>Gestão do Checkout Builder</li>
+              <li>Webhooks e Integrações Nativas</li>
+              <li>Relatórios e Monitoramento de Vendas</li>
+              <li>Conciliação regular com o ÓrgãoDash <small>comparar vendas entre plataformas</small></li>
+            </ul></div>
+          </div>
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">Guru</div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Gestão de Produto</li>
+              <li>Gestão de Cupons e Ofertas</li>
+              <li>Gestão do Checkout Builder</li>
+              <li>Webhooks e Integrações Nativas</li>
+              <li>Relatórios e Monitoramento de Vendas</li>
+              <li>Conciliação regular com o ÓrgãoDash <small>comparar vendas entre plataformas</small></li>
+            </ul></div>
+          </div>
+
+        </div></div>
+      </div>
+
+      <!-- DADOS & BI -->
+      <div class="grupo" data-group>
+        <div class="grupo-header">
+          <div class="grupo-title"><span class="grupo-icon">📊</span> Dados &amp; BI</div>
+          <div class="grupo-meta">
+            <span class="grupo-count">2 ferramentas</span>
+            <span class="chevron">▶</span>
+          </div>
+        </div>
+        <div class="grupo-body"><div class="grupo-body-inner">
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">ÓrgãoDash <span class="badge principal">Hub central</span></div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Criação dos Dashboards de Lançamentos e Turmas</li>
+              <li>Integrações Nativas <small>Pesquisa, Sendflow</small></li>
+              <li>Rotação de Páginas <small>criação e manutenção diária</small></li>
+              <li>Atualização semanal dos Lançamentos Pagos</li>
+              <li>Conferência de Dados</li>
+              <li>Gestão de Usuários e Permissões</li>
+              <li>Suporte ao time no uso da Dash</li>
+            </ul></div>
+          </div>
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">n8n <span class="badge">Orquestrador</span></div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Mapeamento de Produtos</li>
+              <li>Acompanhar automações diárias <small>verificar se as infos entram no MetaBase, Mautic, Dash e Unnichat</small></li>
+            </ul></div>
+          </div>
+
+        </div></div>
+      </div>
+
+      <!-- EMAIL MARKETING -->
+      <div class="grupo" data-group>
+        <div class="grupo-header">
+          <div class="grupo-title"><span class="grupo-icon">📧</span> Email Marketing</div>
+          <div class="grupo-meta">
+            <span class="grupo-count">1 ferramenta</span>
+            <span class="chevron">▶</span>
+          </div>
+        </div>
+        <div class="grupo-body"><div class="grupo-body-inner">
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">Mautic</div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Gestão de Segmentos / Campanhas / Emails / Formulários <small>criar, gerir e acompanhar</small></li>
+              <li>Gestão dos Usuários da Equipe</li>
+              <li>Gerir Fluxos de Email dos Lançamentos <small>onboarding, recuperações etc.</small></li>
+              <li>Acompanhamento diário das automações do n8n frente ao Mautic</li>
+              <li>Gestão das Assinaturas (pagamentos)</li>
+              <li>Auxiliar o time no uso regular do Mautic</li>
+            </ul></div>
+          </div>
+
+        </div></div>
+      </div>
+
+      <!-- PESQUISAS & FORMULÁRIOS -->
+      <div class="grupo" data-group>
+        <div class="grupo-header">
+          <div class="grupo-title"><span class="grupo-icon">📝</span> Pesquisas &amp; Formulários</div>
+          <div class="grupo-meta">
+            <span class="grupo-count">2 ferramentas</span>
+            <span class="chevron">▶</span>
+          </div>
+        </div>
+        <div class="grupo-body"><div class="grupo-body-inner">
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">FluentForms</div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Integrações com n8n</li>
+              <li>Criação completa dos formulários</li>
+              <li>Gestão de Pesquisas de Lead / Formulários de Interesse / Aplicações</li>
+              <li>Conexão e acompanhamento com o ÓrgãoDash</li>
+            </ul></div>
+          </div>
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">Inlead</div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Gestão dos Lançamentos Pagos Semanais <small>criar / editar formulários</small></li>
+            </ul></div>
+          </div>
+
+        </div></div>
+      </div>
+
+      <!-- WEB / PÁGINAS -->
+      <div class="grupo" data-group>
+        <div class="grupo-header">
+          <div class="grupo-title"><span class="grupo-icon">🌐</span> Web / Páginas</div>
+          <div class="grupo-meta">
+            <span class="grupo-count">1 ferramenta</span>
+            <span class="chevron">▶</span>
+          </div>
+        </div>
+        <div class="grupo-body"><div class="grupo-body-inner">
+
+          <div class="ferramenta" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">WordPress</div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Ajustes Visuais nas Páginas</li>
+              <li>Gestão de URLs / Slugs / Redirecionamentos</li>
+              <li>Limpeza de Cache</li>
+              <li>Gestão de Formulários do Elementor</li>
+              <li>Integrações com o Mautic</li>
+              <li>Gestão de Usuários</li>
+            </ul></div>
+          </div>
+
+        </div></div>
+      </div>
+
+      <!-- LINKS -->
+      <div class="grupo" data-group>
+        <div class="grupo-header">
+          <div class="grupo-title"><span class="grupo-icon">🔗</span> Links</div>
+          <div class="grupo-meta">
+            <span class="grupo-count">1 ferramenta</span>
+            <span class="chevron">▶</span>
+          </div>
+        </div>
+        <div class="grupo-body"><div class="grupo-body-inner">
+
+          <div class="ferramenta universal" data-tool>
+            <div class="ferramenta-head">
+              <div class="ferramenta-name">Switchy <span class="badge universal">Uso universal</span></div>
+              <span class="ferramenta-toggle">+</span>
+            </div>
+            <div class="tarefas"><ul>
+              <li>Criação de Links de Redirecionamento + DeepLinkings</li>
+              <li><small>Tudo que é link da operação passa pelo Switchy</small></li>
+            </ul></div>
+          </div>
+
+        </div></div>
+      </div>
+
+    </section>
+
+    <!-- =================================================== -->
+    <!-- EIXO B — JORNADA / FLUXOS DE TRABALHO -->
+    <!-- =================================================== -->
+    <section class="eixo eixo-b">
+      <div class="eixo-header">
+        <span class="eixo-tag">Eixo B</span>
+        <h3><span class="num">02</span>Jornada &amp; Fluxos de Trabalho</h3>
+        <p class="eixo-desc">// como as ferramentas se conectam na operação</p>
+      </div>
+
+      <!-- FLUXOS -->
+      <div class="fluxo">
+        <div class="fluxo-num">FLUXO 01</div>
+        <div class="fluxo-titulo">Captura de Lead → Comunicação</div>
+        <div class="fluxo-chain">
+          <span class="fluxo-step">WordPress / Elementor</span>
+          <span class="fluxo-arrow">→</span>
+          <span class="fluxo-step">FluentForms / Inlead</span>
+          <span class="fluxo-arrow">→</span>
+          <span class="fluxo-step">n8n</span>
+          <span class="fluxo-arrow">→</span>
+          <span class="fluxo-step bifurcacao">Mautic</span>
+          <span class="fluxo-step bifurcacao">ÓrgãoDash</span>
+          <span class="fluxo-step bifurcacao">Unnichat</span>
+        </div>
+      </div>
+
+      <div class="fluxo">
+        <div class="fluxo-num">FLUXO 02</div>
+        <div class="fluxo-titulo">Venda → Conciliação &amp; Onboarding</div>
+        <div class="fluxo-chain">
+          <span class="fluxo-step">Hotmart / Guru</span>
+          <span class="fluxo-arrow">→</span>
+          <span class="fluxo-step">Webhooks</span>
+          <span class="fluxo-arrow">→</span>
+          <span class="fluxo-step">n8n</span>
+          <span class="fluxo-arrow">→</span>
+          <span class="fluxo-step bifurcacao">ÓrgãoDash <small style="opacity:.6">(conciliação)</small></span>
+          <span class="fluxo-step bifurcacao">Mautic <small style="opacity:.6">(email)</small></span>
+          <span class="fluxo-step bifurcacao">Unnichat <small style="opacity:.6">(chat)</small></span>
+        </div>
+      </div>
+
+      <div class="fluxo">
+        <div class="fluxo-num">FLUXO 03</div>
+        <div class="fluxo-titulo">Engajamento WhatsApp</div>
+        <div class="fluxo-chain">
+          <span class="fluxo-step">Sendflow</span>
+          <span class="fluxo-arrow">→</span>
+          <span class="fluxo-step">Sendhooks</span>
+          <span class="fluxo-arrow">→</span>
+          <span class="fluxo-step bifurcacao">n8n</span>
+          <span class="fluxo-step bifurcacao">ÓrgãoDash</span>
+        </div>
+      </div>
+
+      <!-- ESCOPO GIANNAVITA -->
+      <div class="fluxo escopo">
+        <div class="fluxo-num">FLUXO 04 · ESCOPO DEDICADO</div>
+        <div class="fluxo-titulo">GiannaVita</div>
+        <div class="escopo-frentes">
+
+          <div class="frente">
+            <span class="frente-status ativo">✓ Ativo</span>
+            <div class="frente-content">
+              <div class="frente-titulo">Gestão de Listas e Contas do Instagram</div>
+              <div class="frente-desc">Operação contínua das contas e listas da marca.</div>
+            </div>
+          </div>
+
+          <div class="frente">
+            <span class="frente-status construcao">⚙ Em construção</span>
+            <div class="frente-content">
+              <div class="frente-titulo">Migração Ascend → Mautic</div>
+              <div class="frente-desc">
+                Planejamento iniciado: criação de dashboard, recuperação automática e gestão de envios migrando do Ascend para o Mautic. Após conclusão, entra na rotina de acompanhamento.
+                <span class="pipeline">Dashboard · Recuperação auto · Envios via Mautic</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TIME TECH -->
+      <div class="time-tech">
+        <div class="label">◆ Stakeholders</div>
+        <h4>Time Tech &amp; Tráfego</h4>
+        <div class="time-tech-grid">
+          <div class="time-tech-block">
+            <div class="who">↔ Hericlis</div>
+            <ul>
+              <li>Delegação bidirecional de demandas tech</li>
+              <li>Assume e repassa tasks</li>
+            </ul>
+          </div>
+          <div class="time-tech-block">
+            <div class="who">↔ Tráfego</div>
+            <ul>
+              <li>Pixels</li>
+              <li>Vendas</li>
+              <li>Webhooks</li>
+              <li>Campanhas e métricas</li>
+              <li>Match BI ↔ Relatórios</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROTINAS -->
+      <div class="rotinas">
+        <div class="rotinas-header">Rotinas Recorrentes</div>
+
+        <div class="rotina-tipo">
+          <span class="freq diaria">◉ Diário</span>
+          <ul>
+            <li>Auxiliar todo o time no uso das ferramentas</li>
+            <li>Acompanhar automações n8n ↔ Mautic / Dash / Unni</li>
+            <li>Acompanhamento com tráfego <small style="opacity:.7">(campanhas, métricas, match BI)</small></li>
+            <li>Rotação de páginas no ÓrgãoDash</li>
+          </ul>
+        </div>
+
+        <div class="rotina-tipo">
+          <span class="freq semanal">◉ Semanal</span>
+          <ul>
+            <li>Atualização de lançamentos pagos <small style="opacity:.7">(ÓrgãoDash + Inlead)</small></li>
+            <li>Conciliação Hotmart / Guru ↔ ÓrgãoDash</li>
+          </ul>
+        </div>
+
+        <div class="rotina-tipo">
+          <span class="freq demanda">◉ Sob demanda</span>
+          <ul>
+            <li>Contato com suporte das ferramentas em caso de erro</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <footer>
+    <div>// blueprint operacional · gestão tech &amp; ops · <span class="signature">v1.0</span> //</div>
+  </footer>
+
+</div>
+
+<script>
+  // === TOGGLE DE GRUPOS ===
+  document.querySelectorAll('[data-group] .grupo-header').forEach(h => {
+    h.addEventListener('click', () => {
+      h.parentElement.classList.toggle('open');
+    });
+  });
+
+  // === TOGGLE DE FERRAMENTAS ===
+  document.querySelectorAll('[data-tool] .ferramenta-head').forEach(h => {
+    h.addEventListener('click', () => {
+      h.parentElement.classList.toggle('open');
+    });
+  });
+
+  // === EXPANDIR / RECOLHER TUDO ===
+  document.getElementById('expandAll').addEventListener('click', () => {
+    document.querySelectorAll('[data-group]').forEach(el => el.classList.add('open'));
+    document.querySelectorAll('[data-tool]').forEach(el => el.classList.add('open'));
+  });
+  document.getElementById('collapseAll').addEventListener('click', () => {
+    document.querySelectorAll('[data-group]').forEach(el => el.classList.remove('open'));
+    document.querySelectorAll('[data-tool]').forEach(el => el.classList.remove('open'));
+  });
+
+  // === TEMA LIGHT/DARK ===
+  const themeBtn = document.getElementById('themeToggle');
+  themeBtn.addEventListener('click', () => {
+    const body = document.body;
+    const next = body.dataset.theme === 'light' ? 'dark' : 'light';
+    body.dataset.theme = next;
+    themeBtn.innerHTML = next === 'light' ? '◐ Tema' : '◑ Tema';
+  });
+
+  // === ESTADO INICIAL: ABRE O PRIMEIRO GRUPO DE CADA EIXO P/ DAR DICA VISUAL ===
+  window.addEventListener('load', () => {
+    const firstGroup = document.querySelector('.eixo-a [data-group]');
+    if (firstGroup) firstGroup.classList.add('open');
+  });
+</script>
+</body>
+</html>
