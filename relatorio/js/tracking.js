@@ -43,21 +43,24 @@ export function trackAccess(evento, dados = {}) {
     ...dados,
   });
 
+  // Estratégia:
+  //   1) fetch CORS normal — n8n responde preflight OK, vimos pelo curl
+  //   2) `keepalive: true` mantém o request vivo se a aba fechar
+  //   3) sem `mode: 'no-cors'` (que forçaria text/plain e bagunça o JSON parsing do n8n)
+  //   4) sendBeacon como último fallback (text/plain, n8n consegue ler raw body)
   try {
-    // sendBeacon: melhor pra eventos que não devem bloquear nem ser perdidos
-    if (navigator.sendBeacon) {
-      const blob = new Blob([body], { type: "application/json" });
-      const ok = navigator.sendBeacon(N8N_WEBHOOK_URL, blob);
-      if (ok) return;
-    }
-    // fallback: fetch com keepalive
     fetch(N8N_WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body,
       keepalive: true,
-      mode: "no-cors",
-    }).catch(() => {});
+    }).catch(() => {
+      // se fetch falhar (ex: CSP bloqueou connect-src), tenta sendBeacon
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: "application/json" });
+        navigator.sendBeacon(N8N_WEBHOOK_URL, blob);
+      }
+    });
   } catch (_) {
     /* tracking nunca quebra o relatório */
   }
