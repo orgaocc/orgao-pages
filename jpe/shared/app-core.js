@@ -82,7 +82,36 @@ function initFaq() {
 }
 
 /* =============================================
-   UTMs
+   MODAL
+   ============================================= */
+const modal = document.getElementById('modal');
+
+function openModal()  { if (modal) { modal.classList.add('open');    document.body.style.overflow = 'hidden'; } }
+function closeModal() { if (modal) { modal.classList.remove('open'); document.body.style.overflow = ''; } }
+
+function initModal() {
+  if (!modal) return;
+  document.querySelectorAll('[data-open-modal]').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); openModal(); });
+  });
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  const closeBtn = document.getElementById('modal-close');
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+}
+
+/* =============================================
+   PHONE MASK
+   ============================================= */
+function applyMask(v) {
+  const d = v.replace(/\D/g, '').slice(0, 11);
+  if (d.length <= 2) return d.length ? `(${d}` : '';
+  if (d.length <= 7) return `(${d.slice(0,2)}) ${d.slice(2)}`;
+  return `(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;
+}
+
+/* =============================================
+   FORM SUBMIT
    ============================================= */
 function getUtms() {
   const p = new URLSearchParams(window.location.search);
@@ -97,27 +126,71 @@ function getUtms() {
   };
 }
 
-/* =============================================
-   DIRECT CHECKOUT
-   Popup de precheckout foi arquivado em ./popup-archive.md.
-   Todos os CTAs com [data-open-modal] redirecionam direto ao Hotmart.
-   ============================================= */
-function buildCheckoutUrl() {
-  const utms = getUtms();
-  const sep = CONFIG.link_ingresso.includes('?') ? '&' : '?';
-  const checkoutMode = /[?&]checkoutMode=/.test(CONFIG.link_ingresso) ? '' : 'checkoutMode=10&';
-  let url = `${CONFIG.link_ingresso}${sep}${checkoutMode}src=${encodeURIComponent(utms.utm_source)}&sck=${CONFIG.sck}`;
-  if (utms.xcod) url += `&xcod=${encodeURIComponent(utms.xcod)}`;
-  return url;
+function pad(n) { return String(n).padStart(2, '0'); }
+function submissionDate() {
+  const d = new Date();
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
-function initDirectCheckout() {
-  document.querySelectorAll('[data-open-modal]').forEach(el => {
-    el.addEventListener('click', e => {
-      e.preventDefault();
-      window.location.href = buildCheckoutUrl();
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('form-btn');
+  if (btn.disabled) return;
+
+  const nome     = document.getElementById('f-nome').value.trim();
+  const email    = document.getElementById('f-email').value.trim();
+  const telefone = document.getElementById('f-tel').value;
+  const digits   = telefone.replace(/\D/g, '');
+
+  if (!nome || !email || digits.length < 10) return;
+
+  btn.disabled = true;
+  btn.textContent = 'ENVIANDO...';
+
+  const utms = getUtms();
+  const body = {
+    nome, email,
+    whatsapp:        `+55${digits}`,
+    utm_campaign:    utms.utm_campaign,
+    utm_source:      utms.utm_source,
+    utm_medium:      utms.utm_medium,
+    utm_content:     utms.utm_content,
+    utm_term:        utms.utm_term,
+    utm_page:        window.location.pathname,
+    lancamento:      'PCT33',
+    utm_id:          utms.utm_id,
+    form:            CONFIG.form,
+    source:          CONFIG.source,
+    headline_variant: sessionStorage.getItem('headline_variant') || 'HeadOriginal',
+    precheckout:     'true',
+    submission_date: submissionDate(),
+  };
+
+  try {
+    await fetch(`${CONFIG.supabase_url}/functions/v1/process-lead`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey:         CONFIG.supabase_key,
+        Authorization:  `Bearer ${CONFIG.supabase_key}`,
+      },
+      body: JSON.stringify(body),
     });
-  });
+  } catch (_) {}
+
+  const sep = CONFIG.link_ingresso.includes('?') ? '&' : '?';
+  const checkoutMode = /[?&]checkoutMode=/.test(CONFIG.link_ingresso) ? '' : 'checkoutMode=10&';
+  let url = `${CONFIG.link_ingresso}${sep}${checkoutMode}name=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&phonenumber=${encodeURIComponent(digits)}&src=${encodeURIComponent(utms.utm_source)}&sck=${CONFIG.sck}`;
+  if (utms.xcod) url += `&xcod=${encodeURIComponent(utms.xcod)}`;
+  window.location.href = url;
+}
+
+function initForm() {
+  const tel  = document.getElementById('f-tel');
+  const form = document.getElementById('formClaude');
+  if (!tel || !form) return;
+  tel.addEventListener('input', function() { this.value = applyMask(this.value); });
+  form.addEventListener('submit', handleSubmit);
 }
 
 /* =============================================
@@ -177,7 +250,8 @@ function initFloatCta() {
 document.addEventListener('DOMContentLoaded', () => {
   loadDates();
   initFaq();
-  initDirectCheckout();
+  initModal();
+  initForm();
   initReveal();
   initFloatCta();
 });
