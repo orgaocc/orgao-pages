@@ -1,138 +1,90 @@
 # Setup — Relatório de Fertilidade
 
-Relatório dinâmico que lê as respostas das 5 aulas (forms InLead) da tabela
-`cpl_inlead_hooks` no Supabase, aplica a metodologia descrita em
-[`metodologia_relatorio_conceber.md`](metodologia_relatorio_conceber.md) e
-renderiza o HTML.
+Relatório dinâmico que lê as respostas das 5 aulas (forms InLead) do **Postgres interno** (`ep.orgao.cc`), aplica a metodologia descrita em [`metodologia_relatorio_conceber.md`](metodologia_relatorio_conceber.md) e renderiza o HTML.
 
-**Sem CLI, sem deploy de edge function.** Só uma função SQL no Supabase Cloud
-+ JavaScript rodando no browser.
+## Arquitetura
 
----
+```
+Tentante → p.grupoconceber.com/relatorio/
+              │ fetch POST
+              ▼
+hooks.grupoconceber.com/webhook/get-relatorio-data  ← n8n
+              │
+              ▼ SQL: SELECT get_relatorio_data($1)
+       ep.orgao.cc:5433 (metabase)
+              │ retorna JSON com 5 aulas
+              ▼
+       Frontend renderiza relatório
 
-## Estrutura
+[paralelo]
+       Tracking → hooks.grupoconceber.com/webhook/relatorio-acesso
+```
+
+**Migração de Junho/2026:** removida 100% a dependência da Lovable/Supabase. Tudo passa pela infra interna (`*.orgao.cc` / `*.grupoconceber.com`).
+
+## Estrutura do projeto
 
 ```
 relatorio/
-├── relatorio-conceber.html              ← HTML (template + data-attributes)
-├── metodologia_relatorio_conceber.md    ← spec da metodologia (referência)
-├── SETUP.md                             ← este arquivo
+├── index.html                              ← HTML (gate + relatório)
+├── metodologia_relatorio_conceber.md       ← spec da metodologia
+├── SETUP.md                                ← este arquivo
+├── n8n-workflow-instructions.md            ← como criar o workflow n8n
+├── assets/                                 ← logo
 ├── sql/
-│   └── get_lead_webhooks.sql            ← função SQL para colar no SQL Editor
+│   └── get_relatorio_data.sql              ← função PG (rodar 1x)
 └── js/
-    ├── app.js                           ← entry point (lê ?email=, orquestra)
-    ├── supabase.js                      ← chamada HTTP à RPC
-    ├── mappings.js                      ← opcoes_XXX → A_Q_n + normalização
-    ├── methodology.js                   ← implementa o MD inteiro
-    └── render.js                        ← preenche o HTML com os dados
+    ├── app.js                              ← entry point
+    ├── api.js                              ← cliente HTTP do n8n
+    ├── mappings.js                         ← coluna PG → código metodologia
+    ├── methodology.js                      ← cálculo do relatório
+    ├── render.js                           ← preenche o HTML
+    └── tracking.js                         ← envia eventos ao n8n
 ```
 
----
+## Setup (1x)
 
-## Passo 1 — Criar a função SQL no Supabase
+### 1. Função SQL no Postgres
+Rodar [`sql/get_relatorio_data.sql`](sql/get_relatorio_data.sql) no Postgres interno (`ep.orgao.cc:5433`).
 
-1. Abrir o **SQL Editor** do projeto Supabase (`mjzboolbdynbavxpounr`)
-2. Colar todo o conteúdo de [`sql/get_lead_webhooks.sql`](sql/get_lead_webhooks.sql)
-3. **Run**
-4. Conferir o teste comentado no fim do arquivo:
+### 2. Workflow n8n
+Seguir [`n8n-workflow-instructions.md`](n8n-workflow-instructions.md) — 3 nós (Webhook → Postgres → Respond).
 
-   ```sql
-   SELECT count(*) FROM public.get_lead_webhooks('clauzinhasantos5@gmail.com');
-   ```
+### 3. Workflow n8n de tracking (já existe)
+Continua igual: `hooks.grupoconceber.com/webhook/relatorio-acesso`.
 
-   Deve retornar pelo menos 1 (essa tentante respondeu a Aula 5).
+## Tabelas Postgres (gravadas em tempo real pelo n8n)
 
-A função usa `SECURITY DEFINER` → roda com privilégios do criador (postgres),
-bypassando o RLS da `cpl_inlead_hooks`. O `GRANT EXECUTE ... TO anon` permite
-que o front consulte usando a anon key.
+| Tabela | Conteúdo |
+|---|---|
+| `gc_inlead_aula1` | Ciclo menstrual |
+| `gc_inlead_aula2` | Corpo e equilíbrio hormonal |
+| `gc_inlead_aula3` | Ovulação e janela fértil |
+| `gc_inlead_aula4` | Nutrição e suplementação |
+| `gc_inlead_aula5` | Saúde do casal |
 
----
+Cada uma com colunas em português (`ciclo_freq`, `intensidade_colica`, etc.) + `raw jsonb` (payload bruto do webhook InLead) + `imported_at`.
 
-## Passo 2 — Testar o relatório
-
-### 2.1 — Modo design preview (sem banco)
-
-Abrir o `relatorio-conceber.html` direto no browser **sem query string**:
+## Como o front consome
 
 ```
-relatorio-conceber.html
+http://localhost:8080/relatorio/                           → gate de login
+http://localhost:8080/relatorio/?email=x@y.com             → busca direto
+http://localhost:8080/relatorio/?email=x@y.com&debug=rows  → loga JSON do n8n
+http://localhost:8080/relatorio/?preview=carla             → modo design (Carla mock)
 ```
-
-Carrega os dados hardcoded da Carla Mendes (mesma cara que o template original).
-Útil para revisar o design.
-
-### 2.2 — Modo dinâmico (lê do banco)
-
-```
-relatorio-conceber.html?email=clauzinhasantos5@gmail.com
-```
-
-O front:
-1. faz `POST` na RPC `/rest/v1/rpc/get_lead_webhooks` com `{lead_email: ...}`
-2. recebe N rows (uma por aula respondida)
-3. detecta a aula de cada row pela "fingerprint" (conjunto único de chaves opcoes_*)
-4. mapeia cada `opcoes_XXX` → código da metodologia (A1_Q1, A2_Q3, ...)
-5. roda a metodologia → calcula 7 pilares, índice, contadores, findings, diagnósticos, gaps, CTA
-6. renderiza no HTML
-
-### 2.3 — Debug (DevTools)
-
-Adicionar `&debug=rows|input|report` para ver cada estágio no console:
-
-```
-relatorio-conceber.html?email=...&debug=rows     → rows brutas do banco
-relatorio-conceber.html?email=...&debug=input    → input agregado depois do mapping
-relatorio-conceber.html?email=...&debug=report   → JSON final pronto pro render
-```
-
----
-
-## Como adaptar quando os forms da InLead mudarem
-
-Se você editar um form na InLead (adicionar/remover pergunta, mudar texto de opção),
-os IDs `opcoes_XXX` podem mudar e o mapeamento quebra parcialmente.
-
-**Onde editar:** [`js/mappings.js`](js/mappings.js)
-
-**O que editar:**
-
-1. **`FINGERPRINTS`** — se um form ganhar/perder uma pergunta, atualizar o array de chaves esperadas dessa aula
-2. **`INPUT_TO_QUESTION`** — adicionar/atualizar a chave nova → código da metodologia
-3. **`NORMALIZE`** — se o texto da opção mudou, atualizar o needle do match parcial
-
-**Como descobrir os novos IDs:** rode no SQL Editor
-
-```sql
-SELECT
-  jsonb_object_keys(payload) AS chave,
-  count(*) AS aparece_em_n_payloads
-FROM public.cpl_inlead_hooks
-WHERE created_at > now() - interval '7 days'
-  AND payload != '{}'::jsonb
-GROUP BY 1
-ORDER BY 2 DESC;
-```
-
----
-
-## Mapeamento dos 5 forms (referência rápida)
-
-| Aula | Form ID URL | # perguntas |
-|---|---|---|
-| Aula 1 — Ciclo menstrual | `Yk5cbX` | 8 |
-| Aula 2 — Corpo/hormônios | `OyLh10` | 14 + altura/peso |
-| Aula 3 — Ovulação | `5eQ0xw` | 8 |
-| Aula 4 — Suplementação | `cUzRqH` | 6 + texto livre |
-| Aula 5 — Casal | `RfERBP` | 15 |
-
-Cada `opcoes_XXX` é único por aula (com 2 exceções compartilhadas entre A4 e A5,
-que mapeamos por contexto). Tudo está em [`js/mappings.js`](js/mappings.js).
-
----
 
 ## Hospedagem
 
-O relatório é HTML+JS estático puro — pode hospedar em qualquer lugar:
-Cloudflare Pages, Netlify, Vercel, ou direto no mesmo bucket do JPE.
+Cloudflare Pages no domínio `p.grupoconceber.com`, deploy automático em push pra `main` do repo `orgaocc/hebe-cd-jpe`.
 
-Para Cloudflare Pages (igual JPE): basta dar deploy da pasta `relatorio/`.
+## O que mudou em relação à versão anterior
+
+| | Antes | Agora |
+|---|---|---|
+| Banco | Supabase Lovable (`cpl_inlead_hooks`) | Postgres interno (`gc_inlead_aulaN`) |
+| API | Supabase RPC (`get_lead_webhooks`) | n8n webhook (`get-relatorio-data`) |
+| Auth | Supabase anon key | Sem auth (webhook público) |
+| Estrutura dados | `payload.opcoes_XXX` (IDs InLead) | Colunas humanas (`ciclo_freq`, etc.) |
+| Coluna `interesse` | Não capturada | ✅ A3/A4/A5 |
+| Coluna `raw` | Inexistente | ✅ payload bruto preservado |

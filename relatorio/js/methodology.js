@@ -3,100 +3,51 @@
 // =============================================================================
 
 import {
-  detectAula, INPUT_TO_QUESTION,
+  COLUMN_TO_QUESTION,
   normalizeAnswer, toArray, normalizeA4Q1, normalizeDiagnosticos,
 } from "./mappings.js";
 
 // -----------------------------------------------------------------------------
-// AGREGADOR — recebe N rows do banco e monta o input único
+// AGREGADOR — recebe payload do endpoint n8n (já 1 row por aula) e monta input
 // -----------------------------------------------------------------------------
-// A InLead envia 1 webhook POR ETAPA do form (cada nova resposta = nova row).
-// Para cada aula, queremos a row MAIS COMPLETA (mais respostas preenchidas).
+// Estrutura esperada do endpoint:
+//   {
+//     email: "x@y.com",
+//     aulas_respondidas: 5,
+//     aulas_vistas: ["aula1", ...],
+//     aula1: { ciclo_freq, borra_cafe, ..., created_at } | null,
+//     aula2: { altura, peso, ..., created_at } | null,
+//     ...
+//   }
+//
+// Cada `aulaN` já é a row mais completa (mais recente) — o Postgres faz isso
+// via ORDER BY created_at DESC LIMIT 1.
 // -----------------------------------------------------------------------------
-export function aggregateRows(rows) {
+export function aggregateRows(data) {
   const respostas = {};
-  let nome = "", email = "";
-  const aulasVistas = new Set();
+  const aulasVistas = data?.aulas_vistas || [];
+  const email = (data?.email || "").trim().toLowerCase();
 
-  // 1. agrupa por aula, mantém a row com mais opcoes_ preenchidas
-  //    detectAula prioriza row.aula (coluna do banco, vinda da edge function
-  //    isolada da aula); cai pra fingerprint do payload se aula vier null.
-  const bestByAula = {};   // aula → row
-  for (const row of rows) {
-    const payload = row.payload || {};
-    const aula = detectAula(row);
-    if (!aula) continue;
-    const opcoesCount = Object.keys(payload).filter((k) => k.startsWith("opcoes_")).length;
-    const cur = bestByAula[aula];
-    const curCount = cur ? Object.keys(cur.payload || {}).filter((k) => k.startsWith("opcoes_")).length : -1;
-    if (opcoesCount > curCount) bestByAula[aula] = row;
-  }
+  // Pra cada aula presente, traduz colunas → códigos de questão usando o mapeamento
+  for (const aulaKey of ["aula1", "aula2", "aula3", "aula4", "aula5"]) {
+    const aulaData = data?.[aulaKey];
+    if (!aulaData) continue;
 
-  // ordem cronológica (mais antiga primeiro, mais nova sobrescreve em conflitos)
-  const sorted = Object.entries(bestByAula)
-    .map(([aula, row]) => ({ aula, row }))
-    .sort((a, b) => new Date(a.row.created_at || 0) - new Date(b.row.created_at || 0));
-
-  // Para a Aula 1, o campo `ciclo` é SOBRESCRITO (frequência e borra de café
-  // têm o mesmo ID interno na InLead). Varre TODAS as rows da Aula 1 (ou
-  // sem aula detectada — registros antigos) capturando os 2 valores distintos.
-  const cicloValues = new Set();
-  for (const row of rows) {
-    const payload = row.payload || {};
-    if (!payload.ciclo) continue;
-    // só inclui se a row for da Aula 1 (ou sem identificação — fallback antigo)
-    const aula = detectAula(row);
-    if (aula && aula !== "aula1") continue;
-    cicloValues.add(String(payload.ciclo).trim());
-  }
-  for (const v of cicloValues) {
-    const s = v.toLowerCase();
-    if (s.includes("borra")) respostas["A1_Q2"] = v;
-    else respostas["A1_Q1"] = v;
-  }
-
-  for (const { aula, row } of sorted) {
-    const payload = row.payload || {};
-    aulasVistas.add(aula);
-
-    const map = INPUT_TO_QUESTION[aula];
+    const map = COLUMN_TO_QUESTION[aulaKey];
     if (!map) continue;
 
-    // Aula 1 tem duas colunas chamadas "ciclo" → o JSON pode ter vindo como
-    // ambas combinadas em uma única string com pipe (InLead). Trato abaixo.
-    const cicloDual = [];
-
-    for (const [inputKey, value] of Object.entries(payload)) {
-      const qcode = map[inputKey];
+    for (const [col, value] of Object.entries(aulaData)) {
+      if (col === "created_at" || value === null || value === undefined || value === "") continue;
+      const qcode = map[col];
       if (!qcode) continue;
-      if (qcode === "_A1_DUAL") { cicloDual.push(value); continue; }
+      // muco_ovulatorio da A1 só é fallback de A3_Q2 — só usa se A3_Q2 não tem
+      if (qcode === "A3_Q2_ALT") {
+        if (!respostas["A3_Q2"]) respostas["A3_Q2"] = value;
+        continue;
+      }
       respostas[qcode] = value;
     }
-
-    if (cicloDual.length > 0) {
-      // separa: a primeira "ciclo" é frequência (Q1), a segunda é borra de café (Q2)
-      // se vier um valor único contendo "borra de café", é Q2
-      // se vier "Entre 25 e 35", é Q1
-      for (const v of cicloDual) {
-        const s = String(v || "").toLowerCase();
-        if (s.includes("borra")) respostas["A1_Q2"] = v;
-        else if (s.includes("dias") || s.includes("meses")) respostas["A1_Q1"] = v;
-      }
-    }
-
-    // detecta email no payload procurando valor com formato @
-    if (!email) {
-      for (const v of Object.values(payload)) {
-        if (typeof v === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())) {
-          email = v.trim().toLowerCase();
-          break;
-        }
-      }
-    }
   }
-
-  // se não temos nome real, deixa em branco — o render mostra o email no header
-  // e o CTA usa fallback "Você"
 
   const hoje = new Date();
   const meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
@@ -104,12 +55,18 @@ export function aggregateRows(rows) {
 
   return {
     contexto: {
-      nome, email,
+      nome: "",
+      email,
       idade: null,
       anos_tentando: null,
       data_relatorio: dataRel,
-      formularios_respondidos: aulasVistas.size,
-      aulas_vistas: Array.from(aulasVistas),
+      formularios_respondidos: typeof data?.aulas_respondidas === "number" ? data.aulas_respondidas : aulasVistas.length,
+      aulas_vistas: aulasVistas,
+      interesse: {
+        aula3: data?.aula3?.interesse || null,
+        aula4: data?.aula4?.interesse || null,
+        aula5: data?.aula5?.interesse || null,
+      },
     },
     respostas,
   };

@@ -15,7 +15,7 @@
 //   ?debug=rows|input|report  → loga cada estágio no console
 // =============================================================================
 
-import { fetchLeadWebhooks } from "./supabase.js";
+import { fetchLeadReport } from "./api.js";
 import { aggregateRows, buildReport } from "./methodology.js";
 import {
   renderReport, showError,
@@ -71,9 +71,9 @@ async function processarEmail(email, debug) {
   setGateLoading(true);
   setGateMessage("");
 
-  let rows;
+  let data;
   try {
-    rows = await fetchLeadWebhooks(email);
+    data = await fetchLeadReport(email);
   } catch (e) {
     console.error(e);
     setGateLoading(false);
@@ -81,16 +81,16 @@ async function processarEmail(email, debug) {
     return;
   }
 
-  if (debug === "rows") { console.log("ROWS", rows); setGateLoading(false); return; }
+  if (debug === "rows") { console.log("DATA", data); setGateLoading(false); return; }
 
-  if (!rows || rows.length === 0) {
+  if (!data || data.aulas_respondidas === 0 || !data.aulas_vistas?.length) {
     setGateLoading(false);
     setGateMessage("E-mail não encontrado nos formulários. Confira se digitou o mesmo e-mail usado no preenchimento.");
     trackAccess("email_nao_encontrado", { email });
     return;
   }
 
-  const input = aggregateRows(rows);
+  const input = aggregateRows(data);
   if (debug === "input") { console.log("INPUT", input); setGateLoading(false); return; }
 
   const aulasVistas = input.contexto.aulas_vistas || [];
