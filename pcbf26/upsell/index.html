@@ -108,6 +108,14 @@ h1, h2, h3, p, ul { margin: 0; overflow-wrap: break-word; }
 .item-texto li { padding: clamp(5px, .7vw, 9px) 0; }
 .item-texto li + li { border-top: 1px solid #4a4a4a; }
 .item-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 0 18px 18px 0; }
+/* aviso de envio do kit (Figma "UPSELL 2": faixa vermelha no topo da foto, por falta de estoque) */
+.item-img--kit { display: flex; flex-direction: column; background: #ee2f21; }
+.kit-envio {
+  padding: clamp(16px, 1.8vw, 23px) 8% clamp(14px, 1.4vw, 18px); color: var(--cinza); text-align: center;
+  font-size: var(--f24); font-weight: 800; text-transform: uppercase; line-height: 1.2;
+}
+@media (min-width: 901px) { .kit-envio { max-width: 11em; margin-inline: auto; padding-inline: 0; } }
+.item-img--kit img { flex: 1; min-height: 0; border-radius: 20px 20px 18px 0; }
 .kit { position: relative; }
 .kit-nota {
   margin-top: -91px; padding: calc(91px + clamp(18px, 2vw, 25px)) 8% clamp(24px, 2.5vw, 32px);
@@ -147,6 +155,8 @@ h1, h2, h3, p, ul { margin: 0; overflow-wrap: break-word; }
   .item { grid-template-columns: 1fr; }
   .item-img { order: -1; }
   .item-img img { height: auto; aspect-ratio: 16 / 10; border-radius: 18px 18px 0 0; }
+  .item-img--kit { border-radius: 18px 18px 0 0; overflow: hidden; }
+  .item-img--kit img { border-radius: 18px 18px 0 0; }
   .item-cabeca { margin-top: -2px; }
   .item h3, .item-texto > p, .item-texto ul { max-width: none; }
   .kit-nota { margin-top: -40px; padding: calc(40px + 22px) 18px 26px; }
@@ -215,8 +225,9 @@ h1, h2, h3, p, ul { margin: 0; overflow-wrap: break-word; }
                 <li>Creatina</li>
               </ul>
             </div>
-            <div class="item-img">
-              <img src="assets/kit-gianna-vita.webp" width="678" height="954" loading="lazy" alt="Kit Fertilidade Máxima Gianna Vita com cinco suplementos">
+            <div class="item-img item-img--kit">
+              <p class="kit-envio">Envio a partir do dia 05/11</p>
+              <img src="assets/kit-gianna-vita.webp" width="678" height="758" loading="lazy" alt="Kit Fertilidade Máxima Gianna Vita com cinco suplementos">
             </div>
           </article>
           <div class="kit-nota">
