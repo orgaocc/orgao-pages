@@ -65,3 +65,7 @@
 
 /jpe/cc-v9/assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Pink Friday 2026 — imagens 1 dia (podem ser trocadas durante o lançamento; o js/config.js segue o baseline de 5 min)
+/pcbf26/*/assets/*
+  Cache-Control: public, max-age=86400

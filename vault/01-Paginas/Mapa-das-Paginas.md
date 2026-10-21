@@ -8,7 +8,7 @@ updated: 2026-10-21
 
 [Índice](../00-Indice.md) · [Estrutura e integrações](Estrutura-e-Integracoes.md)
 
-Inventário extraído de todos os arquivos HTML na revisão base `e486a51123655e35ac5fa14b9055a1605e0779c6` em 2026-10-21: **13 entradas HTML**, sendo **10 variantes JPE**, relatório, tech e fallback. Não é uma verificação de disponibilidade em produção.
+Inventário extraído de todos os arquivos HTML na revisão base `e486a51123655e35ac5fa14b9055a1605e0779c6` em 2026-10-21: **13 entradas HTML**, sendo **10 variantes JPE**, relatório, tech e fallback. Depois disso, entrou `/pcbf26/vendas/` (Pink Friday 2026). Não é uma verificação de disponibilidade em produção.
 
 | Rota no código | Arquivo | Título HTML | Observação |
 | --- | --- | --- | --- |
@@ -23,6 +23,7 @@ Inventário extraído de todos os arquivos HTML na revisão base `e486a51123655e
 | `/jpe/cc-v7-bkp1/` | [jpe/cc-v7-bkp1/index.html](../../jpe/cc-v7-bkp1/index.html) | Jejum para Engravidar — Detox Metabólico - Grupo Conceber | Cópia histórica; `_redirects` aponta esta rota para `/jpe/cc-v7/` |
 | `/jpe/cc-v7b/` | [jpe/cc-v7b/index.html](../../jpe/cc-v7b/index.html) | Jejum para Engravidar — Detox Metabólico - Grupo Conceber | Destino de `/` e do fallback, conforme configuração |
 | `/jpe/cc-v9/` | [jpe/cc-v9/index.html](../../jpe/cc-v9/index.html) | Jejum e Oração para Engravidar - Grupo Conceber | Versão de campanha presente no Git |
+| `/pcbf26/vendas/` | [pcbf26/vendas/index.html](../../pcbf26/vendas/index.html) | Pink Friday Conceber — O Programa Conceber pelo menor investimento do ano | Página de vendas da Pink Friday 2026 (2026-10-21). Link de checkout em `js/config.js` |
 | `/relatorio/` | [relatorio/index.html](../../relatorio/index.html) | Programa Conceber — Relatório de Fertilidade | Relatório dinâmico; depende de integração HTTP |
 | `/tech/` | [tech/index.html](../../tech/index.html) | Mapa Mental — Gestão Tech & Operações | Mapa de gestão tech e operações |
 
