@@ -242,22 +242,19 @@ ul { padding: 0; list-style: none; }
   :root { --cw: calc(100vw - 40px); }
   .btn { font-size: 18px; min-height: 66px; padding: 12px 18px; }
 
-  .hero { background-position: 70% center; }
-  .hero .wrap { grid-template-columns: 1fr; grid-template-areas: "topo" "img" "corpo"; grid-template-rows: none; }
-  .hero-logo { width: 170px; }
-  .hero h1 { font-size: clamp(24px, 6.4vw, 36px); max-width: none; }
-  .hero-topo, .hero-corpo { width: 100%; max-width: 600px; justify-self: center; }
-  /* celular: tudo centralizado, como a imagem (pedido da Bruna, 21/10) */
-  .hero-topo, .hero-corpo { text-align: center; }
-  .hero-logo { margin-inline: auto; }
-  .hero h1 { margin-inline: auto; }
-  .hero-corpo p { margin-inline: auto; }
-  /* no celular a imagem cede espaço pro botão aparecer sem rolar */
-  .hero-img { width: min(100%, 440px, calc(40svh * .818)); margin: 14px auto 0; justify-self: center; }
-  .hero-corpo { padding: 22px 0 44px; }
-  .hero-corpo p { font-size: 18px; max-width: 560px; }
-  .hero .btn { width: 100%; max-width: 560px; min-height: 72px; }
-  .hero-condicao { text-align: center; max-width: 560px; }
+  /* Topo no celular: versão do designer (Figma "iPhone 17 - 1", quadro de 402): logo centralizado, título e texto
+     à esquerda, botão centralizado e a imagem embaixo, colada no fim do topo. Medidas em vw a partir do quadro de 402. */
+  .hero { background-position: 30% 75%; }
+  .hero .wrap { width: 100%; grid-template-columns: 1fr; grid-template-areas: "topo" "corpo" "img"; grid-template-rows: none; }
+  .hero-topo, .hero-corpo { width: 100%; max-width: 640px; justify-self: center; padding-inline: max(20px, 9.45vw); }
+  .hero-topo { padding-top: min(10.7vw, 48px); }
+  .hero-logo { width: min(56.7vw, 260px); margin-inline: auto; }
+  .hero h1 { margin-top: min(6vw, 28px); font-size: min(8.96vw, 40px); max-width: 8.9em; }
+  .hero-corpo { padding: min(2.5vw, 12px) max(20px, 9.45vw) 0; }
+  .hero-corpo p { font-size: min(4.97vw, 22px); max-width: none; }
+  .hero .btn { display: flex; width: 100%; max-width: 420px; margin: min(6.5vw, 30px) auto 0; min-height: min(19.2vw, 80px); font-size: min(4.97vw, 20px); padding: 10px 14px; }
+  .hero-condicao { display: none; }
+  .hero-img { width: min(101%, 560px); max-width: none; margin: min(2.5vw, 12px) auto 0; justify-self: center; }
 
   .fita-trilho img { zoom: .78; }
 
@@ -328,8 +325,6 @@ ul { padding: 0; list-style: none; }
 @media (max-width: 380px) {
   :root { --cw: calc(100vw - 32px); }
   .titulo, .quem h2, .sonho h2 { font-size: 23px; }
-  .hero h1 { font-size: 23px; }
-  .hero-img { width: min(100%, calc(35svh * .818)); }
   .preco-parc { font-size: 31px; }
   .btn { font-size: 16px; }
 }
