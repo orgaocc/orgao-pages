@@ -28,3 +28,9 @@ A campanha Jejum para Engravidar tem dez variantes no diretório `jpe/`. O repos
 ## Sessão de 2026-10-21
 
 A pedido do Héric, preparada a documentação publicável no próprio repositório: README, Brain enxuto, vault, inventário das entradas HTML e regras de exclusão de arquivos privados. O conteúdo foi adaptado do contexto local e conferido contra os arquivos do Git; nenhum registro operacional restrito foi copiado integralmente. O `.env` preexistente foi retirado do índice, preservando a cópia local. A entrega será submetida por PR; merge e deploy são estados posteriores.
+
+## Pink Friday 2026 (2026-10-21, Luan)
+
+Entraram `/pcbf26/vendas/` e `/pcbf26/upsell/`, montadas do Figma "BLACK FRIDAY PC 2026". Endereço segue domínio / lançamento / página; `utm_page` grava `/pcbf26/...`. Link de checkout de cada página (e o id e o formato da VSL do upsell) ficam no `js/config.js` da pasta: trocar ali, sem mexer no HTML. Imagens em WebP. Detalhes no [mapa das páginas](vault/01-Paginas/Mapa-das-Paginas.md).
+
+Publicação: o Workers Builds constrói cada commit uma vez. Commit que chega primeiro por uma branch vira só prévia (`<branch>-jpe-cd.conceber.workers.dev`); levar o mesmo commit pra `main` não publica. Pra produção, o commit precisa nascer na `main` (ou merge com commit próprio).
