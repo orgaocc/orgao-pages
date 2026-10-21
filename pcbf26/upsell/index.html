@@ -249,6 +249,7 @@ h1, h2, h3, p, ul { margin: 0; overflow-wrap: break-word; }
 </main>
 
 <script src="js/config.js"></script>
+<script src="../shared/precheckout.js"></script>
 <script>
 (function () {
   var cfg = typeof CONFIG !== 'undefined' ? CONFIG : {};
@@ -272,15 +273,6 @@ h1, h2, h3, p, ul { margin: 0; overflow-wrap: break-word; }
     capa.disabled = true;
   }
 
-  /* Botão de compra: com link configurado, vai pro checkout levando os parâmetros da URL. */
-  var link = cfg.link_checkout || '';
-  if (!link) return;
-  var url;
-  try { url = new URL(link); } catch (e) { return; }
-  new URLSearchParams(window.location.search).forEach(function (valor, chave) {
-    if (!url.searchParams.has(chave)) url.searchParams.set(chave, valor);
-  });
-  document.querySelectorAll('[data-checkout]').forEach(function (a) { a.href = url.toString(); });
 })();
 </script>
 </body>

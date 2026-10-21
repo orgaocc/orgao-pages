@@ -247,6 +247,11 @@ ul { padding: 0; list-style: none; }
   .hero-logo { width: 170px; }
   .hero h1 { font-size: clamp(24px, 6.4vw, 36px); max-width: none; }
   .hero-topo, .hero-corpo { width: 100%; max-width: 600px; justify-self: center; }
+  /* celular: tudo centralizado, como a imagem (pedido da Bruna, 21/10) */
+  .hero-topo, .hero-corpo { text-align: center; }
+  .hero-logo { margin-inline: auto; }
+  .hero h1 { margin-inline: auto; }
+  .hero-corpo p { margin-inline: auto; }
   /* no celular a imagem cede espaço pro botão aparecer sem rolar */
   .hero-img { width: min(100%, 440px, calc(40svh * .818)); margin: 14px auto 0; justify-self: center; }
   .hero-corpo { padding: 22px 0 44px; }
@@ -361,7 +366,7 @@ ul { padding: 0; list-style: none; }
   <!-- 2. Depoimentos -->
   <section class="depoimentos" aria-labelledby="t-depoimentos">
     <div class="wrap">
-      <h2 class="titulo" id="t-depoimentos">Elas também viveram a espera pelo positivo e hoje, <span class="destaque">compartilham a alegria de ter seus filhos nos braços</span>!</h2>
+      <h2 class="titulo" id="t-depoimentos">Elas também viveram a espera pelo positivo e, hoje, <span class="destaque">compartilham a alegria de ter seus filhos nos braços</span>!</h2>
     </div>
     <div class="fita">
       <div class="fita-trilho">
@@ -616,18 +621,6 @@ ul { padding: 0; list-style: none; }
 </main>
 
 <script src="js/config.js"></script>
-<script>
-/* Botões de compra: com link configurado, vão pro checkout levando os parâmetros da URL (utm_*, src, sck, xcod). */
-(function () {
-  var link = (typeof CONFIG !== 'undefined' && CONFIG.link_checkout) || '';
-  if (!link) return;
-  var url;
-  try { url = new URL(link); } catch (e) { return; }
-  new URLSearchParams(window.location.search).forEach(function (valor, chave) {
-    if (!url.searchParams.has(chave)) url.searchParams.set(chave, valor);
-  });
-  document.querySelectorAll('[data-checkout]').forEach(function (a) { a.href = url.toString(); });
-})();
-</script>
+<script src="../shared/precheckout.js"></script>
 </body>
 </html>
