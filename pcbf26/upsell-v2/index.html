@@ -44,7 +44,7 @@
   --t-h2: 48px; --lh-h2: 56px;
   --t-h3: 24px; --lh-h3: 32px;
   --t-quote: 32px; --lh-quote: 40px;
-  --t-price: 56px;
+  --t-price: 88px;
   --t-lead: 18px; --lh-lead: 32px;
   --t-body: 16px; --lh-body: 24px;
   --t-small: 14px;
@@ -56,11 +56,11 @@
 }
 /* degraus de tipografia e espaçamento (sem tamanho fluido) */
 @media (max-width: 1023px) {
-  :root { --t-hero: 48px; --lh-hero: 56px; --t-h2: 40px; --lh-h2: 48px; --t-h3: 22px; --lh-h3: 32px; --t-quote: 24px; --lh-quote: 32px; --t-price: 48px;
+  :root { --t-hero: 48px; --lh-hero: 56px; --t-h2: 40px; --lh-h2: 48px; --t-h3: 22px; --lh-h3: 32px; --t-quote: 24px; --lh-quote: 32px; --t-price: 72px;
     --gap-xl: 64px; --gap-lg: 48px; --gap-sec: 16px; }
 }
 @media (max-width: 767px) {
-  :root { --t-hero: 40px; --lh-hero: 48px; --t-h2: 32px; --lh-h2: 40px; --t-h3: 22px; --lh-h3: 32px; --t-quote: 22px; --lh-quote: 32px; --t-price: 40px;
+  :root { --t-hero: 40px; --lh-hero: 48px; --t-h2: 32px; --lh-h2: 40px; --t-h3: 22px; --lh-h3: 32px; --t-quote: 22px; --lh-quote: 32px; --t-price: 56px;
     --lh-lead: 32px; --gap-xl: 32px; --gap-lg: 32px; --gap-sec: 0px; }
 }
 
@@ -92,13 +92,13 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 16px;
   min-height: 64px; padding: 16px 32px; border-radius: 999px; border: 0;
-  background: linear-gradient(180deg, #ff5aa8 0%, #e8277f 100%); color: #fff;
+  background: linear-gradient(180deg, #2ccf74 0%, #0f9a4e 100%); color: #fff;
   font: 700 16px/24px var(--display); letter-spacing: .02em; text-transform: uppercase; text-decoration: none; text-align: center;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, .18) inset, 0 12px 40px -8px rgba(255, 63, 152, .65);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .18) inset, 0 12px 40px -8px rgba(20, 170, 90, .6);
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .btn::after { content: "→"; font-size: 18px; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(255, 255, 255, .25) inset, 0 18px 50px -8px rgba(255, 63, 152, .8); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(255, 255, 255, .25) inset, 0 18px 50px -8px rgba(20, 170, 90, .75); }
 .btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 
 /* ===== 1. Topo ===== */
@@ -145,16 +145,16 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 
 /* ===== 3. Condição exclusiva ===== */
 .condicao { background: radial-gradient(50% 50% at 50% 60%, rgba(255, 63, 152, .22), transparent 70%), var(--noite); }
-.preco { position: relative; max-width: 560px; margin: 0 auto; padding: 48px 40px; border-radius: var(--r); text-align: center;
+.preco { position: relative; max-width: 768px; margin: 0 auto; padding: 48px 40px; border-radius: var(--r); text-align: center;
   background: linear-gradient(180deg, rgba(255, 63, 152, .16), rgba(43, 13, 25, .9)); border: 1px solid rgba(255, 140, 190, .3);
   box-shadow: 0 0 0 12px rgba(255, 63, 152, .06), 0 40px 100px -40px rgba(255, 63, 152, .6); }
 .preco h3 { font-size: var(--t-h3); line-height: var(--lh-h3); font-weight: 700; max-width: 22em; margin: 0 auto; }
-.preco-por { margin-top: 24px; color: rgba(255, 255, 255, .7); }
-.preco-parc { font-size: var(--t-price); line-height: 1; font-weight: 800; letter-spacing: -.03em; }
-.preco-parc small { font-size: 22px; font-weight: 600; letter-spacing: 0; vertical-align: 24px; margin-right: 8px; }
-.preco-vista { margin-top: 8px; color: rgba(255, 255, 255, .78); }
-.preco-vista strong { color: #fff; }
-.preco .btn { margin-top: 32px; width: 100%; }
+.preco-por { margin-top: 24px; font-size: 18px; line-height: 24px; color: rgba(255, 255, 255, .7); }
+.preco-parc { margin-top: 8px; font-size: var(--t-price); line-height: 1; font-weight: 800; letter-spacing: -.03em; white-space: nowrap; }
+.preco-parc small { font-size: 24px; font-weight: 600; letter-spacing: 0; vertical-align: calc(var(--t-price) * .45); margin-right: 8px; }
+.preco-vista { margin-top: 16px; font-size: 18px; line-height: 24px; color: rgba(255, 255, 255, .8); }
+.preco-vista strong { font-size: 22px; color: #fff; }
+.preco .btn { margin-top: 32px; width: 100%; min-height: 72px; font-size: 18px; }
 .termos { max-width: 640px; margin: 32px auto 0; text-align: center; font-size: 14px; font-style: italic; color: rgba(255, 255, 255, .55); }
 
 @media (max-width: 900px) {
@@ -174,6 +174,8 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
   .kit-nota { margin: 0 24px 24px; }
   .preco { padding: 32px 24px; }
   .btn { padding-inline: 24px; font-size: 14px; }
+  .preco .btn { min-height: 64px; font-size: 16px; }
+  .preco-parc small { display: block; margin: 0 0 8px; vertical-align: baseline; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
 </style>
