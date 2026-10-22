@@ -21,7 +21,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero-composicao.webp" fetchpriority="high">
 
 <!-- Pixel X App - START -->
@@ -48,8 +48,8 @@
   --linha-escura: rgba(255, 255, 255, .1);
   --linha-clara: rgba(36, 18, 26, .1);
 
-  --display: 'Space Grotesk', system-ui, sans-serif;  /* títulos, botões, números */
-  --sans: 'Manrope', system-ui, sans-serif;         /* parágrafos */
+  --display: 'Manrope', system-ui, sans-serif;  /* títulos, botões, números */
+  --sans: 'Rubik', system-ui, sans-serif;       /* parágrafos */
 
   /* escala tipográfica (fluida entre o celular e 1280) */
   /* tipografia no grid de 8 (exceções permitidas: 14, 18, 22) */
@@ -102,7 +102,7 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 .claro { background: var(--off); color: var(--tinta); }
 
 .cabeca { max-width: 760px; margin: 0 auto var(--gap-lg); text-align: center; }
-.cabeca h2 { font-size: var(--t-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -.025em; }
+.cabeca h2 { font-size: var(--t-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -.015em; }
 .cabeca p { margin-top: 16px; font-size: var(--t-lead); line-height: var(--lh-lead); color: var(--tinta-2); }
 .escuro .cabeca p { color: rgba(255, 255, 255, .72); }
 
@@ -127,8 +127,11 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 .hero .wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 32px; padding-bottom: 0; min-height: min(92svh, 880px); }
 .hero-conteudo { align-self: center; padding-bottom: var(--gap-lg); }
 .hero-logo { width: 216px; }
-.hero h1 { margin-top: 40px; font-size: var(--t-hero); line-height: var(--lh-hero); font-weight: 800; letter-spacing: -.035em; }
+.hero h1 { margin-top: 40px; font-size: var(--t-hero); line-height: var(--lh-hero); font-weight: 800; letter-spacing: -.02em; }
 .hero h1 em.dest { display: block; margin-top: 8px; }
+/* quebra equilibrada: sem palavra sozinha na última linha */
+h1, h2, h3, .hero h1 em.dest { text-wrap: balance; }
+p, li { text-wrap: pretty; }
 .hero-texto { margin-top: 24px; max-width: 30em; font-size: var(--t-lead); line-height: var(--lh-lead); color: rgba(255, 255, 255, .78); }
 .hero-texto strong { color: #fff; font-weight: 700; }
 .hero-cta { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
@@ -163,6 +166,14 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 .fita:hover .fita-trilho { animation-play-state: paused; }
 .fita--volta .fita-trilho { animation-direction: reverse; }
 @keyframes rolar { to { transform: translateX(calc(-50% - 12px)); } }
+
+/* barra corrida logo depois da hero, com os números do topo */
+.letreiro { overflow: hidden; background: var(--pink); color: var(--noite); }
+.letreiro-trilho { display: flex; width: max-content; animation: letreiro 40s linear infinite; }
+.letreiro ul { display: flex; flex: none; align-items: center; }
+.letreiro li { display: flex; align-items: center; gap: 32px; padding: 16px 32px 16px 0; font: 700 14px/24px var(--display); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.letreiro li::before { content: ""; width: 1px; height: 16px; background: currentColor; opacity: .5; }
+@keyframes letreiro { to { transform: translateX(-50%); } }
 
 /* ===== 3. Como funciona: os 7 pilares ao redor do positivo ===== */
 .como { background: radial-gradient(50% 45% at 50% 55%, rgba(255, 63, 152, .2), transparent 70%), var(--noite); }
@@ -258,7 +269,7 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 /* ===== 7. Quem sou eu ===== */
 .quem .wrap { display: grid; grid-template-columns: 5fr 7fr; gap: var(--gap-xl); align-items: center; }
 .quem .arco { aspect-ratio: 3 / 4; box-shadow: 0 0 0 1px rgba(208, 42, 124, .25), 0 0 0 12px rgba(208, 42, 124, .06), 0 30px 70px -30px rgba(120, 20, 60, .45); }
-.quem h2 { font-size: var(--t-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -.025em; }
+.quem h2 { font-size: var(--t-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -.015em; }
 .quem-texto { margin-top: 24px; display: grid; gap: 16px; font-size: var(--t-lead); line-height: var(--lh-lead); color: var(--tinta-2); }
 .quem-texto p:first-child { color: var(--tinta); font-weight: 600; }
 
@@ -266,7 +277,7 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 .sonho { overflow: hidden; background: radial-gradient(60% 80% at 80% 80%, rgba(255, 63, 152, .55), transparent 70%), linear-gradient(160deg, var(--vinho), #4a1530); }
 .sonho .wrap { display: grid; grid-template-columns: 7fr 5fr; gap: var(--gap-xl); align-items: center; }
 
-.sonho h2 { font-size: var(--t-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -.025em; }
+.sonho h2 { font-size: var(--t-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -.015em; }
 .sonho-corpo { margin-top: 24px; display: grid; gap: 16px; font-size: var(--t-lead); line-height: var(--lh-lead); color: rgba(255, 255, 255, .8); }
 .sonho .btn { margin-top: 40px; }
 .sonho-arco { position: relative; width: min(100%, 440px); justify-self: center; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
@@ -329,6 +340,10 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
   .pilar { position: static; translate: none; transform: none; font-size: 14px; padding: 8px 16px; }
   .selo { gap: 8px; padding: 8px 16px 8px 8px; }
   .selo b { min-width: 24px; height: 24px; padding-inline: 8px; }
+  /* no celular os selos descem pro notebook e pro papel, longe do rosto */
+  .selo--1 { top: 52%; left: 0; }
+  .selo--2 { top: 68%; right: 0; }
+  .selo--3 { top: auto; bottom: 4%; left: 0; }
   .recebe ul { flex-direction: column; align-items: stretch; }
   .recebe li { border-radius: var(--r-s); }
   .card, .recebe { padding: 24px; }
@@ -343,7 +358,7 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .selo, .hero-condicao::before { animation: none; }
+  .selo, .hero-condicao::before, .letreiro-trilho { animation: none; }
   .fita { overflow-x: auto; }
   .fita-trilho { animation: none; }
   .btn { transition: none; }
@@ -376,6 +391,27 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
       </div>
     </div>
   </section>
+
+  <div class="letreiro">
+    <div class="letreiro-trilho">
+        <ul>
+          <li>Pink Friday</li>
+          <li>50% de desconto</li>
+          <li>12 semanas de preparação</li>
+          <li>+2.000 mulheres</li>
+          <li>Condição por tempo limitado</li>
+          <li>7 Pilares da Fertilidade</li>
+        </ul>
+        <ul aria-hidden="true">
+          <li>Pink Friday</li>
+          <li>50% de desconto</li>
+          <li>12 semanas de preparação</li>
+          <li>+2.000 mulheres</li>
+          <li>Condição por tempo limitado</li>
+          <li>7 Pilares da Fertilidade</li>
+        </ul>
+    </div>
+  </div>
 
   <!-- 2. Depoimentos -->
   <section class="secao claro" aria-labelledby="t-depoimentos">
