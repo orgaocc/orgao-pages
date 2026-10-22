@@ -74,8 +74,8 @@
     --gap-xl: 64px; --gap-lg: 48px; --gap-sec: 16px; }
 }
 @media (max-width: 767px) {
-  :root { --t-hero: 40px; --lh-hero: 48px; --t-h2: 32px; --lh-h2: 40px; --t-h3: 22px; --lh-h3: 32px; --t-quote: 22px; --lh-quote: 32px; --t-price: 56px;
-    --lh-lead: 32px; --gap-xl: 32px; --gap-lg: 32px; --gap-sec: 0px; }
+  :root { --t-hero: 32px; --lh-hero: 40px; --t-h2: 24px; --lh-h2: 32px; --t-h3: 18px; --lh-h3: 24px; --t-quote: 18px; --lh-quote: 32px; --t-price: 56px;
+    --t-lead: 16px; --lh-lead: 24px; --gap-xl: 32px; --gap-lg: 32px; --gap-sec: 0px; }
 }
 
 
@@ -192,10 +192,11 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 .card li + li { border-top: 1px solid var(--linha-clara); }
 .card li::before { content: ""; width: 8px; height: 8px; margin-top: 8px; border-radius: 50%; background: var(--pink-fundo-claro); }
 /* área de imagem igual nos quatro cards: uma foto grande à esquerda e as outras empilhadas à direita */
-.card-imgs { order: -1; aspect-ratio: 16 / 9; display: grid; grid-template-columns: 3fr 2fr; grid-template-rows: 1fr 1fr; gap: 8px; }
-.card-imgs img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; background: var(--off-2); }
+/* min-height 0 + linhas minmax(0,1fr): no Safari a foto empurrava a caixa e subia por cima do título */
+.card-imgs { order: -1; aspect-ratio: 16 / 9; min-height: 0; overflow: hidden; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.card-imgs img { width: 100%; height: 100%; min-height: 0; min-width: 0; object-fit: cover; border-radius: 12px; background: var(--off-2); }
 .card-imgs img:first-child { grid-row: 1 / -1; }
-.card-imgs--2 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+.card-imgs--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); }
 .card-imgs--planner { display: grid; place-items: center; grid-template-columns: 1fr; grid-template-rows: 1fr; border-radius: 12px;
   background: radial-gradient(60% 70% at 50% 55%, #ff7ab8, #c2276f 60%, #5a1435); }
 .card-imgs--planner { position: relative; }
@@ -326,6 +327,8 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
   .pilares::before, .pilares::after { display: none; }
   .pilares-centro { position: relative; inset: auto; flex: 0 0 200px; height: 200px; margin: 0 calc((100% - 200px) / 2) 24px; }
   .pilar { position: static; translate: none; transform: none; font-size: 14px; padding: 8px 16px; }
+  .selo { gap: 8px; padding: 8px 16px 8px 8px; }
+  .selo b { min-width: 24px; height: 24px; padding-inline: 8px; }
   .recebe ul { flex-direction: column; align-items: stretch; }
   .recebe li { border-radius: var(--r-s); }
   .card, .recebe { padding: 24px; }
