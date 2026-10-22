@@ -18,25 +18,27 @@
   var params = new URLSearchParams(window.location.search);
   function utm(nome, padrao) { return params.get(nome) || padrao; }
 
-  /* ---------- estilo do modal ---------- */
+  /* ---------- estilo do modal ----------
+     Só visual. A página escolhe as cores e fontes pelas variáveis --pc-* no :root dela;
+     sem elas, fica o visual laranja de antes (é o que a vendas-antiga usa). */
   var css = '' +
-    '.pc-modal{position:fixed;inset:0;z-index:100;background:rgba(10,4,8,.72);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(4px)}' +
+    '.pc-modal{position:fixed;inset:0;z-index:100;background:var(--pc-veu,rgba(10,4,8,.72));display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(4px)}' +
     '.pc-modal.open{display:flex}' +
-    '.pc-box{background:#fff;border-radius:16px;width:100%;max-width:440px;position:relative;max-height:92vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.4);font-family:Montserrat,system-ui,sans-serif;color:#1b1a1a}' +
-    '.pc-fechar{position:absolute;top:12px;right:12px;width:36px;height:36px;border:0;border-radius:50%;background:#ffeff7;color:#700f45;display:flex;align-items:center;justify-content:center;cursor:pointer}' +
+    '.pc-box{background:var(--pc-fundo,#fff);border-radius:var(--pc-raio,16px);width:100%;max-width:440px;position:relative;max-height:92vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.4);font-family:var(--pc-fonte,Montserrat,system-ui,sans-serif);color:var(--pc-texto,#1b1a1a)}' +
+    '.pc-fechar{position:absolute;top:12px;right:12px;width:36px;height:36px;border:0;border-radius:50%;background:var(--pc-fechar-fundo,#ffeff7);color:var(--pc-fechar-cor,#700f45);display:flex;align-items:center;justify-content:center;cursor:pointer}' +
     '.pc-fechar svg{width:18px;height:18px}' +
     '.pc-inner{padding:32px 26px 26px}' +
-    '.pc-titulo{font-size:21px;font-weight:800;text-align:center;color:#1b1a1a;margin:0 0 6px}' +
-    '.pc-sub{text-align:center;font-size:14px;color:#555;margin:0 0 20px}' +
-    '.pc-sub strong{color:#d32382;font-weight:800}' +
+    '.pc-titulo{font-family:var(--pc-fonte-titulo,inherit);font-size:21px;font-weight:800;text-align:center;color:var(--pc-texto,#1b1a1a);margin:0 0 6px}' +
+    '.pc-sub{text-align:center;font-size:14px;color:var(--pc-texto-2,#555);margin:0 0 20px}' +
+    '.pc-sub strong{color:var(--pc-destaque,#d32382);font-weight:800}' +
     '.pc-campo{margin-bottom:13px}' +
-    '.pc-campo label{display:block;font-size:12px;font-weight:600;color:#555;margin-bottom:6px}' +
-    '.pc-campo input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #ddd;border-radius:10px;font:inherit;font-size:16px;color:#1b1a1a;background:#fff}' +
-    '.pc-campo input:focus{outline:0;border-color:#d32382;box-shadow:0 0 0 3px rgba(211,35,130,.15)}' +
+    '.pc-campo label{display:block;font-size:12px;font-weight:600;color:var(--pc-texto-2,#555);margin-bottom:6px}' +
+    '.pc-campo input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid var(--pc-borda,#ddd);border-radius:var(--pc-raio-campo,10px);font:inherit;font-size:16px;color:var(--pc-texto,#1b1a1a);background:var(--pc-campo-fundo,#fff)}' +
+    '.pc-campo input:focus{outline:0;border-color:var(--pc-destaque,#d32382);box-shadow:0 0 0 3px var(--pc-foco,rgba(211,35,130,.15))}' +
     '.pc-campo input[aria-invalid=true]{border-color:#c62828}' +
-    '.pc-btn{width:100%;margin-top:6px;border:0;cursor:pointer;background:linear-gradient(96deg,#ff6e30 1.35%,#ff9e02 104.4%);color:#fffef5;font:800 17px/1.2 Montserrat,system-ui,sans-serif;text-transform:uppercase;border-radius:10px;padding:16px 18px;min-height:60px}' +
+    '.pc-btn{width:100%;margin-top:6px;border:0;cursor:pointer;background:var(--pc-btn-fundo,linear-gradient(96deg,#ff6e30 1.35%,#ff9e02 104.4%));color:var(--pc-btn-cor,#fffef5);font:800 17px/1.2 var(--pc-fonte-titulo,Montserrat,system-ui,sans-serif);letter-spacing:var(--pc-btn-espaco,normal);text-transform:uppercase;border-radius:var(--pc-raio-btn,10px);padding:16px 18px;min-height:60px;box-shadow:var(--pc-btn-sombra,none)}' +
     '.pc-btn:disabled{opacity:.7;cursor:wait}' +
-    '.pc-seguro{display:flex;align-items:center;justify-content:center;gap:6px;margin:14px 0 0;font-size:12px;color:#555}' +
+    '.pc-seguro{display:flex;align-items:center;justify-content:center;gap:6px;margin:14px 0 0;font-size:12px;color:var(--pc-texto-2,#555)}' +
     '.pc-seguro svg{width:14px;height:14px}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
 

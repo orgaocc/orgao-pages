@@ -1,5 +1,5 @@
 /* =============================================
-   CONFIG — pcbf26/upsell (Pink Friday 2026)
+   CONFIG — pcbf26/upsell (Pink Friday 2026, layout novo desde 22/10)
    ============================================= */
 const CONFIG = {
   // Checkout do upsell (consulta adicional + Kit Gianna Vita). Vazio = o botão leva pra seção da oferta.

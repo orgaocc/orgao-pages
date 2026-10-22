@@ -7,7 +7,6 @@
 <meta name="description" content="50% de desconto para viver 12 semanas de preparação com a Dra. Talita Melo e sua equipe no Programa Conceber.">
 <link rel="canonical" href="https://p.grupoconceber.com/pcbf26/vendas/">
 
-<!-- Open Graph -->
 <meta property="og:locale" content="pt_BR">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Pink Friday Conceber — O Programa Conceber pelo menor investimento do ano">
@@ -15,14 +14,13 @@
 <meta property="og:url" content="https://p.grupoconceber.com/pcbf26/vendas/">
 <meta property="og:site_name" content="Grupo Conceber">
 <meta property="og:image" content="https://grupoconceber.com/wp-content/uploads/2024/12/icon_conceber.png">
-<meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="https://grupoconceber.com/wp-content/uploads/2024/12/cropped-icon_conceber-32x32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="https://grupoconceber.com/wp-content/uploads/2024/12/cropped-icon_conceber-180x180.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero-composicao.webp" fetchpriority="high">
 
 <!-- Pixel X App - START -->
@@ -32,305 +30,340 @@
 <!-- Pixel X App - END -->
 
 <style>
-/* Figma: frame de 1280 com área útil de 988 (77,2%). Aqui a área útil vai até 1280 numa tela de 1920,
-   mantendo a mesma proporção; os fundos ocupam a largura toda.
-   Tamanhos fluidos: batem com o Figma a partir de 1280px de tela e encolhem junto até 900px (1px do Figma = 0,078vw). */
+/* ===== Tokens =====
+   Paleta Pink Friday: noite vinho, pink luminoso, off-white rosado.
+   Assinatura: o halo (anel de luz rosa) atrás da Talita, em volta do teste nos 7 pilares e nas fotos em arco. */
 :root {
-  --cw: min(1280px, 77.2vw);
-  --rosa: #d32382;
-  --rosa-vivo: #fc268c;
-  --rosa-claro: #ee78ad;
-  --rosa-medio: #f270c2;
-  --rosa-fundo: #ffeff7;
-  --rosa-forte: #ec8aba;
-  --vinho: #700f45;
-  --vinho-titulo: #910551;
-  --tinta: #1b1a1a;
-  --cinza: #f4f4f4;
-  --creme: #fffef5;
-  --borda: #555;
-  --escuro: linear-gradient(180deg, #1a0e14 0%, #030303 100%);
-  --laranja: linear-gradient(96deg, #ff6e30 1.35%, #ff9e02 104.4%);
+  --noite: #14070c;
+  --vinho: #2b0d19;
+  --vinho-2: #3a1224;
+  --pink: #ff3f98;
+  --pink-fundo-claro: #d02a7c;
+  --blush: #f7c9dd;
+  --off: #fbf3f3;
+  --off-2: #f4e7e9;
+  --tinta: #24121a;
+  --tinta-2: #6b5560;
+  --linha-escura: rgba(255, 255, 255, .1);
+  --linha-clara: rgba(36, 18, 26, .1);
 
-  --f50: clamp(34px, 3.9vw, 50px);
-  --f40: clamp(26px, 3.125vw, 40px);
-  --f34: clamp(21px, 2.66vw, 34px);
-  --f28: clamp(19px, 2.19vw, 28px);
-  --f24: clamp(17px, 1.875vw, 24px);
-  --f22: clamp(16px, 1.72vw, 22px);
-  --f20: clamp(15px, 1.5625vw, 20px);
-  --sec: clamp(52px, 8.6vw, 112px);        /* respiro vertical das seções */
+  --display: 'Manrope', system-ui, sans-serif;  /* títulos, botões, números */
+  --sans: 'Rubik', system-ui, sans-serif;       /* parágrafos */
+
+  /* escala tipográfica (fluida entre o celular e 1280) */
+  /* tipografia no grid de 8 (exceções permitidas: 14, 18, 22) */
+  --t-hero: 64px; --lh-hero: 72px;
+  --t-h2: 48px; --lh-h2: 56px;
+  --t-h3: 24px; --lh-h3: 32px;
+  --t-quote: 32px; --lh-quote: 40px;
+  --t-price: 88px;
+  --t-lead: 18px; --lh-lead: 32px;
+  --t-body: 16px; --lh-body: 24px;
+  --t-small: 14px;
+  /* espaçamentos */
+  --gap-xl: 96px; --gap-lg: 64px; --gap-sec: 32px;
+
+  --r: 24px;
+  --r-s: 16px;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+/* degraus de tipografia e espaçamento (sem tamanho fluido) */
+@media (max-width: 1023px) {
+  :root { --t-hero: 48px; --lh-hero: 56px; --t-h2: 40px; --lh-h2: 48px; --t-h3: 22px; --lh-h3: 32px; --t-quote: 24px; --lh-quote: 32px; --t-price: 72px;
+    --gap-xl: 64px; --gap-lg: 48px; --gap-sec: 16px; }
+}
+@media (max-width: 767px) {
+  :root { --t-hero: 32px; --lh-hero: 40px; --t-h2: 24px; --lh-h2: 32px; --t-h3: 18px; --lh-h3: 24px; --t-quote: 18px; --lh-quote: 32px; --t-price: 56px;
+    --t-lead: 16px; --lh-lead: 24px; --gap-xl: 32px; --gap-lg: 32px; --gap-sec: 0px; }
+}
+
+
 *, *::before, *::after { box-sizing: border-box; }
+/* pré-checkout (shared/precheckout.js) no visual desta página: só estilo */
+:root { --pc-fonte: var(--sans); --pc-fonte-titulo: var(--display); --pc-texto: var(--tinta); --pc-texto-2: var(--tinta-2);
+  --pc-destaque: var(--pink-fundo-claro); --pc-foco: rgba(208, 42, 124, .18); --pc-borda: var(--linha-clara); --pc-campo-fundo: var(--off);
+  --pc-fundo: #fff; --pc-raio: 24px; --pc-raio-campo: 12px; --pc-raio-btn: 999px; --pc-fechar-fundo: var(--off-2); --pc-fechar-cor: var(--tinta);
+  --pc-veu: rgba(20, 7, 12, .78); --pc-btn-fundo: linear-gradient(180deg, #2ccf74 0%, #0f9a4e 100%); --pc-btn-cor: #fff; --pc-btn-espaco: .02em;
+  --pc-btn-sombra: 0 0 0 1px rgba(255, 255, 255, .18) inset, 0 12px 32px -8px rgba(20, 170, 90, .6); }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-body { margin: 0; font-family: 'Montserrat', system-ui, sans-serif; color: var(--tinta); background: var(--cinza); line-height: normal; overflow-x: hidden; }
+body { margin: 0; font-family: var(--sans); font-size: var(--t-body); line-height: var(--lh-body); color: var(--tinta); background: var(--off); overflow-x: hidden; }
 img { display: block; max-width: 100%; height: auto; }
-h1, h2, h3, p, ul { margin: 0; overflow-wrap: break-word; }
+h1, h2, h3, p, ul, figure, blockquote { margin: 0; }
 ul { padding: 0; list-style: none; }
-.wrap { width: var(--cw); margin-inline: auto; }
-.destaque { color: var(--rosa); font-weight: 800; }
+em.dest { font-family: var(--display); font-style: normal; font-weight: 700; color: var(--pink); }
+h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condicao, .item-num, .parabens, .envio, .faq summary { font-family: var(--display); }
+.claro em.dest { color: var(--pink-fundo-claro); }
 
-/* Botão laranja (o mesmo nos 4 pontos) */
+/* ===== Régua do container (1280 / 90% / 1em) ===== */
+.wrap { width: 100%; max-width: var(--container-max-width, 1280px); margin-inline: auto; }
+@media (min-width: 1367px) { .wrap { --container-max-width: 1280px; padding-top: 4em; padding-bottom: 4em; } }
+@media (min-width: 768px) and (max-width: 1366px) { .wrap { --container-max-width: 90%; padding-top: 3em; padding-bottom: 3em; } }
+@media (max-width: 767px) { .wrap { --container-max-width: 100%; padding: 2em 1em; } }
+
+/* seções: espaço extra em múltiplos de 8 por fora do container */
+.secao { position: relative; padding-block: var(--gap-sec); }
+.escuro { background: var(--noite); color: #fff; isolation: isolate; }
+.escuro::after { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; z-index: -1; }
+.claro { background: var(--off); color: var(--tinta); }
+
+.cabeca { max-width: 760px; margin: 0 auto var(--gap-lg); text-align: center; }
+.cabeca h2 { font-size: var(--t-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -.015em; }
+.cabeca p { margin-top: 16px; font-size: var(--t-lead); line-height: var(--lh-lead); color: var(--tinta-2); }
+.escuro .cabeca p { color: rgba(255, 255, 255, .72); }
+
+/* Botão: pílula pink com brilho (o mesmo em todos os pontos de compra) */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; text-align: center;
-  background: var(--laranja); color: var(--creme); text-decoration: none; text-transform: uppercase;
-  font-weight: 800; font-size: var(--f24); line-height: 1.2; border-radius: 10px; padding: 14px 20px;
-  min-height: clamp(64px, 6.4vw, 82px); transition: transform .15s ease, box-shadow .15s ease;
-  box-shadow: 0 10px 24px rgba(255, 110, 48, .25);
+  display: inline-flex; align-items: center; justify-content: center; gap: 16px;
+  min-height: 64px; padding: 16px 32px; border-radius: 999px; border: 0;
+  background: linear-gradient(180deg, #2ccf74 0%, #0f9a4e 100%); color: #fff;
+  font: 700 16px/24px var(--display); letter-spacing: .02em; text-transform: uppercase; text-decoration: none; text-align: center;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .18) inset, 0 12px 40px -8px rgba(20, 170, 90, .6);
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(255, 110, 48, .35); }
-.btn:focus-visible { outline: 3px solid var(--creme); outline-offset: 3px; }
+.btn::after { content: "→"; font-size: 18px; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(255, 255, 255, .25) inset, 0 18px 50px -8px rgba(20, 170, 90, .75); }
+.btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.claro .btn:focus-visible { outline-color: var(--pink-fundo-claro); }
 
-.titulo { font-size: var(--f40); text-align: center; }
+/* ===== 1. Topo ===== */
+.hero { overflow: hidden; padding-block: 0; background:
+  radial-gradient(60% 70% at 72% 55%, rgba(255, 63, 152, .28), transparent 70%),
+  radial-gradient(40% 40% at 10% 0%, rgba(122, 22, 66, .5), transparent 70%), var(--noite); }
+.hero .wrap { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 32px; padding-bottom: 0; min-height: min(92svh, 880px); }
+.hero-conteudo { align-self: center; padding-bottom: var(--gap-lg); }
+.hero-logo { width: 216px; }
+.hero h1 { margin-top: 40px; font-size: var(--t-hero); line-height: var(--lh-hero); font-weight: 800; letter-spacing: -.02em; }
+.hero h1 em.dest { display: block; margin-top: 8px; }
+/* quebra equilibrada: sem palavra sozinha na última linha */
+h1, h2, h3, .hero h1 em.dest { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+.hero-texto { margin-top: 24px; max-width: 30em; font-size: var(--t-lead); line-height: var(--lh-lead); color: rgba(255, 255, 255, .78); }
+.hero-texto strong { color: #fff; font-weight: 700; }
+.hero-cta { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.hero-condicao { display: inline-flex; align-items: center; gap: 8px; font-size: var(--t-small); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--blush); }
+.hero-condicao::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 0 4px rgba(255, 63, 152, .25); animation: pulso 2s ease-in-out infinite; }
 
-/* 1. Topo */
-.hero { background: #030303 url(assets/hero-fundo.webp) right center / cover no-repeat; color: var(--creme); overflow: hidden; }
-.hero .wrap {
-  display: grid; grid-template-columns: 40% 1fr; grid-template-areas: "topo img" "corpo img";
-  grid-template-rows: auto 1fr; column-gap: 1%;
+/* halo: anéis de luz atrás da composição */
+.hero-figura { position: relative; align-self: end; display: grid; place-items: end center; }
+.halo { position: absolute; left: 50%; top: 46%; width: min(100%, 560px); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 63, 152, .55) 0%, rgba(255, 63, 152, .12) 45%, transparent 70%); }
+.halo::before, .halo::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255, 140, 190, .35); }
+.halo::before { inset: 6%; }
+.halo::after { inset: -10%; border-color: rgba(255, 140, 190, .15); }
+.hero-figura img { position: relative; width: min(100%, 620px); }
+.selo {
+  position: absolute; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 8px 16px 8px 8px; border-radius: 999px;
+  background: rgba(43, 13, 25, .62); border: 1px solid rgba(255, 255, 255, .14); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  font-size: 14px; line-height: 16px; color: #fff; white-space: nowrap; box-shadow: 0 16px 40px -16px rgba(0, 0, 0, .6);
+  animation: flutua 6s ease-in-out infinite;
 }
-.hero-topo { grid-area: topo; padding-top: clamp(28px, 4.4vw, 56px); }
-.hero-logo { width: clamp(150px, 20.9vw, 268px); }
-.hero h1 { margin-top: clamp(18px, 3.2vw, 41px); font-size: var(--f40); font-weight: 700; line-height: 1.22; text-transform: uppercase; max-width: 8.9em; }
-.hero h1 span { color: var(--rosa-vivo); font-weight: 900; }
-.hero-corpo { grid-area: corpo; padding: 14px 0 clamp(40px, 4.5vw, 57px); }
-.hero-corpo p { font-size: var(--f24); max-width: 392px; }
-.hero-corpo strong { font-weight: 800; }
-.hero .btn { margin-top: clamp(20px, 2.2vw, 28px); width: clamp(260px, 28.2vw, 361px); min-height: clamp(66px, 6.8vw, 87px); }
-.hero-condicao { margin-top: clamp(16px, 2.4vw, 31px); color: var(--rosa-claro); font-size: var(--f22) !important; }
-/* a imagem não passa da altura da tela (notebook de 768px de altura) */
-.hero-img { grid-area: img; align-self: end; justify-self: start; width: min(116%, 760px, calc((100svh - 40px) * .818)); max-width: none; margin-top: clamp(32px, 5vw, 64px); }
+.selo b { display: grid; place-items: center; min-width: 40px; height: 40px; padding-inline: 8px; border-radius: 999px; background: var(--pink); font-weight: 800; font-size: 14px; }
+.selo--1 { top: 18%; left: -2%; }
+.selo--2 { top: 44%; right: -4%; animation-delay: -2s; }
+.selo--3 { bottom: 14%; left: 2%; animation-delay: -4s; }
+@keyframes flutua { 50% { transform: translateY(-8px); } }
+@keyframes pulso { 50% { box-shadow: 0 0 0 8px rgba(255, 63, 152, 0); } }
 
-/* 2. Depoimentos (prints) */
-.depoimentos { background: var(--rosa-fundo); padding: var(--sec) 0 clamp(44px, 5vw, 64px); }
-.depoimentos .titulo { font-weight: 600; max-width: 824px; margin-inline: auto; }
-.fita { margin-top: clamp(30px, 4.5vw, 57px); overflow: hidden; }
-.fita-trilho { display: flex; align-items: flex-start; gap: 20px; width: max-content; animation: rolar 70s linear infinite; }
-.fita-trilho img { border-radius: 10px; flex: none; }
+/* ===== 2. Depoimentos (prints) ===== */
+.fita { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.fita-trilho { display: flex; align-items: flex-start; gap: 24px; width: max-content; padding-block: 8px 24px; animation: rolar 80s linear infinite; }
+.fita-trilho img { width: 232px; height: auto; flex: none; border-radius: var(--r-s); background: #fff; box-shadow: 0 1px 0 var(--linha-clara), 0 18px 40px -24px rgba(80, 20, 45, .45); }
 .fita:hover .fita-trilho { animation-play-state: paused; }
 .fita--volta .fita-trilho { animation-direction: reverse; }
-@keyframes rolar { to { transform: translateX(calc(-50% - 10px)); } }
+@keyframes rolar { to { transform: translateX(calc(-50% - 12px)); } }
 
-/* 3. Como funciona */
-.como { padding: var(--sec) 0 clamp(52px, 7.2vw, 92px); }
-.como .titulo { font-weight: 600; }
-.como-sub { font-size: var(--f24); text-align: center; max-width: 787px; margin: clamp(10px, 1.3vw, 17px) auto 0; }
-.roda { position: relative; width: min(664px, 100%); margin: clamp(26px, 3.1vw, 40px) auto 0; }
-.roda-teste { position: absolute; left: 38.5%; top: 18.8%; width: 22.4%; filter: drop-shadow(-1px 23px 7px rgba(0, 0, 0, .25)); }
-.como-texto { font-size: var(--f24); text-align: center; max-width: 831px; margin: clamp(26px, 3.4vw, 44px) auto 0; }
+/* barra corrida logo depois da hero, com os números do topo */
+.letreiro { overflow: hidden; background: var(--pink); color: var(--noite); }
+.letreiro-trilho { display: flex; width: max-content; animation: letreiro 40s linear infinite; }
+.letreiro ul { display: flex; flex: none; align-items: center; }
+.letreiro li { display: flex; align-items: center; gap: 32px; padding: 16px 32px 16px 0; font: 700 14px/24px var(--display); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.letreiro li::before { content: ""; width: 1px; height: 16px; background: currentColor; opacity: .5; }
+@keyframes letreiro { to { transform: translateX(-50%); } }
 
-/* 4. Experiência */
-.experiencia { background: var(--escuro); color: var(--cinza); padding: var(--sec) 0; }
-.experiencia .titulo { font-weight: 600; max-width: 766px; margin-inline: auto; }
-.experiencia .titulo span { color: var(--rosa); font-weight: 900; }
-.cards { width: 84.4%; margin: clamp(30px, 3.75vw, 48px) auto 0; display: grid; gap: clamp(18px, 2.3vw, 30px); }
-.card {
-  display: grid; grid-template-columns: 1fr 35.6%; column-gap: 24px; align-items: start;
-  background: rgba(27, 26, 26, .7); border: 2px solid var(--borda); border-radius: 20px;
-  padding: clamp(16px, 1.65vw, 21px) clamp(14px, 1.5vw, 19px) clamp(16px, 1.65vw, 21px) clamp(18px, 2.5vw, 32px);
+/* ===== 3. Como funciona: os 7 pilares ao redor do positivo ===== */
+.como { background: radial-gradient(50% 45% at 50% 55%, rgba(255, 63, 152, .2), transparent 70%), var(--noite); }
+.pilares { position: relative; width: min(100%, 640px); aspect-ratio: 1; margin: 0 auto; }
+.pilares::before, .pilares::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255, 140, 190, .28); }
+.pilares::before { inset: 15%; }
+.pilares::after { inset: 3%; border-style: dashed; border-color: rgba(255, 140, 190, .14); }
+.pilares-centro { position: absolute; inset: 30%; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle, rgba(255, 63, 152, .35), rgba(43, 13, 25, .9) 70%); box-shadow: 0 0 80px rgba(255, 63, 152, .35); }
+.pilares-centro img { width: 44%; transform: rotate(-12deg); filter: drop-shadow(0 18px 18px rgba(0, 0, 0, .45)); }
+.pilar {
+  --a: calc(var(--i) * 360deg / 7 - 90deg);
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  transform: rotate(var(--a)) translateX(min(41vw, 262px)) rotate(calc(-1 * var(--a)));
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px;
+  background: var(--vinho); border: 1px solid rgba(255, 140, 190, .3); color: #fff; font-weight: 600; font-size: 14px; white-space: nowrap;
 }
-.card-texto { padding: clamp(6px, 1.25vw, 16px) 0 12px; }
-.card h3 { font-size: var(--f28); font-weight: 900; max-width: 421px; }
-.card-texto p { font-size: var(--f24); max-width: 420px; padding: clamp(10px, 1.1vw, 14px) 0; }
-.card-texto p + p { border-top: 1px solid #4a4a4a; }
-.card-texto p:last-child { padding-bottom: 0; }
-.card-imgs { display: grid; gap: 9px; }
-/* a borda e o canto saem do CSS (no Figma vinham assados na imagem, com franja branca) */
-.card-imgs img { width: 100%; border: 2px solid var(--borda); border-radius: 20px; background: var(--tinta); }
-.card--planner { align-items: center; }
-.card--planner .card-imgs { justify-items: center; margin: -10px 0 -14px; }
-.card--planner .card-imgs img { width: auto; border: 0; border-radius: 0; background: none; }
+.pilar::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--pink); }
+.como-texto { max-width: 720px; margin: var(--gap-lg) auto 0; text-align: center; font-size: var(--t-lead); line-height: var(--lh-lead); color: rgba(255, 255, 255, .78); }
 
-/* 5. Depoimento da Dra. Talita */
-.talita-depo { background: var(--rosa-forte) url(assets/rosa-fundo.svg) center / cover no-repeat; padding: clamp(48px, 6.4vw, 82px) 0 clamp(48px, 7.3vw, 93px); }
-.depo { width: 98.9%; margin: 0 auto; display: grid; grid-template-columns: 41.5% 1fr; background: #fff; border-radius: 20px; }
-/* a foto acompanha a altura do texto (no Figma: 406 x 360) */
-.depo-foto { position: relative; min-height: 300px; }
-.depo-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 20px 0 0 20px; }
-.depo-escuro { position: relative; background: var(--tinta); border: 2px solid var(--borda); border-left: 0; border-radius: 0 20px 20px 0; padding: clamp(32px, 3.4vw, 43px) clamp(24px, 3.1vw, 40px) clamp(28px, 2.7vw, 34px) clamp(28px, 4.5vw, 58px); }
-.depo-escuro blockquote { margin: 0; color: #fff; font-size: var(--f24); font-style: italic; font-weight: 500; max-width: 462px; }
-.aspas { position: absolute; width: clamp(38px, 4.3vw, 55px); }
-.aspas--abre { top: -11px; left: clamp(20px, 4.1vw, 53px); }
-.aspas--fecha { bottom: -11px; right: clamp(20px, 2.7vw, 34px); }
-.depo-autora { padding: clamp(22px, 2.3vw, 30px) clamp(22px, 3.1vw, 40px) clamp(22px, 2.2vw, 28px) clamp(26px, 4.3vw, 55px); font-size: var(--f20); font-style: italic; font-weight: 500; color: #000; max-width: 600px; }
-.depo-autora strong { color: var(--rosa-claro); font-weight: 800; }
+/* ===== 4. Experiência ===== */
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.card { display: flex; flex-direction: column; gap: 24px; padding: 24px 24px 32px; border-radius: var(--r); background: #fff; border: 1px solid var(--linha-clara); }
+.card h3 { padding-inline: 8px; font-size: var(--t-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -.015em; }
+.card ul { display: grid; padding-inline: 8px; }
+.card li { display: grid; grid-template-columns: 16px 1fr; gap: 8px; padding-block: 16px; color: var(--tinta-2); }
+.card li + li { border-top: 1px solid var(--linha-clara); }
+.card li::before { content: ""; width: 8px; height: 8px; margin-top: 8px; border-radius: 50%; background: var(--pink-fundo-claro); }
+/* área de imagem igual nos quatro cards: uma foto grande à esquerda e as outras empilhadas à direita */
+/* min-height 0 + linhas minmax(0,1fr): no Safari a foto empurrava a caixa e subia por cima do título */
+.card-imgs { order: -1; aspect-ratio: 16 / 9; min-height: 0; overflow: hidden; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.card-imgs img { width: 100%; height: 100%; min-height: 0; min-width: 0; object-fit: cover; border-radius: 12px; background: var(--off-2); }
+.card-imgs img:first-child { grid-row: 1 / -1; }
+.card-imgs--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); }
+.card-imgs--planner { display: grid; place-items: center; grid-template-columns: 1fr; grid-template-rows: 1fr; border-radius: 12px;
+  background: radial-gradient(60% 70% at 50% 55%, #ff7ab8, #c2276f 60%, #5a1435); }
+.card-imgs--planner { position: relative; }
+.card-imgs--planner img { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: auto; height: 84%; object-fit: contain; border-radius: 0; background: none; transform: rotate(-6deg); filter: drop-shadow(0 20px 24px rgba(60, 0, 25, .45)); }
 
-/* 6. Oferta */
-.oferta { padding: var(--sec) 0 34px; }
-.oferta .titulo { font-weight: 800; }
-.oferta-sub { color: var(--rosa); font-size: var(--f34); font-weight: 700; text-align: center; max-width: 586px; margin: 3px auto 0; }
-.oferta-box { width: 73.3%; margin: clamp(26px, 3vw, 38px) auto 0; }
-.oferta-mockups { width: 100%; border-radius: 31px; }
-.recebe { margin-top: 15px; background: var(--rosa-medio); border-radius: 31px 31px 0 0; color: #fff; padding: clamp(30px, 3.6vw, 46px) 6% clamp(30px, 3.9vw, 50px); }
-.recebe h3 { font-size: var(--f24); font-weight: 800; text-align: center; }
-.recebe ul { margin-top: clamp(16px, 2.2vw, 28px); }
-.recebe li { display: flex; align-items: center; gap: 13px; font-size: var(--f20); font-weight: 600; padding: clamp(11px, 1.2vw, 15px) 0; }
-.recebe li + li { border-top: 1px solid rgba(112, 15, 69, .55); }
-.recebe li img { width: clamp(22px, 2vw, 26px); flex: none; }
-.preco { background: var(--vinho); color: var(--creme); border-radius: 0 0 31px 31px; text-align: center; padding: clamp(32px, 3.75vw, 48px) 6% clamp(30px, 3.1vw, 40px); }
-.preco-intro { font-size: var(--f24); font-weight: 800; max-width: 440px; margin-inline: auto; }
-.preco-de { margin-top: clamp(20px, 2.3vw, 30px); font-size: var(--f28); line-height: 1.36; }
-.preco-de s { font-weight: 800; }
-.preco-cond { font-size: var(--f28); line-height: 1.36; margin-top: 9px; text-transform: uppercase; }
-.preco-parc { font-size: var(--f50); line-height: 1.05; font-weight: 900; margin-top: 9px; }
-.preco-vista { font-size: var(--f28); line-height: 1.36; margin-top: 11px; }
-.preco-vista strong { font-weight: 800; }
-.preco .btn { margin-top: clamp(22px, 2.3vw, 30px); width: min(403px, 100%); min-height: clamp(66px, 6.8vw, 87px); }
+/* ===== 5. Depoimento da Dra. Talita ===== */
+.depo-secao { background: radial-gradient(45% 60% at 22% 50%, rgba(255, 63, 152, .3), transparent 70%), var(--vinho); }
+.depo { display: grid; grid-template-columns: 5fr 7fr; gap: var(--gap-xl); align-items: center; }
+.arco { position: relative; border-radius: 999px 999px var(--r) var(--r); overflow: hidden; box-shadow: 0 0 0 1px rgba(255, 140, 190, .35), 0 0 0 12px rgba(255, 63, 152, .08), 0 30px 80px -30px rgba(255, 63, 152, .6); }
+.arco img { width: 100%; height: 100%; object-fit: cover; }
+.retrato { position: relative; justify-self: center; width: min(100%, 460px); padding: 16px 16px 56px; border-radius: 6px; background: #fdf8f6;
+  transform: rotate(-3deg); box-shadow: 0 2px 0 rgba(0, 0, 0, .08), 0 40px 80px -30px rgba(0, 0, 0, .7); }
+.retrato img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 40% 50%; border-radius: 2px; }
+.retrato::after { content: ""; position: absolute; left: 50%; top: -16px; width: 96px; height: 28px; translate: -50% 0; rotate: 4deg;
+  background: rgba(255, 170, 210, .55); backdrop-filter: blur(2px); }
+.depo blockquote { font-family: var(--display); font-style: normal; font-weight: 500; font-size: var(--t-quote); line-height: var(--lh-quote); letter-spacing: -.01em; color: #fff; }
+.depo blockquote::before { content: "“"; display: block; height: 32px; font-size: 64px; line-height: 64px; color: var(--pink); }
+.depo figcaption { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--linha-escura); color: rgba(255, 255, 255, .7); }
+.depo figcaption strong { display: block; color: var(--blush); font-weight: 700; }
 
-.presentes {
-  width: min(110.7%, calc(100vw - 32px)); margin: clamp(48px, 5.8vw, 74px) 0 0 50%; transform: translateX(-50%);
-  display: grid; grid-template-columns: 1fr 46%; align-items: center; column-gap: 20px;
-  background: #010000; border-radius: 25px; color: #fff; padding: 0 clamp(16px, 2.3vw, 30px) 0 clamp(28px, 5.7vw, 73px); min-height: clamp(340px, 34vw, 437px);
-}
-.presentes h3 { font-size: var(--f24); font-weight: 800; max-width: 358px; text-transform: uppercase; }
-.presentes ul { margin-top: 18px; max-width: 498px; }
-.presentes li { display: flex; gap: 13px; font-size: var(--f20); font-weight: 600; padding: 12px 0 11px; }
-.presentes li + li { border-top: 1px solid #4a4a4a; }
-.presentes li img { width: clamp(18px, 1.7vw, 22px); height: auto; flex: none; align-self: flex-start; margin-top: 3px; }
-.presentes-img { margin: -16px 0 -12px; }
-.btn--presentes { display: flex; width: min(687px, 100%); min-height: 53px; margin: 24px auto 0; padding: 12px 16px; }
-.oferta .fita { margin-top: clamp(56px, 7.8vw, 100px); }
+/* ===== 6. Oferta ===== */
+.oferta { background: var(--off); scroll-margin-top: 0; }
+.oferta .cabeca h2 { text-transform: none; }
+.eyebrow { display: inline-block; margin-bottom: 16px; padding: 8px 16px; border-radius: 999px; border: 1px solid currentColor; font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--pink-fundo-claro); }
+/* uma caixa só, centralizada: o que recebe em cima, o preço embaixo, no meio da página */
+.oferta-caixa { max-width: 960px; margin-inline: auto; border-radius: var(--r); overflow: hidden; background: #fff; border: 1px solid var(--linha-clara);
+  box-shadow: 0 40px 80px -48px rgba(120, 20, 60, .45); }
+.recebe { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 48px 48px 40px; text-align: center; }
+.recebe > img { width: 100%; border-radius: var(--r-s); }
+.recebe h3 { font-size: var(--t-h3); line-height: var(--lh-h3); font-weight: 700; }
+.recebe ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.recebe li { display: inline-flex; gap: 8px; align-items: center; padding: 8px 16px 8px 8px; border-radius: 999px; background: var(--off); border: 1px solid var(--linha-clara); font-weight: 600; text-align: left; }
+.recebe li img { width: 24px; flex: none; }
 
-/* 7. Quem sou eu */
-.quem { background: var(--rosa-fundo); padding: clamp(48px, 6.1vw, 78px) 0 clamp(52px, 6.7vw, 86px); }
-.quem .wrap { display: grid; grid-template-columns: 39.4% 1fr; column-gap: 7.4%; align-items: start; }
-.quem-foto { margin-left: -2.1%; border-radius: 20px; }
-.quem h2 { color: var(--vinho-titulo); font-size: var(--f40); font-weight: 800; max-width: 464px; }
-.quem-texto { margin-top: clamp(14px, 1.7vw, 22px); font-size: var(--f24); }
-.quem-texto p + p { margin-top: 10px; }
+.preco { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 48px; text-align: center; color: #fff;
+  background: radial-gradient(80% 60% at 50% 0%, rgba(255, 63, 152, .45), transparent 70%), var(--noite); }
+.preco::after { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; }
+.preco > * { position: relative; z-index: 1; }
+.preco-intro { font-size: var(--t-lead); line-height: var(--lh-lead); color: rgba(255, 255, 255, .8); max-width: 30em; margin: 0 auto 16px; }
+.preco-de { font-size: 18px; line-height: 24px; color: rgba(255, 255, 255, .6); }
+.preco-de s { font-size: 22px; color: #fff; font-weight: 600; }
+.preco-cond { margin-top: 24px; font-size: 16px; line-height: 24px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blush); }
+.preco-parc { font-size: var(--t-price); line-height: 1; font-weight: 800; letter-spacing: -.03em; white-space: nowrap; }
+.preco-parc small { font-size: 24px; font-weight: 600; letter-spacing: 0; vertical-align: calc(var(--t-price) * .45); margin-right: 8px; }
+.preco-vista { margin-top: 8px; font-size: 18px; line-height: 24px; color: rgba(255, 255, 255, .8); }
+.preco-vista strong { font-size: 22px; color: #fff; }
+.preco .btn { margin-top: 32px; width: 100%; max-width: 560px; min-height: 72px; font-size: 18px; }
 
-/* 8. O sonho */
-.sonho { background: var(--rosa-forte); color: #fff; overflow: hidden; }
-.sonho .wrap { display: grid; grid-template-columns: 1fr 48.7%; column-gap: 3%; }
-.sonho-texto { align-self: center; padding: clamp(48px, 5.2vw, 67px) 0 clamp(40px, 3.75vw, 48px) 2.3%; }
-.sonho h2 { font-size: var(--f40); font-weight: 800; max-width: 525px; }
-.sonho-corpo { margin-top: 13px; font-size: var(--f24); max-width: 468px; }
-.sonho-corpo p + p { margin-top: 10px; }
-.sonho .btn { margin-top: clamp(22px, 2.3vw, 30px); width: clamp(260px, 30.5vw, 391px); }
-.sonho-img { align-self: end; }
+.presentes { max-width: 960px; margin: 24px auto 0; display: grid; grid-template-columns: 7fr 5fr; align-items: center; gap: 24px; padding: 40px; border-radius: var(--r);
+  background: linear-gradient(120deg, var(--vinho), var(--noite)); color: #fff; overflow: hidden; }
+.presentes h3 { font-size: var(--t-h3); line-height: var(--lh-h3); font-weight: 700; }
+.presentes ul { margin-top: 16px; }
+.presentes li { display: flex; gap: 16px; align-items: flex-start; padding-block: 16px; border-top: 1px solid var(--linha-escura); color: rgba(255, 255, 255, .85); }
+.presentes li img { width: 24px; height: auto; flex: none; margin-top: 0; }
+.presentes-img { margin: -24px -16px -40px 0; filter: drop-shadow(0 0 60px rgba(255, 63, 152, .35)); }
+.presentes-cta { margin-top: 24px; }
+.oferta .fita { margin-top: var(--gap-xl); }
 
-/* 9. Perguntas frequentes */
-.faq { background: var(--escuro); color: var(--cinza); padding: var(--sec) 0; }
-.faq .titulo { color: var(--rosa-medio); font-weight: 800; }
-.faq .titulo span { color: #fff; }
-.faq-lista { width: 87%; margin: clamp(28px, 3.4vw, 44px) auto 0; display: grid; gap: clamp(14px, 1.7vw, 22px); }
-.faq summary {
-  list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: clamp(14px, 1.9vw, 24px);
-  background: var(--tinta); border: 2px solid var(--borda);
-  padding: clamp(15px, 1.5vw, 19px) clamp(16px, 2.7vw, 34px) clamp(15px, 1.5vw, 19px) clamp(18px, 2.8vw, 36px); min-height: 70px;
-  font-size: var(--f24); font-weight: 600;
-}
+/* ===== 7. Quem sou eu ===== */
+.quem .wrap { display: grid; grid-template-columns: 5fr 7fr; gap: var(--gap-xl); align-items: center; }
+.quem .arco { aspect-ratio: 3 / 4; box-shadow: 0 0 0 1px rgba(208, 42, 124, .25), 0 0 0 12px rgba(208, 42, 124, .06), 0 30px 70px -30px rgba(120, 20, 60, .45); }
+.quem h2 { font-size: var(--t-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -.015em; }
+.quem-texto { margin-top: 24px; display: grid; gap: 16px; font-size: var(--t-lead); line-height: var(--lh-lead); color: var(--tinta-2); }
+.quem-texto p:first-child { color: var(--tinta); font-weight: 600; }
+
+/* ===== 8. O sonho ===== */
+.sonho { overflow: hidden; background: radial-gradient(60% 80% at 80% 80%, rgba(255, 63, 152, .55), transparent 70%), linear-gradient(160deg, var(--vinho), #4a1530); }
+.sonho .wrap { display: grid; grid-template-columns: 7fr 5fr; gap: var(--gap-xl); align-items: center; }
+
+.sonho h2 { font-size: var(--t-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -.015em; }
+.sonho-corpo { margin-top: 24px; display: grid; gap: 16px; font-size: var(--t-lead); line-height: var(--lh-lead); color: rgba(255, 255, 255, .8); }
+.sonho .btn { margin-top: 40px; }
+.sonho-arco { position: relative; width: min(100%, 440px); justify-self: center; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+  background: radial-gradient(70% 60% at 45% 55%, #ff7ab8, #c2276f 60%, #6d1840);
+  box-shadow: 0 0 0 1px rgba(255, 170, 210, .45), 0 0 0 12px rgba(255, 63, 152, .1), 0 40px 90px -30px rgba(255, 63, 152, .7); }
+/* a imagem é maior que o arco e encostada embaixo: o arco corta na altura do ombro */
+.sonho-arco img { position: absolute; left: 50%; top: 50%; width: 112%; max-width: none; transform: translate(-31%, -56%); }
+.sonho-circulo { position: relative; justify-self: center; width: min(100%, 440px); }
+.sonho-circulo::before, .sonho-circulo::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+.sonho-circulo::before { inset: -7%; border: 1px solid rgba(255, 170, 210, .35); }
+.sonho-circulo::after { inset: -15%; border: 1px dashed rgba(255, 170, 210, .18); }
+.sonho-circulo .sonho-arco { width: 100%; }
+
+/* ===== 9. Perguntas frequentes ===== */
+.faq .wrap { display: grid; grid-template-columns: 4fr 8fr; gap: var(--gap-xl); align-items: start; }
+.faq .cabeca { text-align: left; margin: 0; position: sticky; top: 32px; }
+.faq-lista { display: grid; gap: 8px; }
+.faq details { border-radius: var(--r-s); background: rgba(255, 255, 255, .04); border: 1px solid var(--linha-escura); transition: border-color .2s ease, background .2s ease; }
+.faq details[open] { background: rgba(255, 63, 152, .07); border-color: rgba(255, 140, 190, .35); }
+.faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px; font-weight: 600; font-size: 16px; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after {
-  content: ""; flex: none; width: clamp(18px, 2vw, 26px); height: clamp(13px, 1.4vw, 18px); background: #fff;
-  clip-path: polygon(0 0, 100% 0, 50% 100%); transition: transform .2s ease;
-}
-.faq details[open] summary::after { transform: rotate(180deg); }
-.faq summary span { max-width: 697px; }
-.faq summary:focus-visible { outline: 3px solid var(--rosa-medio); outline-offset: 2px; }
-.faq details p { font-size: var(--f20); padding: 15px clamp(18px, 2.8vw, 36px) 18px; }
+.faq summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .25); font-size: 24px; font-weight: 400; transition: transform .2s ease, background .2s ease; }
+.faq details[open] summary::after { transform: rotate(45deg); background: var(--pink); border-color: var(--pink); }
+.faq summary:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; border-radius: var(--r-s); }
+.faq details p { padding: 0 24px 24px; color: rgba(255, 255, 255, .75); }
 
-/* Notebook pequeno e tablet deitado: topo em duas colunas mais equilibradas */
-@media (max-width: 1100px) and (min-width: 901px) {
-  .hero .wrap { grid-template-columns: 46% 1fr; }
-  .hero-img { width: min(104%, calc((100svh - 40px) * .818)); }
-  .card { grid-template-columns: 1fr 38%; }
+/* ===== Responsivo ===== */
+@media (max-width: 1100px) {
+  .selo--2 { right: 0; }
 }
-
-/* Tablet em pé e celular */
 @media (max-width: 900px) {
-  :root { --cw: calc(100vw - 40px); }
-  .btn { font-size: 18px; min-height: 66px; padding: 12px 18px; }
+  .hero .wrap { grid-template-columns: 1fr; min-height: 0; gap: 0; text-align: center; padding-bottom: 0; }
+  .hero-logo { margin-inline: auto; width: 176px; }
+  .hero h1 { margin-top: 24px; }
+  .hero-texto { margin-inline: auto; }
+  .hero-cta { justify-content: center; flex-direction: column; margin-top: 32px; }
+  .hero-cta .btn { width: 100%; max-width: 420px; }
+  .hero-figura { margin-top: 24px; }
+  .hero-figura img { width: min(100%, 440px); }
+  .selo { font-size: 14px; padding: 8px 16px 8px 8px; }
+  .selo b { min-width: 32px; height: 32px; font-size: 14px; }
+  .selo--1 { top: 10%; left: 0; }
+  .selo--2 { top: 40%; right: 0; }
+  .selo--3 { bottom: 10%; left: 0; }
 
-  /* Topo no celular: versão do designer (Figma "iPhone 17 - 1", quadro de 402): logo centralizado, título e texto
-     à esquerda, botão centralizado e a imagem embaixo, colada no fim do topo. Medidas em vw a partir do quadro de 402. */
-  .hero { background-position: 30% 75%; }
-  .hero .wrap { width: 100%; grid-template-columns: 1fr; grid-template-areas: "topo" "corpo" "img"; grid-template-rows: none; }
-  .hero-topo, .hero-corpo { width: 100%; max-width: 640px; justify-self: center; padding-inline: max(20px, 9.45vw); }
-  .hero-topo { padding-top: min(10.7vw, 48px); }
-  .hero-logo { width: min(56.7vw, 260px); margin-inline: auto; }
-  .hero h1 { margin-top: min(6vw, 28px); font-size: min(8.96vw, 40px); max-width: 8.9em; }
-  .hero-corpo { padding: min(2.5vw, 12px) max(20px, 9.45vw) 0; }
-  .hero-corpo p { font-size: min(4.97vw, 22px); max-width: none; }
-  .hero .btn { display: flex; width: 100%; max-width: 420px; margin: min(6.5vw, 30px) auto 0; min-height: min(19.2vw, 80px); font-size: min(4.97vw, 20px); padding: 10px 14px; }
-  .hero-condicao { margin-top: min(3.5vw, 16px); text-align: center; font-size: min(4.3vw, 19px) !important; }
-  .hero-img { width: min(101%, 560px); max-width: none; margin: min(2.5vw, 12px) auto 0; justify-self: center; }
-
-  .fita-trilho img { zoom: .78; }
-
-  .cards { width: 100%; }
-  .card { grid-template-columns: 1fr; padding: 22px 18px; row-gap: 14px; }
-  .card-texto { padding: 0; }
-  .card-texto p { padding: 11px 0; }
-  .card-texto p, .card h3 { max-width: none; }
-  .card-imgs { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
-  .card-imgs img { border-radius: 14px; }
-  .card--planner .card-imgs { margin: 0; }
-  .card--planner .card-imgs img { width: 170px; }
-
-  .depo { width: 100%; grid-template-columns: 1fr; max-width: 620px; }
-  .depo-foto { min-height: 0; }
-  .depo-foto img { position: static; height: auto; border-radius: 20px 20px 0 0; aspect-ratio: 406 / 300; }
-  .depo-escuro { border: 2px solid var(--borda); border-radius: 0; padding: 34px 22px 30px; }
-  .aspas--abre { top: -14px; }
-  .aspas--fecha { bottom: -14px; }
-
-  .oferta-box { width: 100%; max-width: 620px; }
-  .oferta-mockups { border-radius: 18px; }
-  .recebe { border-radius: 22px 22px 0 0; padding: 32px 18px 30px; }
-  .preco { border-radius: 0 0 22px 22px; padding: 34px 18px 32px; }
-  .preco .btn { width: 100%; }
-
-  .presentes {
-    width: 100%; max-width: 620px; margin: 48px auto 0; transform: none; grid-template-columns: 1fr; padding: 32px 20px 0; min-height: 0;
-  }
-  .presentes h3 { max-width: none; }
-  .presentes-img { width: min(100%, 360px); margin: 10px auto -10px; }
-  .btn--presentes { font-size: 16px; min-height: 64px; max-width: 620px; }
-
-  .quem .wrap { grid-template-columns: 1fr; row-gap: 26px; }
-  .quem-foto { margin: 0 auto; width: min(100%, 340px); }
-  .quem h2 { max-width: none; }
-
-  .sonho .wrap { grid-template-columns: 1fr; }
-  .sonho-texto { padding: 48px 0 8px; }
-  .sonho h2, .sonho-corpo { max-width: 600px; }
-  .sonho .btn { width: 100%; max-width: 560px; }
-  .sonho-img { width: min(100%, 360px); margin: 20px auto 0; }
-
-  .faq-lista { width: 100%; }
-  .faq summary { font-size: 16px; min-height: 0; }
-  .faq details p { font-size: 15px; }
+  .cards, .presentes, .depo, .quem .wrap, .sonho .wrap, .faq .wrap { grid-template-columns: 1fr; }
+  .retrato { width: min(88%, 340px); }
+  .quem .arco { max-width: 360px; margin-inline: auto; }
+  .presentes { padding: 32px 24px 0; }
+  .presentes-img { margin: 0 auto; width: min(100%, 320px); }
+  .sonho-texto { text-align: center; }
+  .sonho .btn { width: 100%; max-width: 420px; }
+  .sonho-circulo { width: min(76%, 320px); margin: 40px auto 24px; }
+  .faq .cabeca { position: static; text-align: center; margin-bottom: 32px; }
 }
-
-/* Tablet em pé (601 a 900): duas colunas onde cabe */
-@media (min-width: 601px) and (max-width: 900px) {
-  :root { --f50: 42px; --f40: 31px; --f34: 25px; --f28: 23px; --f24: 19px; --f22: 18px; --f20: 17px; }
-  .btn { font-size: 19px; }
-  .hero-corpo p { font-size: 19px; }
-  .faq summary { font-size: 18px; }
-  .faq details p { font-size: 16px; }
-  .card { grid-template-columns: 1fr 40%; column-gap: 18px; align-items: center; }
-  .card-imgs { grid-template-columns: 1fr; }
-  .quem .wrap { grid-template-columns: 40% 1fr; column-gap: 28px; align-items: center; }
-  .quem-foto { width: 100%; }
-  .sonho .wrap { grid-template-columns: 1fr 42%; column-gap: 20px; }
-  .sonho-texto { padding: 48px 0 40px; }
-  .sonho-img { width: 100%; margin: 0; }
-  .presentes { grid-template-columns: 1fr 40%; padding: 32px 20px; align-items: center; }
-  .presentes-img { margin: 0; }
+@media (max-width: 600px) {
+  .pilares { aspect-ratio: auto; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; }
+  .pilares::before, .pilares::after { display: none; }
+  .pilares-centro { position: relative; inset: auto; flex: 0 0 200px; height: 200px; margin: 0 calc((100% - 200px) / 2) 24px; }
+  .pilar { position: static; translate: none; transform: none; font-size: 14px; padding: 8px 16px; }
+  .selo { gap: 8px; padding: 8px 16px 8px 8px; }
+  .selo b { min-width: 24px; height: 24px; padding-inline: 8px; }
+  /* no celular os selos descem pro notebook e pro papel, longe do rosto */
+  .selo--1 { top: 52%; left: 0; }
+  .selo--2 { top: 68%; right: 0; }
+  .selo--3 { top: auto; bottom: 4%; left: 0; }
+  .recebe ul { flex-direction: column; align-items: stretch; }
+  .recebe li { border-radius: var(--r-s); }
+  .card, .recebe { padding: 24px; }
+  .preco { padding: 32px 24px; }
+  .fita-trilho img { width: 184px; }
+  .btn { padding-inline: 24px; font-size: 14px; }
+  .preco .btn { min-height: 64px; font-size: 16px; }
+  .preco-cond { font-size: 14px; letter-spacing: .08em; }
+  .preco-parc small { display: block; margin: 0 0 8px; vertical-align: baseline; }
+  .faq summary { padding: 16px; font-size: 16px; }
+  .faq details p { padding: 0 16px 16px; }
 }
-
-/* Celular pequeno (360) */
-@media (max-width: 380px) {
-  :root { --cw: calc(100vw - 32px); }
-  .titulo, .quem h2, .sonho h2 { font-size: 23px; }
-  .preco-parc { font-size: 31px; }
-  .btn { font-size: 16px; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .selo, .hero-condicao::before, .letreiro-trilho { animation: none; }
   .fita { overflow-x: auto; }
   .fita-trilho { animation: none; }
   .btn { transition: none; }
@@ -342,76 +375,113 @@ ul { padding: 0; list-style: none; }
 <main>
 
   <!-- 1. Topo -->
-  <section class="hero">
+  <section class="hero escuro">
     <div class="wrap">
-      <div class="hero-topo">
+      <div class="hero-conteudo">
         <img class="hero-logo" src="assets/logo-pink-friday.webp" width="536" height="237" alt="Pink Friday Programa Conceber">
-        <h1>O Programa Conceber pelo <span>menor investimento do ano</span>!</h1>
+        <h1>O Programa Conceber pelo <em class="dest">menor investimento do ano!</em></h1>
+        <p class="hero-texto"><strong>50% de desconto</strong> para viver 12 semanas de preparação com a Dra. Talita Melo e sua equipe, no acompanhamento que <strong>já levou mais de 2.000 mulheres a engravidar naturalmente</strong>.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#oferta">Quero aproveitar a Pink Friday Conceber</a>
+          <span class="hero-condicao">Condição por tempo limitado</span>
+        </div>
       </div>
-      <img class="hero-img" src="assets/hero-composicao.webp" width="1330" height="1628" fetchpriority="high"
-           alt="Dra. Talita Melo abrindo um presente, com o Planner Conceber, materiais e a plataforma do programa">
-      <div class="hero-corpo">
-        <p><strong>50% de desconto</strong> para viver 12 semanas de preparação com a Dra. Talita Melo e sua equipe, no acompanhamento que <strong>já levou mais de 2.000 mulheres a engravidar naturalmente</strong>.</p>
-        <a class="btn" href="#oferta">Quero aproveitar a Pink Friday Conceber</a>
-        <p class="hero-condicao">Condição por tempo limitado</p>
+      <div class="hero-figura">
+        <div class="halo" aria-hidden="true"></div>
+        <img src="assets/hero-composicao.webp" width="1332" height="1628" fetchpriority="high"
+             alt="Dra. Talita Melo abrindo um presente, com o Planner Conceber, materiais e a plataforma do programa">
+        <span class="selo selo--1"><b>50%</b>de desconto</span>
+        <span class="selo selo--2"><b>12</b>semanas de preparação</span>
+        <span class="selo selo--3"><b>+2.000</b>mulheres</span>
       </div>
     </div>
   </section>
 
+  <div class="letreiro">
+    <div class="letreiro-trilho">
+        <ul>
+          <li>Pink Friday</li>
+          <li>50% de desconto</li>
+          <li>12 semanas de preparação</li>
+          <li>+2.000 mulheres</li>
+          <li>Condição por tempo limitado</li>
+          <li>7 Pilares da Fertilidade</li>
+        </ul>
+        <ul aria-hidden="true">
+          <li>Pink Friday</li>
+          <li>50% de desconto</li>
+          <li>12 semanas de preparação</li>
+          <li>+2.000 mulheres</li>
+          <li>Condição por tempo limitado</li>
+          <li>7 Pilares da Fertilidade</li>
+        </ul>
+    </div>
+  </div>
+
   <!-- 2. Depoimentos -->
-  <section class="depoimentos" aria-labelledby="t-depoimentos">
+  <section class="secao claro" aria-labelledby="t-depoimentos">
     <div class="wrap">
-      <h2 class="titulo" id="t-depoimentos">Elas também viveram a espera pelo positivo e, hoje, <span class="destaque">compartilham a alegria de ter seus filhos nos braços</span>!</h2>
+      <div class="cabeca">
+        <h2 id="t-depoimentos">Elas também viveram a espera pelo positivo e, hoje, <em class="dest">compartilham a alegria de ter seus filhos nos braços!</em></h2>
+      </div>
     </div>
     <div class="fita">
       <div class="fita-trilho">
-        <img src="assets/dep-a1.webp" width="228" height="228" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-a2.webp" width="226" height="388" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-a3.webp" width="228" height="228" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-a4.webp" width="199" height="291" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-a5.webp" width="198" height="428" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-a6.webp" width="210" height="280" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-a7.webp" width="198" height="313" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-a8.webp" width="198" height="302" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <!-- cópia para o rolamento contínuo -->
-        <img src="assets/dep-a1.webp" width="228" height="228" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-a2.webp" width="226" height="388" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-a3.webp" width="228" height="228" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-a4.webp" width="199" height="291" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-a5.webp" width="198" height="428" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-a6.webp" width="210" height="280" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-a7.webp" width="198" height="313" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-a8.webp" width="198" height="302" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-a1.webp" width="560" height="560" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-a2.webp" width="560" height="961" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-a3.webp" width="560" height="560" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-a4.webp" width="560" height="817" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-a5.webp" width="560" height="1212" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-a6.webp" width="560" height="747" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-a7.webp" width="560" height="884" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-a8.webp" width="560" height="854" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-a1.webp" width="560" height="560" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-a2.webp" width="560" height="961" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-a3.webp" width="560" height="560" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-a4.webp" width="560" height="817" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-a5.webp" width="560" height="1212" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-a6.webp" width="560" height="747" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-a7.webp" width="560" height="884" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-a8.webp" width="560" height="854" loading="lazy" alt="" aria-hidden="true">
       </div>
     </div>
   </section>
 
   <!-- 3. Como funciona -->
-  <section class="como" aria-labelledby="t-como">
+  <section class="secao escuro como" aria-labelledby="t-como">
     <div class="wrap">
-      <h2 class="titulo" id="t-como">Como funciona o <span class="destaque">Programa Conceber</span></h2>
-      <p class="como-sub">Os <span class="destaque">7 Pilares da Fertilidade</span>, método desenvolvido pela <span class="destaque">Dra. Talita Melo</span>, aplicados à sua história, de forma personalizada.</p>
-      <div class="roda">
-        <img src="assets/pilares-roda.svg" width="665" height="675" loading="lazy"
-             alt="Os 7 Pilares da Fertilidade: Detox, Equilíbrio Nutricional, Equilíbrio Hormonal, Atividade Física, Sono, Equilíbrio Emocional e Fertilidade Masculina">
-        <img class="roda-teste" src="assets/pilares-teste.webp" width="257" height="700" loading="lazy" alt="">
+      <div class="cabeca">
+        <h2 id="t-como">Como funciona o <em class="dest">Programa Conceber</em></h2>
+        <p>Os <strong>7 Pilares da Fertilidade</strong>, método desenvolvido pela <strong>Dra. Talita Melo</strong>, aplicados à sua história, de forma personalizada.</p>
+      </div>
+      <div class="pilares" role="list" aria-label="Os 7 Pilares da Fertilidade">
+        <div class="pilares-centro" aria-hidden="true"><img src="assets/pilares-teste.webp" width="257" height="700" loading="lazy" alt=""></div>
+        <span class="pilar" role="listitem" style="--i:0">Detox</span>
+        <span class="pilar" role="listitem" style="--i:1">Equilíbrio Nutricional</span>
+        <span class="pilar" role="listitem" style="--i:2">Equilíbrio Hormonal</span>
+        <span class="pilar" role="listitem" style="--i:3">Atividade Física</span>
+        <span class="pilar" role="listitem" style="--i:4">Sono</span>
+        <span class="pilar" role="listitem" style="--i:5">Equilíbrio Emocional</span>
+        <span class="pilar" role="listitem" style="--i:6">Fertilidade Masculina</span>
       </div>
       <p class="como-texto">Imagine viver as próximas 12 semanas sabendo quais cuidados fazem parte da sua preparação, compreendendo melhor seu corpo e tendo profissionais para orientar você ao longo do caminho. Tudo para aumentar suas chances de engravidar ainda este ano.</p>
     </div>
   </section>
 
   <!-- 4. Experiência -->
-  <section class="experiencia" aria-labelledby="t-exp">
+  <section class="secao claro" aria-labelledby="t-exp">
     <div class="wrap">
-      <h2 class="titulo" id="t-exp">É essa experiência que espera por você dentro do <span>Programa Conceber</span>.</h2>
+      <div class="cabeca">
+        <h2 id="t-exp">É essa experiência que espera por você dentro do <em class="dest">Programa Conceber.</em></h2>
+      </div>
       <div class="cards">
         <article class="card">
-          <div class="card-texto">
-            <h3>Você vai saber exatamente o que fazer todos os dias</h3>
-            <p>Protocolos alimentares, divididos por fases, feitos por nutricionistas especialistas em fertilidade.</p>
-            <p>Treinos com foco na ativação da sua fertilidade</p>
-            <p>Uma trilha semanal, com aulas curtas e práticas, na plataforma</p>
-          </div>
+          <h3>Você vai saber exatamente o que fazer todos os dias</h3>
+          <ul>
+            <li>Protocolos alimentares, divididos por fases, feitos por nutricionistas especialistas em fertilidade.</li>
+            <li>Treinos com foco na ativação da sua fertilidade</li>
+            <li>Uma trilha semanal, com aulas curtas e práticas, na plataforma</li>
+          </ul>
           <div class="card-imgs">
             <img src="assets/exp-alimentos.webp" width="586" height="236" loading="lazy" alt="Alimentos frescos">
             <img src="assets/exp-treino.webp" width="586" height="236" loading="lazy" alt="Mulher treinando">
@@ -419,12 +489,12 @@ ul { padding: 0; list-style: none; }
           </div>
         </article>
         <article class="card">
-          <div class="card-texto">
-            <h3>Você vai entender o seu corpo</h3>
-            <p>Análise do seu quadro geral, do seu histórico e dos seus exames em uma consulta individual.</p>
-            <p>Prescrição de suplementação personalizada para você</p>
-            <p>Masterclasses sobre SOP, endometriose, baixa reserva e outros diagnósticos</p>
-          </div>
+          <h3>Você vai entender o seu corpo</h3>
+          <ul>
+            <li>Análise do seu quadro geral, do seu histórico e dos seus exames em uma consulta individual.</li>
+            <li>Prescrição de suplementação personalizada para você</li>
+            <li>Masterclasses sobre SOP, endometriose, baixa reserva e outros diagnósticos</li>
+          </ul>
           <div class="card-imgs">
             <img src="assets/exp-consulta.webp" width="586" height="252" loading="lazy" alt="Consulta individual por vídeo com a Dra. Talita">
             <img src="assets/exp-prescricao.webp" width="586" height="250" loading="lazy" alt="Prescrição de suplementação">
@@ -432,57 +502,49 @@ ul { padding: 0; list-style: none; }
           </div>
         </article>
         <article class="card">
-          <div class="card-texto">
-            <h3>Você nunca mais vai estar sozinha</h3>
-            <p>Mentorias semanais ao vivo com a Dra. Talita e o corpo técnico Conceber</p>
-            <p>Um grupo exclusivo e suas dúvidas respondidas em até 48 horas</p>
-          </div>
-          <div class="card-imgs">
+          <h3>Você nunca mais vai estar sozinha</h3>
+          <ul>
+            <li>Mentorias semanais ao vivo com a Dra. Talita e o corpo técnico Conceber</li>
+            <li>Um grupo exclusivo e suas dúvidas respondidas em até 48 horas</li>
+          </ul>
+          <div class="card-imgs card-imgs--2">
             <img src="assets/exp-mentorias.webp" width="586" height="308" loading="lazy" alt="Mentoria ao vivo com a Dra. Talita">
             <img src="assets/exp-grupo.webp" width="586" height="308" loading="lazy" alt="Conversa no grupo exclusivo">
           </div>
         </article>
-        <article class="card card--planner">
-          <div class="card-texto">
-            <h3>E o Conceber chega até a sua casa</h3>
-            <p>Um Planner físico de acompanhamento, entregue no seu endereço</p>
-          </div>
-          <div class="card-imgs">
-            <img src="assets/planner.webp" width="231" height="253" loading="lazy" alt="Planner Conceber">
-          </div>
+        <article class="card">
+          <h3>E o Conceber chega até a sua casa</h3>
+          <ul><li>Um Planner físico de acompanhamento, entregue no seu endereço</li></ul>
+          <div class="card-imgs card-imgs--planner"><img src="assets/planner.webp" width="500" height="548" loading="lazy" alt="Planner Conceber"></div>
         </article>
       </div>
     </div>
   </section>
 
   <!-- 5. Depoimento da Dra. Talita -->
-  <section class="talita-depo">
+  <section class="secao escuro depo-secao">
     <div class="wrap">
       <figure class="depo">
-        <div class="depo-foto">
-          <img src="assets/depoimento-talita-familia.webp" width="812" height="720" loading="lazy" alt="Dra. Talita Melo com o marido e os dois filhos">
-        </div>
+        <div class="retrato"><img src="assets/depoimento-talita-familia.webp" width="812" height="720" loading="lazy" alt="Dra. Talita Melo com o marido e os dois filhos"></div>
         <div>
-          <div class="depo-escuro">
-            <img class="aspas aspas--abre" src="assets/aspas-abre.svg" width="55" height="40" alt="">
-            <blockquote>Com 7 diagnósticos, eu passei 10 anos no deserto da infertilidade e precisei entregar cinco filhos a Deus. Hoje eu tenho dois garotos lindos nos meus braços, e foi cuidando dos Sete Pilares que eu cheguei até eles.</blockquote>
-            <img class="aspas aspas--fecha" src="assets/aspas-fecha.svg" width="55" height="40" alt="">
-          </div>
-          <figcaption class="depo-autora"><strong>Dra. Talita Melo</strong>, ginecologista, referência em fertilidade há mais de 15 anos</figcaption>
+          <blockquote>Com 7 diagnósticos, eu passei 10 anos no deserto da infertilidade e precisei entregar cinco filhos a Deus. Hoje eu tenho dois garotos lindos nos meus braços, e foi cuidando dos Sete Pilares que eu cheguei até eles.</blockquote>
+          <figcaption><strong>Dra. Talita Melo</strong>ginecologista, referência em fertilidade há mais de 15 anos</figcaption>
         </div>
       </figure>
     </div>
   </section>
 
   <!-- 6. Oferta -->
-  <section class="oferta" id="oferta" aria-labelledby="t-oferta">
+  <section class="secao claro oferta" id="oferta" aria-labelledby="t-oferta">
     <div class="wrap">
-      <h2 class="titulo" id="t-oferta">CHEGOU A SUA HORA!</h2>
-      <p class="oferta-sub">O Programa Conceber pelo menor investimento do ano</p>
+      <div class="cabeca">
+        <span class="eyebrow">Chegou a sua hora!</span>
+        <h2 id="t-oferta">O Programa Conceber pelo <em class="dest">menor investimento do ano</em></h2>
+      </div>
 
-      <div class="oferta-box">
-        <img class="oferta-mockups" src="assets/oferta-mockups.webp" width="1444" height="428" loading="lazy" alt="Materiais, aulas e masterclasses do Programa Conceber">
+      <div class="oferta-caixa">
         <div class="recebe">
+          <img src="assets/oferta-mockups.webp" width="1444" height="428" loading="lazy" alt="Materiais, aulas e masterclasses do Programa Conceber">
           <h3>Tudo o que você recebe:</h3>
           <ul>
             <li><img src="assets/icone-check.svg" width="26" height="26" alt="">12 semanas de acompanhamento</li>
@@ -498,7 +560,7 @@ ul { padding: 0; list-style: none; }
           <p class="preco-intro">Você vai investir na saúde do seu corpo, na sua fertilidade e no seu sonho de ser mãe, por apenas:</p>
           <p class="preco-de">De <s>R$ 3.997,00</s></p>
           <p class="preco-cond">Condição especial de Pink Friday:</p>
-          <p class="preco-parc">12x de R$ 197,90</p>
+          <p class="preco-parc"><small>12x de</small>R$ 197,90</p>
           <p class="preco-vista">ou <strong>R$ 1.997,90</strong> à vista</p>
           <a class="btn" href="#oferta" data-checkout>Quero entrar no Programa Conceber</a>
         </div>
@@ -506,46 +568,45 @@ ul { padding: 0; list-style: none; }
 
       <div class="presentes">
         <div>
-          <h3>Presentes especiais para quem entrar nas primeiras 24 horas!</h3>
+          <h3>Presentes especiais para quem entrar nas <em class="dest">primeiras 24 horas!</em></h3>
           <ul>
             <li><img src="assets/icone-coracao.svg" width="22" height="19" alt="">Imersão receitas para Engravidar (Detox, Especial de Natal e Low Carb)</li>
             <li><img src="assets/icone-coracao.svg" width="22" height="19" alt="">Clube de Receitas</li>
             <li><img src="assets/icone-coracao.svg" width="22" height="19" alt="">Cartilha de chás para fertilidade</li>
             <li><img src="assets/icone-coracao.svg" width="22" height="19" alt="">Box Conceber (chá, infusor, máscara de dormir, teste de fertilidade e de gravidez)</li>
           </ul>
+          <div class="presentes-cta"><a class="btn" href="#oferta" data-checkout>Quero garantir minha vaga + os presentes</a></div>
         </div>
         <img class="presentes-img" src="assets/presente.webp" width="1008" height="929" loading="lazy" alt="Caixa de presente aberta">
       </div>
-      <a class="btn btn--presentes" href="#oferta" data-checkout>Quero garantir minha vaga + os presentes</a>
     </div>
 
     <div class="fita fita--volta">
       <div class="fita-trilho">
-        <img src="assets/dep-b1.webp" width="215" height="215" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-b2.webp" width="207" height="251" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-b3.webp" width="209" height="339" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-b4.webp" width="217" height="288" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-b5.webp" width="228" height="198" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-b6.webp" width="250" height="223" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <img src="assets/dep-b7.webp" width="171" height="288" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
-        <!-- cópia para o rolamento contínuo -->
-        <img src="assets/dep-b1.webp" width="215" height="215" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-b2.webp" width="207" height="251" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-b3.webp" width="209" height="339" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-b4.webp" width="217" height="288" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-b5.webp" width="228" height="198" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-b6.webp" width="250" height="223" loading="lazy" alt="" aria-hidden="true">
-        <img src="assets/dep-b7.webp" width="171" height="288" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-b1.webp" width="560" height="560" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-b2.webp" width="560" height="677" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-b3.webp" width="560" height="906" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-b4.webp" width="560" height="742" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-b5.webp" width="560" height="486" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-b6.webp" width="506" height="452" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-b7.webp" width="403" height="678" loading="lazy" alt="Depoimento de aluna do Programa Conceber">
+        <img src="assets/dep-b1.webp" width="560" height="560" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-b2.webp" width="560" height="677" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-b3.webp" width="560" height="906" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-b4.webp" width="560" height="742" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-b5.webp" width="560" height="486" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-b6.webp" width="506" height="452" loading="lazy" alt="" aria-hidden="true">
+        <img src="assets/dep-b7.webp" width="403" height="678" loading="lazy" alt="" aria-hidden="true">
       </div>
     </div>
   </section>
 
   <!-- 7. Quem sou eu -->
-  <section class="quem" aria-labelledby="t-quem">
+  <section class="secao claro quem" aria-labelledby="t-quem">
     <div class="wrap">
-      <img class="quem-foto" src="assets/talita-retrato.webp" width="778" height="1062" loading="lazy" alt="Dra. Talita Melo segurando o livro FÉrtilidade">
+      <div class="arco"><img src="assets/talita-retrato.webp" width="778" height="1062" loading="lazy" alt="Dra. Talita Melo segurando o livro FÉrtilidade"></div>
       <div>
-        <h2 id="t-quem">Quem sou eu para te ajudar a engravidar?</h2>
+        <h2 id="t-quem">Quem sou eu para te ajudar a <em class="dest">engravidar?</em></h2>
         <div class="quem-texto">
           <p>Meu nome é Talita Melo.</p>
           <p>Sou Médica Ginecologista, referência em fertilidade no Brasil, autora do livro FÉrtilidade e cofundadora do Conceber, um dos maiores programas de acompanhamento para quem quer engravidar no Brasil.</p>
@@ -558,55 +619,57 @@ ul { padding: 0; list-style: none; }
   </section>
 
   <!-- 8. O sonho -->
-  <section class="sonho" aria-labelledby="t-sonho">
+  <section class="secao escuro sonho" aria-labelledby="t-sonho">
     <div class="wrap">
       <div class="sonho-texto">
-        <h2 id="t-sonho">O seu sonho de ser mãe merece mais do que uma nova tentativa.</h2>
+        <h2 id="t-sonho">O seu sonho de ser mãe merece mais do que <em class="dest">uma nova tentativa.</em></h2>
         <div class="sonho-corpo">
           <p>Merece cuidado, orientação e um acompanhamento que considere a sua história, o seu corpo e tudo o que você já viveu até aqui.</p>
           <p>Não deixe passar a oportunidade de viver as próximas 12 semanas cuidando da sua fertilidade com os 7 Pilares do Programa Conceber.</p>
         </div>
         <a class="btn" href="#oferta" data-checkout>Quero começar minha jornada no Conceber</a>
       </div>
-      <img class="sonho-img" src="assets/gravida.webp" width="962" height="1258" loading="lazy" alt="Mulher grávida com as mãos na barriga">
+      <div class="sonho-circulo"><div class="sonho-arco"><img src="assets/gravida.webp" width="962" height="1258" loading="lazy" alt="Mulher grávida com as mãos na barriga"></div></div>
     </div>
   </section>
 
   <!-- 9. Perguntas frequentes -->
-  <section class="faq" aria-labelledby="t-faq">
+  <section class="secao escuro faq" aria-labelledby="t-faq">
     <div class="wrap">
-      <h2 class="titulo" id="t-faq">PERGUNTAS <span>FREQUENTES</span></h2>
+      <div class="cabeca">
+        <h2 id="t-faq">Perguntas <em class="dest">frequentes</em></h2>
+      </div>
       <div class="faq-lista">
         <details open>
-          <summary><span>O Programa Conceber é para mim, mesmo que eu já esteja tentando engravidar há anos?</span></summary>
+          <summary>O Programa Conceber é para mim, mesmo que eu já esteja tentando engravidar há anos?</summary>
           <p>Sim! O Conceber foi desenvolvido para mulheres que desejam se preparar para a gravidez, inclusive aquelas que já enfrentam dificuldades para engravidar. Durante 12 semanas, você terá orientações e acompanhamento para cuidar da sua fertilidade de forma mais completa.</p>
         </details>
         <details>
-          <summary><span>E se eu tiver SOP, endometriose, baixa reserva ovariana ou outros diagnósticos?</span></summary>
+          <summary>E se eu tiver SOP, endometriose, baixa reserva ovariana ou outros diagnósticos?</summary>
           <p>O programa contempla orientações sobre diferentes condições que podem interferir na fertilidade, além de uma avaliação individual do seu histórico e exames. Os cuidados indicados dependerão das necessidades identificadas no seu caso.</p>
         </details>
         <details>
-          <summary><span>Como funciona o acompanhamento durante as 12 semanas?</span></summary>
+          <summary>Como funciona o acompanhamento durante as 12 semanas?</summary>
           <p>Você terá uma trilha semanal de aulas práticas, planos alimentares, orientações de atividade física, mentorias semanais com a Dra. Talita e sua equipe, além de um grupo exclusivo para esclarecer dúvidas.</p>
         </details>
         <details>
-          <summary><span>Vou ter uma consulta individual?</span></summary>
+          <summary>Vou ter uma consulta individual?</summary>
           <p>Sim! O Programa Conceber inclui o Panorama Fértil, uma consulta individual para avaliar seu histórico, seus exames e os cuidados que merecem atenção na sua preparação para a gravidez.</p>
         </details>
         <details>
-          <summary><span>Meu marido também pode participar?</span></summary>
+          <summary>Meu marido também pode participar?</summary>
           <p>Sim! A preparação para a gravidez também envolve a saúde do homem. Por isso, você terá acesso ao Conceber com Amor, com orientações voltadas aos cuidados do casal.</p>
         </details>
         <details>
-          <summary><span>O Box e o Planner Conceber estão incluídos?</span></summary>
+          <summary>O Box e o Planner Conceber estão incluídos?</summary>
           <p>Sim! Você receberá o Box Conceber e o Planner físico no endereço cadastrado, conforme as condições de envio do programa.</p>
         </details>
         <details>
-          <summary><span>O Programa Conceber garante que vou engravidar?</span></summary>
+          <summary>O Programa Conceber garante que vou engravidar?</summary>
           <p>Não. A gravidez depende de diversos fatores individuais e do casal. O Conceber oferece acompanhamento e orientações para apoiar sua preparação, mas não garante um resultado específico.</p>
         </details>
         <details>
-          <summary><span>Posso parcelar minha inscrição?</span></summary>
+          <summary>Posso parcelar minha inscrição?</summary>
           <p>Sim! Nesta Pink Friday, você pode garantir sua inscrição por 12x de R$ 197,90 ou aproveitar o valor especial de R$ 1.997,90 à vista.</p>
         </details>
       </div>

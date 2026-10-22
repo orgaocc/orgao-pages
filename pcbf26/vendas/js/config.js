@@ -1,5 +1,5 @@
 /* =============================================
-   CONFIG — pcbf26/vendas (Pink Friday 2026)
+   CONFIG — pcbf26/vendas (Pink Friday 2026, layout novo desde 22/10)
    ============================================= */
 const CONFIG = {
   // Checkout da oferta Pink Friday (Guru ou Hotmart). Vazio = os botões levam pra seção da oferta, sem pré-checkout.
