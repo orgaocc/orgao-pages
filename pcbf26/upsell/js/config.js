@@ -2,10 +2,10 @@
    CONFIG — pcbf26/upsell (Pink Friday 2026)
    ============================================= */
 const CONFIG = {
-  // Checkout do upsell (consulta adicional + Kit Gianna Vita). Vazio = o botão leva pra seção da oferta, sem pré-checkout.
+  // Checkout do upsell (consulta adicional + Kit Gianna Vita). Vazio = o botão leva pra seção da oferta.
   link_checkout: "https://checkout.grupoconceber.com/pay/upsell-bf-consulta-kit-fertilidade-maxima",
 
-  // Pré-checkout (mesmo fluxo da JPE). Nome, e-mail e telefone vêm preenchidos se o checkout anterior mandar na URL.
+  // Sem pré-checkout: o botão vai direto pro checkout com os dados da URL. Campos abaixo ficam pra se voltar o modal.
   lancamento: "PC-T57-BF",
   form: "pcbf26_upsell",
   source: "pcbf26_upsell",

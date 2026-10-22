@@ -245,6 +245,27 @@ h1, h2, h3, p, ul { margin: 0; overflow-wrap: break-word; }
 </main>
 
 <script src="js/config.js"></script>
-<script src="../shared/precheckout.js"></script>
+<script>
+/* Upsell sem pré-checkout (pedido do Yago, 21/10): a compradora acabou de preencher os dados no checkout anterior.
+   O botão vai direto pro checkout do upsell repassando tudo que veio no endereço desta página
+   (nome, e-mail, telefone, documento, UTMs, xcod). A Guru preenche name, email e phone_number. */
+(function () {
+  var cfg = typeof CONFIG !== 'undefined' ? CONFIG : {};
+  if (!cfg.link_checkout) return;
+  var url;
+  try { url = new URL(cfg.link_checkout); } catch (e) { return; }
+  var q = new URLSearchParams(window.location.search);
+  var apelidos = { nome: 'name', phone: 'phone_number', phonenumber: 'phone_number', telefone: 'phone_number', whatsapp: 'phone_number', cpf: 'doc' };
+  q.forEach(function (valor, chave) {
+    var destino = apelidos[chave] || chave;
+    if (destino === 'phone_number') {
+      valor = valor.replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
+      if (!url.searchParams.has('phone_local_code')) url.searchParams.set('phone_local_code', '55');
+    }
+    if (valor && !url.searchParams.has(destino)) url.searchParams.set(destino, valor);
+  });
+  document.querySelectorAll('[data-checkout]').forEach(function (a) { a.href = url.toString(); });
+})();
+</script>
 </body>
 </html>
