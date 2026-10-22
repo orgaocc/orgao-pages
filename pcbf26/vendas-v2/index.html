@@ -167,34 +167,33 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
 .como-texto { max-width: 720px; margin: clamp(40px, 5vw, 64px) auto 0; text-align: center; font-size: var(--t-lead); color: rgba(255, 255, 255, .78); }
 
 /* ===== 4. Experiência ===== */
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.card { display: flex; flex-direction: column; gap: 24px; padding: 32px; border-radius: var(--r); background: #fff; border: 1px solid var(--linha-clara); }
-.card h3 { font-size: var(--t-h3); line-height: 1.2; font-weight: 700; letter-spacing: -.015em; }
-.card ul { display: grid; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.card { display: flex; flex-direction: column; gap: 24px; padding: 24px 24px 32px; border-radius: var(--r); background: #fff; border: 1px solid var(--linha-clara); }
+.card h3 { padding-inline: 8px; font-size: var(--t-h3); line-height: 1.2; font-weight: 700; letter-spacing: -.015em; }
+.card ul { display: grid; padding-inline: 8px; }
 .card li { display: grid; grid-template-columns: 16px 1fr; gap: 12px; padding-block: 12px; color: var(--tinta-2); }
 .card li + li { border-top: 1px solid var(--linha-clara); }
 .card li::before { content: ""; width: 8px; height: 8px; margin-top: 10px; border-radius: 50%; background: var(--pink-fundo-claro); }
-/* fotos no topo do card: a primeira grande, as outras embaixo */
-.card-imgs { order: -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.card-imgs img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; background: var(--off-2); }
-.card-imgs img:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
-.card-imgs[style*="--n:2"] img { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
-/* planner: faixa baixa em largura total, o planner saindo da faixa */
-.card--planner { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 32px; padding: 24px 40px; margin-top: 16px;
-  background: radial-gradient(40% 120% at 85% 50%, rgba(255, 63, 152, .4), transparent 70%), var(--vinho); color: #fff; border-color: transparent; }
-.card--planner .card-texto { flex: 1; }
-
-.card--planner li { color: rgba(255, 255, 255, .78); }
-.card--planner li::before { background: var(--pink); }
-.card--planner img { width: 132px; margin: -56px 24px -40px 0; transform: rotate(8deg); filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .5)); }
+/* área de imagem igual nos quatro cards: uma foto grande à esquerda e as outras empilhadas à direita */
+.card-imgs { order: -1; aspect-ratio: 16 / 9; display: grid; grid-template-columns: 3fr 2fr; grid-template-rows: 1fr 1fr; gap: 8px; }
+.card-imgs img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; background: var(--off-2); }
+.card-imgs img:first-child { grid-row: 1 / -1; }
+.card-imgs--2 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+.card-imgs--planner { display: grid; place-items: center; grid-template-columns: 1fr; grid-template-rows: 1fr; border-radius: 12px;
+  background: radial-gradient(60% 70% at 50% 55%, #ff7ab8, #c2276f 60%, #5a1435); }
+.card-imgs--planner { position: relative; }
+.card-imgs--planner img { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: auto; height: 84%; object-fit: contain; border-radius: 0; background: none; transform: rotate(-6deg); filter: drop-shadow(0 20px 24px rgba(60, 0, 25, .45)); }
 
 /* ===== 5. Depoimento da Dra. Talita ===== */
 .depo-secao { background: radial-gradient(45% 60% at 22% 50%, rgba(255, 63, 152, .3), transparent 70%), var(--vinho); }
 .depo { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
 .arco { position: relative; border-radius: 999px 999px var(--r) var(--r); overflow: hidden; box-shadow: 0 0 0 1px rgba(255, 140, 190, .35), 0 0 0 12px rgba(255, 63, 152, .08), 0 30px 80px -30px rgba(255, 63, 152, .6); }
 .arco img { width: 100%; height: 100%; object-fit: cover; }
-.depo .arco { aspect-ratio: 4 / 5; }
-.depo .arco img { object-position: 40% 60%; }
+.retrato { position: relative; justify-self: center; width: min(100%, 460px); padding: 14px 14px 56px; border-radius: 6px; background: #fdf8f6;
+  transform: rotate(-3deg); box-shadow: 0 2px 0 rgba(0, 0, 0, .08), 0 40px 80px -30px rgba(0, 0, 0, .7); }
+.retrato img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 40% 50%; border-radius: 2px; }
+.retrato::after { content: ""; position: absolute; left: 50%; top: -14px; width: 96px; height: 28px; translate: -50% 0; rotate: 4deg;
+  background: rgba(255, 170, 210, .55); backdrop-filter: blur(2px); }
 .depo blockquote { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.625rem, 1.2rem + 1.6vw, 2.5rem); line-height: 1.22; color: #fff; }
 .depo blockquote::before { content: "“"; display: block; height: .5em; font-size: 2.6em; line-height: 1; color: var(--pink); }
 .depo figcaption { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--linha-escura); color: rgba(255, 255, 255, .7); }
@@ -250,11 +249,16 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
 .sonho h2 { font-size: var(--t-h2); line-height: 1.08; font-weight: 700; letter-spacing: -.025em; }
 .sonho-corpo { margin-top: 24px; display: grid; gap: 16px; font-size: var(--t-lead); color: rgba(255, 255, 255, .8); }
 .sonho .btn { margin-top: 40px; }
-.sonho-arco { position: relative; width: min(100%, 440px); justify-self: center; aspect-ratio: 4 / 5; border-radius: 999px 999px var(--r) var(--r); overflow: hidden;
+.sonho-arco { position: relative; width: min(100%, 440px); justify-self: center; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
   background: radial-gradient(70% 60% at 45% 55%, #ff7ab8, #c2276f 60%, #6d1840);
   box-shadow: 0 0 0 1px rgba(255, 170, 210, .45), 0 0 0 12px rgba(255, 63, 152, .1), 0 40px 90px -30px rgba(255, 63, 152, .7); }
 /* a imagem é maior que o arco e encostada embaixo: o arco corta na altura do ombro */
-.sonho-arco img { position: absolute; left: 50%; bottom: 0; width: 118%; max-width: none; transform: translateX(-46%); }
+.sonho-arco img { position: absolute; left: 50%; top: 50%; width: 112%; max-width: none; transform: translate(-31%, -56%); }
+.sonho-circulo { position: relative; justify-self: center; width: min(100%, 440px); }
+.sonho-circulo::before, .sonho-circulo::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+.sonho-circulo::before { inset: -7%; border: 1px solid rgba(255, 170, 210, .35); }
+.sonho-circulo::after { inset: -15%; border: 1px dashed rgba(255, 170, 210, .18); }
+.sonho-circulo .sonho-arco { width: 100%; }
 
 /* ===== 9. Perguntas frequentes ===== */
 .faq .wrap { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
@@ -272,7 +276,6 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
 /* ===== Responsivo ===== */
 @media (max-width: 1100px) {
   .selo--2 { right: 0; }
-  .cards { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 900px) {
   .hero .wrap { grid-template-columns: 1fr; min-height: 0; gap: 0; text-align: center; padding-bottom: 0; }
@@ -290,13 +293,13 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
   .selo--3 { bottom: 10%; left: 0; }
 
   .cards, .oferta-grade, .presentes, .depo, .quem .wrap, .sonho .wrap, .faq .wrap { grid-template-columns: 1fr; }
-  .depo .arco { max-width: 360px; margin-inline: auto; }
+  .retrato { width: min(88%, 340px); }
   .quem .arco { max-width: 360px; margin-inline: auto; }
   .presentes { padding: 32px 24px 0; }
   .presentes-img { margin: 0 auto; width: min(100%, 320px); }
   .sonho-texto { text-align: center; }
   .sonho .btn { width: 100%; max-width: 420px; }
-  .sonho-arco { width: min(100%, 340px); margin-top: 16px; }
+  .sonho-circulo { width: min(76%, 320px); margin: 40px auto 24px; }
   .faq .cabeca { position: static; text-align: center; margin-bottom: 32px; }
 }
 @media (max-width: 600px) {
@@ -306,8 +309,6 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
   .pilar { position: static; translate: none; transform: none; font-size: .875rem; padding: 8px 14px; }
   .recebe ul { grid-template-columns: 1fr; }
   .card, .recebe { padding: 24px; }
-  .card--planner { flex-direction: column; align-items: stretch; text-align: left; padding: 24px 24px 0; gap: 8px; }
-  .card--planner img { align-self: center; width: 120px; margin: 8px 0 -24px; }
   .preco { padding: 32px 24px; }
   .fita-trilho img { width: 184px; }
   .btn { padding-inline: 24px; font-size: .9375rem; }
@@ -439,17 +440,15 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
             <li>Mentorias semanais ao vivo com a Dra. Talita e o corpo técnico Conceber</li>
             <li>Um grupo exclusivo e suas dúvidas respondidas em até 48 horas</li>
           </ul>
-          <div class="card-imgs" style="--n:2">
+          <div class="card-imgs card-imgs--2">
             <img src="assets/exp-mentorias.webp" width="586" height="308" loading="lazy" alt="Mentoria ao vivo com a Dra. Talita">
             <img src="assets/exp-grupo.webp" width="586" height="308" loading="lazy" alt="Conversa no grupo exclusivo">
           </div>
         </article>
-        <article class="card card--planner">
-          <div class="card-texto">
-            <h3>E o Conceber chega até a sua casa</h3>
-            <ul><li>Um Planner físico de acompanhamento, entregue no seu endereço</li></ul>
-          </div>
-          <img src="assets/planner.webp" width="500" height="548" loading="lazy" alt="Planner Conceber">
+        <article class="card">
+          <h3>E o Conceber chega até a sua casa</h3>
+          <ul><li>Um Planner físico de acompanhamento, entregue no seu endereço</li></ul>
+          <div class="card-imgs card-imgs--planner"><img src="assets/planner.webp" width="500" height="548" loading="lazy" alt="Planner Conceber"></div>
         </article>
       </div>
     </div>
@@ -459,7 +458,7 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
   <section class="secao escuro depo-secao">
     <div class="wrap">
       <figure class="depo">
-        <div class="arco"><img src="assets/depoimento-talita-familia.webp" width="812" height="720" loading="lazy" alt="Dra. Talita Melo com o marido e os dois filhos"></div>
+        <div class="retrato"><img src="assets/depoimento-talita-familia.webp" width="812" height="720" loading="lazy" alt="Dra. Talita Melo com o marido e os dois filhos"></div>
         <div>
           <blockquote>Com 7 diagnósticos, eu passei 10 anos no deserto da infertilidade e precisei entregar cinco filhos a Deus. Hoje eu tenho dois garotos lindos nos meus braços, e foi cuidando dos Sete Pilares que eu cheguei até eles.</blockquote>
           <figcaption><strong>Dra. Talita Melo</strong>ginecologista, referência em fertilidade há mais de 15 anos</figcaption>
@@ -563,7 +562,7 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
         </div>
         <a class="btn" href="#oferta" data-checkout>Quero começar minha jornada no Conceber</a>
       </div>
-      <div class="sonho-arco"><img src="assets/gravida.webp" width="962" height="1258" loading="lazy" alt="Mulher grávida com as mãos na barriga"></div>
+      <div class="sonho-circulo"><div class="sonho-arco"><img src="assets/gravida.webp" width="962" height="1258" loading="lazy" alt="Mulher grávida com as mãos na barriga"></div></div>
     </div>
   </section>
 
