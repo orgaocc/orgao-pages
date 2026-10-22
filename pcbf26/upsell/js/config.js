@@ -3,7 +3,7 @@
    ============================================= */
 const CONFIG = {
   // Checkout do upsell (consulta adicional + Kit Gianna Vita). Vazio = o botão leva pra seção da oferta.
-  link_checkout: "https://checkout.grupoconceber.com/pay/upsell-bf-consulta-kit-fertilidade-maxima",
+  link_checkout: "https://checkout.grupoconceber.com/pay/upsell-bf-consulta-kit-fertilidade-maxima/1click",  // 1 clique da Guru (Gabriel, 21/10)
 
   // Sem pré-checkout: o botão vai direto pro checkout com os dados da URL. Campos abaixo ficam pra se voltar o modal.
   lancamento: "PC-T57-BF",
