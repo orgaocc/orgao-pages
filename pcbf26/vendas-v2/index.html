@@ -220,19 +220,21 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 .oferta { background: var(--off); scroll-margin-top: 0; }
 .oferta .cabeca h2 { text-transform: none; }
 .eyebrow { display: inline-block; margin-bottom: 16px; padding: 8px 16px; border-radius: 999px; border: 1px solid currentColor; font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--pink-fundo-claro); }
-.oferta-grade { display: grid; grid-template-columns: 7fr 5fr; gap: 24px; align-items: stretch; }
-.recebe { display: flex; flex-direction: column; gap: 24px; padding: 32px; border-radius: var(--r); background: #fff; border: 1px solid var(--linha-clara); }
-.recebe img { border-radius: var(--r-s); }
+/* uma caixa só, centralizada: o que recebe em cima, o preço embaixo, no meio da página */
+.oferta-caixa { max-width: 960px; margin-inline: auto; border-radius: var(--r); overflow: hidden; background: #fff; border: 1px solid var(--linha-clara);
+  box-shadow: 0 40px 80px -48px rgba(120, 20, 60, .45); }
+.recebe { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 48px 48px 40px; text-align: center; }
+.recebe > img { width: 100%; border-radius: var(--r-s); }
 .recebe h3 { font-size: var(--t-h3); line-height: var(--lh-h3); font-weight: 700; }
-.recebe ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
-.recebe li { display: flex; gap: 16px; align-items: flex-start; padding-block: 16px; border-top: 1px solid var(--linha-clara); font-weight: 500; }
-.recebe li img { width: 24px; flex: none; margin-top: 0; border-radius: 0; }
+.recebe ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.recebe li { display: inline-flex; gap: 8px; align-items: center; padding: 8px 16px 8px 8px; border-radius: 999px; background: var(--off); border: 1px solid var(--linha-clara); font-weight: 600; text-align: left; }
+.recebe li img { width: 24px; flex: none; }
 
-.preco { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 40px 32px; border-radius: var(--r); text-align: center; color: #fff;
+.preco { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 48px; text-align: center; color: #fff;
   background: radial-gradient(80% 60% at 50% 0%, rgba(255, 63, 152, .45), transparent 70%), var(--noite); }
 .preco::after { content: ""; position: absolute; inset: 0; background: var(--grain); pointer-events: none; }
 .preco > * { position: relative; z-index: 1; }
-.preco-intro { color: rgba(255, 255, 255, .78); max-width: 26em; margin: 0 auto 16px; }
+.preco-intro { color: rgba(255, 255, 255, .78); max-width: 32em; margin: 0 auto 16px; }
 .preco-de { color: rgba(255, 255, 255, .6); }
 .preco-de s { color: #fff; font-weight: 600; }
 .preco-cond { margin-top: 16px; font-size: var(--t-small); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blush); }
@@ -240,9 +242,9 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
 .preco-parc small { font-size: 22px; font-weight: 600; letter-spacing: 0; vertical-align: 24px; margin-right: 8px; }
 .preco-vista { color: rgba(255, 255, 255, .78); }
 .preco-vista strong { color: #fff; }
-.preco .btn { margin-top: 24px; width: 100%; }
+.preco .btn { margin-top: 24px; width: 100%; max-width: 480px; }
 
-.presentes { margin-top: 24px; display: grid; grid-template-columns: 7fr 5fr; align-items: center; gap: 24px; padding: 40px; border-radius: var(--r);
+.presentes { max-width: 960px; margin: 24px auto 0; display: grid; grid-template-columns: 7fr 5fr; align-items: center; gap: 24px; padding: 40px; border-radius: var(--r);
   background: linear-gradient(120deg, var(--vinho), var(--noite)); color: #fff; overflow: hidden; }
 .presentes h3 { font-size: var(--t-h3); line-height: var(--lh-h3); font-weight: 700; }
 .presentes ul { margin-top: 16px; }
@@ -309,7 +311,7 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
   .selo--2 { top: 40%; right: 0; }
   .selo--3 { bottom: 10%; left: 0; }
 
-  .cards, .oferta-grade, .presentes, .depo, .quem .wrap, .sonho .wrap, .faq .wrap { grid-template-columns: 1fr; }
+  .cards, .presentes, .depo, .quem .wrap, .sonho .wrap, .faq .wrap { grid-template-columns: 1fr; }
   .retrato { width: min(88%, 340px); }
   .quem .arco { max-width: 360px; margin-inline: auto; }
   .presentes { padding: 32px 24px 0; }
@@ -324,7 +326,8 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
   .pilares::before, .pilares::after { display: none; }
   .pilares-centro { position: relative; inset: auto; flex: 0 0 200px; height: 200px; margin: 0 calc((100% - 200px) / 2) 24px; }
   .pilar { position: static; translate: none; transform: none; font-size: 14px; padding: 8px 16px; }
-  .recebe ul { grid-template-columns: 1fr; }
+  .recebe ul { flex-direction: column; align-items: stretch; }
+  .recebe li { border-radius: var(--r-s); }
   .card, .recebe { padding: 24px; }
   .preco { padding: 32px 24px; }
   .fita-trilho img { width: 184px; }
@@ -492,7 +495,7 @@ h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condi
         <h2 id="t-oferta">O Programa Conceber pelo <em class="dest">menor investimento do ano</em></h2>
       </div>
 
-      <div class="oferta-grade">
+      <div class="oferta-caixa">
         <div class="recebe">
           <img src="assets/oferta-mockups.webp" width="1444" height="428" loading="lazy" alt="Materiais, aulas e masterclasses do Programa Conceber">
           <h3>Tudo o que você recebe:</h3>
