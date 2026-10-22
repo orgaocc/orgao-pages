@@ -21,7 +21,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero-composicao.webp" fetchpriority="high">
 
 <!-- Pixel X App - START -->
@@ -48,8 +48,8 @@
   --linha-escura: rgba(255, 255, 255, .1);
   --linha-clara: rgba(36, 18, 26, .1);
 
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Onest', system-ui, sans-serif;
+  --display: 'Space Grotesk', system-ui, sans-serif;  /* títulos, botões, números */
+  --sans: 'Manrope', system-ui, sans-serif;         /* parágrafos */
 
   /* escala tipográfica (fluida entre o celular e 1280) */
   --t-hero: clamp(2.375rem, 1.6rem + 3.6vw, 4.5rem);
@@ -70,7 +70,8 @@ body { margin: 0; font-family: var(--sans); font-size: var(--t-body); line-heigh
 img { display: block; max-width: 100%; height: auto; }
 h1, h2, h3, p, ul, figure, blockquote { margin: 0; }
 ul { padding: 0; list-style: none; }
-em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--pink); letter-spacing: -.01em; font-size: 1.12em; line-height: 1; }
+em.dest { font-family: var(--display); font-style: normal; font-weight: 700; color: var(--pink); }
+h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condicao, .item-num, .parabens, .envio, .faq summary { font-family: var(--display); }
 .claro em.dest { color: var(--pink-fundo-claro); }
 
 /* ===== Régua do container (1280 / 90% / 1em) ===== */
@@ -95,7 +96,7 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
   display: inline-flex; align-items: center; justify-content: center; gap: 12px;
   min-height: 64px; padding: 16px 32px; border-radius: 999px; border: 0;
   background: linear-gradient(180deg, #ff5aa8 0%, #e8277f 100%); color: #fff;
-  font: 700 1rem/1.2 var(--sans); letter-spacing: .02em; text-transform: uppercase; text-decoration: none; text-align: center;
+  font: 700 1rem/1.2 var(--display); letter-spacing: .02em; text-transform: uppercase; text-decoration: none; text-align: center;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, .18) inset, 0 12px 40px -8px rgba(255, 63, 152, .65);
   transition: transform .2s ease, box-shadow .2s ease;
 }
@@ -194,7 +195,7 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
 .retrato img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 40% 50%; border-radius: 2px; }
 .retrato::after { content: ""; position: absolute; left: 50%; top: -14px; width: 96px; height: 28px; translate: -50% 0; rotate: 4deg;
   background: rgba(255, 170, 210, .55); backdrop-filter: blur(2px); }
-.depo blockquote { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.625rem, 1.2rem + 1.6vw, 2.5rem); line-height: 1.22; color: #fff; }
+.depo blockquote { font-family: var(--display); font-style: normal; font-weight: 500; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); line-height: 1.3; letter-spacing: -.01em; color: #fff; }
 .depo blockquote::before { content: "“"; display: block; height: .5em; font-size: 2.6em; line-height: 1; color: var(--pink); }
 .depo figcaption { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--linha-escura); color: rgba(255, 255, 255, .7); }
 .depo figcaption strong { display: block; color: var(--blush); font-weight: 700; }

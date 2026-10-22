@@ -13,7 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/talita-recorte.webp" fetchpriority="high">
 
 <!-- Pixel X App - START -->
@@ -37,8 +37,8 @@
   --vermelho: #ee2f21;
   --linha-escura: rgba(255, 255, 255, .1);
   --linha-clara: rgba(36, 18, 26, .1);
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Onest', system-ui, sans-serif;
+  --display: 'Space Grotesk', system-ui, sans-serif;  /* títulos, botões, números */
+  --sans: 'Manrope', system-ui, sans-serif;         /* parágrafos */
   --t-hero: clamp(2.125rem, 1.5rem + 2.9vw, 3.75rem);
   --t-h2: clamp(1.875rem, 1.35rem + 2.2vw, 3.25rem);
   --t-h3: clamp(1.25rem, 1.1rem + .6vw, 1.625rem);
@@ -53,7 +53,8 @@ body { margin: 0; font-family: var(--sans); font-size: 1.0625rem; line-height: 1
 img { display: block; max-width: 100%; height: auto; }
 h1, h2, h3, p, ul { margin: 0; }
 ul { padding: 0; list-style: none; }
-em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--pink); letter-spacing: -.01em; font-size: 1.12em; line-height: 1; }
+em.dest { font-family: var(--display); font-style: normal; font-weight: 700; color: var(--pink); }
+h1, h2, h3, .btn, .eyebrow, .selo, .pilar, .preco-parc, .preco-cond, .hero-condicao, .item-num, .parabens, .envio, .faq summary { font-family: var(--display); }
 .claro em.dest { color: var(--pink-fundo-claro); }
 
 /* Régua do container (1280 / 90% / 1em) */
@@ -75,7 +76,7 @@ em.dest { font-family: var(--serif); font-style: italic; font-weight: 600; color
   display: inline-flex; align-items: center; justify-content: center; gap: 12px;
   min-height: 64px; padding: 16px 32px; border-radius: 999px; border: 0;
   background: linear-gradient(180deg, #ff5aa8 0%, #e8277f 100%); color: #fff;
-  font: 700 1rem/1.2 var(--sans); letter-spacing: .02em; text-transform: uppercase; text-decoration: none; text-align: center;
+  font: 700 1rem/1.2 var(--display); letter-spacing: .02em; text-transform: uppercase; text-decoration: none; text-align: center;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, .18) inset, 0 12px 40px -8px rgba(255, 63, 152, .65);
   transition: transform .2s ease, box-shadow .2s ease;
 }
