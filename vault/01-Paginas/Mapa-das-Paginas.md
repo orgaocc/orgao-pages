@@ -25,6 +25,8 @@ Inventário extraído de todos os arquivos HTML na revisão base `e486a51123655e
 | `/jpe/cc-v9/` | [jpe/cc-v9/index.html](../../jpe/cc-v9/index.html) | Jejum e Oração para Engravidar - Grupo Conceber | Versão de campanha presente no Git |
 | `/pcbf26/vendas/` | [pcbf26/vendas/index.html](../../pcbf26/vendas/index.html) | Pink Friday Conceber — O Programa Conceber pelo menor investimento do ano | Página de vendas da Pink Friday 2026 (2026-10-21). Link de checkout em `js/config.js` |
 | `/pcbf26/upsell/` | [pcbf26/upsell/index.html](../../pcbf26/upsell/index.html) | Parabéns! Sua inscrição no Programa Conceber foi realizada | Upsell pós-compra da Pink Friday 2026 (consulta adicional + Kit Gianna Vita), `noindex`, sem VSL (removida em 21/10). Checkout em `js/config.js` |
+| `/pcbf26/vendas-v2/` | [pcbf26/vendas-v2/index.html](../../pcbf26/vendas-v2/index.html) | Pink Friday Conceber — O Programa Conceber pelo menor investimento do ano | Layout novo da página de vendas, mesma copy e checkout (2026-10-22), `noindex` enquanto a v1 é a oficial |
+| `/pcbf26/upsell-v2/` | [pcbf26/upsell-v2/index.html](../../pcbf26/upsell-v2/index.html) | Parabéns! Sua inscrição no Programa Conceber foi realizada | Layout novo do upsell, mesma copy e 1 clique (2026-10-22), `noindex` |
 | `/relatorio/` | [relatorio/index.html](../../relatorio/index.html) | Programa Conceber — Relatório de Fertilidade | Relatório dinâmico; depende de integração HTTP |
 | `/tech/` | [tech/index.html](../../tech/index.html) | Mapa Mental — Gestão Tech & Operações | Mapa de gestão tech e operações |
 
