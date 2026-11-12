@@ -31,3 +31,12 @@ const CONFIG = {
 
   pagina_obrigado: "obrigado/",
 };
+
+/* Sala (demonstração de webinar sem WebinarJam, em sala/). Vídeo de exemplo público só pra ter imagem rodando. */
+CONFIG.sala = {
+  titulo: "[a preencher: título do webinar]",
+  video_url: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
+  duracao_minutos: 10,   /* de verdade vem do próprio vídeo; aqui serve pra demonstração */
+  oferta_minuto: 3,      /* minuto da sessão em que o cartão de oferta aparece */
+  link_oferta: "#",
+};

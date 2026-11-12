@@ -37,6 +37,17 @@ serve pra testar layout e fluxo sem backend.
 - Tirar o `noindex` das duas páginas.
 - Testar o pixel (Pixel X App) com navegador de verdade, como em toda página nova.
 
+## Sala sem WebinarJam (demonstração, `sala/`)
+
+Pergunta do Luan em 12/11: "preciso do WebinarJam mesmo?". Não. A `sala/` mostra a ideia: lê a hora da sessão (do
+`localStorage` da inscrição ou de `?h=<ISO>&t=<ingresso>`) e faz sozinha o que a sala do WebinarJam faz:
+contagem antes da hora; na hora, play no vídeo gravado já no minuto certo (quem entra atrasado pega do meio), sem
+barra nem pausa, "toque para ouvir" porque o autoplay nasce mudo; cartão de oferta no minuto `sala.oferta_minuto`;
+pergunta pelo WhatsApp (o Unnichat responde); "você está assistindo há N min" e, a cada minuto, o sinal de presença
+(aqui só no console; de verdade vai pro n8n/Supabase e vira tag no Unnichat); no fim do vídeo, "sessão encerrada, sem
+replay". Pra mostrar: `sala/?demo=antes`, `?demo=aovivo`, `?demo=oferta`, `?demo=fim`. O vídeo em `sala.video_url` é um
+exemplo público (Big Buck Bunny no archive.org), só pra ter imagem; o real vai pro Panda ou Cloudflare Stream.
+
 ## Arquivos
 
 | Arquivo | O que é |

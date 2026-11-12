@@ -1,0 +1,67 @@
+/* sala do webinar: vídeo + coluna do lado. Usa os tokens do ../css/style.css */
+.sala-body { background: var(--offwhite); min-height: 100vh; }
+.sala-topo { background: var(--white); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+.sala-topo-miolo { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.sala-marca { font-family: var(--serif); font-size: 18px; color: var(--deep); }
+.sala-status { font-size: 14px; }
+.sala-status [data-so] { display: none; }
+.sala-status.antes [data-so="antes"],
+.sala-status.aovivo [data-so="aovivo"],
+.sala-status.fim [data-so="fim"] { display: inline-flex; align-items: center; gap: 6px; }
+.ao-vivo { color: var(--rose); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+.ao-vivo i, .video-selo i {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: currentColor;
+  animation: pulsar 1.4s ease-out infinite;
+}
+
+.sala-grid { display: flex; flex-direction: column; gap: 24px; padding-top: 24px; padding-bottom: 48px; }
+.sala-palco { width: 100%; }
+.sala-lado { width: 100%; display: flex; flex-direction: column; gap: 16px; }
+
+.palco-antes {
+  background: var(--cream); border-radius: var(--raio); padding: 48px 24px; text-align: center;
+}
+.palco-antes .btn { max-width: 360px; margin: 0 auto; }
+.eyebrow { font-size: 14px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--deep); margin: 0 0 8px; }
+.contagem { display: flex; justify-content: center; gap: 8px; }
+.contagem > div { background: var(--white); border-radius: var(--raio-sm); padding: 16px; min-width: 80px; }
+.contagem b { display: block; font-family: var(--serif); font-size: 32px; line-height: 1; color: var(--deep); }
+.contagem small { color: var(--ink-soft); font-size: 14px; }
+
+.video-caixa { position: relative; background: #111; border-radius: var(--raio); overflow: hidden; aspect-ratio: 16 / 9; }
+.video-caixa video { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.video-selo {
+  position: absolute; top: 16px; left: 16px; display: inline-flex; align-items: center; gap: 6px;
+  background: var(--rose); color: var(--white); font-size: 14px; font-weight: 700; letter-spacing: .08em;
+  padding: 4px 12px; border-radius: 999px;
+}
+.video-som {
+  position: absolute; inset: 0; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(0,0,0,.45); color: var(--white); font-size: 18px; font-weight: 600;
+}
+.video-som svg { width: 48px; height: 48px; }
+.video-rodape { padding: 16px 0 0; }
+
+.lado-cartao { background: var(--white); border: 1px solid var(--line); border-radius: var(--raio); padding: 24px; }
+.lado-cartao .btn--p { width: 100%; }
+.lado-presente { background: var(--mint); border-color: transparent; }
+.lado-oferta { background: var(--deep); color: var(--white); border-color: transparent; animation: entrar .5s ease-out; }
+.lado-oferta .eyebrow { color: var(--mint); }
+.lado-oferta h2 { color: var(--white); }
+.lado-oferta .ph-texto { color: #f3dca2; }
+.lado-oferta .suave { color: rgba(255,255,255,.7); }
+.lado-ingresso { text-align: center; }
+@keyframes entrar { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+.demo-barra {
+  background: var(--ink); color: var(--white); font-size: 14px; padding: 8px 16px; display: flex; gap: 16px; align-items: center;
+  justify-content: center; flex-wrap: wrap;
+}
+.demo-barra a { color: #f3dca2; }
+
+@media (min-width: 1024px) {
+  .sala-grid { flex-direction: row; align-items: flex-start; gap: 32px; padding-top: 32px; }
+  .sala-palco { flex: 1; min-width: 0; }
+  .sala-lado { width: 360px; flex: none; position: sticky; top: 80px; }
+  .palco-antes { padding: 64px 48px; }
+}
