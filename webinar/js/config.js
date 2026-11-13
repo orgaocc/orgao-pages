@@ -4,7 +4,9 @@
    ============================================= */
 const CONFIG = {
   /* Pra onde o formulário manda a inscrição (gatilho do n8n do Órgão).
-     Vazio = modo de teste: o formulário simula a resposta e segue pra página de obrigado. */
+     Vazio = modo de teste: o formulário simula a resposta e segue pra página de obrigado.
+     Quando o fluxo "[PC] [WEBINAR] 1. Inscrição" estiver ativo no n8n, trocar por:
+     "https://n8n.orgao.cc/webhook/pc-webinar-inscricao" */
   webhook_url: "",
 
   /* Número que recebe a confirmação pelo WhatsApp (conexão do Unnichat).
