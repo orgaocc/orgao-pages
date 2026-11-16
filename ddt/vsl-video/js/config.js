@@ -2,9 +2,11 @@
    CONFIG — ddt/vsl-video (a página /ddt/vsl/ mostrando só o vídeo até a hora do preço; Detox da Tentante, turma T58, lançamento de 7 a 13/12/2026)
    ============================================= */
 const CONFIG = {
-  // Segundo do vídeo em que o resto da página aparece (quando ela fala o preço). A DEFINIR com a Elisa.
-  // Enquanto for 0, a página abre inteira, igual à /ddt/vsl/. Pra testar: ?aos=10 revela aos 10 s; ?mostrar=1 revela na hora.
-  revelar_segundos: 0,
+  // Segundo do vídeo (14min52s no total) em que cada parte aparece. PROVISÓRIO: falta a Elisa passar os minutos certos.
+  //   botao  = o botão de compra do topo (quando a doutora fala em comprar)
+  //   oferta = o resto da página, com a oferta
+  // 0 = aparece na hora. Pra testar: ?aos=10 revela tudo aos 10 s; ?mostrar=1 revela na hora.
+  revelar: { botao: 600, oferta: 600 },
 
   // Começo da primeira aula: o contador do topo conta até aqui. A CONFIRMAR com a Bruna (a página antiga contava até as 20h do primeiro dia).
   inicio: "2026-12-07T20:00:00-03:00",
