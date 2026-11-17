@@ -7,7 +7,7 @@ const CONFIG = {
 
   // Checkout do ingresso na Hotmart. 17/11: a Elisa decidiu não ter produto novo. É o Detox que já vende (ID 8009648), no preço
   // "[PC] [T58] DDTM" (R$ 97 ou 12x de R$ 9,34, código dx5vmnqf), criado ao lado dos preços que já existiam. Vazio = o botão não abre o formulário.
-  link_checkout: "https://pay.hotmart.com/T106499003D?off=dx5vmnqf",
+  link_checkout: "https://pay.hotmart.com/T106499003D?off=dx5vmnqf&checkoutMode=10",
 
   // Pré-checkout: mesmos valores do formulário da página antiga do WordPress (popup 453324)
   lancamento: "PC-RDF",
