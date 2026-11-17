@@ -5,9 +5,9 @@ const CONFIG = {
   // Começo da primeira aula: o contador do topo conta até aqui. A CONFIRMAR com a Bruna (a página antiga contava até as 20h do primeiro dia).
   inicio: "2026-12-07T20:00:00-03:00",
 
-  // Checkout do ingresso na Hotmart: página de pagamento do produto novo da T58 (ID 8993150, R$ 97). Vazio = o botão da oferta não abre o formulário.
-  // Em 16/11 o produto ainda estava em rascunho: o formulário abre e manda o lead, mas a compra só funciona quando o cadastro for finalizado na Hotmart.
-  link_checkout: "https://pay.hotmart.com/C108529467K",
+  // Checkout do ingresso na Hotmart. 17/11: a Elisa decidiu não ter produto novo. É o Detox que já vende (ID 8009648), no preço
+  // "[PC] [T58] DDTM" (R$ 97 ou 12x de R$ 9,34, código dx5vmnqf), criado ao lado dos preços que já existiam. Vazio = o botão não abre o formulário.
+  link_checkout: "https://pay.hotmart.com/T106499003D?off=dx5vmnqf",
 
   // Pré-checkout: mesmos valores do formulário da página antiga do WordPress (popup 453324)
   lancamento: "PC-RDF",
