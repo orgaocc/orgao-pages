@@ -1,0 +1,240 @@
+/* =============================================
+   Programa Conceber — página de venda (/pc-lps/), refeita em 17/11/2026.
+   Mesma ordem de seções e mesmos textos da página do WordPress (grupoconceber.com/pc-lps/).
+   Cores da marca: vinho, magenta, rosa e creme; verde só nos botões de ação.
+   Tamanhos de fonte e espaços em múltiplos de 8 (mais 14, 18 e 22). Celular: H1 32, H2 24, H3 18, texto 16.
+   ============================================= */
+:root {
+  --vinho: #700f45; --vinho-fundo: #4a0a2e; --magenta: #b73180; --rosa: #f270c2; --rosa-claro: #ffeff7; --rosa-fio: #f6cfe4;
+  --creme: #fffdf4; --branco: #fff; --tinta: #2b1220; --tinta-2: #5c4552; --fio: #ecdfe6;
+  --verde-a: #a9c05a; --verde-b: #4c644c; --verde: #5d8656; --negativo: #d92f5f;
+  --fonte: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Playfair Display", Georgia, serif;
+  /* formulário de pré-checkout (../ddt/shared/precheckout.js lê estas variáveis) */
+  --pc-fundo: #fff; --pc-texto: #2b1220; --pc-texto-2: #5c4552; --pc-destaque: #b73180; --pc-raio: 16px;
+  --pc-fechar-fundo: #ffeff7; --pc-fechar-cor: #700f45; --pc-borda: #ecdfe6; --pc-foco: rgba(183, 49, 128, .18);
+  --pc-fonte: "DM Sans", system-ui, sans-serif; --pc-fonte-titulo: "DM Sans", system-ui, sans-serif;
+  --pc-btn-fundo: linear-gradient(90deg, #a9c05a, #4c644c); --pc-btn-cor: #fff; --pc-btn-sombra: 0 16px 32px -16px rgba(40, 70, 40, .8);
+  --pc-raio-btn: 999px; --pc-raio-campo: 12px; --pc-veu: rgba(43, 18, 32, .72);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; font: 400 16px/24px var(--fonte); color: var(--tinta); background: var(--creme); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; }
+b { font-weight: 700; }
+.so-def { position: absolute; width: 0; height: 0; overflow: hidden; }
+.wrap { width: min(1120px, 100% - 48px); margin-inline: auto; }
+
+/* ---------- botões ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; padding: 16px 32px; border-radius: 999px; border: 0;
+  background: linear-gradient(90deg, var(--verde-a), var(--verde-b)); color: #fff; font: 700 16px/24px var(--fonte); text-align: center; text-decoration: none;
+  box-shadow: 0 16px 32px -16px rgba(40, 70, 40, .8); transition: transform .2s ease, box-shadow .2s ease; cursor: pointer; }
+.btn svg { width: 24px; height: 24px; flex: none; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 24px 40px -16px rgba(40, 70, 40, .9); }
+.btn:focus-visible { outline: 3px solid var(--rosa); outline-offset: 3px; }
+.btn--vinho { background: linear-gradient(90deg, #d61d84, var(--vinho)); box-shadow: 0 16px 32px -16px rgba(112, 15, 69, .8); }
+.btn--grande { min-height: 64px; width: 100%; font-size: 18px; }
+.btn--linha { width: 100%; background: transparent; color: var(--vinho); border: 1px solid var(--rosa-fio); box-shadow: none; font-weight: 500; }
+.btn--linha:hover { background: var(--rosa-claro); box-shadow: none; }
+.acao { display: flex; justify-content: center; margin-top: 48px; }
+
+/* ---------- seções e títulos ---------- */
+.sec { padding: 96px 0; }
+.sec--creme { background: var(--creme); }
+.sec--rosa { background: linear-gradient(180deg, #fff 0%, #ffd9ef 100%); }
+.sec--magenta { background: linear-gradient(135deg, #d04a98 0%, var(--magenta) 55%, #8f1f60 100%); color: #fff; }
+.sec--vinho { background: var(--vinho-fundo); color: #fff; padding: 80px 0; }
+.sec--rosa-forte { background: linear-gradient(180deg, #f48fd0 0%, var(--rosa) 100%); }
+.titulo { font: 700 40px/48px var(--fonte); letter-spacing: -.01em; color: var(--vinho); text-wrap: balance; }
+.titulo--centro { text-align: center; max-width: 800px; margin-inline: auto; }
+.titulo--medio { font-size: 32px; line-height: 40px; max-width: 880px; margin-top: 96px; }
+.sec--magenta .titulo, .sec--vinho .titulo, .sec--rosa-forte .titulo { color: #fff; }
+.apoio { max-width: 640px; margin: 16px auto 0; text-align: center; font-size: 18px; line-height: 32px; color: var(--tinta-2); }
+.apoio--esq { margin-inline: 0; text-align: left; }
+.sec--magenta .apoio, .sec--rosa-forte .apoio { color: rgba(255, 255, 255, .92); }
+
+/* ---------- 1. topo ---------- */
+.topo { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 85% 20%, #d04a98 0%, var(--magenta) 45%, #8a1c5c 100%); color: #fff; }
+.topo__grade { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: center; gap: 48px; padding: 64px 0 0; }
+.topo__texto { padding-bottom: 64px; }
+.marca { width: 216px; margin-bottom: 40px; }
+.topo h1 { font: 700 48px/56px var(--fonte); letter-spacing: -.02em; text-wrap: balance; }
+.topo__sub { max-width: 520px; margin-top: 24px; font-size: 18px; line-height: 32px; color: rgba(255, 255, 255, .92); }
+.topo__sub u { text-decoration-color: var(--verde-a); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.topo .btn { margin-top: 32px; }
+.topo__prova { margin-top: 24px; font: italic 500 18px/24px var(--display); color: #ffe3f3; }
+.topo__foto { position: relative; align-self: end; }
+.topo__foto::before { content: ""; position: absolute; left: 50%; top: 52%; width: 88%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 68%); }
+.topo__foto img { position: relative; width: min(100%, 520px); margin-inline: auto; }
+
+/* ---------- faixas que andam (depoimentos e aulas) ---------- */
+.faixa { margin-top: 48px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.faixa__trilho { display: flex; gap: 24px; width: max-content; padding: 8px 24px; overflow-x: auto; }
+.faixa__trilho img { height: 320px; width: auto; flex: none; border-radius: 16px; box-shadow: 0 16px 32px -24px rgba(112, 15, 69, .6); background: #fff; }
+.faixa--larga .faixa__trilho img { height: 240px; border-radius: 16px; box-shadow: 0 24px 48px -24px rgba(0, 0, 0, .7); }
+.faixa__trilho.anda { overflow: visible; animation: anda 60s linear infinite; }
+.faixa:hover .faixa__trilho.anda { animation-play-state: paused; }
+@keyframes anda { to { transform: translateX(calc(-50% - 12px)); } }
+
+/* ---------- 2. a história e os 7 pilares ---------- */
+.historia { margin-top: 96px; }
+.chamada { max-width: 640px; margin: 24px auto 0; padding: 16px 32px; border-radius: 16px; background: linear-gradient(90deg, var(--rosa), var(--magenta)); color: #fff; font: 500 18px/24px var(--fonte); text-align: center; }
+.historia__grade { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: center; gap: 64px; margin-top: 64px; }
+.historia__texto p { font-size: 18px; line-height: 32px; color: var(--tinta-2); }
+.historia__texto p + p, .historia__texto .falas + p { margin-top: 24px; }
+.historia__texto b { color: var(--vinho); }
+.historia__texto u { text-decoration-color: var(--rosa); text-underline-offset: 4px; }
+.falas { margin-top: 24px; padding: 8px 24px; border-left: 3px solid var(--rosa); background: var(--rosa-claro); border-radius: 0 16px 16px 0; }
+.falas p { padding: 8px 0; font: italic 500 18px/24px var(--display); color: var(--vinho); }
+.falas p + p { margin-top: 0; border-top: 1px solid var(--rosa-fio); }
+.historia__texto .garante { color: var(--tinta); }
+/* 4 em cima e 3 centralizados embaixo, sem buraco no fim da grade */
+.pilares { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 48px; }
+.pilares .pilar { flex: 0 0 calc((100% - 48px) / 4); }
+.pilar { display: flex; flex-direction: column; gap: 16px; padding: 24px; border-radius: 16px; background: #fff; border: 1px solid var(--fio); border-top: 4px solid var(--cor); }
+.pilar .n { font: 700 40px/40px var(--display); color: var(--cor); }
+.pilar p { font: 500 18px/24px var(--fonte); }
+.fecho { max-width: 720px; margin: 64px auto 0; text-align: center; }
+.fecho p { font-size: 18px; line-height: 32px; color: var(--tinta-2); }
+.fecho b { color: var(--vinho); }
+.fecho .fecho__forte { margin-top: 16px; font: italic 700 24px/32px var(--display); color: var(--vinho); }
+.fecho .btn { margin-top: 32px; }
+
+/* ---------- listas com marca (sem ponto nem traço) ---------- */
+.marcas li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 16px; align-items: start; padding: 8px 0; }
+.marcas svg { width: 24px; height: 24px; color: var(--verde); }
+.marcas--fio li { padding: 16px 0; border-top: 1px solid var(--fio); }
+.marcas--fio li:first-child { border-top: 0; }
+.marcas--cartoes li { padding: 16px; margin-top: 8px; border-radius: 16px; background: #fff; color: var(--tinta); }
+.marcas--cartoes li:first-child { margin-top: 0; }
+
+/* ---------- 3. o que você vai receber ---------- */
+.eixos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 48px; }
+.eixo { display: flex; flex-direction: column; padding: 32px; border-radius: 24px; background: #fff; box-shadow: 0 24px 48px -32px rgba(112, 15, 69, .5); }
+.eixo h3 { font: 700 24px/32px var(--fonte); color: var(--magenta); text-align: center; }
+.eixo__foto { display: grid; place-items: center; height: 200px; margin: 16px 0 24px; border-bottom: 1px solid var(--fio); padding-bottom: 16px; }
+.eixo__foto img { max-height: 168px; width: auto; }
+
+/* ---------- 4. antes e depois ---------- */
+.prova { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: 64px; }
+.prova__texto .titulo { color: var(--magenta); }
+.prova__texto .btn { margin-top: 32px; }
+.prova__foto { border-radius: 24px; box-shadow: 0 32px 64px -40px rgba(112, 15, 69, .6); }
+.lados { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 96px; }
+.lado { padding: 32px; border-radius: 24px; background: #fff; border: 1px solid var(--fio); }
+.lado header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.lado header img { width: 64px; }
+.lado h3 { font: 700 18px/24px var(--fonte); letter-spacing: .06em; color: var(--magenta); }
+.lado--antes .marcas svg { color: var(--negativo); }
+.lado--antes { background: #fbf6f8; }
+.lado--depois { border-color: #cfe0c4; box-shadow: 0 24px 48px -32px rgba(76, 100, 76, .7); }
+.lado--depois h3 { color: var(--verde-b); }
+
+/* ---------- 5. os 7 pilares no dia a dia ---------- */
+.metodo { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: 64px; }
+.metodo__roda img { width: min(100%, 400px); margin-top: 32px; padding: 24px; border-radius: 24px; background: #fff; }
+.metodo__acesso h3 { margin-bottom: 24px; font: 700 24px/32px var(--fonte); }
+.metodo__acesso .btn { margin-top: 32px; }
+
+/* ---------- 7. quem é a Dra. Talita ---------- */
+.bio { display: grid; grid-template-columns: 366px minmax(0, 1fr); align-items: center; gap: 64px; }
+.bio__foto { border-radius: 24px; box-shadow: 24px 24px 0 var(--rosa-claro); }
+.bio__texto p { margin-top: 16px; font-size: 18px; line-height: 32px; color: var(--tinta-2); }
+.bio__texto .titulo + p { margin-top: 24px; font-weight: 700; color: var(--tinta); }
+
+/* ---------- 8. oferta ---------- */
+[hidden] { display: none !important; }
+.oferta__faixa { width: min(100%, 880px); margin: 48px auto 0; border-radius: 24px; }
+.cartao-oferta { max-width: 880px; margin: 24px auto 0; padding: 48px; border-radius: 24px; background: #fff; box-shadow: 0 40px 80px -48px rgba(112, 15, 69, .8); }
+.cartao-oferta h3 { font: 700 24px/32px var(--fonte); color: var(--vinho); text-align: center; }
+.valores { margin-top: 32px; }
+.valores > div { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid var(--fio); }
+.valores > div:first-child { border-top: 0; }
+.valores svg { width: 24px; height: 24px; color: var(--magenta); }
+.valores span { font: 500 18px/24px var(--fonte); color: var(--vinho); }
+.valores small { display: block; font: 400 14px/24px var(--fonte); color: var(--tinta-2); }
+.valores s { font: 700 18px/24px var(--fonte); color: var(--tinta-2); white-space: nowrap; }
+.valores .total { grid-template-columns: minmax(0, 1fr) auto; padding: 24px 0 0; border-top: 2px solid var(--vinho); }
+.valores .total span, .valores .total s { font-size: 24px; line-height: 32px; font-weight: 700; color: var(--vinho); }
+.preco { max-width: 480px; margin: 48px auto 0; text-align: center; }
+.preco__antes { font: 500 18px/24px var(--fonte); color: var(--tinta-2); }
+.preco__de { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--fio); font-size: 18px; line-height: 24px; color: var(--tinta-2); }
+.preco__parcela { margin-top: 8px; font: 700 56px/64px var(--fonte); letter-spacing: -.02em; color: var(--vinho); }
+.preco__avista { margin-top: 8px; font-size: 18px; line-height: 24px; color: var(--tinta-2); }
+.preco__avista b { color: var(--tinta); }
+.bandeiras { margin: 24px auto; }
+.garantia { margin: 16px 0 24px; font-size: 14px; line-height: 24px; color: var(--tinta-2); }
+.espera { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: center; gap: 64px; padding: 48px; border-radius: 24px; background: #fff; box-shadow: 0 40px 80px -48px rgba(112, 15, 69, .8); }
+.espera .titulo { color: var(--vinho); font-size: 32px; line-height: 40px; }
+.espera .selo { display: inline-block; margin-bottom: 24px; padding: 8px 16px; border-radius: 999px; background: var(--vinho); color: #fff; font: 700 14px/24px var(--fonte); letter-spacing: .08em; }
+.espera__texto > p:not(.selo) { margin-top: 16px; font-size: 18px; line-height: 32px; color: var(--tinta-2); }
+.espera .btn--grande { margin-top: 32px; }
+.espera .btn--linha { margin-top: 16px; }
+.espera__foto { border-radius: 24px; }
+
+/* ---------- rodapé ---------- */
+.rodape { background: var(--vinho-fundo); color: rgba(255, 255, 255, .8); text-align: center; font-size: 14px; line-height: 24px; }
+.rodape .wrap { padding: 48px 0 32px; }
+.rodape .gc { width: 184px; margin: 0 auto 24px; }
+.rodape a { color: #ffb3dc; }
+.rodape .cnpj { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 24px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 14px; }
+
+/* ---------- telas menores ---------- */
+@media (max-width: 960px) {
+  .topo__grade, .historia__grade, .prova, .metodo, .bio, .espera { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .topo__texto { padding-bottom: 0; }
+  .topo__foto img { width: min(100%, 400px); }
+  .eixos { grid-template-columns: minmax(0, 1fr); }
+  .pilares .pilar { flex-basis: calc((100% - 16px) / 2); }
+  .bio__foto { width: min(100%, 320px); margin-inline: auto; }
+  .historia__foto, .prova__foto, .espera__foto { margin-inline: auto; }
+  .metodo__roda img { margin-inline: auto; }
+}
+@media (max-width: 720px) {
+  .sec { padding: 64px 0; }
+  .sec--vinho { padding: 64px 0; }
+  .titulo, .espera .titulo { font-size: 24px; line-height: 32px; }
+  .titulo--medio { margin-top: 64px; }
+  .apoio, .topo__sub, .historia__texto p, .fecho p, .bio__texto p, .espera__texto > p:not(.selo) { font-size: 16px; line-height: 24px; }
+  .topo__grade { padding-top: 40px; gap: 32px; }
+  .marca { width: 176px; margin-bottom: 32px; }
+  .topo h1 { font-size: 32px; line-height: 40px; }
+  .btn { width: 100%; padding: 16px 24px; }
+  .btn--grande { font-size: 16px; }
+  .acao { margin-top: 32px; }
+  .faixa { margin-top: 32px; }
+  .faixa__trilho { gap: 16px; }
+  .faixa__trilho img { height: 240px; }
+  .faixa--larga .faixa__trilho img { height: 168px; }
+  .historia { margin-top: 64px; }
+  .chamada { padding: 16px 24px; font-size: 16px; }
+  .historia__grade { margin-top: 40px; }
+  .falas p, .topo__prova { font-size: 16px; }
+  .pilares { gap: 8px; margin-top: 32px; }
+  .pilares .pilar { flex-basis: 100%; }
+  .pilar { flex-direction: row; align-items: center; padding: 16px; border-top-width: 1px; border-left: 4px solid var(--cor); }
+  .pilar .n { font-size: 32px; line-height: 32px; width: 32px; flex: none; text-align: center; }
+  .pilar p, .valores span, .lado h3 { font-size: 16px; }
+  .fecho { margin-top: 48px; }
+  .fecho .fecho__forte, .eixo h3, .metodo__acesso h3, .cartao-oferta h3 { font-size: 18px; line-height: 24px; }
+  .eixos { margin-top: 32px; gap: 16px; }
+  .eixo, .lado { padding: 24px; }
+  .lados { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 64px; }
+  .bio__foto { box-shadow: 16px 16px 0 var(--rosa-claro); }
+  .oferta__faixa { margin-top: 32px; border-radius: 16px; }
+  .cartao-oferta, .espera { padding: 32px 24px; }
+  .valores > div { grid-template-columns: 24px minmax(0, 1fr); row-gap: 0; }
+  .valores > div s { grid-column: 2; font-size: 16px; }
+  .valores .total { grid-template-columns: minmax(0, 1fr) auto; }
+  .valores .total s { grid-column: auto; }
+  .valores .total span, .valores .total s { font-size: 18px; line-height: 24px; }
+  .preco { margin-top: 32px; }
+  .preco__parcela { font-size: 32px; line-height: 40px; white-space: nowrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+}

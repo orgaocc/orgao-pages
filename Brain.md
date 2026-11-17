@@ -40,3 +40,18 @@ Publicação: o Workers Builds constrói cada commit uma vez. Commit que chega p
 Entraram `/ddt/vsl/` e `/ddt/v9/`, versões novas das páginas de ingresso que hoje ficam no WordPress (`grupoconceber.com/ddt/vsl/` e `/ddt/v9/`). Mesma ordem de seções, mesma copy e mesmas cores das originais; muda o acabamento (Playfair Display + DM Sans, grid de 8, botão com texto escuro). Valor e data já são os da T58: R$ 97 ou 12x de R$ 9,34, de 07 até 13 de dezembro. O que é comum às duas fica em `ddt/shared/` (`ddt.css`, `ddt.js` com o contador e a faixa de depoimentos, `precheckout.js` copiado do `pcbf26` com o aviso da LGPD vindo do config). Cada página tem a paleta no `<style>` dela e o `js/config.js` com `inicio` (contador), `link_checkout` e os dados do pré-checkout (`lancamento: PC-RDF`, `utm_campaign: PC-LPS`, iguais aos do popup 453324 do WordPress).
 
 Pendências: `link_checkout` vazio nas duas (o produto da T58 ainda não existe na Hotmart; sem ele o botão da oferta não abre o formulário); hora do contador (20h de 07/12) e as frases "começa nesta segunda-feira" a confirmar com a Bruna; `noindex` ligado enquanto for prévia. Branch `ddt-t58`, prévia em `ddt-t58-jpe-cd.conceber.workers.dev/ddt/vsl/` e `/ddt/v9/`.
+
+## Página de venda do Programa Conceber (2026-11-17, Luan)
+
+- `pc-lps/`: refeita a partir de `grupoconceber.com/pc-lps/` ("refaz essa página, tá bem feia"). Mesma ordem de seções,
+  mesmos textos e preços; visual novo com as cores da marca (vinho, magenta, rosa, creme; verde nos botões).
+- A oferta troca sozinha pela regra da original, no horário de Brasília: domingo a partir das 10h45 e segunda = 12x de
+  R$ 279,90 / R$ 2.797,90; terça e quarta = 12x de R$ 297,90 / R$ 2.997,90; quinta a domingo 10h44 = inscrições fechadas
+  (lista de espera). Regra e preços em `js/config.js` (`estado`). Pra ver cada versão: `?estado=2797`, `?estado=2997`,
+  `?estado=espera`.
+- **`link_checkout` das duas ofertas está vazio**: sem ele o botão de compra não abre o formulário. Falta o link da Guru
+  do Programa Conceber da T58 (pedido à Bruna). Na original o redirecionamento estava dentro do formulário do Elementor
+  "[PC-LPS] PRÉ-CHECKOUT | VENDAS", fora do código público.
+- `lancamento` e `utm_campaign` do pré-checkout: a original mandava "PCT32"; pus "PCT58", a confirmar.
+- Formulário de pré-checkout: o mesmo de `ddt/shared/precheckout.js`, com as cores da página pelas variáveis `--pc-*`.
+- Conferida em 1440 e 390 no Chrome e no WebKit (nada fora da tela, todas as imagens, formulário abrindo com link).

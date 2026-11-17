@@ -73,3 +73,7 @@
 # Detox da Tentante (ddt) — imagens 1 dia; css e js compartilhados seguem o baseline de 5 min e levam ?v= no endereço
 /ddt/*/assets/*
   Cache-Control: public, max-age=86400
+
+# Programa Conceber, página de venda (pc-lps) — imagens 1 dia; css e js levam ?v= no endereço
+/pc-lps/assets/*
+  Cache-Control: public, max-age=86400
