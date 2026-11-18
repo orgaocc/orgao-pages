@@ -263,18 +263,26 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
 .c-barra .btn { width: 100%; flex: none; padding: 12px 24px; font-size: 14px; background: #fff; color: var(--c-escura); box-shadow: none; }
 .c-barra .btn:hover { background: var(--c-clara); }
 
-.c-rodape { background: #303030; color: #fff; padding: 56px 0 0; text-align: center; font-size: 14px; line-height: 24px; font-weight: 500; }
-.c-rodape-miolo { display: grid; justify-items: center; gap: 16px; }
-.c-rodape p { margin: 0; color: #fff; }
-.c-rodape a { color: #fff; text-decoration: none; }
-.c-rodape a:hover { text-decoration: underline; }
-.c-rodape-logo { width: 152px; height: auto; }
-.c-redes { display: flex; gap: 16px; margin-top: 8px; }
-.c-redes a { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .12); }
-.c-redes a:hover { background: rgba(255, 255, 255, .24); text-decoration: none; }
-.c-redes svg { width: 16px; height: 16px; fill: #fff; }
-.c-cnpj { margin-top: 40px; background: #3b3b3b; padding: 16px 24px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: .02em; }
-.c-cnpj img { width: 16px; height: 16px; flex: none; }
+/* rodapé no tom da página: fundo escuro do tema, tudo alinhado no container, CNPJ discreto embaixo */
+.c-rodape { background: var(--c-escura); color: rgba(255, 255, 255, .72); padding: 56px 0 32px; font-size: 14px; line-height: 24px; font-weight: 400; text-align: left; }
+.c-rodape a { font-weight: 500; }
+.c-rodape p { margin: 0; }
+.c-rodape a { color: #fff; text-decoration: none; transition: color .15s; }
+.c-rodape a:hover { color: var(--c-clara); }
+.c-rodape-grade { display: grid; gap: 32px; }
+.c-rodape-marca { display: grid; gap: 16px; justify-items: start; }
+.c-rodape-logo { width: 136px; height: auto; }
+.c-rodape-links { display: grid; gap: 8px; justify-items: start; }
+.c-redes { display: flex; gap: 8px; }
+.c-redes a { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 1px solid rgba(255, 255, 255, .24); transition: background .15s, border-color .15s; }
+.c-redes a:hover { background: #fff; border-color: #fff; }
+.c-redes svg { width: 16px; height: 16px; fill: #fff; transition: fill .15s; }
+.c-redes a:hover svg { fill: var(--c-escura); }
+.c-cnpj {
+  margin-top: 40px !important; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .12);
+  display: flex; align-items: center; gap: 12px; font-size: 12px; line-height: 16px; letter-spacing: .04em; color: rgba(255, 255, 255, .56);
+}
+.c-cnpj img { width: 16px; height: 16px; flex: none; opacity: .7; }
 .c-modal { background: var(--c-fundo); border-radius: 12px; }
 .c-modal-titulo { font-family: var(--serif); font-size: 22px; line-height: 30px; margin-bottom: 16px; }
 .c-modal .campo, .c-modal .hr-toggle { background: #fff; }
@@ -308,6 +316,7 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
 
 /* ---------- desktop ---------- */
 @media (min-width: 1024px) {
+  .c-rodape-grade { grid-template-columns: 1.2fr 1fr auto; align-items: start; gap: 64px; }
   .captura section { padding: 96px 0; }
   .c-titulo-centro { font-size: 40px; line-height: 48px; margin-bottom: 56px; }
 
