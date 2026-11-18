@@ -38,7 +38,7 @@ const FAIXA = [...alunas.map((f) => fotoAluna(f, false)), ...alunas.map((f) => f
 // cada print dentro de um celular: mesma moldura pra todos, o print rola dentro da tela e amplia no clique
 const PRINTS = lista('depoimento-').map((f, i) => {
   const [w, h] = medidas(join(IMG, f));
-  return `    <button class="c-celular" type="button" data-zoom="/webinar/img/${f}" aria-label="Ampliar o depoimento ${i + 1}"><span class="c-tela"><img src="/webinar/img/${f}" alt="Depoimento de aluna ${i + 1}" width="${w}" height="${h}" loading="lazy"></span></button>`;
+  return `        <button class="c-print" type="button" data-zoom="/webinar/img/${f}" aria-label="Ampliar o depoimento ${i + 1}"><img src="/webinar/img/${f}" alt="Depoimento de aluna ${i + 1}" width="${w}" height="${h}" loading="lazy"></button>`;
 }).join('\n');
 
 const modelo = readFileSync(join(AQUI, '_modelo.html'), 'utf8');

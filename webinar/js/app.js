@@ -363,28 +363,23 @@
   function initPrints() {
     var trilho = document.querySelector('[data-prints]');
     if (!trilho) return;
-    var volta = document.querySelector('[data-prints-volta]');
-    var vai = document.querySelector('[data-prints-vai]');
-    var barra = document.querySelector('[data-prints-barra]');
-    function passo() {
-      var itens = trilho.children;
-      if (itens.length < 2) return 300;
-      return itens[1].getBoundingClientRect().left - itens[0].getBoundingClientRect().left;
+    // mural: mostra uma parte e abre o resto no botão; se tudo já cabe, o botão some
+    var mural = document.querySelector('[data-mural]');
+    var acao = document.querySelector('[data-mural-acao]');
+    var abrir = document.querySelector('[data-mural-abrir]');
+    function conferirAltura() {
+      if (!mural || !acao || mural.classList.contains('aberto')) return;
+      var cabe = trilho.scrollHeight <= mural.clientHeight + 2;
+      acao.hidden = cabe;
+      mural.classList.toggle('cabe', cabe);
     }
-    function atualizar() {
-      var max = trilho.scrollWidth - trilho.clientWidth;
-      if (volta) volta.disabled = trilho.scrollLeft <= 2;
-      if (vai) vai.disabled = trilho.scrollLeft >= max - 2;
-      if (barra) {
-        var visivel = trilho.clientWidth / trilho.scrollWidth;
-        barra.style.width = Math.min(100, (visivel + (1 - visivel) * (max > 0 ? trilho.scrollLeft / max : 1)) * 100) + '%';
-      }
-    }
-    if (volta) volta.addEventListener('click', function () { trilho.scrollBy({ left: -passo(), behavior: 'smooth' }); });
-    if (vai) vai.addEventListener('click', function () { trilho.scrollBy({ left: passo(), behavior: 'smooth' }); });
-    trilho.addEventListener('scroll', atualizar, { passive: true });
-    window.addEventListener('resize', atualizar);
-    atualizar();
+    if (abrir) abrir.addEventListener('click', function () {
+      mural.classList.add('aberto');
+      acao.hidden = true;
+    });
+    window.addEventListener('resize', conferirAltura);
+    window.addEventListener('load', conferirAltura);
+    conferirAltura();
 
     var zoom = document.getElementById('zoom-print');
     if (!zoom) return;
