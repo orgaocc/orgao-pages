@@ -208,7 +208,7 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
 
 /* ---------- para quem: foto em cartão + seis cartões ---------- */
 .c-pq-grade { display: grid; gap: 16px; }
-.c-pq-foto { border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 3; }
+.c-pq-foto { border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 5; margin: 0; }
 .c-pq-foto img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
 .c-perfis { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .c-perfis li { position: relative; font-size: 18px; line-height: 26px; padding: 24px 24px 24px 24px; }
@@ -221,7 +221,7 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
   padding: 48px 24px; overflow: hidden;
 }
 .c-polaroid {
-  align-self: center; width: 240px; background: #fff; padding: 8px 8px 40px; border-radius: 4px;
+  align-self: center; width: 280px; background: #fff; padding: 8px 8px 40px; border-radius: 4px;
   transform: rotate(-3deg); box-shadow: 0 24px 48px rgba(0, 0, 0, .3);
 }
 .c-polaroid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border-radius: 2px; }
@@ -239,17 +239,11 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
 .c-linha span:empty { display: none; }
 .c-chamada .btn { max-width: 400px; }
 
-/* ---------- quem é: círculo com halo + texto com a frase grande ---------- */
+/* ---------- quem é: retrato grande (fica parado no computador enquanto o texto corre) ---------- */
 .c-quem { background: var(--c-fundo-2); }
-.c-quem-grade { display: flex; flex-direction: column; gap: 48px; }
-.c-circulo { position: relative; width: 240px; margin: 16px auto 0; }
-.c-circulo img { width: 100%; aspect-ratio: 1; border-radius: 50%; object-fit: cover; }
-.c-circulo::before {
-  content: ""; position: absolute; inset: -16px; border-radius: 50%; border: 1px solid var(--c-cor); opacity: .5;
-}
-.c-circulo::after {
-  content: ""; position: absolute; inset: -32px; border-radius: 50%; border: 1px dashed var(--c-cor); opacity: .25;
-}
+.c-quem-grade { display: flex; flex-direction: column; gap: 40px; }
+.c-quem-foto { margin: 0; border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 5; }
+.c-quem-foto img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
 .c-quem-texto h2 { font-size: 32px; line-height: 40px; margin-bottom: 24px; }
 .c-quem-texto p { font-size: 16px; line-height: 26px; }
 .c-quem .c-forte {
@@ -259,10 +253,33 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
 .c-quem .c-tres { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 32px; color: var(--c-cor); margin-top: 32px; }
 
 /* ---------- barra fixa, rodapé, modal ---------- */
-.c-barra { background: color-mix(in srgb, var(--c-fundo) 92%, transparent); backdrop-filter: blur(8px); border-top: 1px solid var(--c-fio); padding: 0 !important; }
-.c-barra .container { padding: 8px 16px; justify-content: center; }
-.c-barra .btn { max-width: 400px; padding: 16px 24px; }
-.c-rodape { padding: 24px 0; text-align: center; font-size: 14px; font-weight: 500; color: var(--c-suave); border-top: 1px solid var(--c-fio); }
+.c-barra {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--c-escura); color: #fff;
+  padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -8px 24px rgba(0, 0, 0, .12);
+  transform: translateY(100%); visibility: hidden; transition: transform .4s, visibility .4s;
+}
+.c-barra.mostrar { transform: none; visibility: visible; }
+.c-barra-miolo { display: flex; flex-direction: column; align-items: stretch; gap: 8px; padding-top: 12px; padding-bottom: 12px; }
+.c-barra-info { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0; font-size: 12px; line-height: 16px; color: rgba(255, 255, 255, .8); white-space: nowrap; }
+.c-barra-info i { width: 8px; height: 8px; border-radius: 50%; background: var(--c-clara); flex: none; animation: c-pulsar 1.6s ease-out infinite; }
+.c-barra-info > span { display: flex; gap: 8px; }
+.c-barra-info > span > span:not(:empty)::before { content: "·"; margin-right: 8px; color: var(--c-clara); }
+.c-barra-info b { color: #fff; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.c-barra .btn { width: 100%; flex: none; padding: 12px 24px; font-size: 14px; background: #fff; color: var(--c-escura); box-shadow: none; }
+.c-barra .btn:hover { background: var(--c-clara); }
+
+.c-rodape { background: #303030; color: #fff; padding: 56px 0 0; text-align: center; font-size: 14px; line-height: 24px; font-weight: 500; }
+.c-rodape-miolo { display: grid; justify-items: center; gap: 16px; }
+.c-rodape p { margin: 0; color: #fff; }
+.c-rodape a { color: #fff; text-decoration: none; }
+.c-rodape a:hover { text-decoration: underline; }
+.c-rodape-logo { width: 152px; height: auto; }
+.c-redes { display: flex; gap: 16px; margin-top: 8px; }
+.c-redes a { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .12); }
+.c-redes a:hover { background: rgba(255, 255, 255, .24); text-decoration: none; }
+.c-redes svg { width: 16px; height: 16px; fill: #fff; }
+.c-cnpj { margin-top: 40px; background: #3b3b3b; padding: 16px 24px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: .02em; }
+.c-cnpj img { width: 16px; height: 16px; flex: none; }
 .c-modal { background: var(--c-fundo); border-radius: 12px; }
 .c-modal-titulo { font-family: var(--serif); font-size: 22px; line-height: 30px; margin-bottom: 16px; }
 .c-modal .campo, .c-modal .hr-toggle { background: #fff; }
@@ -341,19 +358,25 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
   .c-versiculo-texto { min-height: 560px; }
   .c-versiculo p { font-size: 56px; line-height: 64px; max-width: 680px; }
 
-  .c-pq-grade { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
-  .c-pq-foto { grid-row: span 2; aspect-ratio: auto; }
-  .c-perfis { display: contents; }
+  .c-pq-grade { grid-template-columns: 5fr 7fr; gap: 24px; }
+  .c-pq-foto { aspect-ratio: auto; min-height: 560px; }
+  .c-perfis { grid-template-columns: 1fr 1fr; gap: 24px; }
   .c-perfis li { padding: 32px; font-size: 18px; line-height: 28px; }
 
   .c-chamada { padding-top: 0 !important; }
-  .c-chamada-cartao { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: center; padding: 80px; }
-  .c-polaroid { width: 100%; max-width: 360px; padding: 12px 12px 56px; }
+  .c-chamada-cartao { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 80px; }
+  .c-polaroid { width: 100%; max-width: 480px; padding: 16px 16px 64px; }
+
+  .c-barra-miolo { flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; padding-top: 16px; padding-bottom: 16px; }
+  .c-barra-info { font-size: 16px; line-height: 24px; gap: 12px; }
+  .c-barra-info > span { gap: 12px; }
+  .c-barra-info > span > span:not(:empty)::before { margin-right: 12px; }
+  .c-barra .btn { width: auto; padding: 16px 40px; }
   .c-chamada-texto h2 { font-size: 40px; line-height: 48px; }
   .c-chamada-texto p { font-size: 18px; line-height: 28px; }
 
-  .c-quem-grade { display: grid; grid-template-columns: 5fr 7fr; gap: 96px; align-items: start; }
-  .c-circulo { width: 100%; max-width: 400px; margin: 48px auto 0; position: sticky; top: 96px; }
+  .c-quem-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .c-quem-foto { position: sticky; top: 48px; }
   .c-quem-texto h2 { font-size: 40px; line-height: 48px; }
   .c-quem-texto p { font-size: 18px; line-height: 28px; }
   .c-quem .c-forte { font-size: 40px; line-height: 48px; }
@@ -362,5 +385,6 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
 
 @media (prefers-reduced-motion: reduce) {
   .c-faixa-trilho { animation: none; }
-  .c-etiqueta i, .c-selo i { animation: none; }
+  .c-etiqueta i, .c-selo i, .c-barra-info i { animation: none; }
+  .c-barra { transition: none; }
 }

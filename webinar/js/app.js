@@ -349,7 +349,9 @@
       if (aguardando) return;
       aguardando = true;
       requestAnimationFrame(function () {
-        barra.classList.toggle('mostrar', hero.getBoundingClientRect().bottom < 0);
+        var rodape = document.getElementById('rodape');
+        var rodapeChegou = rodape && rodape.getBoundingClientRect().top < window.innerHeight;
+        barra.classList.toggle('mostrar', hero.getBoundingClientRect().bottom < 0 && !rodapeChegou);
         aguardando = false;
       });
     }
