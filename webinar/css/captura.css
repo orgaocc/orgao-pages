@@ -214,6 +214,12 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
   transform: rotate(-3deg); box-shadow: 0 24px 48px rgba(0, 0, 0, .3);
 }
 .c-polaroid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border-radius: 2px; }
+/* pilha de três polaroides: duas atrás, viradas pros lados, e a da frente quase reta */
+.c-polaroides { position: relative; align-self: center; width: 248px; margin: 24px auto 16px; }
+.c-polaroides .c-polaroid { width: 100%; margin: 0; }
+.c-polaroides .c-polaroid:nth-child(1) { position: absolute; inset: 0; transform: translate(-32px, 8px) rotate(-10deg); }
+.c-polaroides .c-polaroid:nth-child(2) { position: absolute; inset: 0; transform: translate(32px, 0) rotate(8deg); }
+.c-polaroides .c-polaroid:nth-child(3) { position: relative; transform: rotate(-2deg); }
 .c-chamada-texto h2 { color: #fff; font-size: 32px; line-height: 40px; margin-bottom: 24px; }
 .c-chamada-texto p { color: rgba(255, 255, 255, .85); font-size: 16px; line-height: 26px; }
 .c-chamada-texto strong { color: #fff; }
@@ -355,6 +361,9 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
   .c-chamada { padding-top: 0 !important; }
   .c-chamada-cartao { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 80px; }
   .c-polaroid { width: 100%; max-width: 480px; padding: 16px 16px 64px; }
+  .c-polaroides { width: 100%; max-width: 360px; margin: 0 auto; }
+  .c-polaroides .c-polaroid:nth-child(1) { transform: translate(-64px, 16px) rotate(-12deg); }
+  .c-polaroides .c-polaroid:nth-child(2) { transform: translate(64px, 0) rotate(9deg); }
 
   .c-barra-miolo { flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; padding-top: 16px; padding-bottom: 16px; }
   .c-barra-info { font-size: 16px; line-height: 24px; gap: 12px; }
