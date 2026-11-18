@@ -1,0 +1,8 @@
+# Fica no repo, mas não vai para o ar em p.grupoconceber.com (o Worker publica a pasta inteira)
+.git
+.gitignore
+.lovable
+vault
+*.md
+*.sql
+wrangler.toml
