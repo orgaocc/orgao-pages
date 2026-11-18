@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://forms.grupoconceber.com">
 
 <!-- Pixel X App - START -->
 <script type='text/javascript'>
@@ -59,87 +60,18 @@ body { background: var(--fundo); color: #fff; }
 .ob-sub { margin-top: 16px; max-width: 640px; font-size: 18px; line-height: 28px; color: rgba(255, 255, 255, .82); text-wrap: pretty; }
 .ob-sub b { color: var(--verde); font-weight: 700; }
 
-/* ---------- pesquisa: cartão claro, uma pergunta por tela ---------- */
 .ob-cartao {
-  margin-top: 40px; width: 100%; max-width: 760px; border-radius: 24px; overflow: hidden; text-align: left;
-  background: var(--verde-claro); color: #2f3a17; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .7), 0 0 0 8px rgba(255, 255, 255, .06);
+  margin-top: 40px; width: 100%; max-width: 880px; padding: 8px; border-radius: 24px;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .6);
 }
-.pq-topo { display: flex; align-items: center; gap: 16px; padding: 24px 40px 0; min-height: 48px; }
-.pq-contagem { flex: none; min-width: 64px; font-size: 14px; line-height: 24px; font-weight: 700; color: #5d8656; }
-.pq-progresso { flex: 1; height: 4px; border-radius: 4px; background: rgba(93, 134, 86, .18); overflow: hidden; }
-.pq-progresso span { display: block; height: 100%; width: 0; border-radius: 4px; background: #5d8656; transition: width .4s ease; }
-.pq-miolo { min-height: 480px; display: flex; padding: 32px 40px 40px; }
-.pq-tela { width: 100%; align-self: center; }
-.pq-entra { animation: pq-entra .35s ease both; }
-.pq-entra-volta { animation: pq-volta .35s ease both; }
-@keyframes pq-entra { from { opacity: 0; transform: translateY(16px); } }
-@keyframes pq-volta { from { opacity: 0; transform: translateY(-16px); } }
-
-.pq-abertura { text-align: center; max-width: 560px; margin: 0 auto; }
-.pq-abertura-titulo { font: 700 32px/40px var(--serif); color: #2f3a17; margin-bottom: 16px; }
-.pq-abertura p { font-size: 18px; line-height: 28px; color: #4f5b38; }
-.pq-abertura strong { font-style: italic; color: #2f3a17; }
-.pq-assinatura { margin-top: 24px; font-family: var(--serif); font-style: italic; }
-
-.pq-num { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #5d8656; margin-bottom: 8px; }
-.pq-num svg { width: 16px; height: 16px; }
-.pq-titulo { font: 700 24px/32px var(--serif); color: #2f3a17; text-wrap: pretty; }
-.pq-req { color: #c0392b; margin-left: 4px; }
-.pq-dica { margin-top: 16px; font-size: 14px; line-height: 24px; color: #6b7752; }
-
-.pq-campo {
-  margin-top: 24px; width: 100%; border: 0; border-bottom: 2px solid rgba(93, 134, 86, .4); background: transparent;
-  font: 400 22px/32px var(--sans); color: #2f3a17; padding: 8px 0; outline: none; border-radius: 0;
+.ob-cartao iframe { display: block; width: 100%; height: 560px; border: 0; border-radius: 16px; background: var(--verde-claro); }
+.ob-alt { margin-top: 24px; display: grid; justify-items: center; gap: 8px; font-size: 14px; line-height: 24px; color: rgba(255, 255, 255, .6); }
+.ob-alt a {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 999px; text-decoration: none;
+  font-weight: 700; color: var(--btn-tinta); background: linear-gradient(90deg, var(--btn-a), var(--btn-b));
 }
-.pq-campo:focus { border-bottom-color: #5d8656; }
-.pq-campo::placeholder { color: rgba(79, 91, 56, .4); }
-
-.pq-opcoes { margin-top: 24px; display: grid; gap: 8px; max-width: 520px; }
-.pq-opcoes--grade { max-width: none; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.pq-opcao {
-  display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 16px; border-radius: 12px; cursor: pointer; text-align: left;
-  border: 1px solid rgba(93, 134, 86, .35); background: rgba(255, 255, 255, .6); color: #2f3a17; font: 500 16px/24px var(--sans);
-  transition: background .15s, border-color .15s, transform .15s;
-}
-.pq-opcao:hover { background: #fff; border-color: #5d8656; }
-.pq-opcao:active { transform: scale(.99); }
-.pq-letra {
-  flex: none; width: 24px; height: 24px; border-radius: 6px; display: grid; place-items: center;
-  font-size: 12px; font-weight: 700; border: 1px solid rgba(93, 134, 86, .5); color: #5d8656; background: #fff;
-}
-.pq-opcao.marcada { background: #5d8656; border-color: #5d8656; color: #fff; }
-.pq-opcao.marcada .pq-letra { background: #fff; color: #5d8656; border-color: #fff; }
-
-.pq-escala { margin-top: 24px; display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 8px; }
-.pq-nota {
-  height: 48px; border-radius: 12px; border: 1px solid rgba(93, 134, 86, .35); background: rgba(255, 255, 255, .6);
-  font: 700 16px/24px var(--sans); color: #2f3a17; cursor: pointer;
-}
-.pq-nota:hover { background: #fff; border-color: #5d8656; }
-.pq-nota.marcada { background: #5d8656; border-color: #5d8656; color: #fff; }
-.pq-escala-pontas { display: flex; justify-content: space-between; margin-top: 8px; font-size: 14px; color: #6b7752; }
-
-.pq-acoes { margin-top: 32px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.pq-acoes--centro { justify-content: center; }
-.pq-ok {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 32px; border: 0; border-radius: 999px;
-  cursor: pointer; text-decoration: none; font: 700 16px/24px var(--sans); color: var(--btn-tinta);
-  background: linear-gradient(90deg, var(--btn-a), var(--btn-b)); box-shadow: 0 8px 24px -8px rgba(255, 171, 1, .6);
-}
-.pq-ok:hover { filter: brightness(1.05); }
-.pq-ok:disabled { opacity: .6; cursor: wait; }
-.pq-ok svg { width: 20px; height: 20px; fill: currentColor; }
-.pq-voltar { border: 0; background: none; padding: 8px; cursor: pointer; font: 500 14px/24px var(--sans); color: #5d8656; text-decoration: underline; text-underline-offset: 4px; }
-.pq-erro { margin-top: 16px; font-size: 14px; line-height: 24px; font-weight: 700; color: #b03a2e; }
-
-.pq-pronto { text-align: center; }
-.pq-pronto p { margin-top: 8px; font-size: 18px; line-height: 28px; color: #4f5b38; }
-.pq-pronto-ok { margin: 0 auto 24px; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: #5d8656; color: #fff; }
-.pq-pronto-ok svg { width: 28px; height: 28px; }
-.pq-grupo { background: #1fa855; color: #fff; box-shadow: 0 8px 24px -8px rgba(31, 168, 85, .6); }
-.pq-sem-js { padding: 40px; text-align: center; }
-.pq :focus { outline: none; }
-.pq :focus-visible { outline: 3px solid rgba(93, 134, 86, .55); outline-offset: 2px; }
+.ob-alt a svg { width: 14px; height: 14px; }
 
 @media (max-width: 720px) {
   .ob { padding: 40px 0 64px; }
@@ -148,19 +80,9 @@ body { background: var(--fundo); color: #fff; }
   .ob-ok { margin-top: 24px; width: 48px; height: 48px; }
   .ob h1 { font-size: 32px; line-height: 40px; }
   .ob-sub { font-size: 16px; line-height: 24px; }
-  .ob-cartao { margin-top: 32px; border-radius: 20px; }
-  .pq-topo { padding: 16px 24px 0; }
-  .pq-miolo { min-height: 520px; padding: 24px 24px 32px; }
-  .pq-abertura-titulo { font-size: 24px; line-height: 32px; }
-  .pq-abertura p, .pq-pronto p { font-size: 16px; line-height: 24px; }
-  .pq-titulo { font-size: 22px; line-height: 30px; }
-  .pq-campo { font-size: 18px; line-height: 28px; }
-  .pq-opcoes--grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pq-escala { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .pq-ok { width: 100%; }
-  .pq-acoes { flex-direction: column; align-items: stretch; gap: 8px; }
+  .ob-cartao { margin-top: 32px; padding: 4px; border-radius: 20px; }
+  .ob-cartao iframe { height: 600px; }
 }
-@media (prefers-reduced-motion: reduce) { .pq-entra, .pq-entra-volta { animation: none; } }
 </style>
 </head>
 <body>
@@ -184,15 +106,14 @@ body { background: var(--fundo); color: #fff; }
     <h1>Bem-vinda ao <em>Detox da Tentante</em></h1>
     <p class="ob-sub"><b>Responda a pesquisa abaixo para confirmar sua inscrição</b> e receber o link do grupo exclusivo de whatsapp</p>
 
-    <!-- Pesquisa na própria página: mesmas perguntas do Fluent Forms 102, enviada pra ele (pesquisa.js) -->
-    <section class="ob-cartao pq" aria-label="Pesquisa do Detox da Tentante">
-      <div class="pq-topo">
-        <span class="pq-contagem" data-pesquisa-contagem></span>
-        <div class="pq-progresso" aria-hidden="true"><span data-pesquisa-barra></span></div>
-      </div>
-      <div class="pq-miolo" data-pesquisa aria-live="polite"></div>
-      <noscript><p class="pq-sem-js"><a href="https://forms.grupoconceber.com/?fluent-form=102">Responder a pesquisa</a></p></noscript>
-    </section>
+    <div class="ob-cartao">
+      <iframe id="fluentform" src="https://forms.grupoconceber.com/?fluent-form=102&amp;embedded=1" title="Pesquisa do Detox da Tentante"></iframe>
+    </div>
+
+    <!-- Enquanto o forms.grupoconceber.com não libera esta página, a pesquisa pode não aparecer no quadro acima: o botão abre ela inteira. -->
+    <div class="ob-alt">
+      <a href="https://forms.grupoconceber.com/?fluent-form=102" rel="noopener">Abrir a pesquisa em tela cheia <svg><use href="#i-seta"/></svg></a>
+    </div>
   </div>
 </main>
 
@@ -211,9 +132,6 @@ body { background: var(--fundo); color: #fff; }
   </div>
   <div class="cnpj"><img src="../shared/assets/orgao.svg" width="16" height="16" alt=""><span>48.966.701/0001-06 ORGAO CONSULTORIA E ACELERACAO DE NEGOCIOS LTDA</span></div>
 </footer>
-
-<script src="perguntas.js?v=20261118"></script>
-<script src="pesquisa.js?v=20261118"></script>
 
 </body>
 </html>
