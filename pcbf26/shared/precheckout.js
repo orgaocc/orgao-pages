@@ -164,7 +164,7 @@
     function ir() { if (!foi) { foi = true; window.location.href = destino; } }
     // não segura a compradora: no máximo 2,5 s esperando o registro do lead
     setTimeout(ir, 2500);
-    // mesmo formato que o process-lead da Supabase mandava pro n8n (form-urlencoded); no-cors porque a resposta não é lida
+    // lead em form-urlencoded, mesmo formato que o leads_captacao já recebe; no-cors porque a resposta não é lida
     fetch(N8N_LEADS, { method: 'POST', mode: 'no-cors', keepalive: true, body: new URLSearchParams(corpo) })
       .catch(function () {}).then(ir);
   });

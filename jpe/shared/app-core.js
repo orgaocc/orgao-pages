@@ -31,7 +31,7 @@ function applyDates() {
   document.querySelectorAll('[data-urgency]').forEach(el => el.textContent = urgencyText);
 }
 
-// datas e link do ingresso vêm só do config.js (a leitura do launch_config na Supabase saiu em 18/11)
+// datas e link do ingresso vêm só do config.js
 function loadDates() {
   applyDates();
 }
@@ -146,7 +146,7 @@ async function handleSubmit(e) {
   };
 
   try {
-    // direto pro n8n, no mesmo formato que o process-lead da Supabase mandava (form-urlencoded)
+    // direto pro n8n (leads_captacao), em form-urlencoded
     await fetch('https://n8n.orgao.cc/webhook/leads_captacao', {
       method: 'POST', mode: 'no-cors', keepalive: true,
       body: new URLSearchParams(body),
