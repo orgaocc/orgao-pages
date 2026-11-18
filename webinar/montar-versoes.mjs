@@ -11,9 +11,10 @@ const IMG = join(AQUI, 'img');
 const VERSOES = [
   { pasta: 'v1', tema: 'oliva', cor: '#74815a', form: 'webinar_v1',
     headline: 'Descubra o real motivo que está te impedindo de engravidar, <em>mesmo com os seus exames normais.</em>' },
-  { pasta: 'v2', tema: 'rose', cor: '#b0646a', form: 'webinar_v2',
+  { pasta: 'v2', tema: 'rose', cor: '#b0646a', form: 'webinar_v2', cel: true,
     headline: 'Descubra de uma vez por todas o que está atrapalhando você de engravidar, <em>antes de mais um teste negativo ou de ir direto para a FIV.</em>' },
   { pasta: 'v3', tema: 'cafe', cor: '#74402f', form: 'webinar_v3',
+    longa: true,
     headline: 'Saia de um único encontro sabendo <em>o dia da sua ovulação</em>, qual fase da sua fertilidade está em desequilíbrio e o que mudar na sua rotina nos próximos 7 dias.' },
 ];
 
@@ -49,6 +50,9 @@ for (const v of VERSOES) {
     .replaceAll('{{TEMA}}', v.tema)
     .replaceAll('{{COR}}', v.cor)
     .replaceAll('{{FORM}}', v.form)
+    // fotos da Dra. Talita: cada versão tem o seu conjunto (v1 sem sufixo; v2 e v3 com -v2/-v3, ver orgao-cc/material-conceber/LEIA-ME.md)
+    .replaceAll('{{H1_CLASSE}}', v.longa ? ' class="c-h1-longa"' : v.cel ? ' class="c-h1-cel"' : '')
+    .replaceAll('{{SUF}}', v.pasta === 'v1' ? '' : '-' + v.pasta)
     .replace('{{FAIXA}}', FAIXA)
     .replace('{{PRINTS}}', PRINTS);
   if (/\{\{[A-Z_]+\}\}/.test(html)) throw new Error(`${v.pasta}: sobrou marcador no HTML`);

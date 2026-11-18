@@ -281,6 +281,24 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
   .c-topo-lado { display: contents; }
   .c-topo-foto::before { inset: 6px -6px -6px 6px; }
   .c-topo h1, .c-sub, .c-form-cartao, .c-autoridade { grid-column: 1 / -1; }
+  /* o formulário vem logo depois do título, pra aparecer inteiro ao abrir; o subtítulo desce pra baixo dele */
+  .c-topo h1 { grid-row: 3; }
+  .c-form-cartao { grid-row: 4; margin-bottom: 24px; }
+  .c-sub { grid-row: 5; margin-bottom: 0; }
+  .c-autoridade { grid-row: 6; }
+  /* compacto no celular pra caber o formulário inteiro na primeira tela */
+  .c-topo { padding-top: 8px !important; }
+  .c-topo-grid { grid-template-columns: minmax(0, 1fr) 96px; }
+  .c-marca { width: 120px; margin-bottom: 8px; }
+  .c-topo-foto { margin: 8px 0 16px; }
+  .c-arco { aspect-ratio: 1 / 1; }
+  .c-topo h1 { font-size: 28px; line-height: 36px; margin-bottom: 16px; }
+  .c-topo h1.c-h1-longa, .c-topo h1.c-h1-cel { font-size: 24px; line-height: 32px; }
+  .c-form-cartao { padding: 12px; }
+  .c-form .campo, .c-form .hr-toggle { padding-top: 12px; padding-bottom: 12px; }
+  .c-form .btn { padding-top: 12px; padding-bottom: 12px; margin-top: 0; }
+  .c-form .hr-toggle { font-size: 14px; padding-left: 16px; padding-right: 40px; }
+  .c-form .campo { padding-left: 16px; padding-right: 16px; }
   .c-selo { display: none; }
 
   .c-ferrugem { min-height: 0; }
@@ -303,17 +321,22 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
   .captura section { padding: 96px 0; }
   .c-titulo-centro { font-size: 40px; line-height: 48px; margin-bottom: 56px; }
 
-  .c-topo { padding: 48px 0 96px !important; }
-  .c-topo-grid { display: grid; grid-template-columns: minmax(0, 1fr) 504px; gap: 64px; align-items: center; }
-  .c-topo-lado { gap: 40px; padding-right: 24px; }
-  .c-topo-foto { order: 0; max-width: none; margin: 0; }
+  /* topo: texto à esquerda; à direita a foto com o formulário por cima da parte de baixo dela,
+     pra o formulário aparecer inteiro na primeira tela (pedido do Luan, 18/11) */
+  .c-topo { padding: 32px 0 96px !important; }
+  .c-topo-grid { display: grid; grid-template-columns: minmax(0, 1fr) 480px; gap: 64px; align-items: start; }
+  .c-topo-texto { padding-top: 8px; }
+  .c-topo-lado { position: relative; padding-right: 24px; }
+  .c-topo-foto { order: 0; max-width: none; margin: 0 0 0 40px; width: calc(100% - 40px); }
+  .c-arco { aspect-ratio: 1 / 1; }
   .c-topo-foto::before { inset: 24px -24px -24px 24px; }
-  .c-marca { width: 176px; margin-bottom: 32px; }
+  .c-marca { width: 160px; margin-bottom: 24px; }
   .c-topo h1 { font-size: 48px; line-height: 56px; margin-bottom: 24px; }
-  .c-sub { font-size: 18px; line-height: 28px; margin-bottom: 32px; max-width: 600px; }
-  .c-form-cartao { padding: 24px; max-width: 600px; }
-  .c-autoridade { margin-top: 24px; }
-  .c-selo { left: -24px; bottom: 40px; padding: 16px 24px; font-size: 16px; }
+  .c-topo h1.c-h1-longa { font-size: 40px; line-height: 48px; }
+  .c-sub { font-size: 18px; line-height: 28px; margin-bottom: 0; max-width: 600px; }
+  .c-form-cartao { position: relative; z-index: 2; margin-top: -184px; padding: 24px; }
+  .c-autoridade { margin-top: 32px; max-width: 560px; }
+  .c-selo { left: -24px; top: 32px; bottom: auto; padding: 12px 24px; font-size: 16px; }
 
   .c-faixa { padding-bottom: 96px !important; }
   .c-faixa-trilho { gap: 24px; }
