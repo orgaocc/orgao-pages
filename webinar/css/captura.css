@@ -1,0 +1,196 @@
+/* ===========================================================
+   Página de inscrição da imersão (3 versões, 17/11/2026)
+   Copy da Bruna (doc "PÁGINA WEBNÁRIO - DPE"); uma headline e uma cor por versão.
+   Cores: oliva = marca do Detox (#74815a); rosé = Conceber; café = blazer do ensaio da Talita.
+   Tipografia no grid de 8 (+14/18/22). Espaçamento em múltiplos de 8. Vem depois do style.css.
+   =========================================================== */
+:root, [data-tema="oliva"] {
+  --c-fundo: #f7f6ef;
+  --c-fundo-2: #eceee2;
+  --c-cor: #74815a;
+  --c-escura: #4a5536;
+  --c-clara: #dfe5cf;
+  --c-tinta: #262a1f;
+  --c-suave: #5a6050;
+  --c-fio: #d6d9c8;
+}
+[data-tema="rose"] {
+  --c-fundo: #fcf6f4;
+  --c-fundo-2: #f6e6e2;
+  --c-cor: #b0646a;
+  --c-escura: #81434a;
+  --c-clara: #f0d6d3;
+  --c-tinta: #2e2224;
+  --c-suave: #6d5a5c;
+  --c-fio: #ead3cf;
+}
+[data-tema="cafe"] {
+  --c-fundo: #f8f3ee;
+  --c-fundo-2: #eee3d9;
+  --c-cor: #74402f;
+  --c-escura: #4a271c;
+  --c-clara: #e8d6c8;
+  --c-tinta: #2a201b;
+  --c-suave: #6a5a50;
+  --c-fio: #e2d3c6;
+}
+/* variáveis do style.css apontando pras da versão */
+[data-tema] {
+  --rose: var(--c-cor);
+  --rose-dark: var(--c-escura);
+  --deep: var(--c-cor);
+  --cream: #ffffff;
+  --ink: var(--c-tinta);
+  --ink-soft: var(--c-suave);
+  --line: var(--c-fio);
+  --offwhite: var(--c-fundo);
+}
+
+body.captura { background: var(--c-fundo); color: var(--c-tinta); }
+.captura h1, .captura h2 { color: var(--c-tinta); font-weight: 500; }
+.captura em { color: var(--c-cor); }
+.captura section { padding: 64px 0; }
+.captura p + p { margin-top: 16px; }
+
+/* ---------- botão ---------- */
+.captura .btn {
+  border-radius: 8px; padding: 16px 24px; font-size: 16px; font-weight: 700; letter-spacing: .06em;
+  background: var(--c-cor);
+}
+.captura .btn:hover { background: var(--c-escura); }
+
+.c-etiqueta {
+  display: inline-block; background: var(--c-cor); color: #fff; font-size: 14px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; padding: 8px 16px; border-radius: 8px; margin-bottom: 16px;
+}
+
+/* ---------- topo ---------- */
+.c-topo { padding: 32px 0 0 !important; }
+.c-topo-grid { display: flex; flex-direction: column; gap: 32px; }
+.c-marca { width: 160px; height: auto; margin-bottom: 24px; }
+.c-topo h1 { font-size: 32px; line-height: 1.15; margin-bottom: 16px; }
+.c-sub { font-size: 18px; color: var(--c-suave); margin-bottom: 24px; }
+.c-form .campo { background: #fff; border: 1px solid var(--c-fio); }
+.c-form .campo:focus { border-color: var(--c-cor); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-cor) 18%, transparent); }
+.c-form .hr-toggle { background: #fff; border: 1px solid var(--c-fio); text-transform: none; font-size: 16px; color: var(--c-tinta); letter-spacing: 0; }
+.c-form .hr-toggle svg { color: var(--c-cor); }
+.c-form .hr-agora, .c-form .hr-agora i { color: var(--c-cor); }
+.c-form .hr-agora i { background: var(--c-cor); }
+.c-form .hr-opcao:hover { background: var(--c-fundo); }
+.c-autoridade {
+  margin-top: 24px; font-size: 14px; color: var(--c-suave); line-height: 1.6;
+  border-left: 2px solid var(--c-cor); padding-left: 16px;
+}
+.c-topo-foto { margin: 0 -16px; }
+.c-topo-foto img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; }
+
+/* ---------- faixa das alunas ---------- */
+.c-faixa { padding: 16px 0 !important; overflow: hidden; background: var(--c-fundo); }
+.c-faixa-trilho { display: flex; gap: 8px; width: max-content; animation: c-correr 70s linear infinite; }
+.c-faixa-trilho img { height: 200px; width: auto; border-radius: 8px; object-fit: cover; }
+@keyframes c-correr { to { transform: translateX(-50%); } }
+
+/* ---------- depoimentos ---------- */
+.c-depoimentos { background: var(--c-fundo-2); }
+.c-titulo-centro { font-size: 24px; text-align: center; max-width: 720px; margin: 0 auto 32px; }
+.c-prints {
+  display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px;
+  padding: 0 16px 8px; align-items: flex-start; scrollbar-width: none;
+}
+.c-prints::-webkit-scrollbar { display: none; }
+/* mesma altura pra todos os prints; a largura acompanha o formato de cada um */
+.c-prints img {
+  flex: none; height: 440px; width: auto; max-width: 86vw; object-fit: contain; border-radius: 8px;
+  scroll-snap-align: start;
+}
+.c-setas { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+.c-setas button {
+  width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--c-cor); color: var(--c-cor);
+  display: inline-flex; align-items: center; justify-content: center; background: transparent;
+}
+.c-setas button:hover { background: var(--c-cor); color: #fff; }
+.c-setas svg { width: 18px; height: 18px; }
+
+/* ---------- o problema ---------- */
+.c-estreito { max-width: 720px; }
+.c-problema h2 { font-size: 24px; margin-bottom: 24px; }
+.c-problema p { font-size: 16px; }
+.c-destaque { font-family: var(--serif); font-size: 22px; line-height: 1.3; color: var(--c-escura); }
+.c-destaque em { font-style: italic; }
+.c-lista-bloco { margin: 40px 0; }
+.c-lista-titulo { font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--c-cor); margin-bottom: 8px; }
+.c-lista { list-style: none; margin: 0; padding: 0; }
+.c-lista li { display: grid; grid-template-columns: 48px 1fr; gap: 8px; padding: 16px 0; border-top: 1px solid var(--c-fio); font-size: 18px; line-height: 1.4; }
+.c-lista li:last-child { border-bottom: 1px solid var(--c-fio); }
+.c-lista span { font-family: var(--serif); color: var(--c-cor); font-size: 18px; }
+.c-garanta {
+  margin-top: 24px; font-weight: 700; font-size: 18px; color: var(--c-escura);
+  text-decoration: underline; text-decoration-color: var(--c-cor); text-underline-offset: 6px; text-decoration-thickness: 2px;
+  text-align: left;
+}
+.c-garanta:hover { color: var(--c-cor); }
+
+/* ---------- versículo ---------- */
+.c-versiculo { background: var(--c-escura); color: #fff; text-align: center; }
+.c-versiculo blockquote { margin: 0; }
+.c-versiculo p { font-family: var(--serif); font-style: italic; font-size: 32px; line-height: 1.2; }
+.c-versiculo cite { display: block; margin-top: 16px; font-style: normal; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--c-clara); }
+
+/* ---------- duas colunas (para quem, chamada, quem é) ---------- */
+.c-duas { display: flex; flex-direction: column; gap: 32px; }
+.c-duas h2 { font-size: 24px; margin-bottom: 24px; }
+.c-foto { margin: 0; }
+.c-foto img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 25%; border-radius: 12px; }
+.c-perfis { list-style: none; margin: 0; padding: 0; }
+.c-perfis li { padding: 16px 0; border-top: 1px solid var(--c-fio); font-size: 18px; line-height: 1.4; }
+.c-perfis li:last-child { border-bottom: 1px solid var(--c-fio); }
+
+.c-chamada { background: var(--c-fundo-2); }
+.c-frase { margin: 32px 0; padding-left: 16px; border-left: 2px solid var(--c-cor); }
+.c-frase blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.3; color: var(--c-escura); }
+.c-frase figcaption { margin-top: 8px; font-size: 14px; color: var(--c-suave); }
+.c-linha { font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c-escura); margin-bottom: 16px; }
+.c-linha i { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--c-cor); vertical-align: middle; margin: 0 8px; }
+.c-chamada .btn { max-width: 400px; }
+
+.c-quem .c-forte { font-family: var(--serif); font-size: 22px; line-height: 1.3; color: var(--c-escura); }
+
+/* ---------- barra fixa, rodapé, modal ---------- */
+.c-barra { background: var(--c-fundo); border-top: 1px solid var(--c-fio); padding: 0 !important; }
+.c-barra .container { padding: 8px 16px; justify-content: center; }
+.c-barra .btn { max-width: 400px; padding: 16px 24px; }
+.c-rodape { padding: 24px 0; text-align: center; font-size: 14px; color: var(--c-suave); border-top: 1px solid var(--c-fio); }
+.c-modal { background: var(--c-fundo); }
+.c-modal-titulo { font-family: var(--serif); font-size: 22px; line-height: 1.25; margin-bottom: 16px; }
+
+/* ---------- desktop ---------- */
+@media (min-width: 1024px) {
+  .captura section { padding: 96px 0; }
+  .c-topo { padding: 48px 0 64px !important; }
+  .c-topo-grid { flex-direction: row; align-items: stretch; gap: 64px; }
+  .c-topo-texto { flex: 1 1 0; min-width: 0; }
+  .c-topo-foto { flex: 0 0 40%; margin: 0; }
+  .c-topo-foto img { height: 100%; aspect-ratio: auto; max-height: 880px; border-radius: 12px; }
+  .c-marca { width: 192px; }
+  .c-topo h1 { font-size: 40px; }
+  .c-faixa-trilho img { height: 280px; }
+  .c-titulo-centro { font-size: 32px; margin-bottom: 48px; }
+  .c-prints { padding: 0 max(24px, calc((100vw - 1200px) / 2 + 24px)) 8px; scroll-padding: 0 max(24px, calc((100vw - 1200px) / 2 + 24px)); gap: 24px; }
+  .c-prints img { height: 560px; max-width: none; }
+  .c-setas { justify-content: flex-end; }
+  .c-problema h2 { font-size: 32px; }
+  .c-problema p { font-size: 18px; }
+  .c-destaque { font-size: 24px; }
+  .c-versiculo p { font-size: 48px; }
+  .c-duas { flex-direction: row; align-items: center; gap: 64px; }
+  .c-duas > .c-foto { flex: 0 0 42%; }
+  .c-duas > div { flex: 1 1 0; min-width: 0; }
+  .c-duas--inverte { flex-direction: row-reverse; }
+  .c-duas h2 { font-size: 32px; }
+  .c-foto img { aspect-ratio: 4 / 5; }
+  .c-quem .c-duas, .c-quem.c-duas { align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-faixa-trilho { animation: none; }
+}

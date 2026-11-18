@@ -58,3 +58,13 @@ exemplo público (Big Buck Bunny no archive.org), só pra ter imagem; o real vai
 | `js/app.js` | horários, formulário, modal, barra fixa |
 | `js/obrigado.js` | link do WhatsApp e contagem |
 | `css/style.css` | esqueleto visual (paleta da `jpe/cc-v11`) |
+
+## Inscrição da imersão: 3 versões (17/11/2026)
+
+- Pedido da Bruna: a copy do doc "PÁGINA WEBNÁRIO - DPE" com as 3 headlines, cada uma numa cor.
+  `v1/` oliva (marca do Detox) com a H1 · `v2/` rosé com a H2 · `v3/` café com a H3.
+- Editar sempre `_modelo.html` (e `css/captura.css`) e rodar `node webinar/montar-versoes.mjs`; os `v*/index.html` são gerados.
+- Imagens em `img/` (WebP, 1,4 MB): fotos do ensaio da Talita, marca do Detox, 15 prints e 17 fotos de alunas que a Bruna mandou.
+- O primeiro horário já vem escolhido no formato da copy ("Quarta-feira, 18/11, às 7h"); a linha
+  "Imersão gratuita · Ao vivo · [data e horário]" mostra a próxima sessão. O formulário manda também `vk_source` e `vk_ad_id`.
+- Continua em modo de teste (sem `webhook_url`) e `noindex`. Fica só nesta branch (prévia), fora da main.

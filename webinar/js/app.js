@@ -80,24 +80,23 @@
     return itens.slice(0, MOSTRAR);
   }
 
+  /* "[DIA DA SEMANA], [DATA], às [HORÁRIO]" (formato da copy), sempre no horário de Brasília */
+  function textoSessao(d) {
+    var b = emBrasilia(d);
+    var dia = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'][b.getUTCDay()];
+    var hora = b.getUTCHours() + 'h' + (b.getUTCMinutes() ? pad(b.getUTCMinutes()) : '');
+    return dia + ', ' + pad(b.getUTCDate()) + '/' + pad(b.getUTCMonth() + 1) + ', às ' + hora;
+  }
+
   function rotulo(item) {
     var agora = new Date();
     var d = item.data;
-    var hoje = new Date();
-    var amanha = new Date(hoje); amanha.setDate(hoje.getDate() + 1);
-    var quando;
-    if (item.agora) quando = '<span class="hr-agora"><i></i>Agora</span>';
-    else if (d.toDateString() === hoje.toDateString()) quando = '<strong class="hr-hoje">Hoje</strong>';
-    else if (d.toDateString() === amanha.toDateString()) quando = '<strong>Amanhã</strong>';
-    else {
-      quando = d.toLocaleDateString('pt-BR', { weekday: 'long' });
-      quando = quando.charAt(0).toUpperCase() + quando.slice(1);
-    }
-    var min = Math.max(0, Math.round((d - agora) / 60000));
+    var min = Math.max(1, Math.round((d - agora) / 60000));
     var h = Math.floor(min / 60), m = min % 60;
-    var comeca = h > 0 ? 'Começa em ' + h + 'h ' + m + 'min' : 'Começa em ' + m + ' minutos';
+    var comeca = h > 0 ? 'Começa em ' + h + 'h ' + m + 'min' : 'Começa em ' + m + (m === 1 ? ' minuto' : ' minutos');
     return {
-      titulo: quando + ', ' + pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + ', <strong>' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + 'h</strong>',
+      titulo: (item.agora ? '<span class="hr-agora"><i></i>Agora</span> · ' : '') + textoSessao(d),
+      texto: textoSessao(d),
       sub: comeca,
     };
   }
@@ -137,6 +136,17 @@
       campo.value = '';
       texto.textContent = botao.dataset.textoInicial;
       botao.classList.remove('hr-escolhido');
+    }
+    /* com caixa vazia (páginas da imersão), a primeira sessão já vem escolhida */
+    if (!campo.value && !botao.dataset.textoInicial && itens.length) {
+      var r0 = rotulo(itens[0]);
+      campo.value = iso(itens[0].data);
+      texto.innerHTML = r0.titulo;
+      botao.classList.add('hr-escolhido');
+    }
+    /* linha "Imersão gratuita | Ao vivo | [DATA E HORÁRIO]" */
+    if (itens.length) {
+      document.querySelectorAll('[data-proxima-sessao]').forEach(function (el) { el.textContent = rotulo(itens[0]).texto; });
     }
   }
 
@@ -187,6 +197,8 @@
       utm_term:     p.get('utm_term')     || 'direto_site',
       utm_id:       p.get('utm_id')       || '',
       xcod:         p.get('xcod')         || '',
+      vk_source:    p.get('vk_source')    || '',
+      vk_ad_id:     p.get('vk_ad_id')     || '',
     };
   }
 
@@ -259,6 +271,8 @@
       utm_term: u.utm_term,
       utm_id: u.utm_id,
       xcod: u.xcod,
+      vk_source: u.vk_source,
+      vk_ad_id: u.vk_ad_id,
       utm_page: window.location.pathname,
       lancamento: cfg.lancamento || '',
       form: cfg.form || '',
@@ -343,7 +357,19 @@
     olhar();
   }
 
+  /* ---------- carrossel de depoimentos (setas) ---------- */
+  function initPrints() {
+    var trilho = document.querySelector('[data-prints]');
+    if (!trilho) return;
+    function passo() { var img = trilho.querySelector('img'); return img ? img.getBoundingClientRect().width + 16 : 300; }
+    var volta = document.querySelector('[data-prints-volta]');
+    var vai = document.querySelector('[data-prints-vai]');
+    if (volta) volta.addEventListener('click', function () { trilho.scrollBy({ left: -passo(), behavior: 'smooth' }); });
+    if (vai) vai.addEventListener('click', function () { trilho.scrollBy({ left: passo(), behavior: 'smooth' }); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    initPrints();
     initHorarios();
     initForm();
     initModal();

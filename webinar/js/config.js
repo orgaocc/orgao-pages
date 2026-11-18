@@ -31,7 +31,7 @@ const CONFIG = {
   form:       "webinar_v1",
   source:     "webinar_v1",
 
-  pagina_obrigado: "obrigado/",
+  pagina_obrigado: "/webinar/obrigado/",
 };
 
 /* Sala (demonstração de webinar sem WebinarJam, em sala/). Vídeo de exemplo público só pra ter imagem rodando. */
