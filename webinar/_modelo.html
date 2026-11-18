@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <!-- gerado por montar-versoes.mjs a partir de _modelo.html: editar o modelo, não este arquivo -->
 <title>Imersão gratuita com a Dra. Talita Melo</title>
-<meta name="description" content="{{HEADLINE}}">
+<meta name="description" content="{{HEADLINE_TEXTO}}">
 <!-- prévia: fora do Google até a Bruna aprovar -->
 <meta name="robots" content="noindex, nofollow">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Imersão gratuita com a Dra. Talita Melo">
-<meta property="og:description" content="{{HEADLINE}}">
+<meta property="og:description" content="{{HEADLINE_TEXTO}}">
 <meta property="og:image" content="/webinar/img/talita-topo.webp">
 <meta name="theme-color" content="{{COR}}">
 
@@ -43,31 +43,38 @@
   <div class="container c-topo-grid">
     <div class="c-topo-texto">
       <img class="c-marca" src="/webinar/img/marca-detox.webp" alt="Detox da Tentante" width="800" height="343">
-      <p class="c-etiqueta">Imersão gratuita</p>
+      <p class="c-etiqueta"><i></i>Imersão gratuita</p>
       <h1>{{HEADLINE}}</h1>
       <p class="c-sub">Um encontro ao vivo para você reconhecer os sinais de que o seu corpo está intoxicado e descobrir o seu próximo passo para engravidar.</p>
 
-      <form class="form-inscricao c-form" data-form-inscricao novalidate>
-        <div class="horarios" data-horarios>
-          <button class="hr-toggle" type="button" data-horarios-toggle aria-haspopup="listbox" aria-expanded="false" aria-label="Dia e horário da imersão">
-            <span></span>
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
-          </button>
-          <div class="hr-menu" data-horarios-menu role="listbox" hidden></div>
-          <input type="hidden" name="schedule">
-        </div>
-        <input class="campo" type="text" name="name" placeholder="Digite o seu nome" autocomplete="name" required>
-        <input class="campo" type="email" name="email" placeholder="O seu melhor e-mail" autocomplete="email" required>
-        <input class="campo" type="tel" name="phone" inputmode="tel" placeholder="O seu WhatsApp com DDD" autocomplete="tel" required>
-        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn" type="submit">QUERO PARTICIPAR</button>
-        <p class="form-aviso" data-form-aviso hidden></p>
-      </form>
+      <div class="c-form-cartao">
+        <form class="form-inscricao c-form" data-form-inscricao novalidate>
+          <div class="horarios" data-horarios>
+            <button class="hr-toggle" type="button" data-horarios-toggle aria-haspopup="listbox" aria-expanded="false" aria-label="Dia e horário da imersão">
+              <span></span>
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+            </button>
+            <div class="hr-menu" data-horarios-menu role="listbox" hidden></div>
+            <input type="hidden" name="schedule">
+          </div>
+          <input class="campo" type="text" name="name" placeholder="Digite o seu nome" autocomplete="name" required>
+          <input class="campo" type="email" name="email" placeholder="O seu melhor e-mail" autocomplete="email" required>
+          <input class="campo" type="tel" name="phone" inputmode="tel" placeholder="O seu WhatsApp com DDD" autocomplete="tel" required>
+          <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn" type="submit">QUERO PARTICIPAR</button>
+          <p class="form-aviso" data-form-aviso hidden></p>
+        </form>
+      </div>
 
-      <p class="c-autoridade">Criada pela Dra. Talita Melo, ginecologista, referência em fertilidade há mais de 15 anos, que perdeu cinco bebês e teve os seus dois filhos de forma natural depois dos 40. Hoje, mais de 2.000 mulheres que começaram por esse mesmo primeiro passo têm os seus filhos nos braços.</p>
+      <div class="c-autoridade">
+        <img src="/webinar/img/talita-avatar.webp" alt="" width="160" height="160">
+        <p>Criada pela Dra. Talita Melo, ginecologista, referência em fertilidade há mais de 15 anos, que perdeu cinco bebês e teve os seus dois filhos de forma natural depois dos 40. Hoje, mais de 2.000 mulheres que começaram por esse mesmo primeiro passo têm os seus filhos nos braços.</p>
+      </div>
     </div>
+
     <figure class="c-topo-foto">
-      <img src="/webinar/img/talita-topo.webp" alt="Dra. Talita Melo segurando um teste de gravidez" width="1000" height="1498" fetchpriority="high">
+      <div class="c-arco"><img src="/webinar/img/talita-topo.webp" alt="Dra. Talita Melo segurando um teste de gravidez" width="1000" height="1498" fetchpriority="high"></div>
+      <p class="c-selo"><i></i><span>Ao vivo</span><b data-proxima-sessao></b></p>
     </figure>
   </div>
 </section>
@@ -84,11 +91,12 @@
   <div class="container">
     <h2 class="c-titulo-centro">Elas começaram pelo mesmo primeiro passo. <em>Agora é a sua vez!</em></h2>
   </div>
-  <div class="c-carrossel">
-    <div class="c-prints" data-prints tabindex="0" aria-label="Depoimentos das alunas">
+  <div class="c-prints" data-prints tabindex="0" aria-label="Depoimentos das alunas">
 {{PRINTS}}
-    </div>
-    <div class="container c-setas">
+  </div>
+  <div class="container c-controles">
+    <div class="c-progresso" aria-hidden="true"><span data-prints-barra></span></div>
+    <div class="c-setas">
       <button type="button" data-prints-volta aria-label="Depoimento anterior"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg></button>
       <button type="button" data-prints-vai aria-label="Próximo depoimento"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg></button>
     </div>
@@ -97,29 +105,36 @@
 
 <!-- O PROBLEMA -->
 <section class="c-problema">
-  <div class="container c-estreito">
-    <h2>Exame normal para o laboratório não é normal para engravidar.</h2>
-    <p>A referência do laboratório foi feita para todas as pessoas, e não para a mulher que quer gerar um bebê por nove meses. Enquanto isso, o que entra no seu corpo todos os dias vai oxidando o seu óvulo e o seu endométrio, o útero onde o seu bebê vai se implantar.</p>
-    <p class="c-destaque">Eu chamo isso de <em>ferrugem celular</em>. A idade você não muda, mas a oxidação sim.</p>
-
-    <div class="c-lista-bloco">
-      <p class="c-lista-titulo">Na imersão, você vai:</p>
-      <ol class="c-lista">
-        <li><span>01</span>Entender o real motivo de você não engravidar, mesmo com os exames normais</li>
-        <li><span>02</span>Reconhecer os sinais de que o seu corpo está intoxicado, como aquela borrinha marrom antes da menstruação descer</li>
-        <li><span>03</span>Descobrir o dia da sua ovulação e o dia exato para conceber</li>
-        <li><span>04</span>Sair sabendo o que fazer nos próximos 7 dias, na sua casa, na sua rotina e na sua alimentação.</li>
-      </ol>
+  <div class="container c-bento">
+    <div class="c-card c-card--texto">
+      <h2>Exame normal para o laboratório não é normal para engravidar.</h2>
+      <p>A referência do laboratório foi feita para todas as pessoas, e não para a mulher que quer gerar um bebê por nove meses. Enquanto isso, o que entra no seu corpo todos os dias vai oxidando o seu óvulo e o seu endométrio, o útero onde o seu bebê vai se implantar.</p>
+    </div>
+    <div class="c-card c-card--escuro c-ferrugem">
+      <p>Eu chamo isso de <em>ferrugem celular</em>. A idade você não muda, mas a oxidação sim.</p>
     </div>
 
-    <p>E quem ficar comigo até o final ganha o <strong>Termômetro da Intoxicação</strong>, um teste com os sinais que eu investigo no consultório. Você responde em três minutos e recebe o diagnóstico da intoxicação do seu corpo.</p>
-    <button class="c-garanta" type="button" data-abrir-modal>Garanta a sua participação gratuita.</button>
+    <div class="c-itens">
+      <p class="c-rotulo">Na imersão, você vai:</p>
+      <ol class="c-itens-grade">
+        <li class="c-card"><span>01</span>Entender o real motivo de você não engravidar, mesmo com os exames normais</li>
+        <li class="c-card"><span>02</span>Reconhecer os sinais de que o seu corpo está intoxicado, como aquela borrinha marrom antes da menstruação descer</li>
+        <li class="c-card"><span>03</span>Descobrir o dia da sua ovulação e o dia exato para conceber</li>
+        <li class="c-card"><span>04</span>Sair sabendo o que fazer nos próximos 7 dias, na sua casa, na sua rotina e na sua alimentação.</li>
+      </ol>
+    </div>
+    <div class="c-card c-card--cor c-termometro">
+      <svg class="c-termometro-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M14 14.76V5a2 2 0 1 0-4 0v9.76a4 4 0 1 0 4 0Z"/><path d="M12 9v8"/></svg>
+      <p>E quem ficar comigo até o final ganha o <strong>Termômetro da Intoxicação</strong>, um teste com os sinais que eu investigo no consultório. Você responde em três minutos e recebe o diagnóstico da intoxicação do seu corpo.</p>
+      <button class="btn btn--claro" type="button" data-abrir-modal>Garanta a sua participação gratuita.</button>
+    </div>
   </div>
 </section>
 
 <!-- VERSÍCULO -->
 <section class="c-versiculo">
-  <div class="container c-estreito">
+  <div class="c-versiculo-foto"><img src="/webinar/img/talita-verso.webp" alt="" width="900" height="1348" loading="lazy"></div>
+  <div class="container c-versiculo-texto">
     <blockquote>
       <p>“Existe alguma coisa impossível para o Senhor?”</p>
       <cite>Gênesis 18,14</cite>
@@ -129,17 +144,17 @@
 
 <!-- PARA QUEM -->
 <section class="c-para-quem">
-  <div class="container c-duas">
-    <figure class="c-foto"><img src="/webinar/img/talita-para-quem.webp" alt="Dra. Talita Melo" width="900" height="1348" loading="lazy"></figure>
-    <div>
-      <h2>Um encontro online e gratuito para:</h2>
+  <div class="container">
+    <h2 class="c-titulo-centro">Um encontro online e gratuito para:</h2>
+    <div class="c-pq-grade">
+      <figure class="c-pq-foto"><img src="/webinar/img/talita-para-quem.webp" alt="Dra. Talita Melo" width="900" height="1348" loading="lazy"></figure>
       <ul class="c-perfis">
-        <li>Mulheres que ouviram “está tudo normal” e continuam sem engravidar</li>
-        <li>Mulheres que ouviram que estão velhas para ser mãe</li>
-        <li>Mulheres que viram o positivo e perderam o bebê</li>
-        <li>Mulheres com endometriose, SOP, mioma ou uma lista de diagnósticos</li>
-        <li>Mulheres que foram mandadas direto para a FIV</li>
-        <li>Mães que sonham em dar um irmão para o seu filho</li>
+        <li class="c-card">Mulheres que ouviram “está tudo normal” e continuam sem engravidar</li>
+        <li class="c-card">Mulheres que ouviram que estão velhas para ser mãe</li>
+        <li class="c-card">Mulheres que viram o positivo e perderam o bebê</li>
+        <li class="c-card">Mulheres com endometriose, SOP, mioma ou uma lista de diagnósticos</li>
+        <li class="c-card">Mulheres que foram mandadas direto para a FIV</li>
+        <li class="c-card">Mães que sonham em dar um irmão para o seu filho</li>
       </ul>
     </div>
   </div>
@@ -147,33 +162,35 @@
 
 <!-- SEGUNDA CHAMADA -->
 <section class="c-chamada">
-  <div class="container c-duas c-duas--inverte">
-    <figure class="c-foto"><img src="/webinar/img/talita-chamada.webp" alt="Dra. Talita Melo" width="900" height="1348" loading="lazy"></figure>
-    <div>
-      <h2>O seu caso não é impossível!</h2>
-      <p>Eu sei que já te falaram da sua idade, do seu exame, do seu diagnóstico. Falaram para mim também! Nessa imersão, eu vou te mostrar por onde eu comecei e por onde começaram mais de 2.000 mulheres que hoje têm os seus filhos nos braços.</p>
-      <p><strong>Encare esse encontro como a consulta que você nunca teve!</strong></p>
-      <figure class="c-frase">
-        <blockquote>“A medicina guia, você caminha, e Deus te sustenta.”</blockquote>
-        <figcaption>Dra. Talita Melo</figcaption>
-      </figure>
-      <p class="c-linha">Imersão gratuita <i></i> Ao vivo <i></i> <span data-proxima-sessao></span></p>
-      <button class="btn" type="button" data-abrir-modal>QUERO PARTICIPAR</button>
+  <div class="container">
+    <div class="c-chamada-cartao">
+      <figure class="c-polaroid"><img src="/webinar/img/talita-chamada.webp" alt="Dra. Talita Melo" width="900" height="1348" loading="lazy"></figure>
+      <div class="c-chamada-texto">
+        <h2>O seu caso não é impossível!</h2>
+        <p>Eu sei que já te falaram da sua idade, do seu exame, do seu diagnóstico. Falaram para mim também! Nessa imersão, eu vou te mostrar por onde eu comecei e por onde começaram mais de 2.000 mulheres que hoje têm os seus filhos nos braços.</p>
+        <p><strong>Encare esse encontro como a consulta que você nunca teve!</strong></p>
+        <figure class="c-frase">
+          <blockquote>“A medicina guia, você caminha, e Deus te sustenta.”</blockquote>
+          <figcaption>Dra. Talita Melo</figcaption>
+        </figure>
+        <p class="c-linha"><span>Imersão gratuita</span><span>Ao vivo</span><span data-proxima-sessao></span></p>
+        <button class="btn btn--claro" type="button" data-abrir-modal>QUERO PARTICIPAR</button>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- QUEM É A DRA. TALITA MELO -->
 <section class="c-quem">
-  <div class="container c-duas">
-    <figure class="c-foto"><img src="/webinar/img/talita-quem.webp" alt="Dra. Talita Melo" width="900" height="1348" loading="lazy"></figure>
-    <div>
+  <div class="container c-quem-grade">
+    <figure class="c-circulo"><img src="/webinar/img/talita-quem-circulo.webp" alt="Dra. Talita Melo" width="800" height="800" loading="lazy"></figure>
+    <div class="c-quem-texto">
       <h2>Quem é a Dra. Talita Melo</h2>
       <p>Eu sou a Dra. Talita Melo, médica ginecologista, referência em fertilidade há mais de 15 anos, e também uma mulher que passou dez anos do outro lado da mesa. Eu casei aos 35 anos, atendia mulheres que queriam engravidar e achava que comigo ia ser fácil.</p>
       <p class="c-forte">Eu tive sete betas positivos, e eu não tenho sete filhos.</p>
       <p>Perdi cinco bebês. Em todas as perdas, a resposta era a mesma: “é a sua idade”. Me deram uma lista de diagnósticos e uma única solução, a FIV com óvulos de outra mulher. Foi então que eu fui investigar, como médica e como tentante, o meu próprio corpo, e comecei pelo mesmo primeiro passo que hoje eu indico para toda paciente: tirar o que intoxica e investigar a fertilidade nas quatro fases dela.</p>
       <p>Aos 42 anos, eu engravidei de forma natural do Augusto. Cinco meses depois do parto, para a minha alegria, descobri a gravidez do Álvaro. Hoje, mais de 2.000 mulheres percorreram esse caminho e têm os seus filhos nos braços, da mesma forma que eu tenho os meus.</p>
-      <p>Eu aprendi que são três: a medicina guia, você caminha, e Deus sustenta.</p>
+      <p class="c-tres">Eu aprendi que são três: a medicina guia, você caminha, e Deus sustenta.</p>
       <p>Estou animada para te conhecer na imersão. Nos vemos lá!</p>
     </div>
   </div>
@@ -196,7 +213,7 @@
     <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414"/></svg>
   </button>
   <div class="modal-miolo">
-    <p class="c-etiqueta">Imersão gratuita</p>
+    <p class="c-etiqueta"><i></i>Imersão gratuita</p>
     <p class="c-modal-titulo" id="modal-titulo">{{HEADLINE}}</p>
     <form class="form-inscricao c-form" data-form-inscricao novalidate>
       <div class="horarios" data-horarios>
@@ -215,6 +232,14 @@
       <p class="form-aviso" data-form-aviso hidden></p>
     </form>
   </div>
+</dialog>
+
+<!-- AMPLIAR PRINT -->
+<dialog class="c-zoom" id="zoom-print" aria-label="Depoimento ampliado">
+  <button class="modal-fechar" type="button" aria-label="Fechar" data-fechar-zoom>
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414"/></svg>
+  </button>
+  <img alt="" data-zoom-img>
 </dialog>
 
 </body>

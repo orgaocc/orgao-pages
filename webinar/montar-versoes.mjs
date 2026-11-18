@@ -7,14 +7,14 @@ import { fileURLToPath } from 'node:url';
 const AQUI = dirname(fileURLToPath(import.meta.url));
 const IMG = join(AQUI, 'img');
 
-// copy do doc "PÁGINA WEBNÁRIO - DPE", sem mudar uma vírgula
+// copy do doc "PÁGINA WEBNÁRIO - DPE", sem mudar uma vírgula; o <em> só marca o trecho em itálico colorido
 const VERSOES = [
   { pasta: 'v1', tema: 'oliva', cor: '#74815a', form: 'webinar_v1',
-    headline: 'Descubra o real motivo que está te impedindo de engravidar, mesmo com os seus exames normais.' },
+    headline: 'Descubra o real motivo que está te impedindo de engravidar, <em>mesmo com os seus exames normais.</em>' },
   { pasta: 'v2', tema: 'rose', cor: '#b0646a', form: 'webinar_v2',
-    headline: 'Descubra de uma vez por todas o que está atrapalhando você de engravidar, antes de mais um teste negativo ou de ir direto para a FIV.' },
+    headline: 'Descubra de uma vez por todas o que está atrapalhando você de engravidar, <em>antes de mais um teste negativo ou de ir direto para a FIV.</em>' },
   { pasta: 'v3', tema: 'cafe', cor: '#74402f', form: 'webinar_v3',
-    headline: 'Saia de um único encontro sabendo o dia da sua ovulação, qual fase da sua fertilidade está em desequilíbrio e o que mudar na sua rotina nos próximos 7 dias.' },
+    headline: 'Saia de um único encontro sabendo <em>o dia da sua ovulação</em>, qual fase da sua fertilidade está em desequilíbrio e o que mudar na sua rotina nos próximos 7 dias.' },
 ];
 
 // largura e altura de um WebP (VP8, VP8L ou VP8X)
@@ -35,21 +35,23 @@ const fotoAluna = (f, copia) => {
 // duas voltas da lista: a animação anda metade do trilho e emenda sem salto
 const FAIXA = [...alunas.map((f) => fotoAluna(f, false)), ...alunas.map((f) => fotoAluna(f, true))].join('\n');
 
+// cada print dentro de um celular: mesma moldura pra todos, o print rola dentro da tela e amplia no clique
 const PRINTS = lista('depoimento-').map((f, i) => {
   const [w, h] = medidas(join(IMG, f));
-  return `      <img src="/webinar/img/${f}" alt="Depoimento de aluna ${i + 1}" width="${w}" height="${h}" loading="lazy">`;
+  return `    <button class="c-celular" type="button" data-zoom="/webinar/img/${f}" aria-label="Ampliar o depoimento ${i + 1}"><span class="c-tela"><img src="/webinar/img/${f}" alt="Depoimento de aluna ${i + 1}" width="${w}" height="${h}" loading="lazy"></span></button>`;
 }).join('\n');
 
 const modelo = readFileSync(join(AQUI, '_modelo.html'), 'utf8');
 for (const v of VERSOES) {
   const html = modelo
+    .replaceAll('{{HEADLINE_TEXTO}}', v.headline.replace(/<[^>]+>/g, ''))
     .replaceAll('{{HEADLINE}}', v.headline)
     .replaceAll('{{TEMA}}', v.tema)
     .replaceAll('{{COR}}', v.cor)
     .replaceAll('{{FORM}}', v.form)
     .replace('{{FAIXA}}', FAIXA)
     .replace('{{PRINTS}}', PRINTS);
-  if (/\{\{[A-Z]+\}\}/.test(html)) throw new Error(`${v.pasta}: sobrou marcador no HTML`);
+  if (/\{\{[A-Z_]+\}\}/.test(html)) throw new Error(`${v.pasta}: sobrou marcador no HTML`);
   mkdirSync(join(AQUI, v.pasta), { recursive: true });
   writeFileSync(join(AQUI, v.pasta, 'index.html'), html);
   console.log(`ok  webinar/${v.pasta}/  (${v.tema}, ${Math.round(html.length / 1024)} KB)`);

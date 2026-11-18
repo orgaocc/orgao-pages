@@ -357,15 +357,44 @@
     olhar();
   }
 
-  /* ---------- carrossel de depoimentos (setas) ---------- */
+  /* ---------- carrossel de depoimentos: setas, barra de progresso e ampliar ---------- */
   function initPrints() {
     var trilho = document.querySelector('[data-prints]');
     if (!trilho) return;
-    function passo() { var img = trilho.querySelector('img'); return img ? img.getBoundingClientRect().width + 16 : 300; }
     var volta = document.querySelector('[data-prints-volta]');
     var vai = document.querySelector('[data-prints-vai]');
+    var barra = document.querySelector('[data-prints-barra]');
+    function passo() {
+      var itens = trilho.children;
+      if (itens.length < 2) return 300;
+      return itens[1].getBoundingClientRect().left - itens[0].getBoundingClientRect().left;
+    }
+    function atualizar() {
+      var max = trilho.scrollWidth - trilho.clientWidth;
+      if (volta) volta.disabled = trilho.scrollLeft <= 2;
+      if (vai) vai.disabled = trilho.scrollLeft >= max - 2;
+      if (barra) {
+        var visivel = trilho.clientWidth / trilho.scrollWidth;
+        barra.style.width = Math.min(100, (visivel + (1 - visivel) * (max > 0 ? trilho.scrollLeft / max : 1)) * 100) + '%';
+      }
+    }
     if (volta) volta.addEventListener('click', function () { trilho.scrollBy({ left: -passo(), behavior: 'smooth' }); });
     if (vai) vai.addEventListener('click', function () { trilho.scrollBy({ left: passo(), behavior: 'smooth' }); });
+    trilho.addEventListener('scroll', atualizar, { passive: true });
+    window.addEventListener('resize', atualizar);
+    atualizar();
+
+    var zoom = document.getElementById('zoom-print');
+    if (!zoom) return;
+    var zoomImg = zoom.querySelector('[data-zoom-img]');
+    trilho.addEventListener('click', function (e) {
+      var cel = e.target.closest('[data-zoom]');
+      if (!cel) return;
+      zoomImg.src = cel.getAttribute('data-zoom');
+      zoomImg.alt = (cel.querySelector('img') || {}).alt || '';
+      zoom.showModal();
+    });
+    zoom.addEventListener('click', function (e) { if (e.target === zoom || e.target.closest('[data-fechar-zoom]')) zoom.close(); });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
