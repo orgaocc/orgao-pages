@@ -133,6 +133,8 @@ body.captura { background: var(--c-fundo); color: var(--c-tinta); }
 
 /* ---------- faixa das alunas ---------- */
 .c-faixa { padding: 0 0 64px !important; overflow: hidden; }
+.c-imersao { padding-top: 0 !important; }
+.c-problema { padding-top: 0 !important; }
 .c-faixa-trilho { display: flex; gap: 16px; width: max-content; animation: c-correr 90s linear infinite; }
 .c-faixa-trilho:hover { animation-play-state: paused; }
 .c-faixa-trilho img { height: 320px; width: auto; border-radius: 12px; object-fit: cover; }

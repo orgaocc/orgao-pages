@@ -127,6 +127,9 @@
         campo.value = iso(item.data);
         texto.innerHTML = r.titulo;
         botao.classList.add('hr-escolhido');
+        /* a data do selo do topo e da barra fixa acompanha o horário escolhido (pedido da Bruna, 18/11) */
+        sessaoEscolhida = iso(item.data);
+        mostrarSessao(r.texto);
       });
       menu.appendChild(opc);
     });
@@ -146,8 +149,14 @@
     }
     /* linha "Imersão gratuita | Ao vivo | [DATA E HORÁRIO]" */
     if (itens.length) {
-      document.querySelectorAll('[data-proxima-sessao]').forEach(function (el) { el.textContent = rotulo(itens[0]).texto; });
+      var pos = valores.indexOf(sessaoEscolhida);
+      mostrarSessao(rotulo(itens[pos > -1 ? pos : 0]).texto);
     }
+  }
+
+  var sessaoEscolhida = '';
+  function mostrarSessao(texto) {
+    document.querySelectorAll('[data-proxima-sessao]').forEach(function (el) { el.textContent = texto; });
   }
 
   function initHorarios() {
