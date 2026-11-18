@@ -2,21 +2,21 @@
    PRÉ-CHECKOUT — Pink Friday 2026 (pcbf26)
    Mesmo fluxo das páginas JPE (jpe/shared/app-core.js):
    1. botão de compra abre o modal (nome, e-mail, WhatsApp);
-   2. o lead vai pro process-lead (Supabase) com utm_page e precheckout;
+   2. o lead vai direto pro n8n (webhook leads_captacao) com utm_page e precheckout;
    3. redireciona pro checkout com os dados preenchidos.
    Cada página define no js/config.js: link_checkout, lancamento, form, source, sck e o texto do modal.
    Sem link_checkout, o botão só desce até a oferta (não abre o modal).
    ============================================= */
 (function () {
-  var SUPABASE_URL = 'https://mjzboolbdynbavxpounr.supabase.co';
-  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qemJvb2xiZHluYmF2eHBvdW5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4NjYyMTAsImV4cCI6MjA5MDQ0MjIxMH0.Os0IHYXD1-5tF0rzxBWlupa8UwpaKnezjfyyofbAOdc';
+  var N8N_LEADS = 'https://n8n.orgao.cc/webhook/leads_captacao';
 
   var cfg = typeof CONFIG !== 'undefined' ? CONFIG : {};
   var link = cfg.link_checkout || '';
   if (!link) return;
 
   var params = new URLSearchParams(window.location.search);
-  function utm(nome, padrao) { return params.get(nome) || padrao; }
+  // lido na hora: o VK Metrics acrescenta o xcod à URL depois que este script roda
+  function utm(nome, padrao) { return new URLSearchParams(window.location.search).get(nome) || padrao; }
 
   /* ---------- estilo do modal ----------
      Só visual. A página escolhe as cores e fontes pelas variáveis --pc-* no :root dela;
@@ -109,27 +109,36 @@
     return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
   }
 
-  /* ---------- link do checkout com os dados ---------- */
+  /* ---------- link do checkout com os dados ----------
+     Sem sck nem src fixos: o VK Metrics decora (xcod + sck com a origem) e depois o onePixel (id do lead, fbp e UTMs; nunca sobrescreve). */
   function urlCheckout(nome, email, digitos) {
     var url = new URL(link);
     var q = url.searchParams;
-    var hotmart = /hotmart\.com$/.test(url.hostname);
-    if (hotmart) {
+    if (/hotmart\.com$/.test(url.hostname)) {
       if (!q.has('checkoutMode')) q.set('checkoutMode', '10');
       q.set('name', nome); q.set('email', email); q.set('phonenumber', digitos);
-      q.set('src', utm('utm_source', 'direto_site'));
-      if (cfg.sck) q.set('sck', cfg.sck);
     } else {
       // Guru e outros: nome, e-mail e telefone pelos nomes mais comuns (conferir com o link real)
       q.set('name', nome); q.set('email', email);
       q.set('phone_number', digitos); q.set('phone_local_code', '55');
     }
-    // repassa o rastreio da página (utm_*, xcod, src, sck...) sem sobrescrever o que já está no link
-    params.forEach(function (valor, chave) {
+    // repassa o rastreio da página (utm_*, xcod...) sem sobrescrever o que já está no link.
+    // Lido na hora do envio: o xcod do VK Metrics entra na URL depois que este script roda.
+    new URLSearchParams(window.location.search).forEach(function (valor, chave) {
       if (['name', 'nome', 'email', 'phone', 'phonenumber', 'phone_number', 'whatsapp'].indexOf(chave) !== -1) return;
       if (!q.has(chave)) q.set(chave, valor);
     });
-    return url.toString();
+    var destino = url.toString();
+    // VK Metrics: a mesma decoração que ele aplica nos links <a> (xcod + sck com a origem do anúncio)
+    try {
+      var vk = window.vkPixelSales && window.vkPixelSales.generateDecoratedUrl;
+      if (typeof vk === 'function') destino = vk(destino) || destino;
+    } catch (_) {}
+    // onePixel: depois do VK, para não ter o id apagado
+    try {
+      if (window.px && typeof px.decorate === 'function') destino = px.decorate(destino) || destino;
+    } catch (_) {}
+    return destino;
   }
 
   modal.querySelector('#formClaude').addEventListener('submit', function (e) {
@@ -148,17 +157,15 @@
       utm_medium: utm('utm_medium', 'direto_site'), utm_content: utm('utm_content', 'direto_site'),
       utm_term: utm('utm_term', 'direto_site'), utm_id: utm('utm_id', ''),
       utm_page: window.location.pathname, lancamento: cfg.lancamento || '',
-      form: cfg.form || '', source: cfg.source || '', precheckout: 'true', submission_date: dataEnvio(),
+      form: cfg.form || '', source: cfg.source || '', precheckout: 'true', submission_date: dataEnvio(), headline_test: 'Head0',
     };
     var destino = urlCheckout(nome, email, digitos);
     var foi = false;
     function ir() { if (!foi) { foi = true; window.location.href = destino; } }
     // não segura a compradora: no máximo 2,5 s esperando o registro do lead
     setTimeout(ir, 2500);
-    fetch(SUPABASE_URL + '/functions/v1/process-lead', {
-      method: 'POST', keepalive: true,
-      headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY },
-      body: JSON.stringify(corpo),
-    }).catch(function () {}).then(ir);
+    // mesmo formato que o process-lead da Supabase mandava pro n8n (form-urlencoded); no-cors porque a resposta não é lida
+    fetch(N8N_LEADS, { method: 'POST', mode: 'no-cors', keepalive: true, body: new URLSearchParams(corpo) })
+      .catch(function () {}).then(ir);
   });
 })();

@@ -5,7 +5,7 @@ const CONFIG = {
   // Checkout da oferta Pink Friday (Guru ou Hotmart). Vazio = os botões levam pra seção da oferta, sem pré-checkout.
   link_checkout: "https://checkout.grupoconceber.com/pay/black-friday-grupo-plataforma-consulta",
 
-  // Pré-checkout (mesmo fluxo da JPE: lead no process-lead e checkout com os dados preenchidos)
+  // Pré-checkout (mesmo fluxo da JPE: lead direto no n8n (leads_captacao) e checkout com os dados preenchidos)
   lancamento: "PC-T57-BF",          // tag_form do "Programa Conceber BF" na tabela de mapeamento do n8n
   form: "pcbf26_vendas_antiga",
   source: "pcbf26_vendas_antiga",

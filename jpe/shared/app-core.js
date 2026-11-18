@@ -31,30 +31,9 @@ function applyDates() {
   document.querySelectorAll('[data-urgency]').forEach(el => el.textContent = urgencyText);
 }
 
-async function loadDates() {
+// datas e link do ingresso vêm só do config.js (a leitura do launch_config na Supabase saiu em 18/11)
+function loadDates() {
   applyDates();
-
-  const fetchRemote = async () => {
-    try {
-      const res = await fetch(
-        `${CONFIG.supabase_url}/rest/v1/launch_config?id=eq.1&select=week_start,week_end,link_ingresso`,
-        { headers: { apikey: CONFIG.supabase_key, Authorization: `Bearer ${CONFIG.supabase_key}` } }
-      );
-      const [data] = await res.json();
-      if (data) {
-        if (data.week_start)    CONFIG.week_start    = data.week_start;
-        if (data.week_end)      CONFIG.week_end      = data.week_end;
-        if (data.link_ingresso) CONFIG.link_ingresso = data.link_ingresso;
-        applyDates();
-      }
-    } catch (_) {}
-  };
-
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(fetchRemote, { timeout: 3000 });
-  } else {
-    setTimeout(fetchRemote, 1500);
-  }
 }
 
 /* =============================================
@@ -161,27 +140,31 @@ async function handleSubmit(e) {
     utm_id:          utms.utm_id,
     form:            CONFIG.form,
     source:          CONFIG.source,
-    headline_variant: sessionStorage.getItem('headline_variant') || 'HeadOriginal',
+    headline_test:   sessionStorage.getItem('headline_variant') || 'HeadOriginal',
     precheckout:     'true',
     submission_date: submissionDate(),
   };
 
   try {
-    await fetch(`${CONFIG.supabase_url}/functions/v1/process-lead`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey:         CONFIG.supabase_key,
-        Authorization:  `Bearer ${CONFIG.supabase_key}`,
-      },
-      body: JSON.stringify(body),
+    // direto pro n8n, no mesmo formato que o process-lead da Supabase mandava (form-urlencoded)
+    await fetch('https://n8n.orgao.cc/webhook/leads_captacao', {
+      method: 'POST', mode: 'no-cors', keepalive: true,
+      body: new URLSearchParams(body),
     });
   } catch (_) {}
 
-  const sep = CONFIG.link_ingresso.includes('?') ? '&' : '?';
-  const checkoutMode = /[?&]checkoutMode=/.test(CONFIG.link_ingresso) ? '' : 'checkoutMode=10&';
-  let url = `${CONFIG.link_ingresso}${sep}${checkoutMode}name=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&phonenumber=${encodeURIComponent(digits)}&src=${encodeURIComponent(utms.utm_source)}&sck=${CONFIG.sck}`;
-  if (utms.xcod) url += `&xcod=${encodeURIComponent(utms.xcod)}`;
+  // link do checkout montado na hora do envio, sem sck nem src fixos: o VK decora (xcod + sck com a origem) e depois o onePixel (id do lead, fbp e UTMs)
+  const link = new URL(CONFIG.link_ingresso);
+  const q = link.searchParams;
+  if (!q.has('checkoutMode')) q.set('checkoutMode', '10');
+  q.set('name', nome); q.set('email', email); q.set('phonenumber', digits);
+  new URLSearchParams(window.location.search).forEach((valor, chave) => {
+    if (['name', 'nome', 'email', 'phone', 'phonenumber', 'phone_number', 'whatsapp'].includes(chave)) return;
+    if (!q.has(chave)) q.set(chave, valor);
+  });
+  let url = link.toString();
+  try { if (window.vkPixelSales && typeof vkPixelSales.generateDecoratedUrl === 'function') url = vkPixelSales.generateDecoratedUrl(url) || url; } catch (_) {}
+  try { if (window.px && typeof px.decorate === 'function') url = px.decorate(url) || url; } catch (_) {}
   window.location.href = url;
 }
 
