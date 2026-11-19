@@ -23,7 +23,7 @@ const CONFIG = {
   intervalo_minutos: 15,
   horarios_fixos: ["07:00", "12:00", "20:00"],
   quantos_horarios: 3,
-  feriados: ["2026-12-25"],       /* dias sem sessão (AAAA-MM-DD) */
+  feriados: ["2026-12-24", "2026-12-25", "2026-12-31", "2027-01-01"], /* dias sem sessão (AAAA-MM-DD), iguais aos do EverWebinar */
   atualizar_a_cada_segundos: 30,  /* o "Agora" avança sozinho, sem recarregar a página */
 
   /* Identificação do lead (mesmo padrão das outras páginas do Órgão). */
@@ -32,13 +32,4 @@ const CONFIG = {
   source:     "webinar_v1",
 
   pagina_obrigado: "/webinar/obrigado/",
-};
-
-/* Sala (demonstração de webinar sem WebinarJam, em sala/). Vídeo de exemplo público só pra ter imagem rodando. */
-CONFIG.sala = {
-  titulo: "[a preencher: título do webinar]",
-  video_url: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-  duracao_minutos: 10,   /* de verdade vem do próprio vídeo; aqui serve pra demonstração */
-  oferta_minuto: 3,      /* minuto da sessão em que o cartão de oferta aparece */
-  link_oferta: "#",
 };
