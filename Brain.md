@@ -33,6 +33,10 @@ A pedido do Héric, preparada a documentação publicável no próprio repositó
 
 Entraram `/pcbf26/vendas/` e `/pcbf26/upsell/`, montadas do Figma "BLACK FRIDAY PC 2026". Endereço segue domínio / lançamento / página; `utm_page` grava `/pcbf26/...`. Link de checkout de cada página (e o id e o formato da VSL do upsell) ficam no `js/config.js` da pasta: trocar ali, sem mexer no HTML. Imagens em WebP. Detalhes no [mapa das páginas](vault/01-Paginas/Mapa-das-Paginas.md). Em 22/10 o layout novo virou o oficial nessas mesmas rotas; o antigo ficou em `/pcbf26/vendas-antiga/` e `/pcbf26/upsell-antiga/`. O `shared/precheckout.js` aceita variáveis `--pc-*` no `:root` da página pra o modal seguir o visual dela (só estilo; sem elas fica o laranja padrão).
 
+## Webinar evergreen (2026-11-12, Luan)
+
+Entrou `/webinar/` (inscrição) e `/webinar/obrigado/` (confirmação pelo WhatsApp), esqueleto sem copy, `noindex`. Copia a mecânica da página webinar.isalatuf.com.br, da mesma estrategista: lista de horários com o "Agora" (próximo múltiplo de 15 min, horário de Brasília) mais os fixos (07:00, 12:00, 20:00), formulário que posta no n8n e recebe o ingresso `WPJ-`, obrigado que abre o `wa.me` com "Quero confirmar minha inscrição. Meu ingresso é WPJ-...". Tudo que muda por campanha fica em `webinar/js/config.js`; sem `webhook_url` o formulário simula a resposta. Leia [webinar/README.md](webinar/README.md) antes de mexer. Falta: webhook do n8n, conexão do Unnichat que responde, tag do lançamento, copy, imagens e o visual final.
+
 Publicação: o Workers Builds constrói cada commit uma vez. Commit que chega primeiro por uma branch vira só prévia (`<branch>-jpe-cd.conceber.workers.dev`); levar o mesmo commit pra `main` não publica. Pra produção, o commit precisa nascer na `main` (ou merge com commit próprio).
 
 ## Detox da Tentante T58 (2026-11-16, Luan)
