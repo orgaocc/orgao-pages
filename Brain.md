@@ -55,3 +55,8 @@ Pendências: `link_checkout` vazio nas duas (o produto da T58 ainda não existe 
 - `lancamento` e `utm_campaign` do pré-checkout: a original mandava "PCT32"; pus "PCT58", a confirmar.
 - Formulário de pré-checkout: o mesmo de `ddt/shared/precheckout.js`, com as cores da página pelas variáveis `--pc-*`.
 - Conferida em 1440 e 390 no Chrome e no WebKit (nada fora da tela, todas as imagens, formulário abrindo com link).
+
+## Quiz de anamnese da Black (2026-11-19, Luan)
+
+Entraram `/pcbf26/quiz/` e `/pcbf26/carta/` (briefing da Bruna "Quiz de Anamnese e Carta de Vendas"). O quiz salva cada resposta no n8n (`pc-quiz-anamnese-evento`) e no navegador (retoma de onde parou), manda o envio final pra `pc-quiz-anamnese-enviar` e abre a carta em `/pcbf26/carta/?id=<sid>`, que espera a IA terminar (`pc-quiz-anamnese-carta`). O rastreio é só o script do onePixel no head. O checkout da carta é o mesmo da `/pcbf26/vendas/`, preenchido com os dados que ficaram no navegador e decorado pelo VK/onePixel igual ao pré-checkout. O fluxo do n8n e o prompt da IA não ficam neste repositório.
+
