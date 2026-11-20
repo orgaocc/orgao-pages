@@ -14,15 +14,34 @@
 <!--
   /wpp/ = link rastreável pro WhatsApp do comercial (pedido do Luan, 18/11/2026).
   Monta o link no gerador de UTM (luansantos.com.br/orgao/gerador-utm) com esta página como destino.
-  A página: registra a visita (onePixel), dispara o evento Contact, e abre o WhatsApp com a mensagem pronta
-  e a origem no fim (pra quem atende saber de onde a pessoa veio).
-  ?msg=texto troca a mensagem pronta só naquele link.
+  A página: registra a visita (onePixel), dispara o evento Contact, e abre o WhatsApp com a mensagem pronta.
+  19/11 (pedido da Bruna): saiu o "(origem: fonte · meio · campanha)" do fim da mensagem, que quebrava a conversa
+  e muita lead apagava. A origem agora vai na própria frase ("Vim do grupo da Black Friday..."): o Unnichat
+  manda a mensagem pro n8n, que acha a frase na lista do gerador e põe a tag (orgao-cc/links-whatsapp).
+  ?msg=texto = a mensagem escolhida no gerador. Sem ?msg=, vale a frase do canal (FRASES abaixo, iguais às
+  sugestões do gerador), pra os links antigos também ganharem tag.
 -->
 <script>
 window.WPP = {
   numero: '553182343964',            // +55 31 8234-3964, comercial
-  mensagem: 'Olá! Quero saber mais sobre o Programa Conceber.', // provisória: confirmar o texto com a Bruna
+  mensagem: 'Olá! Quero saber mais sobre o Programa Conceber.', // quando o link não diz o canal
   espera_ms: 1200                    // tempo máximo esperando o pixel antes de abrir o WhatsApp
+};
+// frase por canal (utm_source/utm_medium). Mesmas do gerador de UTM: mudou aqui, muda lá.
+window.WPP_FRASES = {
+  'sendflow/grupo': 'Olá! Vim do grupo do Conceber e quero saber mais sobre o Programa Conceber.',
+  'sendflow/grupo/black': 'Olá! Vim do grupo da Black Friday e quero saber mais sobre o Programa Conceber.',
+  'instagram/stories': 'Olá! Vi nos stories e quero saber mais sobre o Programa Conceber.',
+  'instagram/bio': 'Olá! Vim pelo link da bio e quero saber mais sobre o Programa Conceber.',
+  'instagram/post': 'Olá! Vi um post no Instagram e quero saber mais sobre o Programa Conceber.',
+  'instagram/reels': 'Olá! Vi um post no Instagram e quero saber mais sobre o Programa Conceber.',
+  'instagram/direct': 'Olá! Vim pelo direct do Instagram e quero saber mais sobre o Programa Conceber.',
+  'manychat/direct': 'Olá! Vim pelo direct do Instagram e quero saber mais sobre o Programa Conceber.',
+  'unnichat/whatsapp': 'Olá! Recebi a mensagem de vocês e quero saber mais sobre o Programa Conceber.',
+  'mautic/email': 'Olá! Recebi o e-mail de vocês e quero saber mais sobre o Programa Conceber.',
+  'youtube/video': 'Olá! Vi o vídeo no YouTube e quero saber mais sobre o Programa Conceber.',
+  'parceiro/indicacao': 'Olá! Vim por indicação e quero saber mais sobre o Programa Conceber.',
+  'facebookads': 'Olá! Vi o anúncio e quero saber mais sobre o Programa Conceber.'
 };
 </script>
 <style>
@@ -61,12 +80,17 @@ p { margin: 0; color: var(--suave); }
   var cfg = window.WPP;
   var p = new URLSearchParams(location.search);
 
-  // origem no fim da mensagem: só o que veio no link (fonte · meio · campanha)
-  var partes = ['utm_source', 'utm_medium', 'utm_campaign']
-    .map(function (k) { return (p.get(k) || '').trim(); })
-    .filter(function (v) { return v && !/^\{\{.*\}\}$/.test(v); });
-  var texto = (p.get('msg') || cfg.mensagem).trim();
-  if (partes.length) texto += '\n\n(origem: ' + partes.join(' · ') + ')';
+  // a mensagem: a do link (?msg=) ou a frase do canal; sem "(origem: ...)" no fim
+  function frase() {
+    var F = window.WPP_FRASES || {};
+    var s = (p.get('utm_source') || '').trim().toLowerCase();
+    var m = (p.get('utm_medium') || '').trim().toLowerCase();
+    var c = (p.get('utm_campaign') || '').trim().toLowerCase();
+    if (/^\{\{.*\}\}$/.test(m)) m = '';
+    if (/black/.test(c) && F[s + '/' + m + '/black']) return F[s + '/' + m + '/black'];
+    return F[s + '/' + m] || F[s] || cfg.mensagem;
+  }
+  var texto = (p.get('msg') || frase()).trim();
 
   var destino = 'https://wa.me/' + cfg.numero + '?text=' + encodeURIComponent(texto);
   document.getElementById('wpp-link').href = destino;
