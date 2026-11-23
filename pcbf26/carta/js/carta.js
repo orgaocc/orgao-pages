@@ -134,9 +134,13 @@
     var d = null;
     try { d = JSON.parse(sessionStorage.getItem('pcbf26_comprador') || localStorage.getItem('pcbf26_comprador') || 'null'); } catch (e) {}
     if (d && d.email) {
-      var dig = String(d.whatsapp || '').replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
+      // número de fora do Brasil ("+1...", seletor de país do quiz) a pessoa digita no checkout: o link só preenche o brasileiro
+      var bruto = String(d.whatsapp || '');
+      var dig = bruto.replace(/\D/g, '');
+      var brasil = bruto.charAt(0) !== '+' || dig.indexOf('55') === 0;
+      dig = dig.replace(/^55(?=\d{10,11}$)/, '');
       q.set('name', d.nome || ''); q.set('email', d.email);
-      if (dig) { q.set('phone_number', dig); q.set('phone_local_code', '55'); }
+      if (dig && brasil) { q.set('phone_number', dig); q.set('phone_local_code', '55'); }
     }
     params.forEach(function (valor, chave) { if (chave !== 'id' && !q.has(chave)) q.set(chave, valor); });
     if (!q.has('utm_source')) q.set('utm_source', 'quiz');

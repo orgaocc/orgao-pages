@@ -266,12 +266,15 @@
 
     var nome = limparNome(campos.name);
     var email = (campos.email || '').trim();
+    /* número completo (+DDI DDD número) pelo seletor de país do /shared/telefone.js; sem ele, Brasil */
+    var campoTel = form.querySelector('[name="phone"]');
     var digitos = soNumero(campos.phone);
+    var telefone = window.TelPais && campoTel ? TelPais.numero(campoTel) : (digitos.length >= 10 ? '+55' + digitos : '');
 
     if (!horarioValido(campos.schedule)) return aviso(form, 'erro', 'horarioInvalido');
     if (!nome) return aviso(form, 'erro', 'nomeInvalido');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return aviso(form, 'erro', 'emailInvalido');
-    if (digitos.length < 10 || digitos.length > 11) return aviso(form, 'erro', 'telefoneInvalido');
+    if (!telefone) return aviso(form, 'erro', 'telefoneInvalido');
 
     aviso(form, 'info', 'processando');
     travar(form, true);
@@ -281,7 +284,8 @@
       schedule: campos.schedule,
       name: nome,
       email: email,
-      phone: '+55' + digitos,
+      phone: telefone,
+      ddi: window.TelPais && campoTel ? TelPais.ddi(campoTel) : '55',
       utm_campaign: u.utm_campaign,
       utm_source: u.utm_source,
       utm_medium: u.utm_medium,
@@ -323,7 +327,7 @@
           localStorage.setItem('firstName', (partes[0] || '').toLowerCase());
           localStorage.setItem('lastName', (partes.length > 1 ? partes[partes.length - 1] : '').toLowerCase());
           localStorage.setItem('email', (json.email || email).trim().toLowerCase());
-          localStorage.setItem('phone', (json.phone || dados.phone).replace(/\D/g, ''));
+          localStorage.setItem('phone', '+' + String(json.phone || dados.phone).replace(/\D/g, '')); // com o + (o termômetro lê o país)
           localStorage.setItem('schedule', campos.schedule);
           localStorage.setItem('eventStatus', 'pending');
         } catch (_) {}
@@ -340,7 +344,7 @@
   function initForm() {
     document.addEventListener('input', function (e) {
       var el = e.target;
-      if (el.name === 'phone' && el.closest('[data-form-inscricao]')) el.value = mascara(el.value);
+      if (el.name === 'phone' && !el.dataset.telPais && el.closest('[data-form-inscricao]')) el.value = mascara(el.value);
     });
     document.addEventListener('submit', enviar);
   }

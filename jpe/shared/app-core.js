@@ -118,10 +118,15 @@ async function handleSubmit(e) {
 
   const nome     = document.getElementById('f-nome').value.trim();
   const email    = document.getElementById('f-email').value.trim();
-  const telefone = document.getElementById('f-tel').value;
-  const digits   = telefone.replace(/\D/g, '');
+  const campoTel = document.getElementById('f-tel');
+  const telefone = campoTel.value;
+  // número completo (+DDI DDD número) pelo seletor de país do /shared/telefone.js; sem ele, Brasil
+  const tp       = window.TelPais;
+  const digits   = tp ? tp.nacional(campoTel) : telefone.replace(/\D/g, '');
+  const numero   = tp ? tp.numero(campoTel) : (digits.length >= 10 ? `+55${digits}` : '');
+  const brasil   = tp ? tp.brasil(campoTel) : true;
 
-  if (!nome || !email || digits.length < 10) return;
+  if (!nome || !email || !numero) return;
 
   btn.disabled = true;
   btn.textContent = 'ENVIANDO...';
@@ -129,7 +134,7 @@ async function handleSubmit(e) {
   const utms = getUtms();
   const body = {
     nome, email,
-    whatsapp:        `+55${digits}`,
+    whatsapp:        numero,
     utm_campaign:    utms.utm_campaign,
     utm_source:      utms.utm_source,
     utm_medium:      utms.utm_medium,
@@ -157,7 +162,8 @@ async function handleSubmit(e) {
   const link = new URL(CONFIG.link_ingresso);
   const q = link.searchParams;
   if (!q.has('checkoutMode')) q.set('checkoutMode', '10');
-  q.set('name', nome); q.set('email', email); q.set('phonenumber', digits);
+  q.set('name', nome); q.set('email', email);
+  if (brasil) q.set('phonenumber', digits); // número de fora a pessoa digita no checkout (que é brasileiro por padrão)
   new URLSearchParams(window.location.search).forEach((valor, chave) => {
     if (['name', 'nome', 'email', 'phone', 'phonenumber', 'phone_number', 'whatsapp'].includes(chave)) return;
     if (!q.has(chave)) q.set(chave, valor);
@@ -172,7 +178,7 @@ function initForm() {
   const tel  = document.getElementById('f-tel');
   const form = document.getElementById('formClaude');
   if (!tel || !form) return;
-  tel.addEventListener('input', function() { this.value = applyMask(this.value); });
+  tel.addEventListener('input', function() { if (!this.dataset.telPais) this.value = applyMask(this.value); });
   form.addEventListener('submit', handleSubmit);
 }
 

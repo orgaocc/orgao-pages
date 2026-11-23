@@ -142,6 +142,14 @@
     return (d.length === 11 && d[2] === '9') || d.length === 10;
   }
 
+  /* número completo "+DDI DDD número" (seletor de país do /shared/telefone.js); sem "+" é Brasil */
+  function completo(v) {
+    v = String(v || '').trim();
+    if (!v) return '';
+    if (v.charAt(0) === '+') return '+' + v.replace(/\D/g, '');
+    return '+55' + v.replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
+  }
+
   function identificacao() {
     var dados = estado.dados || {};
     tela.innerHTML =
@@ -159,9 +167,10 @@
     var fNome = $('f-nome'), fEmail = $('f-email'), fTel = $('f-tel');
     fNome.value = dados.nome || params.get('name') || params.get('nome') || '';
     fEmail.value = dados.email || params.get('email') || '';
-    var telUrl = (dados.whatsapp || params.get('phone') || params.get('whatsapp') || '').replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
-    if (telUrl) fTel.value = mascara(telUrl);
-    fTel.addEventListener('input', function () { this.value = mascara(this.value); });
+    var telUrl = completo(dados.whatsapp || params.get('phone') || params.get('whatsapp') || '');
+    if (telUrl && window.TelPais) TelPais.preencher(fTel, telUrl);
+    else if (telUrl) fTel.value = mascara(telUrl.replace(/\D/g, '').slice(2));
+    fTel.addEventListener('input', function () { if (!this.dataset.telPais) this.value = mascara(this.value); });
     [fNome, fEmail, fTel].forEach(function (f) { f.addEventListener('input', function () { limparErro(f); }); });
     setTimeout(function () { (fNome.value ? (fEmail.value ? fTel : fEmail) : fNome).focus({ preventScroll: true }); }, 50);
 
@@ -171,9 +180,10 @@
       var valido = true;
       if (nome.length < 2) { erro(fNome, 'Escreva o seu nome.'); valido = false; }
       if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email)) { erro(fEmail, 'Confira o seu e-mail: falta algum pedaço.'); valido = false; }
-      if (!telefoneOk(tel)) { erro(fTel, 'Confira o DDD e o número do seu WhatsApp.'); valido = false; }
+      var numero = window.TelPais ? TelPais.numero(fTel) : (telefoneOk(tel) ? '+55' + tel.replace(/\D/g, '') : '');
+      if (!numero) { erro(fTel, 'Confira o DDD e o número do seu WhatsApp.'); valido = false; }
       if (!valido) { var primeiro = tela.querySelector('[aria-invalid="true"]'); if (primeiro) primeiro.focus(); return; }
-      estado.dados = { nome: nome, email: email, whatsapp: '+55' + tel.replace(/\D/g, '') }; salvar();
+      estado.dados = { nome: nome, email: email, whatsapp: numero, ddi: window.TelPais ? TelPais.ddi(fTel) : '55' }; salvar();
       enviar($('f-empresa').value);
     });
   }
@@ -196,7 +206,7 @@
     botao.disabled = true; aviso.hidden = true;
     quiz.hidden = true; montando.hidden = false; window.scrollTo(0, 0);
     var corpo = Object.assign({ sid: estado.sid, respostas: estado.respostas, utm_page: location.pathname, company: robo || '' }, estado.utm, {
-      nome: estado.dados.nome, email: estado.dados.email, whatsapp: estado.dados.whatsapp,
+      nome: estado.dados.nome, email: estado.dados.email, whatsapp: estado.dados.whatsapp, ddi: estado.dados.ddi || '55',
     });
     post(CONFIG.enviar, corpo)
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })

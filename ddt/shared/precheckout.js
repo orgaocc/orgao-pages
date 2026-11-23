@@ -79,8 +79,9 @@
   /* pré-preenche com o que vier na URL (ex.: redirecionamento pós-compra pro upsell) */
   fNome.value = params.get('name') || params.get('nome') || '';
   fEmail.value = params.get('email') || '';
-  var telUrl = (params.get('phone') || params.get('phonenumber') || params.get('phone_number') || params.get('whatsapp') || '').replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
-  if (telUrl) fTel.value = mascara(telUrl);
+  var telUrl = (params.get('phone') || params.get('phonenumber') || params.get('phone_number') || params.get('whatsapp') || '').trim();
+  if (telUrl && window.TelPais) TelPais.preencher(fTel, telUrl.charAt(0) === '+' ? telUrl : telUrl.replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, ''));
+  else if (telUrl) fTel.value = mascara(telUrl.replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, ''));
 
   var ultimoFoco = null;
   function abrir(e) {
@@ -104,7 +105,8 @@
     if (d.length <= 7) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
     return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
   }
-  fTel.addEventListener('input', function () { this.value = mascara(this.value); });
+  /* com o seletor de país (/shared/telefone.js) a máscara é dele: número de fora não pode virar (00) 00000-0000 */
+  fTel.addEventListener('input', function () { if (!this.dataset.telPais) this.value = mascara(this.value); });
 
   function pad(n) { return String(n).padStart(2, '0'); }
   function dataEnvio() {
@@ -115,15 +117,16 @@
   /* ---------- link do checkout com os dados ----------
      Sem sck nem src fixos: o VK Metrics decora (xcod + sck com a origem) e depois o onePixel (id do lead, fbp e UTMs; nunca sobrescreve). */
   function urlCheckout(nome, email, digitos) {
+    // digitos = DDD + número brasileiro, ou '' quando o número é de fora (aí a pessoa digita no checkout, que é brasileiro por padrão)
     var url = new URL(link);
     var q = url.searchParams;
     if (/hotmart\.com$/.test(url.hostname)) {
       if (!q.has('checkoutMode')) q.set('checkoutMode', '10');
-      q.set('name', nome); q.set('email', email); q.set('phonenumber', digitos);
+      q.set('name', nome); q.set('email', email); if (digitos) q.set('phonenumber', digitos);
     } else {
       // Guru e outros: nome, e-mail e telefone pelos nomes mais comuns (conferir com o link real)
       q.set('name', nome); q.set('email', email);
-      q.set('phone_number', digitos); q.set('phone_local_code', '55');
+      if (digitos) { q.set('phone_number', digitos); q.set('phone_local_code', '55'); }
     }
     // repassa o rastreio da página (utm_*, xcod...) sem sobrescrever o que já está no link.
     // Lido na hora do envio: o xcod do VK Metrics entra na URL depois que este script roda.
@@ -148,21 +151,25 @@
     e.preventDefault();
     if (btn.disabled) return;
     var nome = fNome.value.trim(), email = fEmail.value.trim(), digitos = fTel.value.replace(/\D/g, '');
+    var tp = window.TelPais;
+    var numero = tp ? tp.numero(fTel) : (digitos.length >= 10 ? '+55' + digitos : '');
+    var brasil = tp ? tp.brasil(fTel) : true;
+    if (tp) digitos = tp.nacional(fTel);
     fNome.setAttribute('aria-invalid', String(!nome));
     fEmail.setAttribute('aria-invalid', String(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)));
-    fTel.setAttribute('aria-invalid', String(digitos.length < 10));
-    if (!nome || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || digitos.length < 10) return;
+    fTel.setAttribute('aria-invalid', String(!numero));
+    if (!nome || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !numero) return;
 
     btn.disabled = true; btn.textContent = 'ENVIANDO...';
     var corpo = {
-      nome: nome, email: email, whatsapp: '+55' + digitos,
+      nome: nome, email: email, whatsapp: numero,
       utm_campaign: utm('utm_campaign', cfg.utm_campaign || ''), utm_source: utm('utm_source', 'direto_site'),
       utm_medium: utm('utm_medium', 'direto_site'), utm_content: utm('utm_content', 'direto_site'),
       utm_term: utm('utm_term', 'direto_site'), utm_id: utm('utm_id', ''),
       utm_page: window.location.pathname, lancamento: cfg.lancamento || '',
       form: cfg.form || '', source: cfg.source || '', precheckout: 'true', submission_date: dataEnvio(), headline_test: 'Head0',
     };
-    var destino = urlCheckout(nome, email, digitos);
+    var destino = urlCheckout(nome, email, brasil ? digitos : '');
     var foi = false;
     function ir() { if (!foi) { foi = true; window.location.href = destino; } }
     // não segura a compradora: no máximo 2,5 s esperando o registro do lead

@@ -36,6 +36,16 @@ Inventário extraído de todos os arquivos HTML na revisão base `e486a51123655e
 | `/relatorio/` | [relatorio/index.html](../../relatorio/index.html) | Programa Conceber — Relatório de Fertilidade | Relatório dinâmico; depende de integração HTTP |
 | `/tech/` | [tech/index.html](../../tech/index.html) | Mapa Mental — Gestão Tech & Operações | Mapa de gestão tech e operações |
 
+## Telefone com país (todas as páginas com formulário)
+
+Desde 2026-11-23 todo campo de WhatsApp tem a bandeira do país, já em Brasil, com opção de trocar (pedido do Luan:
+tem quem use número dos Estados Unidos, Portugal...). Quem faz é [`/shared/telefone.js`](../../shared/telefone.js),
+carregado antes do script de cada página: liga sozinho em todo `<input type="tel">` (inclusive em modal e no quiz),
+faz a máscara do Brasil e dá à página `TelPais.numero(campo)` = `+DDI DDD número`. Digitar ou colar com `+` troca o
+país sozinho. As páginas mandam o número completo e o `ddi`; os fluxos do n8n (inscrição do webinar, termômetro, quiz)
+aceitam número de fora. O checkout (Hotmart/Guru) só recebe o telefone preenchido quando é do Brasil: número de fora a
+pessoa digita lá. Página nova com formulário: pôr `<script src="/shared/telefone.js?v=1"></script>` antes do script dela.
+
 ## Redirecionamentos e fallback
 
 | Origem | Destino | Fonte |

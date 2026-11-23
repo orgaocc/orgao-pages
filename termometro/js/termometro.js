@@ -170,13 +170,26 @@
     if (DDDS.indexOf(d.slice(0, 2)) === -1) return false;
     return (d.length === 11 && d[2] === '9') || d.length === 10;
   }
+  /* número completo "+DDI DDD número": pelo seletor de país (/shared/telefone.js); sem ele, Brasil.
+     Aceita o formato antigo guardado no navegador (só DDD + número, sem o +55). */
+  function completo(v) {
+    v = String(v || '').trim();
+    if (!v) return '';
+    if (v.charAt(0) === '+') return '+' + v.replace(/\D/g, '');
+    return '+55' + v.replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
+  }
+  function separar(v) {
+    if (window.TelPais) return TelPais.separar(completo(v));
+    return { ddi: '55', nacional: completo(v).replace(/\D/g, '').slice(2), brasil: true };
+  }
+
   function maiuscula(s) { return s.replace(/(^|\s)(\S)/g, function (m, a, b) { return a + b.toUpperCase(); }); }
 
   // quem se inscreveu no webinar neste navegador já tem nome e WhatsApp guardados pela página de inscrição
   function dadosConhecidos() {
     if (estado.dados) return estado.dados;
     var nome = [lerLS('firstName'), lerLS('lastName')].filter(Boolean).join(' ').trim();
-    var tel = (params.get('phone') || params.get('whatsapp') || lerLS('phone') || '').replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
+    var tel = completo(params.get('phone') || params.get('whatsapp') || lerLS('phone') || '');
     return { nome: maiuscula(params.get('name') || params.get('nome') || nome), whatsapp: tel, email: (params.get('email') || lerLS('email') || '').trim(), ticket: lerLS('ticket') || '' };
   }
 
@@ -185,13 +198,14 @@
     $('count').textContent = '';
     $('bar').firstElementChild.style.width = '100%';
     $('f-nome').value = d.nome || '';
-    $('f-tel').value = d.whatsapp ? mascara(String(d.whatsapp).replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '')) : '';
+    if (d.whatsapp && window.TelPais) TelPais.preencher($('f-tel'), completo(d.whatsapp));
+    else $('f-tel').value = d.whatsapp ? mascara(separar(d.whatsapp).nacional) : '';
     show('lead');
   }
 
   function erro(f, msg) { f.setAttribute('aria-invalid', 'true'); var s = $(f.id + '-erro'); s.textContent = msg; s.hidden = false; }
   function limparErro(f) { f.removeAttribute('aria-invalid'); $(f.id + '-erro').hidden = true; }
-  $('f-tel').addEventListener('input', function () { this.value = mascara(this.value); limparErro(this); });
+  $('f-tel').addEventListener('input', function () { if (!this.dataset.telPais) this.value = mascara(this.value); limparErro(this); });
   $('f-nome').addEventListener('input', function () { limparErro(this); });
 
   $('form-lead').addEventListener('submit', function (e) {
@@ -200,10 +214,11 @@
     var nome = maiuscula(fNome.value.trim().replace(/\s+/g, ' ')), tel = fTel.value;
     var ok = true;
     if (nome.length < 2) { erro(fNome, 'Escreva o seu nome.'); ok = false; }
-    if (!telefoneOk(tel)) { erro(fTel, 'Confira o DDD e o número do seu WhatsApp.'); ok = false; }
+    var numero = window.TelPais ? TelPais.numero(fTel) : (telefoneOk(tel) ? '+55' + tel.replace(/\D/g, '') : '');
+    if (!numero) { erro(fTel, 'Confira o DDD e o número do seu WhatsApp.'); ok = false; }
     if (!ok) { var p = document.querySelector('#lead [aria-invalid="true"]'); if (p) p.focus(); return; }
     var antes = dadosConhecidos();
-    estado.dados = { nome: nome, whatsapp: tel.replace(/\D/g, ''), email: antes.email || '', ticket: antes.ticket || '' };
+    estado.dados = { nome: nome, whatsapp: numero, email: antes.email || '', ticket: antes.ticket || '' };
     salvar();
     var r = score(answers);
     var botao = $('ver'); botao.disabled = true; botao.textContent = 'Calculando...';
@@ -217,7 +232,7 @@
   function enviar(r, robo) {
     if (robo) return Promise.resolve();
     var corpo = Object.assign({
-      sid: estado.sid, nome: estado.dados.nome, whatsapp: '+55' + estado.dados.whatsapp,
+      sid: estado.sid, nome: estado.dados.nome, whatsapp: completo(estado.dados.whatsapp), ddi: separar(estado.dados.whatsapp).ddi,
       email: estado.dados.email, ticket: estado.dados.ticket,
       faixa: r.faixa, pontos: r.total, bloco_principal: r.top || '',
       blocos: { entra: r.groups.entra.pts, corpo: r.groups.corpo.pts, ciclo: r.groups.ciclo.pts },
@@ -239,7 +254,9 @@
     if (d) {
       if (d.nome) q.set('name', d.nome);
       if (d.email) q.set('email', d.email);
-      if (d.whatsapp) q.set('phonenumber', d.whatsapp);
+      // o checkout da Hotmart preenche o telefone como brasileiro: número de fora a pessoa digita lá
+      var tel = d.whatsapp ? separar(d.whatsapp) : null;
+      if (tel && tel.brasil && tel.nacional) q.set('phonenumber', tel.nacional);
     }
     params.forEach(function (v, k) {
       if (['name', 'nome', 'email', 'phone', 'phonenumber', 'whatsapp', 'sck'].indexOf(k) !== -1) return;
