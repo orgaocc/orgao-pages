@@ -1,71 +1,189 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Termômetro da Intoxicação - Grupo Conceber</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Termômetro da Intoxicação | Detox da Tentante</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#f7f6ef">
+<meta name="theme-color" content="#f7f7ef">
 <link rel="icon" href="https://grupoconceber.com/wp-content/uploads/2024/12/cropped-icon_conceber-32x32.png" sizes="32x32">
 
 <!-- onePixel do Grupo Conceber (Meta, GA4, Google Ads, Clarity e VK): registra a visita com as UTMs do link -->
 <script src="https://px.grupoconceber.com/_px/t/pk_grupoconceber_d874174c9cdc.js" async></script>
 
 <!--
-  /termometro/ = link fixo do Termômetro da Intoxicação, o presente do webinar (vai no chat do EverWebinar aos 1:09:35).
-  Pedido da Bruna e da Elisa (19/11/2026): um link que já entra no webinar e é redirecionado depois.
-  Quando o termômetro ficar pronto, é só pôr o endereço em "destino" abaixo e publicar. As UTMs do link seguem junto.
+  /termometro/ = Termômetro da Intoxicação, o presente de quem fica até o final do webinar da Imersão Detox para Engravidar
+  (link no chat do EverWebinar aos 1:09:35). Conteúdo e visual da Elisa (termometro-conteudo.md v3 + protótipo, 22/11/2026).
+  12 perguntas → nome e WhatsApp → resultado (3 faixas) e a oferta do Detox da Tentante.
+  Configuração em js/config.js; perguntas, pontos, faixas e textos em js/termometro.js.
+  Prévia sem responder: #previa-leve, #previa-moderada ou #previa-alta (não envia nada).
 -->
-<script>
-window.TERMOMETRO = {
-  destino: '',      // [a preencher] link do termômetro que a Elisa está montando
-  espera_ms: 1000   // tempo máximo esperando o pixel antes de redirecionar
-};
-</script>
-<style>
-:root { --fundo: #f7f6ef; --tinta: #262a1f; --suave: #5a6050; --cor: #74815a; }
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0; background: var(--fundo); color: var(--tinta);
-  font: 400 16px/24px system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  display: grid; place-items: center; padding: 24px;
-}
-.t { text-align: center; display: grid; justify-items: center; gap: 16px; max-width: 360px; }
-.t-anel { width: 48px; height: 48px; border-radius: 50%; border: 4px solid #dfe5cf; border-top-color: var(--cor); animation: gira 1s linear infinite; }
-@keyframes gira { to { transform: rotate(360deg); } }
-h1 { margin: 8px 0 0; font-size: 22px; line-height: 32px; font-weight: 600; }
-p { margin: 0; color: var(--suave); }
-@media (prefers-reduced-motion: reduce) { .t-anel { animation: none; } }
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/termometro.css?v=1">
 </head>
 <body>
-<main class="t">
-  <span class="t-anel" aria-hidden="true"></span>
-  <h1 id="t-titulo">Abrindo o Termômetro da Intoxicação...</h1>
-  <p id="t-texto"></p>
-</main>
+<div class="wrap">
+  <header class="top">
+    <span class="brand"><em>Detox da</em> Tentante</span>
+    <span class="count" id="count"></span>
+  </header>
+  <div class="bar" id="bar" aria-hidden="true"><i></i></div>
 
-<script>
-(function () {
-  var cfg = window.TERMOMETRO || {};
-  if (!cfg.destino) {
-    /* ainda sem destino: não deixa a pessoa num carregando sem fim */
-    document.querySelector('.t-anel').style.display = 'none';
-    document.getElementById('t-titulo').textContent = 'O Termômetro da Intoxicação ainda não está disponível.';
-    document.getElementById('t-texto').textContent = 'Volte por este mesmo link daqui a pouco.';
-    return;
-  }
-  var url = new URL(cfg.destino);
-  new URLSearchParams(location.search).forEach(function (v, k) { if (!url.searchParams.has(k)) url.searchParams.set(k, v); });
-  var foi = false;
-  function ir() { if (foi) return; foi = true; location.replace(url.toString()); }
-  var inicio = Date.now();
-  (function esperar() {
-    if (typeof window.fbq === 'function' || Date.now() - inicio > (cfg.espera_ms || 1000)) return setTimeout(ir, 150);
-    setTimeout(esperar, 100);
-  })();
-})();
-</script>
+  <!-- ABERTURA -->
+  <section class="stack" id="intro">
+    <div class="photo"><img src="assets/talita.webp" alt="Dra. Talita Melo" width="810" height="525"></div>
+    <div class="card">
+      <span class="pill">Presente de quem ficou até o final</span>
+      <h1>Termômetro da <em>Intoxicação</em></h1>
+      <p class="lead">12 perguntas sobre o que entra no seu corpo, o que ele mostra no dia a dia e como é a sua menstruação. Leva menos de 3 minutos.</p>
+      <ul class="dash">
+        <li>Responda pensando nos últimos 3 meses.</li>
+        <li>Não existe resposta certa. Responda com calma e honestidade.</li>
+        <li>No final você vê o seu nível e onde os sinais mais aparecem.</li>
+      </ul>
+      <button class="btn" id="start" type="button">Começar o termômetro</button>
+      <p class="note">Dra. Talita Melo · ginecologista</p>
+    </div>
+  </section>
+
+  <!-- PERGUNTA -->
+  <section class="card hidden" id="quiz" aria-live="polite">
+    <span class="pill" id="qgroup"></span>
+    <h2 id="qtext"></h2>
+    <p class="note hidden" id="qhint"></p>
+    <div class="opts" id="qopts" role="radiogroup" aria-labelledby="qtext"></div>
+    <button class="link" id="back" type="button">Voltar para a pergunta anterior</button>
+  </section>
+
+  <!-- NOME E WHATSAPP (antes do resultado) -->
+  <section class="card hidden" id="lead">
+    <span class="pill">Último passo</span>
+    <h2>O seu resultado <em>está pronto.</em></h2>
+    <p class="lead">Me diga o seu nome e o seu WhatsApp para ver o resultado.</p>
+    <form class="campos" id="form-lead" novalidate>
+      <div class="campo">
+        <label for="f-nome">Seu nome</label>
+        <input id="f-nome" type="text" autocomplete="name" placeholder="Como você se chama?" required aria-describedby="f-nome-erro">
+        <span class="erro" id="f-nome-erro" hidden></span>
+      </div>
+      <div class="campo">
+        <label for="f-tel">Seu WhatsApp com DDD</label>
+        <input id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required aria-describedby="f-tel-erro">
+        <span class="erro" id="f-tel-erro" hidden></span>
+      </div>
+      <div class="escondido" aria-hidden="true"><label for="f-empresa">Empresa</label><input id="f-empresa" name="company" tabindex="-1" autocomplete="off"></div>
+      <button class="btn" id="ver" type="submit">Ver o meu resultado</button>
+    </form>
+    <button class="link" id="back-lead" type="button">Voltar para a pergunta anterior</button>
+  </section>
+
+  <!-- RESULTADO -->
+  <section class="stack hidden" id="result">
+    <div class="card">
+      <span class="level" id="rlevel"></span>
+      <h2 id="rtitle"></h2>
+      <div class="thermo">
+        <div class="scale"><div class="pin" id="pin"></div></div>
+        <div class="ticks"><span>Leve</span><span>Moderada</span><span>Alta</span></div>
+      </div>
+      <p class="score" id="rscore"></p>
+      <p id="rtext"></p>
+      <div class="passo">
+        <p id="rpasso"></p>
+        <a class="btn cta" id="rbtn" href="#" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="pill">Onde aparece em você</span>
+      <div class="groups" id="rgroups"></div>
+      <p id="rfocus"></p>
+    </div>
+
+    <div class="card hidden" id="rsignsCard">
+      <span class="pill">Os sinais que mais pesaram</span>
+      <h2>E onde cada um entra <em>nos 7 dias</em></h2>
+      <div class="signs" id="rsigns"></div>
+      <a class="btn cta" href="#" target="_blank" rel="noopener">Quero descobrir o que está por trás</a>
+    </div>
+
+    <div class="card plain">
+      <h2>O termômetro mede o que você sente. <em>Ele não enxerga o que está por trás.</em></h2>
+      <p>Borra, inchaço, cansaço: isso é o aviso. O que eu preciso descobrir é por que o seu corpo chegou até aqui e qual fase da sua fertilidade está travada. Nenhum questionário responde isso. Eu preciso dos seus exames e da sua história.</p>
+    </div>
+
+    <div class="card">
+      <span class="pill">O que eu investigo em você, dia a dia</span>
+      <div class="days">
+        <div class="day"><i>Segunda</i><div><b>O seu hemograma, lido para quem quer engravidar</b><span>Eu perdi um bebê com ferritina de 27. Normal para o laboratório, baixa para gestar.</span></div></div>
+        <div class="day"><i>Terça</i><div><b>A sua menstruação e os seus hormônios</b><span>Cor, fluxo e cólica, e os exames hormonais colhidos no dia certo do ciclo.</span></div></div>
+        <div class="day"><i>Quarta</i><div><b>A sua ovulação</b><span>Se você está ovulando e em que dia. Você tem 24 horas por mês para engravidar.</span></div></div>
+        <div class="day"><i>Quinta</i><div><b>As trompas e os exames do seu marido</b><span>Metade dos casos de infertilidade está nessa fase.</span></div></div>
+        <div class="day"><i>Sexta</i><div><b>A implantação</b><span>Por que o positivo não veio, ou veio e não ficou.</span></div></div>
+        <div class="day"><i>Sábado</i><div><b>O seu mapa da fertilidade</b><span>Todos os seus sinais e exames reunidos em um panorama só.</span></div></div>
+        <div class="day"><i>Domingo</i><div><b>O tratamento de cada fase</b><span>E o seu relatório, com o seu nome.</span></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="pill">Você recebe no domingo</span>
+      <h2>Hoje você viu um pedaço. <em>O relatório mostra o resto.</em></h2>
+      <p>O termômetro olhou para um dos sete pilares da sua fertilidade. O relatório cruza os formulários da semana com os seus exames e te entrega os sete.</p>
+      <div class="report" aria-label="Exemplo do relatório da fertilidade">
+        <div class="head"><div><small>Relatório da fertilidade</small><strong id="rpNome">O seu nome aqui</strong></div><div class="idx">?<sub> /10</sub></div></div>
+        <div class="pl done"><span>Detox</span><div class="track"><i id="rpDetox"></i></div><em>visto hoje</em></div>
+        <div class="pl"><span>Equilíbrio hormonal</span><div class="track"><i></i></div><em>a descobrir</em></div>
+        <div class="pl"><span>Nutrição</span><div class="track"><i></i></div><em>a descobrir</em></div>
+        <div class="pl"><span>Atividade física</span><div class="track"><i></i></div><em>a descobrir</em></div>
+        <div class="pl"><span>Sono</span><div class="track"><i></i></div><em>a descobrir</em></div>
+        <div class="pl"><span>Equilíbrio emocional</span><div class="track"><i></i></div><em>a descobrir</em></div>
+        <div class="pl"><span>Fertilidade masculina</span><div class="track"><i></i></div><em>a descobrir</em></div>
+      </div>
+      <ul class="dash">
+        <li>O seu índice de preparo para engravidar, de 0 a 10.</li>
+        <li>A fase em que você está travada.</li>
+        <li>Os sinais importantes e os pontos de melhora, bloco por bloco.</li>
+        <li>Os exames lidos com a régua da fertilidade, e não com a do laboratório.</li>
+      </ul>
+      <a class="btn cta" href="#" target="_blank" rel="noopener">Quero o meu relatório</a>
+    </div>
+
+    <div class="card plain">
+      <h2>Tirar o café por conta própria <em>não é o detox.</em></h2>
+      <p>O que faz o detox funcionar é a combinação: qual alimento entra, e em qual horário. E sem a régua da fertilidade o seu exame continua aparecendo como normal. A homocisteína é um exemplo: o laboratório aceita valores bem mais altos, e para engravidar eu quero abaixo de 8.</p>
+    </div>
+
+    <div class="card plain">
+      <h2 id="ptitle"></h2>
+      <p id="ptext"></p>
+    </div>
+    <div class="photo hidden" id="pimgBox"><img id="pimg" src="data:," alt="" width="810" height="1012" loading="lazy"></div>
+    <div class="stack hidden" id="pquotes">
+      <div class="quote">Meu intestino já está funcionando muito melhor.</div>
+      <div class="quote">Voltei a dormir. Emagreci três quilos e desceu a minha menstruação, que estava há um mês sem descer.</div>
+      <p class="note">Relatos de alunas ao fim dos 7 dias do Detox da Tentante.</p>
+    </div>
+
+    <div class="photo"><img src="assets/o-que-voce-recebe.webp" alt="O que você recebe no Detox da Tentante: 7 aulas com a Dra. Talita, cardápio detox com lista de compras, relatório da sua fertilidade, grupo no WhatsApp e dois e-books" width="810" height="1012" loading="lazy"></div>
+
+    <div class="card dark">
+      <span class="pill">Turma de 7 a 13 de dezembro</span>
+      <h2>7 dias para <em>desinflamar</em> e preparar o seu corpo para engravidar.</h2>
+      <div class="price"><s>R$ 718</s><strong>R$ 97</strong><span>ou 12x de R$ 9,34</span></div>
+      <div class="box hidden" id="bonus">Entrando agora, com a imersão ainda no ar, você leva junto o <em>Guia de Suplementação para Engravidar</em>.</div>
+      <a class="btn cta" href="#" target="_blank" rel="noopener">Quero entrar no Detox da Tentante</a>
+      <p class="note">7 dias de garantia. Você já baixa o cardápio e a lista de compras hoje.</p>
+      <p class="note">Cada menstruação é uma nova chance. A turma começa na segunda-feira, dia 7.</p>
+    </div>
+
+    <button class="link" id="redo" type="button">Refazer o termômetro</button>
+    <p class="note">Este termômetro mostra sinais relatados por você. Ele não é um exame e não substitui a consulta médica.</p>
+  </section>
+</div>
+
+<script src="js/config.js?v=1"></script>
+<script src="js/termometro.js?v=1"></script>
 </body>
 </html>

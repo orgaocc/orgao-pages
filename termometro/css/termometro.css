@@ -1,0 +1,119 @@
+/* Visual do protótipo da Elisa (22/11/2026): creme, verde-oliva, Fraunces com itálico verde, uma coluna de 560px.
+   O que vem depois de "acréscimos" é nosso: tela de nome e WhatsApp, próximo passo por faixa. */
+:root{
+  color-scheme: light;
+  --bg:#f7f7ef;
+  --surface:#ffffff;
+  --ink:#2b2f22;
+  --muted:#6f7562;
+  --line:#e4e6d6;
+  --olive:#404a2f;
+  --sage:#71815a;
+  --wash:#dfe4ce;
+  --low:#71815a;
+  --mid:#c9973a;
+  --high:#b5503a;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-text-size-adjust:100%}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:560px;margin:0 auto;padding:22px 18px 64px;display:flex;flex-direction:column;gap:18px}
+header.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.brand{font-family:var(--display);color:var(--sage);font-size:19px}
+.brand em{font-size:15px}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--sage);border-radius:99px;transition:width .25s ease}
+.stack{display:flex;flex-direction:column;gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 20px;display:flex;flex-direction:column;gap:16px}
+.card.plain{background:none;border:0;padding:6px 2px}
+.card.dark{background:var(--olive);border-color:var(--olive);color:#f7f7ef}
+.card.dark .lead,.card.dark .note{color:#d5dac3}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:38px}
+h2{font-size:27px}
+h3{font-size:19px;line-height:1.25}
+h1 em,h2 em{color:var(--sage)}
+.card.dark h2 em{color:#c5cfae}
+p{margin:0}
+.lead{color:var(--muted)}
+.pill{align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--olive);background:var(--wash);border-radius:99px;padding:5px 12px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{font:inherit;text-align:left;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:15px 16px;cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--sage)}
+.opt[aria-pressed="true"]{border-color:var(--olive);background:var(--wash)}
+.btn{font:inherit;font-weight:600;color:#fff;background:var(--olive);border:0;border-radius:12px;padding:17px 20px;cursor:pointer;text-align:center;text-decoration:none;display:block}
+.card.dark .btn{background:#f7f7ef;color:var(--olive)}
+.btn:hover{filter:brightness(1.12)}
+.card.dark .btn:hover{filter:brightness(.96)}
+.link{font:inherit;font-size:15px;color:var(--muted);background:none;border:0;padding:6px 0;cursor:pointer;text-decoration:underline;align-self:flex-start}
+:focus-visible{outline:3px solid var(--sage);outline-offset:2px}
+ul.dash{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+ul.dash li{padding-left:22px;position:relative}
+ul.dash li::before{content:"—";position:absolute;left:0;color:var(--sage)}
+.photo{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+/* termômetro */
+.thermo{display:flex;flex-direction:column;gap:8px}
+.scale{position:relative;height:18px;border-radius:99px;background:linear-gradient(90deg,var(--low) 0 31.7%,var(--mid) 31.7% 65%,var(--high) 65% 100%)}
+.pin{position:absolute;top:-7px;width:6px;height:32px;border-radius:4px;background:var(--ink);box-shadow:0 0 0 3px var(--surface);transform:translateX(-50%);left:0;transition:left .8s cubic-bezier(.2,.8,.2,1)}
+.ticks{display:flex;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.ticks span:nth-child(1){width:31.7%}
+.ticks span:nth-child(2){width:35%;text-align:center}
+.ticks span:nth-child(3){flex:1;text-align:right}
+.level{align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#fff;border-radius:99px;padding:5px 12px}
+.level.low{background:var(--low)}.level.mid{background:var(--mid)}.level.high{background:var(--high)}
+.score{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px}
+.groups{display:flex;flex-direction:column;gap:12px}
+.g{display:flex;flex-direction:column;gap:5px}
+.g .row{display:flex;justify-content:space-between;gap:10px;font-size:15px;font-weight:500}
+.g .row span:last-child{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400}
+.g .track{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.g .track i{display:block;height:100%;border-radius:99px;background:var(--sage)}
+.g.top .track i{background:var(--olive)}
+.signs{display:flex;flex-direction:column;gap:10px}
+.sign{border-left:3px solid var(--sage);padding:2px 0 2px 14px;display:flex;flex-direction:column;gap:3px}
+.sign b{font-weight:600}
+.sign span{color:var(--muted);font-size:15px}
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.quote::before{content:"“";display:block;font-family:var(--display);font-size:34px;line-height:.6;color:var(--wash);margin-bottom:6px}
+.price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price s{color:#c5cfae;font-size:15px}
+.price strong{font-family:var(--display);font-weight:400;font-size:44px;line-height:1}
+.box{background:var(--wash);color:var(--olive);border-radius:12px;padding:14px 16px;font-family:var(--display);font-size:17px}
+.days{display:flex;flex-direction:column}
+.day{display:grid;grid-template-columns:74px 1fr;gap:12px;padding:13px 0;border-top:1px solid var(--line)}
+.day:first-child{border-top:0;padding-top:0}
+.day i{font-family:var(--display);font-style:italic;color:var(--sage);font-size:17px}
+.day b{font-weight:600;display:block}
+.day span{color:var(--muted);font-size:15px}
+.report{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--bg)}
+.report .head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.report .head small{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.report .head strong{font-family:var(--display);font-weight:400;font-size:20px}
+.report .idx{font-family:var(--display);font-size:34px;line-height:1;color:var(--olive);white-space:nowrap}
+.report .idx sub{font-size:14px;color:var(--muted);vertical-align:baseline}
+.pl{display:grid;grid-template-columns:1fr 92px 64px;gap:10px;align-items:center;font-size:14px}
+.pl .track{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.pl .track i{display:block;height:100%;width:0;background:var(--olive);border-radius:99px}
+.pl em{font-style:normal;font-size:12px;color:var(--muted);text-align:right}
+.pl.done em{color:var(--olive);font-weight:600}
+.note{font-size:13px;color:var(--muted)}
+.hidden{display:none!important}
+@media (prefers-reduced-motion:reduce){.pin,.bar i,.opt{transition:none}}
+@media (max-width:400px){h1{font-size:31px}h2{font-size:23px}.card{padding:20px 16px}.price strong{font-size:38px}}
+
+/* ---------- acréscimos (tela de nome e WhatsApp, próximo passo) ---------- */
+.campos{display:flex;flex-direction:column;gap:14px}
+.campo{display:flex;flex-direction:column;gap:6px}
+.campo label{font-size:15px;font-weight:500}
+.campo input{font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;width:100%}
+.campo input:focus{outline:none;border-color:var(--sage)}
+.campo input[aria-invalid="true"]{border-color:var(--high)}
+.campo .erro{font-size:14px;color:var(--high)}
+.btn[disabled]{opacity:.6;cursor:default}
+.escondido{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.passo{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:16px}
+.passo b{font-weight:600}
