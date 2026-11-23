@@ -83,14 +83,6 @@ img { display: block; max-width: 100%; height: auto; }
 .pilar div > p:first-child { margin-top: 0; }
 .papel .pilares + p { margin-top: 32px; }
 
-/* trailer */
-.trailer { margin: 40px -32px; border-radius: 16px; overflow: hidden; background: var(--noite); aspect-ratio: 16 / 9; position: relative; }
-.trailer button { position: absolute; inset: 0; width: 100%; border: 0; padding: 0; cursor: pointer; background: none; color: #fff; display: grid; place-items: center; }
-.trailer button img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; opacity: .55; }
-.trailer button span { position: relative; display: inline-flex; align-items: center; gap: 16px; padding: 16px 24px 16px 16px; border-radius: 999px;
-  background: rgba(20, 7, 12, .7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font: 700 16px/24px var(--display); }
-.trailer button span::before { content: ""; width: 48px; height: 48px; border-radius: 50%; background: var(--pink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center / 24px no-repeat; }
-.trailer iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .planner { margin: 32px auto; width: min(100%, 360px); }
 
 /* preço */
@@ -128,7 +120,6 @@ img { display: block; max-width: 100%; height: auto; }
   .pilar { grid-template-columns: 40px 1fr; }
   .pilar-num { font-size: 32px; line-height: 40px; }
   .pilar h3 { font-size: 18px; line-height: 24px; }
-  .trailer { margin: 32px -16px; }
   .preco { margin: 32px -16px 0; padding: 40px 16px; }
   .papel .preco-parc { font-size: 56px; line-height: 56px; }
   .papel .preco-parc small { font-size: 18px; line-height: 24px; }

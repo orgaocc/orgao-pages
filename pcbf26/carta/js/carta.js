@@ -51,11 +51,6 @@
     var p = function (t) { return '<p>' + t + '</p>'; };
     var h2 = function (t) { return '<h2>' + t + '</h2>'; };
 
-    var trailer = '';
-    if (CONFIG.trailer_embed) {
-      trailer = '<div class="trailer" id="trailer"><button type="button" id="trailer-play"><img src="../vendas/assets/depoimento-talita-familia.webp" alt="" loading="lazy"><span>Assistir ao trailer</span></button></div>';
-    }
-
     var html = [
       p('Antes de qualquer outra coisa, eu preciso te dizer isto: o fato de você ter parado o seu dia para responder perguntas sobre o seu ciclo, sobre o seu sono, sobre a sua alimentação e sobre a sua história já diz muito sobre o tamanho do seu desejo de ser mãe.'),
       p(ia('devolutiva')),
@@ -86,7 +81,6 @@
       h2('Agora, deixa eu te explicar uma coisa com sinceridade'),
       p('Esse plano que você acabou de ler aponta a direção, mas ele não caminha com você. Ele não olha os seus exames, ele não ajusta a sua rota quando o seu ciclo mudar e ele não responde quando você tiver uma dúvida às onze da noite, que é a hora em que essas dúvidas costumam chegar.'),
       p('É exatamente para isso que existe o Programa Conceber.'),
-      trailer,
 
       h2('O que você recebe no Programa Conceber'),
       p('O Programa Conceber é um protocolo de doze semanas para preparar o seu corpo para engravidar, aplicando à sua história os sete pilares da fertilidade. E eu quero te explicar o que isso significa na prática, porque o Programa Conceber não é um curso: você não entra para assistir aulas sobre como uma tentante deveria se preparar, você entra para viver essa preparação, uma semana por vez, com uma equipe inteira acompanhando o que está acontecendo no seu corpo.'),
@@ -121,16 +115,6 @@
     $('carregando').hidden = true; $('carta').hidden = false;
     window.scrollTo(0, 0);
     evento('carta_aberta');
-
-    var play = $('trailer-play');
-    if (play) play.addEventListener('click', function () {
-      evento('trailer');
-      var f = document.createElement('iframe');
-      f.src = CONFIG.trailer_embed + (CONFIG.trailer_embed.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1';
-      f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
-      f.allowFullscreen = true; f.title = 'Trailer do Programa Conceber';
-      $('trailer').innerHTML = ''; $('trailer').appendChild(f);
-    });
 
     $('comprar').addEventListener('click', function (e) {
       e.preventDefault();
