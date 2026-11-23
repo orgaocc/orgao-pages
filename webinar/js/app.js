@@ -188,8 +188,17 @@
   }
 
   /* ---------- telefone ---------- */
+  /* só DDD + número: o preenchimento do navegador manda "+55 16 9..." e cortar em 11 dígitos
+     sem tirar o 55 gravava outro número (Elisa, 23/11/2026) */
+  function soNumero(v) {
+    var d = String(v || '').replace(/\D/g, '');
+    if (d.length > 11 && d.indexOf('55') === 0) d = d.slice(2);
+    if (d.length > 10 && d.charAt(0) === '0') d = d.slice(1);
+    return d.slice(0, 11);
+  }
+
   function mascara(v) {
-    var d = v.replace(/\D/g, '').slice(0, 11);
+    var d = soNumero(v);
     if (d.length <= 2) return d.length ? '(' + d : '';
     if (d.length <= 7) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
     return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
@@ -257,7 +266,7 @@
 
     var nome = limparNome(campos.name);
     var email = (campos.email || '').trim();
-    var digitos = (campos.phone || '').replace(/\D/g, '');
+    var digitos = soNumero(campos.phone);
 
     if (!horarioValido(campos.schedule)) return aviso(form, 'erro', 'horarioInvalido');
     if (!nome) return aviso(form, 'erro', 'nomeInvalido');
