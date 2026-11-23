@@ -7,7 +7,7 @@ const CONFIG = {
      Vazio = modo de teste: o formulário simula a resposta e segue pra página de obrigado.
      Quando o fluxo "[PC] [WEBINAR] 1. Inscrição" estiver ativo no n8n, trocar por:
      "https://n8n.orgao.cc/webhook/pc-webinar-inscricao" */
-  webhook_url: "",
+  webhook_url: "https://n8n.orgao.cc/webhook/pc-webinar-inscricao",
 
   /* Número que recebe a confirmação pelo WhatsApp (conexão do Unnichat).
      Marketing - Grupo Conceber: +55 31 3191-9798 (a confirmar com a Bruna qual conexão vai responder). */
@@ -27,7 +27,7 @@ const CONFIG = {
   atualizar_a_cada_segundos: 30,  /* o "Agora" avança sozinho, sem recarregar a página */
 
   /* Identificação do lead (mesmo padrão das outras páginas do Órgão). */
-  lancamento: "[a preencher]",
+  lancamento: "PC-RDF",          /* o mesmo das páginas do Detox (ddt/v9, ddt/vsl): o webinar vende o mesmo Detox T58 */
   form:       "webinar_v1",
   source:     "webinar_v1",
 
