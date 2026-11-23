@@ -27,7 +27,9 @@ const CONFIG = {
   atualizar_a_cada_segundos: 30,  /* o "Agora" avança sozinho, sem recarregar a página */
 
   /* Identificação do lead (mesmo padrão das outras páginas do Órgão). */
-  lancamento: "PC-RDF",          /* o mesmo das páginas do Detox (ddt/v9, ddt/vsl): o webinar vende o mesmo Detox T58 */
+  lancamento: "PC-T58-WEBINAR",  /* 23/11: NÃO usar PC-RDF aqui: no Planilhamento ele dispara o pré-checkout T58 no Unnichat.
+                                    Este código não tem linha na "[Dash] Mapeamento de Produtos - Mautic": o lead entra na Dash,
+                                    mas não vira contato no Mautic até alguém criar a linha com tag_form PC-T58-WEBINAR. */
   form:       "webinar_v1",
   source:     "webinar_v1",
 
