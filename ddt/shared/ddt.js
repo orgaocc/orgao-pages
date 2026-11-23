@@ -40,14 +40,15 @@
   }
 
   /* ---------- botão "Quero meu ingresso!" de dentro do vídeo (VTurb) ----------
-     A VTurb só aceita URL completa (https://p.grupoconceber.com/ddt/vsl/#oferta). Se o navegador seguisse o link,
+     A VTurb só aceita URL completa (https://p.grupoconceber.com/ddt/vsl/#oferta) e acrescenta as UTMs da página antes
+     do #oferta (testado em 23/11). Se o navegador seguisse o link,
      a página recarregaria sem as UTMs (a venda cairia como direto_site) e, na vsl-video, a pessoa iria pra outra página.
      Então o clique é pego aqui e só desce até a oferta da página em que a pessoa está. */
   document.addEventListener('click', function (e) {
     var caminho = e.composedPath ? e.composedPath() : [];
     for (var i = 0; i < caminho.length; i++) {
       var el = caminho[i];
-      if (el && el.tagName === 'A' && /^https:\/\/p\.grupoconceber\.com\/ddt\/vsl\/#oferta$/.test(el.getAttribute('href') || '')) {
+      if (el && el.tagName === 'A' && /^https:\/\/p\.grupoconceber\.com\/ddt\/vsl\/(\?[^#]*)?#oferta$/.test(el.getAttribute('href') || '')) {
         var alvoOferta = document.getElementById('oferta');
         if (!alvoOferta) return;
         e.preventDefault();
