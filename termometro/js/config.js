@@ -7,8 +7,9 @@ var CONFIG = {
   // nome + WhatsApp + faixa vão pra cá antes do resultado; o n8n cria/acha o contato no Unnichat e põe a tag da faixa
   enviar: 'https://n8n.orgao.cc/webhook/pc-termometro',
 
-  // checkout do Detox da Tentante (o mesmo da sala do webinar). O sck sai por faixa: termometro_leve/_moderada/_alta
-  checkout: 'https://pay.hotmart.com/T106499003D?off=dx5vmnqf&checkoutMode=10',
+  // checkout do Detox da Tentante, preço do webinar (9192jo6g, R$ 97): página própria só com o combo de order bump
+  // (pedido da Bruna, 27/11/2026). O sck sai por faixa: termometro_leve/_moderada/_alta
+  checkout: 'https://pay.hotmart.com/T106499003D?off=9192jo6g&checkoutMode=10',
   sck: 'termometro',
 
   // Guia de Suplementação na tela de resultado. A Elisa: "só pode aparecer enquanto a imersão estiver no ar.
